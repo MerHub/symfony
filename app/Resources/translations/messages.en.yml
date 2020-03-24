@@ -1,0 +1,46 @@
+traduction:
+  lang1: French
+  lang2: English
+  lang3: Arab
+indexPage:
+  headerHorizontal:
+    firstLinkModeDisconnect: Connection Profile
+    traductionLang: Language
+loginPage:
+  returnPage: Back to Home
+  question: Don’t have an account?
+  linkRegistre: Register
+  linkLogin: Log in
+  informationsGlobal: Enter your e-mail and password below to log in to your account and use the benefits of our services.
+  informationGlobal2: Register a free account on our website to experience the benefits of our services.
+  btnSignIn: Sign In
+  textfieldEmail: E-mail
+  textfieldPassword: Password
+  information1: Or log in via social networks
+  question2: Already have an account?
+  textfieldNumber: Phone number
+  textfieldUsername: Username
+  ErrorMessage1: incorrect username or password
+
+registerPage:
+  textfieldCPassword: confirm password !
+  textfieldCurrentPassword: Current password !
+  typeDriver: Driver
+  typeClient: Client
+  btnadd: Create My Free Account
+  textFieldUsername: username
+
+userProfile:
+  back: Back to home
+  lien1: Driver
+  lien2: User
+  lien3: Your car
+  Textfield1: your adresse
+  Textfield2: your cin
+  Textfield3: your permis
+  Textfield4: your first Name
+  Textfield5: your last Name
+  Textfield6: phone Number
+  btnSave: save
+  MsgConfirmation: operation completed successfully
+  MsgInformation : all the information concerning you must be filled, to continue

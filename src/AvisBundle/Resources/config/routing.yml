@@ -1,0 +1,3 @@
+avis_homepage:
+    path:     /
+    defaults: { _controller: AvisBundle:Default:index }

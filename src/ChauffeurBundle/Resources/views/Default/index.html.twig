@@ -1,0 +1,13 @@
+{% extends 'baseDesign.html.twig' %}
+
+{% block imgUser %}
+    {% if user.photo is not empty %}
+    {{ asset("font/imgProfileUser/"~user.photo) }}
+    {% else %}
+        {{ asset("font/imgProfileUser/user_profil.png") }}
+    {% endif %}
+{% endblock %}
+
+{% block lienProfile %}
+    {{ path("userProfile_page_chauffeur") }}
+{% endblock %}
