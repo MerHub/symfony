@@ -1,7 +1,0 @@
-chauffeur_homepage:
-    path:     /
-    defaults: { _controller: ChauffeurBundle:Default:index }
-
-userProfile_page_chauffeur:
-    path:     /userProfile
-    defaults: { _controller: ChauffeurBundle:Default:userProfile }

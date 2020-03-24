@@ -1,3 +1,0 @@
-velo_homepage:
-    path:     /
-    defaults: { _controller: VeloBundle:Default:index }

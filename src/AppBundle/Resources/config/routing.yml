@@ -1,4 +1,0 @@
-app_typereclamation:
-    resource: "@AppBundle/Resources/config/routing/typereclamation.yml"
-    prefix:   /typereclamation
-

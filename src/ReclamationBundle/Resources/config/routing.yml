@@ -1,7 +1,0 @@
-reclamation_typereclamation:
-    resource: "@ReclamationBundle/Resources/config/routing/typereclamation.yml"
-    prefix:   /typereclamation
-
-reclamation_homepage:
-    resource: "@ReclamationBundle/Resources/config/routing/reclamation.yml"
-    prefix:   /

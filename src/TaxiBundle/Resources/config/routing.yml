@@ -1,3 +1,0 @@
-taxi_homepage:
-    path:     /
-    defaults: { _controller: TaxiBundle:Default:index }
