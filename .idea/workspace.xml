@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6f85daa7-c189-48ac-bbb2-6ffa9b6026d4" name="Default Changelist" comment="" />
+    <list default="true" id="6f85daa7-c189-48ac-bbb2-6ffa9b6026d4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Controller/DefaultController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Entity/Location.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Entity/Location.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Entity/Velo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Entity/Velo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Repository/LocationRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Repository/LocationRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Repository/VeloRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Repository/VeloRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/config/routing.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/config/services.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/Default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/Default/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/VeloBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/VeloBundle.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,8 +83,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -100,7 +113,7 @@
       <workItem from="1585028373254" duration="4221000" />
       <workItem from="1585032829672" duration="97000" />
       <workItem from="1585033296808" duration="25000" />
-      <workItem from="1585078704051" duration="25000" />
+      <workItem from="1585078704051" duration="863000" />
     </task>
     <servers />
   </component>
@@ -108,9 +121,29 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="407" y="241" key="ComposerCompositePathDialog" timestamp="1585084058828">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="407" y="241" key="ComposerCompositePathDialog/0.0.1366.728@0.0.1366.728" timestamp="1585084058828" />
+    <state x="463" y="104" key="FileChooserDialogImpl" timestamp="1585084076619">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="104" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1585084076619" />
+    <state x="184" y="0" key="SettingsEditor" timestamp="1585084109798">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1585084109798" />
+    <state x="493" y="265" key="SymfonyPathDialog" timestamp="1585084078015">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="493" y="265" key="SymfonyPathDialog/0.0.1366.728@0.0.1366.728" timestamp="1585084078015" />
     <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1585032832001">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585032832001" />
+    <state x="339" y="157" width="672" height="677" key="run.anything.popup" timestamp="1585084151594">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="157" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1585084151594" />
   </component>
 </project>

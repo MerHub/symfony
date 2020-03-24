@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Velo</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ velo.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ velo.type }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ velo.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Qte</th>
+                <td>{{ velo.qte }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ velo.prix }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ velo.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ velo.longitude }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td class="fa-image" height="100px" width="200px" style="background-image: url('{{ asset('font/uploads/' ~ velo.photo) }}')">
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('velo_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('velo_edit', { 'id': velo.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

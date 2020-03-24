@@ -22,15 +22,15 @@ class Location
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity=AppBundle\Entity\Client::class)
-     * @ORM\JoinColumn(name="id_client" , referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity=AppBundle\Entity\user::class)
+     * @ORM\JoinColumn(name="id_client" , referencedColumnName="id_user")
      */
     private $idClient;
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity=Velo::class)
-     * @ORM\JoinColumn(name="id_velo" , referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity=Velo::class,)
+     * @ORM\JoinColumn(name="id_velo" , referencedColumnName="id",onDelete="SET NULL")
      */
     private $idVelo;
 
@@ -66,6 +66,7 @@ class Location
         return $this->id;
     }
 
+
     /**
      * Set idLocation
      *
@@ -91,28 +92,24 @@ class Location
     }
 
     /**
-     * Set idClient
-     *
-     * @param integer $idClient
-     *
-     * @return Location
-     */
-    public function setIdClient($idClient)
-    {
-        $this->idClient = $idClient;
-
-        return $this;
-    }
-
-    /**
-     * Get idClient
-     *
      * @return int
      */
     public function getIdClient()
     {
         return $this->idClient;
     }
+
+    /**
+     * @param int $idClient
+     */
+    public function setIdClient($idClient)
+    {
+        $this->idClient = $idClient;
+    }
+
+
+
+
 
     /**
      * Set idVelo

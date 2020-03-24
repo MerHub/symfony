@@ -1,3 +1,8 @@
+velo_location:
+    resource: "@VeloBundle/Resources/config/routing/location.yml"
+    prefix:   /location
+
 velo_homepage:
-    path:     /
-    defaults: { _controller: VeloBundle:Default:index }
+    resource: "@VeloBundle/Resources/config/routing/velo.yml"
+    prefix:   /
+
