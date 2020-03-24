@@ -13,6 +13,9 @@
       <phar pharPath="$PROJECT_DIR$/composer.phar" interpreterId="5e2631d2-f20a-4dd3-b072-714bf533fdc7" />
     </execution>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
@@ -70,6 +73,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -83,6 +87,7 @@
       <updated>1585028370879</updated>
       <workItem from="1585028373254" duration="4221000" />
       <workItem from="1585032829672" duration="97000" />
+      <workItem from="1585033296808" duration="25000" />
     </task>
     <servers />
   </component>
