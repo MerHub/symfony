@@ -221,7 +221,7 @@ $(function(){
     var map = L.mapbox.map('map').setView([{{ user.latitude }},{{ user.longitude }}], 17);
     map.legendControl.addLegend("vide");
     map.legendControl.addLegend("vide")
-    console.log(map);
+    alert(map.getZoom());
 // move the attribution control out of the way
     map.attributionControl.setPosition('bottomleft');
     L.control.fullscreen().addTo(map);
@@ -325,7 +325,6 @@ $(function(){
         return;
     })
     $("#myInput").click(function(){
-console.log(directions+"222222")
         if(nbr_click%2==0){
             $(".lol").css("margin-left","15%")
             $('aside').animate({"left": '+=20%'});
@@ -463,7 +462,6 @@ console.log(directions+"222222")
 
                         }
                     });
-                    console.log(route[j])
                 dc+="<li data-lat='"+route[j].maneuver.location.coordinates[1]+"' data-lng='"+route[j].maneuver.location.coordinates[1]+"' class='mapbox-directions-step'><span class='directions-icon directions-icon-"+route[j].maneuver.type.replace(" ", "")+"'></span><div class='mapbox-directions-step-maneuver dest"+j+"'>"+route[j].maneuver.type+" onto </div><div class='mapbox-directions-step-distance'>"+route[j].distance+" meter</div></li>"
 
             }
@@ -624,7 +622,6 @@ if(executeSpeech==true){
                 for (j = 0; j < directions.length; j++) {
                     reponseDirections = analyseurVocalImbriquer(instruction, directions[j]);
                     if(reponseDirections != -1){
-                      //  console.log(instruction.replace(" ","").toLowerCase())
                         reponseDirections=j;
                         break;
                     }
