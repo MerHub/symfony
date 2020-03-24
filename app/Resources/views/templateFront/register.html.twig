@@ -1,0 +1,61 @@
+{% extends 'templateFront/index.html.twig' %}
+
+{% block Title %}
+  Register
+{% endblock %}
+
+
+{% block NavigationHorizontal %}
+  <div class="layout-2 section-layout-3-header">
+    <div class="layout-2-inner">
+      <div class="layout-2-item"><a class="link link-icon link-icon-left" href="{{ path("homepage",{"_locale":app.request.getLocale()}) }}"><span class="icon mdi mdi-arrow-left"></span><span>Back to Home</span></a></div>
+      <div class="layout-2-item">
+        <p class="text-1"><span>{{ 'loginPage.question2'|trans }}</span><a class="text-primary" href="{{path('loginpage')}}">{{ 'loginPage.linkLogin'|trans }}</a></p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block Body %}
+  <div class="section-layout-3-main">
+    <div class="section-1 text-center">
+      <div class="container">
+        <div class="box-shadow-1"> <a class="brand" href="index.html.twig"><img class="brand-logo-dark" src="{{ asset("font/images/logo-111x33.png") }}" alt="" width="111" height="33" srcset="images/logo-222x66.png 2x"/></a>
+          <p class="text-gray-900"><span style="max-width: 400px">{{ 'loginPage.informationGlobal2'|trans }}</span></p>
+          <div class="box-shadow-1-main">
+            <!-- RD Mailform -->
+            <form class="rd-form rd-mailform">
+              <div class="form-wrap">
+                <input class="form-input" id="login-email" type="number" name="number" data-constraints="@Number @Required">
+                <label class="form-label" for="login-email">{{ 'loginPage.textfieldNumber'|trans }}</label>
+              </div>
+              <div class="form-wrap">
+                <input class="form-input" id="login-email" type="email" name="email" data-constraints="@Email @Required">
+                <label class="form-label" for="login-email">{{ 'loginPage.textfieldEmail'|trans }}</label>
+              </div>
+              <div class="form-wrap">
+                <input class="form-input" id="login-password" type="password" name="password" data-constraints="@Required">
+                <label class="form-label" for="login-password">{{ 'loginPage.textfieldPassword'|trans }}</label>
+              </div>
+              <div class="form-wrap">
+                <input class="form-input" id="login-password" type="password" name="confirmpassword" data-constraints="@Required">
+                <label class="form-label" for="login-password">{{ 'registerPage.textfieldCPassword'|trans }}</label>
+              </div>
+              <div class="form-wrap">
+                <center>
+                  <input type="radio" name="type" value="driver">
+                  <label for="login-password">{{ 'registerPage.typeDriver'|trans }}</label>
+                  <input type="radio" name="type" value="client">
+                  <label for="login-password">{{ 'registerPage.typeClient'|trans }}</label>
+                </center>
+              </div>
+              <div class="form-wrap">
+                <button class="button button-block button-secondary button-shadow button-winona" type="submit">{{ 'registerPage.btnadd'|trans }}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
