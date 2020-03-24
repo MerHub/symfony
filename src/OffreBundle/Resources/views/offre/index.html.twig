@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Offres list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idoffre</th>
+                <th>Dated</th>
+                <th>Datef</th>
+                <th>Type</th>
+                <th>Nom</th>
+                <th>Reductionoffre</th>
+                <th>Codepromo</th>
+                <th>Img</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offre in offres %}
+            <tr>
+                <td><a href="{{ path('offre_show', { 'idOffre': offre.idOffre }) }}">{{ offre.idOffre }}</a></td>
+                <td>{% if offre.dateD %}{{ offre.dateD|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if offre.dateF %}{{ offre.dateF|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ offre.type }}</td>
+                <td>{{ offre.nom }}</td>
+                <td>{{ offre.reductionOffre }}</td>
+                <td>{{ offre.codePromo }}</td>
+                <td>{{ offre.img }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('offre_show', { 'idOffre': offre.idOffre }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('offre_edit', { 'idOffre': offre.idOffre }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('offre_new') }}">Create a new offre</a>
+        </li>
+    </ul>
+{% endblock %}

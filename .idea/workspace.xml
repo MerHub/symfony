@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f85daa7-c189-48ac-bbb2-6ffa9b6026d4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/OffreBundle/Resources/views/offre/edit.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OffreBundle/Resources/views/offre/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OffreBundle/Resources/views/offre/new.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OffreBundle/Resources/views/offre/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OffreBundle/Entity/Offre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OffreBundle/Entity/Offre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OffreBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/OffreBundle/Resources/config/routing.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +81,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/OffreBundle/Resources/views/offre" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\drive\symfony\src\OffreBundle\Resources\views\offre" />
+    </key>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -102,7 +113,7 @@
       <workItem from="1585028373254" duration="4221000" />
       <workItem from="1585032829672" duration="97000" />
       <workItem from="1585033296808" duration="25000" />
-      <workItem from="1585063545348" duration="957000" />
+      <workItem from="1585063545348" duration="3713000" />
     </task>
     <servers />
   </component>
@@ -110,6 +121,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="740" y="296" key="FileChooserDialogImpl" timestamp="1585066324595">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="740" y="296" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1585066324595" />
     <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1585032832001">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

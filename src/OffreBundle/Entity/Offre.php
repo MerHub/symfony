@@ -17,6 +17,7 @@ class Offre
     /**
      * @var int
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(name="id_Offre", type="integer")
      */
     private $idOffre;
