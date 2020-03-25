@@ -3,15 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="6f85daa7-c189-48ac-bbb2-6ffa9b6026d4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Entity/Location.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Entity/Location.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Entity/Velo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Entity/Velo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Repository/LocationRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Repository/LocationRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Repository/VeloRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Repository/VeloRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/config/routing.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/config/services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/Default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/Default/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/VeloBundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/VeloBundle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Controller/VeloController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Controller/VeloController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +84,16 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\drive\symfony\web\back" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="s doctrine:schema:update --force" />
+    </option>
+  </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
       <list>
@@ -113,7 +119,7 @@
       <workItem from="1585028373254" duration="4221000" />
       <workItem from="1585032829672" duration="97000" />
       <workItem from="1585033296808" duration="25000" />
-      <workItem from="1585078704051" duration="863000" />
+      <workItem from="1585078704051" duration="17829000" />
     </task>
     <servers />
   </component>
@@ -129,6 +135,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="104" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1585084076619" />
+    <state width="1322" height="174" key="GridCell.Tab.0.bottom" timestamp="1585086243134">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="174" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1585086243134" />
+    <state width="1322" height="174" key="GridCell.Tab.0.center" timestamp="1585086243134">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="174" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1585086243134" />
+    <state width="1322" height="174" key="GridCell.Tab.0.left" timestamp="1585086243133">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="174" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1585086243133" />
+    <state width="1322" height="174" key="GridCell.Tab.0.right" timestamp="1585086243134">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1322" height="174" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1585086243134" />
     <state x="184" y="0" key="SettingsEditor" timestamp="1585084109798">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

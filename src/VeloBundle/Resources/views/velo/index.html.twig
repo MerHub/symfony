@@ -6,96 +6,51 @@
 
 {% block body %}
 
+    <ul>
+        <li>
+            <a href="{{ path('velo_new') }}">Create a new velo</a>
+        </li>
+    </ul>
+<div class="col-xl-12">
+    <section class="box ">
+        <header class="panel_header">
+            <h2 class="title float-left">List of Bicycles </h2>
+            <div class="actions panel_actions float-right">
+                <a class="box_toggle fa fa-chevron-down"></a>
+                <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
+                <a class="box_close fa fa-times"></a>
+            </div>
+        </header>
+        <div class="content-body">    <div class="row">
+                <div class="col-12">
 
-
-
-    <h2>Search A Bicycle</h2>
-
-    <div class="sidebar-search">
-
-        <div class="input-group custom-search-form">
-
-            <input type="text" id="search" class="form-control" placeholder="Search here">
-        </div>
-        <!-- /input-group -->
-    </div>
-
-            <ul class="nav nav-second-level" id="entitiesNav">
-            </ul>
-
-    <br><br>
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-            var searchRequest = null;
-            $("#search").keyup(function() {
-                var minlength = 1;
-                var that = this;
-                var value = $(this).val();
-                var entitySelector = $("#entitiesNav").html('');
-                if (value.length >= minlength ) {
-                    if (searchRequest != null)
-                        searchRequest.abort();
-                    searchRequest = $.ajax({
-                        type: "GET",
-                        url: "{{ path('search') }}",
-                        data: {
-                            'q' : value
-                        },
-                        dataType: "text",
-                        success: function(msg){
-                            //we need to check if the value is the same
-                            if (value===$(that).val()) {
-                                var result = JSON.parse(msg);
-                                $.each(result, function(key, arr) {
-                                    $.each(arr, function(id, value) {
-                                        if (key === 'velo') {
-                                            if (id !== 'error') {
-                                                console.log(value[1]);
-                                                entitySelector.append('<li><b>'+value[0]+'</b><a href="'+id+'/show">'+'<img src="/font/uploads/'+value[3]+'" style="width: 100px; height: 100px"/>'+'</a></li>');
-                                            } else {
-                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
-                                            }
-                                        }
-                                    });
-                                });
-                            }
-                        }
-                    });
-                }
-            });
-        });
-    </script>
-
-    <h1>Velos list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Type</th>
-                <th>Adresse</th>
-                <th>Qte</th>
-                <th>Photo</th>
-                <th>Prix</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Type</th>
+                            <th>Adresse</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Altitude</th>
+                            <th>Longitude</th>
+                            <th>Picture</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
         {% for velo in velos %}
             <tr>
                 <td><a href="{{ path('velo_show', { 'id': velo.id }) }}">{{ velo.id }}</a></td>
                 <td>{{ velo.type }}</td>
                 <td>{{ velo.adresse }}</td>
                 <td>{{ velo.qte }}</td>
-                <td>{{ velo.photo }}</td>
+
                 <td>{{ velo.prix }}</td>
                 <td>{{ velo.latitude }}</td>
                 <td>{{ velo.longitude }}</td>
+                <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ velo.photo) }}')">
+                </td>
                 <td>
                     <ul>
                         <li>
@@ -108,12 +63,12 @@
                 </td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
+                        </tbody>
+                    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('velo_new') }}">Create a new velo</a>
-        </li>
-    </ul>
+                </div>
+            </div>
+        </div>
+    </section></div>
+
 {% endblock %}

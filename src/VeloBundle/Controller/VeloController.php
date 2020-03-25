@@ -50,7 +50,7 @@ class VeloController extends Controller
             $em->persist($velo);
             $em->flush();
 
-            return $this->redirectToRoute('velo_show', array('id' => $velo->getId()));
+            return $this->redirectToRoute('velo_index', array('id' => $velo->getId()));
         }
 
         return $this->render('@Velo/velo/new.html.twig', array(
