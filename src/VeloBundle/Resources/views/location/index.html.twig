@@ -1,11 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block body %}
-    <h1>Locations list</h1>
+<div class="col-xl-12">
+    <section class="box ">
+        <header class="panel_header">
+            <h2 class="title float-left">List of Rented Bicycles </h2>
+            <div class="actions panel_actions float-right">
+                <a class="box_toggle fa fa-chevron-down"></a>
+                <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
+                <a class="box_close fa fa-times"></a>
+            </div>
+        </header>
+        <div class="content-body">    <div class="row">
+                <div class="col-12">
 
-    <table>
-        <thead>
-            <tr>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
                 <th>Idlocation</th>
                 <th>Dated</th>
                 <th>Datef</th>
@@ -17,8 +28,8 @@
         {% for location in locations %}
             <tr>
                 <td><a href="{{ path('location_show', { 'idLocation': location.idLocation }) }}">{{ location.idLocation }}</a></td>
-                <td>{% if location.dateD %}{{ location.dateD|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if location.dateF %}{{ location.dateF|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if location.dateD %}{{ location.dateD|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if location.dateF %}{{ location.dateF|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ location.prix }}</td>
                 <td>
                     <ul>
@@ -33,7 +44,12 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </section></div>
 
     <ul>
         <li>

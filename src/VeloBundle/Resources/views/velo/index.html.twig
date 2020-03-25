@@ -8,7 +8,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('velo_new') }}">Create a new velo</a>
+            <a href="{{ path('velo_new') }}"><i class="fa fa-backward" style="color:#2e6da4 " ></i>Add a new Bicycle</a>
         </li>
     </ul>
 <div class="col-xl-12">
@@ -28,13 +28,14 @@
                         <thead>
                         <tr>
                             <th>#</th>
+
+                            <th>Picture</th>
                             <th>Type</th>
                             <th>Adresse</th>
                             <th>Quantity</th>
                             <th>Price</th>
                             <th>Altitude</th>
                             <th>Longitude</th>
-                            <th>Picture</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -42,6 +43,8 @@
         {% for velo in velos %}
             <tr>
                 <td><a href="{{ path('velo_show', { 'id': velo.id }) }}">{{ velo.id }}</a></td>
+                <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ velo.photo) }}')">
+                </td>
                 <td>{{ velo.type }}</td>
                 <td>{{ velo.adresse }}</td>
                 <td>{{ velo.qte }}</td>
@@ -49,8 +52,7 @@
                 <td>{{ velo.prix }}</td>
                 <td>{{ velo.latitude }}</td>
                 <td>{{ velo.longitude }}</td>
-                <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ velo.photo) }}')">
-                </td>
+
                 <td>
                     <ul>
                         <li>

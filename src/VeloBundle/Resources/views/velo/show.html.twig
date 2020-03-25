@@ -25,13 +25,14 @@
                             <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Picture</th>
                                 <th>Type</th>
                                 <th>Adresse</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
                                 <th>Altitude</th>
                                 <th>Longitude</th>
-                                <th>Picture</th>
+
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -39,27 +40,28 @@
                             <tr>
 
                                 <td>{{ velo.id }}</td>
+                                <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ velo.photo) }}')">
+                                </td>
                                 <td>{{ velo.type }}</td>
                                 <td>{{ velo.adresse }}</td>
                                 <td>{{ velo.qte }}</td>
                                 <td>{{ velo.prix }}</td>
                                 <td>{{ velo.latitude }}</td>
                                 <td>{{ velo.longitude }}</td>
-                                <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ velo.photo) }}')">
-                                </td>
+
                                 <td>
                                     <ul>
-                                    <li>
+
                                 {{ form_start(delete_form) }}
-                                    <i class="fa fa-trash">
-                                    <input type="submit" value="Delete"  style="color: #ff6c5f"></i>
+
+                                    <input type="submit" value="Delete"  style="color: #ff6c5f">
                                 {{ form_end(delete_form) }}
-                                    </li>
+
                                     </ul>
                                     <ul>
-                                    <li>
+
                                     <a href="{{ path('velo_edit',{'id':velo.id}) }}"><i class="fa fa-edit" style="color:#2e6da4 " ></i></a>
-                                    </li>
+
                                     </ul>
                                 </td>
                             </tr>

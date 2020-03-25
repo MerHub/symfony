@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f85daa7-c189-48ac-bbb2-6ffa9b6026d4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Resources/views/base2.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Controller/VeloController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Controller/VeloController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/new.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/show.html.twig" afterDir="false" />
@@ -119,7 +120,7 @@
       <workItem from="1585028373254" duration="4221000" />
       <workItem from="1585032829672" duration="97000" />
       <workItem from="1585033296808" duration="25000" />
-      <workItem from="1585078704051" duration="17829000" />
+      <workItem from="1585078704051" duration="24441000" />
     </task>
     <servers />
   </component>
@@ -127,6 +128,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="419" y="165" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585157415650">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="419" y="165" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1585157415650" />
     <state x="407" y="241" key="ComposerCompositePathDialog" timestamp="1585084058828">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -1,21 +1,74 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Velo edit</h1>
+<ul>
+    <li>
+        <a href="{{ path('velo_index') }}"><i class="fa fa-backward" style="color:#2e6da4 "></i>Back to the list</a>
+    </li>
 
+</ul>
+<header class="panel_header">
+    <h2 class="title float-left">Add A bicycle</h2>
+    <div class="actions panel_actions float-right">
+        <a class="box_toggle fa fa-chevron-down"></a>
+        <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
+        <a class="box_close fa fa-times"></a>
+    </div>
+</header>
+<div class="content-body">
+    <div class="row">
+        <div class="col-lg-8 col-md-9 col-10">
+
+            <div class="form-group">
+                <table class="table table-striped">
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+                    <tr>
+                        <td>{{ form_label(edit_form.type) }}</td>
+                        <td>{{ form_widget(edit_form.type) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(edit_form.adresse) }}</td>
+                        <td>{{ form_widget(edit_form.adresse) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(edit_form.qte) }}</td>
+                        <td>{{ form_widget(edit_form.qte) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(edit_form.prix) }}</td>
+                        <td>{{ form_widget(edit_form.prix) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(edit_form.latitude) }}</td>
+                        <td>{{ form_widget(edit_form.latitude) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(edit_form.longitude) }}</td>
+                        <td>{{ form_widget(edit_form.longitude) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(edit_form.photo) }}</td>
+                        <td>{{ form_widget(edit_form.photo) }}</td>
+                    </tr>
+                    <tr>
 
-    <ul>
-        <li>
-            <a href="{{ path('velo_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                        <td>{{ form_widget(edit_form) }}</td>
+                        <td> <input type="submit" value="Edit" /></td>
+                    </tr>
+
+    {{ form_end(edit_form) }}
+                </table>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
 {% endblock %}
