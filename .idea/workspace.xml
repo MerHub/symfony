@@ -13,6 +13,9 @@
       <phar pharPath="$PROJECT_DIR$/composer.phar" interpreterId="5e2631d2-f20a-4dd3-b072-714bf533fdc7" />
     </execution>
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="symfony" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
