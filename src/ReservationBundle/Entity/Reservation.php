@@ -38,21 +38,21 @@ class Reservation
     /**
      * @var string
      *
-     * @ORM\Column(name="depart", type="string", length=255, nullable=false)
+     * @ORM\Column(name="depart", type="string", length=255, nullable=true)
      */
     private $depart;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="arrive", type="string", length=255, nullable=false)
+     * @ORM\Column(name="arrive", type="string", length=255, nullable=true)
      */
     private $arrive;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="heure", type="datetime", nullable=true)
+     * @ORM\Column(name="heure", type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
     private $heure = 'NULL';
 
@@ -73,14 +73,14 @@ class Reservation
     /**
      * @var integer
      *
-     * @ORM\Column(name="code_liv", type="integer", nullable=false)
+     * @ORM\Column(name="code_liv", type="integer", nullable=true)
      */
     private $codeLiv;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="nbr_place", type="integer", nullable=false)
+     * @ORM\Column(name="nbr_place", type="integer", nullable=true)
      */
     private $nbrPlace;
 

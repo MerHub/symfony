@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +25,9 @@
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
+        .hide{
+            display: none;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.70.0/dist/L.Control.Locate.min.css" />
 
@@ -37,38 +38,76 @@
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 </head>
-<body translate="no">
+<body translate="no" style="display: none;">
+{% block ShowReservation %}
+
+{% endblock %}
 <main>
     <aside style="background-color: #1A1A1A;opacity:0.9;left:-20%;">
-    <div class="row">
-        <div class="col-md-12" style="padding:8%;">
-            <img src="{{ asset("font/images/logo.png") }}" alt="" width="50px"  style="display: inline-block;vertical-align: middle;padding-left: 10%;">&nbsp;&nbsp;&nbsp;<span class="lead" style="color:white;display: inline-block;">Drive</span>
-         </div>
-        <div class="reservation menu-imbriquer" style="position: absolute;z-index:0;left:0%;top:15%;">
-            <div class="col-md-12 deleteFormReservation ">
-                <center>
-                    <div class="infor" style="margin-top:2%;margin-left:8%;">
-                        <strong><i class="fa fa-info" aria-hidden="true"></i></strong> <br> select a location on the map to pick up a package
-                    </div>
-                </center>
-                <center>
-                    <div class="warnN" style="margin-top:5%;">
-                        <strong><i class="fa fa-info" aria-hidden="true"></i></strong> <br> please select a taxi to make a trip
-                    </div>
-                </center>
-                <center class="loadDsign" style="margin-top: 4%;"><div class="lds-ripple"><div></div><div></div></div></center>
+        <div class="row">
+            <div class="col-md-12" style="padding:8%;">
+                <img src="{{ asset("font/images/logo.png") }}" alt="" width="50px"  style="display: inline-block;vertical-align: middle;padding-left: 10%;">&nbsp;&nbsp;&nbsp;<span class="lead" style="color:white;display: inline-block;">Drive</span>
             </div>
+            <div class="reservation menu-imbriquer" style="position: absolute;z-index:0;left:0%;top:15%;">
+                <div class="col-md-12 deleteFormReservation " {% if reservation is defined %} style="display: none;" {% endif %}>
+                    <center>
+                        <div class="infor" style="margin-top:2%;margin-left:8%;">
+                            <strong><i class="fa fa-info" aria-hidden="true"></i></strong> <br> select a location on the map to pick up a package
+                        </div>
+                    </center>
+                    <center>
+                        <div class="warnN" style="margin-top:5%;">
+                            <strong><i class="fa fa-info" aria-hidden="true"></i></strong> <br> please select a taxi to make a trip
+                        </div>
+                    </center>
+                    <center class="loadDsign" style="margin-top: 4%;"><div class="lds-ripple"><div></div><div></div></div></center>
+                </div>
 
-            <div class="contenuReservation" style="display: none;">
-                <div style="margin-top: 15%;">
+                <div class="contenuReservation" {% if reservation is not defined %} style="display: none;" {% endif %}>
+                    <div style="margin-top: 15%;">
+                        <img src="{{ asset("font/images/design.png") }}" alt=""  style="display: inline-block;margin-left:10%;" width="8px">
+                        <form style="display: inline-block;width: 70%;">
+                            <div class="form-group" style="margin-top:-6%;margin-left:6%;">
+                                <input type="text" name="position"  class="position" placeholder="your address" >
+                                <img src="{{ asset("font/images/house.png") }}" width="15px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
+                            </div>
+                            <div class="form-group" style="margin-top:10%;margin-left:6%;">
+                                <input type="text" name="destination"  class="destination"  placeholder="your destination" style="background-image: url('{{ asset("font/images/house.png") }}')" >
+                                <img src="{{ asset("font/images/lo.png") }}" width="12px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-12" style="margin-top: 15%;">
+                        <h2 class="font-weight-bold" style="color: white;text-align: center;">Price</h2>
+                        <center>
+                            <div class="prix">
+                                <spen class="prixs">10</spen>
+                            </div>
+                        </center>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 20%;">
+                        <center>
+                            {% if form is defined %}
+                            {{ form_start(form) }}
+                            <input type="submit" value="Confirm order" class="order" style="outline: none;">
+                                <a href="{{ path("reservation_homepage") }}" class="order" style="text-decoration: none;margin-top: 2%;background-color: #0d0a0a;">Cancle</a>
+                            {{ form_end(form) }}
+                            {% endif %}
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="livraison menu-imbriquer" style="position: absolute;z-index:0;left:-100%;top:15%;">
+                <div style="margin-top: 5%;">
                     <img src="{{ asset("font/images/design.png") }}" alt=""  style="display: inline-block;margin-left:10%;" width="8px">
                     <form style="display: inline-block;width: 70%;">
                         <div class="form-group" style="margin-top:-6%;margin-left:6%;">
-                            <input type="text" name="position"  class="position" placeholder="your address" >
+                            <input type="text" name="position"placeholder="our address" >
                             <img src="{{ asset("font/images/house.png") }}" width="15px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
                         </div>
                         <div class="form-group" style="margin-top:10%;margin-left:6%;">
-                            <input type="text" name="destination"  class="destination"  placeholder="your destination" style="background-image: url('{{ asset("font/images/house.png") }}')" >
+                            <input type="text" name="destination" placeholder="your destination" style="background-image: url('{{ asset("font/images/house.png") }}')" >
                             <img src="{{ asset("font/images/lo.png") }}" width="12px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
                         </div>
                     </form>
@@ -78,7 +117,7 @@
                     <h2 class="font-weight-bold" style="color: white;text-align: center;">Price</h2>
                     <center>
                         <div class="prix">
-                            <spen class="prixs">10</spen> dinars
+                            10 dinars
                         </div>
                     </center>
                 </div>
@@ -88,42 +127,12 @@
                     </center>
                 </div>
             </div>
-</div>
-        <div class="livraison menu-imbriquer" style="position: absolute;z-index:0;left:-100%;top:15%;">
-            <div style="margin-top: 5%;">
-                <img src="{{ asset("font/images/design.png") }}" alt=""  style="display: inline-block;margin-left:10%;" width="8px">
-                <form style="display: inline-block;width: 70%;">
-                    <div class="form-group" style="margin-top:-6%;margin-left:6%;">
-                        <input type="text" name="position"placeholder="our address" >
-                        <img src="{{ asset("font/images/house.png") }}" width="15px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
-                    </div>
-                    <div class="form-group" style="margin-top:10%;margin-left:6%;">
-                        <input type="text" name="destination" placeholder="your destination" style="background-image: url('{{ asset("font/images/house.png") }}')" >
-                        <img src="{{ asset("font/images/lo.png") }}" width="12px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
-                    </div>
-                </form>
-            </div>
-
-            <div class="col-md-12" style="margin-top: 15%;">
-                <h2 class="font-weight-bold" style="color: white;text-align: center;">Price</h2>
-                <center>
-                    <div class="prix">
-                        10 dinars
-                    </div>
-                </center>
-            </div>
-            <div class="col-md-12" style="margin-top: 20%;">
-                <center>
-                    <input type="submit" value="Confirm order" class="order">
-                </center>
-            </div>
         </div>
-    </div>
     </aside>
     <div class="as" style="display: none;">
         <h4 class="" style="color: #474747;">Routes - <span class="dist">2.5 Kilometers</span></h4>
         <div class="carModel"  style="display: inline-block">
-        <div><i class="fa fa-car" aria-hidden="true"></i> <span class="title">&nbsp;&nbsp;&nbsp;&nbsp;Car Model</span></div>
+            <div><i class="fa fa-car" aria-hidden="true"></i> <span class="title">&nbsp;&nbsp;&nbsp;&nbsp;Car Model</span></div>
             <div class="contentes">Ferary</div>
             <div class="voir"><center><i class="fa fa-eye" aria-hidden="true"></i></center></div>
         </div>
@@ -175,346 +184,171 @@
     <center><div style="background-color: #26316F;display: inline-block;margin-top:6%;"><i class="fa fa-microphone" aria-hidden="true"></i></div> <span class="textMicro">Start vocal</span></center>
 </div>
 <script>
-$(function(){
-    var bonjour=false;
-    //le type de navigateur
-    var Version = navigator.appVersion;
-    // initiation des speech
-    var executeSpeech= (navigator.appVersion.toString().toLowerCase().indexOf("edge")!=-1) ? false : true;
-    //initiation des variable locales
-    var recognition="";
-    var synth="";
-    var voices="";
-    if(executeSpeech==true){
-        // activer le speech recognition
-        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-        //initiation des variable locales
-        synth = window.speechSynthesis;
-        recognition = new SpeechRecognition();
-        recognition.interimResults = true;
-        recognition.lang = 'fr-FR';
-        voices = synth.getVoices();
-
-        for(i = 0; i < voices.length ; i++) {
-            var option = document.createElement('option');
-            option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
-            option.setAttribute('data-lang', voices[i].lang);
-            option.setAttribute('data-name', voices[i].name);
+    $(function(){
+        $("label").hide();
+        $(".lol").show();
+        $("body").fadeIn()
+        L.mapbox.accessToken = 'pk.eyJ1IjoiY3lyaWxsZTgwMCIsImEiOiJjazZzcmU2bHUwMDh0M2xxcGRtOGJndGh4In0.zqSmLTyuMbkLZQyVFgtAXA';
+        var loader = document.getElementById('loader');
+        // centrer la map
+        var map = L.mapbox.map('map').setView([{{ user.latitude }},{{ user.longitude }}], 17);
+        // create the initial directions object, from which the layer
+        // and inputs will pull data.
+        var directions = L.mapbox.directions();
+        var directionsLayer = L.mapbox.directions.layer(directions).addTo(map);
+        var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions).addTo(map);
+        var directionChauffeur = L.mapbox.directions();
+        function startLoading() {
+            loader.className = '';
         }
-    }
-    var ty=0;
-    var nbr_click=0;
-    L.mapbox.accessToken = 'pk.eyJ1IjoiY3lyaWxsZTgwMCIsImEiOiJjazZzcmU2bHUwMDh0M2xxcGRtOGJndGh4In0.zqSmLTyuMbkLZQyVFgtAXA';
-    var loader = document.getElementById('loader');
-    // centrer la map
-    var map = L.mapbox.map('map').setView([{{ user.latitude }},{{ user.longitude }}], 17);
-    // initialisation de la legende
-    map.legendControl.addLegend("vide");
-    map.attributionControl.setPosition('bottomleft');
-    L.control.fullscreen().addTo(map);
-    //
-
-    (executeSpeech==false) ? $(".micro").hide() : "";
-    setInterval(function(){($(".leaflet-control-layers.leaflet-control").length==1 && ty==0) ? (ty=1,$(".leaflet-control-layers-base").css({"position":"fixed","right":"0","background-color":"white","width":"13%","height":"20%"}),$(".leaflet-control-layers-base label").after("<br>"),$(".leaflet-bar-part.leaflet-bar-part-single span").css("margin-left","30%")) : "";},1000)
-    $(".leaflet-control-layers.leaflet-control").css("margin-left","-30%")
-
-
-
-// create the initial directions object, from which the layer
-// and inputs will pull data.
-    var directions = L.mapbox.directions();
-    var directionsLayer = L.mapbox.directions.layer(directions).addTo(map);
-    var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions).addTo(map);
-    var directionChauffeur = L.mapbox.directions();
-
-
-
-    // start the loading screen
-    startLoading();
-
-
-    // crontrol du micro sur la map
-    var SelectIcon=0;
-    if(executeSpeech==true) {
-        $(".micro").click(function () {
-            if (SelectIcon % 2 == 0) {
-                if(bonjour==false){
-                    speak("bonsoir {{ user.username }}, qu'est ce que je peux faire pour vous ?");
-                }else{
-                    speak("je vous écoutes {{ user.username }}");
-                }
-
-                recognition.start();
-                $(".micro i").attr("class", "fa fa-microphone-slash")
-                $(".micro span").text("Stop vocal")
-                bonjour=true;
-            } else {
-                $(".micro i").attr("class", "fa fa-microphone")
-                $(".micro span").text("Start vocal")
-            }
-            SelectIcon++;
-
-        })
-    }
-    var theMarker = new Array();
-    var coordonner = new Array();
-    var i=1;
-    var j=1;
-    var cmpt=1;
-    var spr="";
-    var taxiSelect=false;
-
-    var vitesseLat=0;
-    var vitesseLng=0;
-
-    map.on('click', function(e) {
-       if(taxiSelect==false) {
-            setInterval(function () {
-                if ($("path.leaflet-interactive[stroke-opacity='0.75']").hasClass("dej") == false) {
-                    $("path.leaflet-interactive[stroke-opacity='0.75']").attr("stroke", "#49BB72")
-                    $("path.leaflet-interactive[stroke-opacity='0.75']").attr("stroke-width", "6")
-                    $("path.leaflet-interactive[stroke-opacity='0.75']").addClass("dej")
-                }
-            }, 500)
-           var rien="";
-            var v1= iconStartExist();
-           var v2= iconEndExist();
-           var LamMarker = ((v1!= -1 && v2!= -1) || (v1!= -1 && v2== -1)) ? creerIcon(e.latlng.lat, e.latlng.lng,"fin") : creerIcon(e.latlng.lat, e.latlng.lng,"debut");
-           (theMarker.length >= 2) ? supprimerIcon(iconEndExist()) : rien="";
-            LamMarker._leaflet_id = i;
-            theMarker.push(LamMarker);
-            coordonner.push([e.latlng.lat, e.latlng.lng])
-            map.addLayer(LamMarker);
-           v1= iconStartExist();
-           v2= iconEndExist();
-
-            var debut = 1;
-            var fin = 1;
-           (v1!=-1) ? (directions.setOrigin(L.latLng(coordonner[v1][0], coordonner[v1][1])),debut = coordonner[v1]) : rien="";
-           (v2!=-1) ? (directions.setDestination(L.latLng(coordonner[v2][0], coordonner[v2][1])),fin = coordonner[v2]) : rien="";
-
-           (debut != 1 && fin != 1) ? calculDistance(debut[0],debut[1],fin[0],fin[1]) : rien="";
-           (fin == 1) ? (directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }})),
-               directions.setDestination(L.latLng(debut[0], debut[1])),
-               calculDistance({{ user.latitude }},{{ user.longitude }},debut[0],debut[1])) : rien="";
-
-           LamMarker.on('click', function (e) {
-               v1= iconStartExist();
-               v2= iconEndExist();
-               var iconSelect= (theMarker[v1]._leaflet_id == e.target._leaflet_id) ? v1 : v2;
-                (theMarker[iconSelect]._popup._content == "end") ? (
-                           directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }})),
-                               directions.setDestination(L.latLng(debut[0], debut[1])),
-                               calculDistance({{ user.latitude }},{{ user.longitude }},debut[0],debut[1])
-                       ) : (
-                    theMarker[v2].setIcon(L.mapbox.marker.icon({
-                        'marker-size': 'large',
-                        'marker-symbol': 'warehouse',
-                        'marker-color': '#42AA6B'
-                    })),
-                           theMarker[v2]._popup._content = "start",
-                           fin = coordonner[v2],directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }})),
-                           directions.setDestination(L.latLng(fin[0], fin[1])),calculDistance({{ user.latitude }},{{ user.longitude }},fin[0],fin[1])),
-                           supprimerIcon(iconSelect)
-});
-
-            i++;
-            cmpt++;
-            if (nbr_click % 2 == 0) {
-                $("#myInput").trigger("click")
-            }
+        function finishedLoading() {
+            // first, toggle the class 'done', which makes the loading screen
+            // fade out
+            loader.className = 'done';
+            setTimeout(function() {
+                // then, after a half-second, add the class 'hide', which hides
+                // it completely and ensures that the user can interact with the
+                // map again.
+                loader.className = 'hide';
+            }, 500);
         }
-    });
-    $(".lol").click(function(){
-        return;
-    })
-    $("#myInput").click(function(){
-        if(nbr_click%2==0){
-            $(".lol").css("margin-left","15%")
-            $('aside').animate({"left": '+=20%'});
+        // start the loading screen
+        startLoading();
+        L.control.layers({
+            'Mapbox Streets': L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11').on('load', finishedLoading),
+            'Mapbox Light': L.mapbox.styleLayer('mapbox://styles/mapbox/light-v9').addTo(map).on('load', finishedLoading),
+            'MapBox satelite': L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-v9').on('load', finishedLoading),
+            'MapBox dark': L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v9').on('load', finishedLoading)
+        }).addTo(map);
 
+        // create control and add to map
+        var lc = L.control.locate({
+            strings:{
+                popup: '{{ user.username }}'
+            }}).addTo(map);
+
+        // request location update and set location
+        {% block showPositionInit %}
+        lc.start();
+        {% endblock %}
+        // initialisation de la legende
+        map.legendControl.addLegend("vide");
+        map.attributionControl.setPosition('bottomleft');
+        L.control.fullscreen().addTo(map);
+        // initiation des speech
+        var executeSpeech= (navigator.appVersion.toString().toLowerCase().indexOf("edge")!=-1) ? false : true;
+
+        {% block speech %}
+        {% include '@App/commandeVocale.html.twig' %}
+        {% endblock %}
+
+        if(executeSpeech==false) {
+            $(".micro").hide()
         }else{
-          var  y= confirm("can you cancle this reservation ?")
-           if(y==true){
-               $(".lol").css("margin-left","-15%")
-               $('aside').animate({"left": '-=20%'});
-               directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }}))
-               directions.setDestination(L.latLng({{ user.latitude }},{{ user.longitude }}))
-               directionChauffeur.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }}))
-               directionChauffeur.setDestination(L.latLng({{ user.latitude }},{{ user.longitude }}))
-               directionChauffeur.query();
-               directions.query();
-               map.setView(new L.LatLng({{ user.latitude }},{{ user.longitude }}),17);
-               nbr_click--;
-           }else{
-               $(".lol").trigger("click")
-               return;
-           }
+            {% block decisionShowBlock %} {% endblock %}
         }
-        nbr_click++;
 
-    })
-    L.control.layers({
-        'Mapbox Streets': L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11').on('load', finishedLoading),
-        'Mapbox Light': L.mapbox.styleLayer('mapbox://styles/mapbox/light-v9').addTo(map).on('load', finishedLoading),
-        'MapBox satelite': L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-v9').on('load', finishedLoading),
-        'MapBox dark': L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v9').on('load', finishedLoading)
-    }).addTo(map);
 
-    // create control and add to map
-    var lc = L.control.locate({
-        strings:{
-            popup: '{{ user.username }}'
-        }}).addTo(map);
+        var ty=0;
+        var nbr_click=0;
+        var idChauffeur=0;
 
-    // request location update and set location
-    lc.start();
+        //
 
-    {% for driver in listChauffeur %}
 
-    {% if driver.latitude is not null and driver.latitude is defined %}
-    L.marker([{{ driver.latitude }},{{ driver.longitude }}], {
-        icon: L.mapbox.marker.icon({
-            'marker-size': 'medium',
-            'marker-symbol': 'car',
-            'marker-color': '#ffcf39'
+        setInterval(function(){($(".leaflet-control-layers.leaflet-control").length==1 && ty==0) ? (ty=1,$(".leaflet-control-layers-base").css({"position":"fixed","right":"0","background-color":"white","width":"13%","height":"20%"}),$(".leaflet-control-layers-base label").after("<br>"),$(".leaflet-bar-part.leaflet-bar-part-single span").css("margin-left","30%")) : "";},1000)
+        $(".leaflet-control-layers.leaflet-control").css("margin-left","-30%")
+
+
+        // crontrol du micro sur la map
+        var SelectIcon=0;
+
+        var theMarker = new Array();
+        var coordonner = new Array();
+        var i=1;
+        var j=1;
+        var cmpt=1;
+        var spr="";
+        var taxiSelect=false;
+
+
+
+        {% block moduleReservationLivraison %}
+        {% endblock %}
+        $(".lol").click(function(){
+            return;
         })
-    }).addTo(map).bindPopup('{{ driver.username }}').on('click', function(e) {
-        var directionChauffeurLayer = L.mapbox.directions.layer(directionChauffeur).addTo(map);
-        var directionChauffeurRouteControl = L.mapbox.directions.routesControl('routes', directionChauffeur).addTo(map);
-        var start=iconStartExist();
-        var rien="";
-        (start!=-1) ? (
-            taxiSelect=true,$(".deleteFormReservation").fadeOut(100).queue(function(){$(".contenuReservation").fadeIn();$(this).dequeue()}),
-            setInterval(function(){ ($("path.leaflet-interactive[stroke-width='4']").hasClass("dej")==false) ? (
-                    $("path.leaflet-interactive[stroke-width='4']").attr("stroke","#F1A70E"),
-                        $("path.leaflet-interactive[stroke-width='4']").attr("stroke-opacity","0.4"),
-                        $("path.leaflet-interactive[stroke-width='4']").addClass("dej")
-                ) : rien=""
-                },100),
-                directionChauffeur.setOrigin(L.latLng(e.latlng.lat, e.latlng.lng)),
-                directionChauffeur.setOrigin(L.latLng(e.latlng.lat, e.latlng.lng)),
-                directionChauffeur.setDestination(L.latLng({{ user.latitude }},{{ user.longitude }})),
-                supprimerIconSupplementaire(),
-                updateDirectionChauffeur()
-              ) : map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng), 17);
-    });
-    {% endif %}
-    {% endfor %}
+        $("#myInput").click(function(){
+            if(parseFloat($(".lol").css("margin-left").replace("px",""))<0){
+                $(".lol").css("margin-left","15%")
+                $('aside').animate({"left": '+=20%'});
+            }else{
+                var  y= confirm({% if reservation is not defined %}"can you cancle this reservation ?"{% else %} " change position" {% endif %})
 
-    function deplacerMapNord(){
-        var lat=map.getCenter().lat+vitesseLat;
-        map.setView(new L.LatLng(lat,map.getCenter().lng),map.getZoom());
-    }
-    function deplacerMapSud(){
-        var lat=map.getCenter().lat-(vitesseLat*(-1));
-        map.setView(new L.LatLng(lat,map.getCenter().lng),map.getZoom());
-    }
-    function deplacerMapEst(){
-        var long=map.getCenter().lng-(vitesseLng*(-1));
-        map.setView(new L.LatLng(map.getCenter().lat,long),map.getZoom());
-    }
-    function deplacerMapOuest(){
-        var long=map.getCenter().lng+vitesseLng;
-        map.setView(new L.LatLng(map.getCenter().lat,long),map.getZoom());
-    }
-
-    function deplacerMapNordOuest(){
-        var lat=map.getCenter().lat+vitesseLat;
-        var long=map.getCenter().lng+vitesseLng;
-        map.setView(new L.LatLng(lat,long),map.getZoom());
-    }
-    function deplacerMapSudOuest(){
-        var lat=map.getCenter().lat-(vitesseLat*(-1));
-        var long=map.getCenter().lng+vitesseLng;
-        map.setView(new L.LatLng(lat,long),map.getZoom());
-    }
-
-    function deplacerMapSudEst(){
-        var lat=map.getCenter().lat-(vitesseLat*(-1));
-        var long=map.getCenter().lng-(vitesseLng*(-1));
-        map.setView(new L.LatLng(lat,long),map.getZoom());
-    }
-    function deplacerMapNordEst(){
-        var lat=map.getCenter().lat+vitesseLat;
-        var long=map.getCenter().lng-(vitesseLng*(-1));
-        map.setView(new L.LatLng(lat,long),map.getZoom());
-    }
-
-
-    setInterval(function(){
-        if(vitesseLng==0 && vitesseLat>0){
-            deplacerMapNord();
-        }
-        if(vitesseLng==0 && vitesseLat<0){
-            deplacerMapSud();
-        }
-
-        if(vitesseLat==0 && vitesseLng>0){
-            deplacerMapOuest();
-        }
-        if(vitesseLat==0 && vitesseLng<0){
-            deplacerMapEst() ;
-        }
-        if(vitesseLat<0 && vitesseLng<0){
-            deplacerMapSudEst() ;
-        }
-        if(vitesseLat>0 && vitesseLng<0){
-            deplacerMapNordEst() ;
-        }
-        if(vitesseLat<0 && vitesseLng>0){
-            deplacerMapSudOuest() ;
-        }
-        if(vitesseLat>0 && vitesseLng>0){
-            deplacerMapNordOuest();
-        }
-
-    },100)
-    function iconStartExist() {
-        for (j = 0; j < theMarker.length; j++) {
-            if (theMarker[j]._popup._content == "start") {
-                return j;
+                if(y==true){
+                    supprimerTousIcon()
+                    {% if reservation is not defined %}
+                    $("[name='reservationbundle_reservation']")[0].reset()
+                    {% endif %}
+                    $(".lol").css("margin-left","-15%")
+                    $('aside').animate({"left": '-=20%'});
+                    directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }}))
+                    directions.setDestination(L.latLng({{ user.latitude }},{{ user.longitude }}))
+                    directionChauffeur.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }}))
+                    directionChauffeur.setDestination(L.latLng({{ user.latitude }},{{ user.longitude }}))
+                    directionChauffeur.query();
+                    directions.query();
+                    map.setView(new L.LatLng({{ user.latitude }},{{ user.longitude }}),17);
+                    nbr_click--;
+                }else{
+                    $(".lol").trigger("click")
+                    return;
+                }
             }
-    }
-        return -1;
-    }
 
-    function iconEndExist() {
-        for (j = 0; j < theMarker.length; j++) {
-            if (theMarker[j]._popup._content == "end") {
-                return j;
-            }
-        }
-        return -1;
-    }
+        })
 
-    function calculDistance(lat1,lon1,lat2,lon2){
-        getAdresseDebut(lat1,lon1);
-        getAdresseDestination(lat2,lon2);
-        updateDirection();
 
-        var southWest = L.latLng(lat1, lon1),
-            northEast = L.latLng(lat2, lon2),
-            bounds = L.latLngBounds(southWest, northEast);
-        map.fitBounds(bounds);
 
-    }
-    var listeD = [];
-    function updateDirection(){
-        var res= directions.query().on('selectRoute', function(data) {
-            $(".map-legends.wax-legends.leaflet-control").css({"background-color":"rgba(0,0,0,0.75)","margin-right":"0","margin-bottom":"0"})
-           // $(".leaflet-bottom.leaflet-right").css("bottom","5%")
-            var route = data.route.steps;
-            var j=0;
 
-           var  dist=parseFloat(String(data.route.distance));
-           var  prixs=(dist/1000)*3;
-           $(".prixs").text(prixs.toFixed(3));
 
-            var dc="<div class='mapboxgl-ctrl-top-left' style='background-color: transparent;height:550px;overflow-y: scroll;'><div class='mapboxgl-ctrl-directions mapboxgl-ctrl'><div></div><div class='directions-control directions-control-instructions'><div class='directions-control directions-control-directions'><div style='background-color: rgba(0,0,0,0.75);color:white;padding:7px;text-align: center;font-weight: bold;'><span>"+ data.route.distance+" meters</span>&nbsp;&nbsp;<span style='color: rgba(255,255,255,0.6)'>"+data.route.duration+" secondes</span></div><div class='mapbox-directions-instructions'><div class='mapbox-directions-instructions-wrapper'><ol class='mapbox-directions-steps'>";
+        var listeD = [];
+        function updateDirection(){
 
-            for(j=0;j<route.length;j++){
+            var res= directions.query().on('selectRoute', function(data) {
+
+                $(".map-legends.wax-legends.leaflet-control").css({"background-color":"rgba(0,0,0,0.75)","margin-right":"0","margin-bottom":"0"})
+                // $(".leaflet-bottom.leaflet-right").css("bottom","5%")
+                var route = data.route.steps;
+                var j=0;
+                var  dist=parseFloat(String(data.route.distance));
+                $(".distance").text(data.route.distance+" meters")
+                var  prixs=(dist/1000)*3;
+                $(".prixs").text(prixs.toFixed(3) + "Dinars");
+
+                {% if reservation is defined and form is defined %}
+                var v1= iconStartExist();
+                $("[name='reservationbundle_reservation[longitude2]']").val(coordonner[v1][1])
+                $("[name='reservationbundle_reservation[latitude2]']").val(coordonner[v1][0])
+                $("[name='reservationbundle_reservation[prix]']").val(prixs)
+                {% endif %}
+                directionChauffeur.query().on('selectRoute', function(datas){
+                    $("[name='reservationbundle_reservation[depart]'],[name='reservationbundle_reservation[arrive]']").val("")
+                    $("[name='reservationbundle_reservation[typeReservation]']").val("reservationSimple")
+                    $("[name='reservationbundle_reservation[latitude]']").val("{{ user.latitude }}")
+                    $("[name='reservationbundle_reservation[longitude]']").val("{{ user.longitude }}")
+                    var v1= iconStartExist();
+                    $("[name='reservationbundle_reservation[longitude2]']").val(coordonner[v1][1])
+                    $("[name='reservationbundle_reservation[latitude2]']").val(coordonner[v1][0])
+                    $("[name ='reservationbundle_reservation[idClient]']").val({{ user.id }});
+                    dist+=parseFloat(String(datas.route.distance))
+                    var  prixs=(dist/1000)*3;
+                    $(".prixs").text(prixs.toFixed(3) + "Dinars");
+                    $("[name='reservationbundle_reservation[prix]']").val(prixs)
+                });
+                var dc="<div class='mapboxgl-ctrl-top-left' style='background-color: transparent;height:550px;overflow-y: scroll;'><div class='mapboxgl-ctrl-directions mapboxgl-ctrl'><div></div><div class='directions-control directions-control-instructions'><div class='directions-control directions-control-directions'><div style='background-color: rgba(0,0,0,0.75);color:white;padding:7px;text-align: center;font-weight: bold;'><span>"+ data.route.distance+" meters</span>&nbsp;&nbsp;<span style='color: rgba(255,255,255,0.6)'>"+data.route.duration+" secondes</span></div><div class='mapbox-directions-instructions'><div class='mapbox-directions-instructions-wrapper'><ol class='mapbox-directions-steps'>";
+
+                for(j=0;j<route.length;j++){
 
                     listeD.push(j);
                     var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
@@ -536,222 +370,56 @@ $(function(){
 
                         }
                     });
-                dc+="<li data-lat='"+route[j].maneuver.location.coordinates[1]+"' data-lng='"+route[j].maneuver.location.coordinates[1]+"' class='mapbox-directions-step'><span class='directions-icon directions-icon-"+route[j].maneuver.type.replace(" ", "")+"'></span><div class='mapbox-directions-step-maneuver dest"+j+"'>"+route[j].maneuver.type+" onto </div><div class='mapbox-directions-step-distance'>"+route[j].distance+" meter</div></li>"
+                    dc+="<li data-lat='"+route[j].maneuver.location.coordinates[1]+"' data-lng='"+route[j].maneuver.location.coordinates[1]+"' class='mapbox-directions-step'><span class='directions-icon directions-icon-"+route[j].maneuver.type.replace(" ", "")+"'></span><div class='mapbox-directions-step-maneuver dest"+j+"'>"+route[j].maneuver.type+" onto </div><div class='mapbox-directions-step-distance'>"+route[j].distance+" meter</div></li>"
 
-            }
-            dc+="</ol></div></div></div></div></div></div>";
-            $(".map-legends.wax-legends.leaflet-control").html(dc)
-          //  map.setView(new L.LatLng(lat, lon), (data.route.distance*17)/920);
-        });
-    }
-    function updateDirectionChauffeur(){
-        var res= directionChauffeur.query();
-    }
-
-    function getAdresseDebut(lat,lon){
-        supprimerIconSupplementaire();
-        var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
-        var finalPath = c.replace("var1", lat);
-        var finalPath2 = finalPath.replace("var2", lon);
-        var r="";
-        $.ajax({
-            type: "post",
-            url: finalPath2,
-            contentType: "html",
-            success: function(response) {
-                $(".position").val(response)
-            }
-        });
-
-    }
-
-    function getAdresseDestination(lat,lon){
-        supprimerIconSupplementaire();
-        var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
-        var finalPath = c.replace("var1", lat);
-        var finalPath2 = finalPath.replace("var2", lon);
-        var r="";
-        $.ajax({
-            type: "post",
-            url: finalPath2,
-            contentType: "html",
-            success: function(response) {
-                $(".destination").val(response)
-            }
-        });
-
-    }
-
-    function speak(msg){
-        var utterThis = new SpeechSynthesisUtterance(msg);
-
-        for(i = 0; i < voices.length ; i++) {
-            if(voices[i].name === "Microsoft Hortense - French (France)") {
-                utterThis.voice = voices[i];
-            }
-        }
-        synth.speak(utterThis);
-    }
-
-
-function supprimerIconSupplementaire(){
-    $(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive.leaflet-marker-draggable").css("display", "none");
-}
-    function creerIcon(lat,lon,fonction){
-        var  icon;
-        if(fonction=="fin"){
-            icon= new L.marker([lat, lon], {
-                icon: L.mapbox.marker.icon({
-                    'marker-size': 'large',
-                    'marker-symbol': 'bus',
-                    'marker-color': '#E91E63'
-                })
-            }).bindPopup('end');
-        }else{
-            icon= new L.marker([lat, lon], {
-                icon: L.mapbox.marker.icon({
-                    'marker-size': 'large',
-                    'marker-symbol': 'warehouse',
-                    'marker-color': '#42AA6B'
-                })
-            }).bindPopup('start');
-        }
-
-        return icon;
-    }
-
-    function supprimerIcon(j){
-        map.removeLayer(theMarker[j]);
-        var index = theMarker.indexOf(theMarker[j]);
-        var indexs = coordonner.indexOf(coordonner[j]);
-        theMarker.splice(index, 1);
-        coordonner.splice(indexs, 1)
-        cmpt--;
-    }
-
-    function startLoading() {
-        loader.className = '';
-    }
-
-    function finishedLoading() {
-        // first, toggle the class 'done', which makes the loading screen
-        // fade out
-        loader.className = 'done';
-        setTimeout(function() {
-            // then, after a half-second, add the class 'hide', which hides
-            // it completely and ensures that the user can interact with the
-            // map again.
-            loader.className = 'hide';
-        }, 500);
-    }
-
-
-if(executeSpeech==true){
-    recognition.addEventListener('result', e => {
-
-        var transcript = Array.from(e.results).map(result => result[0]).map(result => result.transcript).join('');
-        var poopScript = transcript.replace(/poop|poo|shit|dump/gi, ' ');
-
-        if (e.results[0].isFinal) {
-            if(poopScript!=""){
-                var p = poopScript
-                for(j=0;j<p.length;j++){
-                    p=p.toString().replace(" ","")
                 }
-                analyseurVocal(p)
-            }
-
-            // p = document.createElement('p');
-
-            // words.appendChild(p);
-
+                dc+="</ol></div></div></div></div></div></div>";
+                $(".map-legends.wax-legends.leaflet-control").html(dc)
+            });
+        }
+        function updateDirectionChauffeur(){
+            $("[name ='reservationbundle_reservation[idChauffeur]']").val(idChauffeur);
+            var res= directionChauffeur.query();
         }
 
-    });
-    recognition.onspeechend = function() {
-        $(".micro").click();
-        recognition.stop();
-    }
-   // recognition.addEventListener('end', recognition.start);
-}
-
-    function analyseurVocal(instruction){
-        // navigation map
-        if(instruction.indexOf("Siri")!=-1) {
-            var operations = [["déplacer", "déplace", "déplacez", "déplacé", "bouge", "bouger", "bougez", "bougé", "mouvoir", "déporter", "déporté", "décaler", "décalez", "décalé", "circuler", "circulé", "circulez"],["arrête","arrêter","arrêté","arrêtez","stop","maintient","maintenier","nebougeplus","resterlà","restelà"],["élargit","élargis","agrandir","agrandis","augmente","augmenté","augmentez"],["réduis","réduire","diminué","diminue"],["maposition","malocalisation","magéolocalisation"]]
-            var directions = [["nord-est","nordest"], ["nord-ouest","nordouest"], ["sud-ouest","sudouest"], ["sud-est","sudest"],["gauche", "Est"], ["droite", "Ouest"], ["haute", "Nord"], ["bas", "Sud"]]
-
-            var reponseOperation = -1;
-            var reponseDirections = -1;
-
-            var j = 0;
-            for (j = 0; j < operations.length; j++) {
-                reponseOperation = analyseurVocalImbriquer(instruction, operations[j]);
-                if(reponseOperation != -1){
-                    reponseOperation=j;
-                    break;
+        function getAdresseDebut(lat,lon){
+            supprimerIconSupplementaire();
+            var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+            var finalPath = c.replace("var1", lat);
+            var finalPath2 = finalPath.replace("var2", lon);
+            var r="";
+            $.ajax({
+                type: "post",
+                url: finalPath2,
+                contentType: "html",
+                success: function(response) {
+                    $(".position").val(response)
+                    $(".position").text(response)
                 }
-            }
-if(reponseOperation==4){
-    map.setView(new L.LatLng({{ user.latitude }},{{ user.longitude }}), 17);
-}else{
-    if(reponseOperation==3){
-        var zoom=map.getZoom()-1;
-        map.setView(new L.LatLng(map.getCenter().lat, map.getCenter().lng), zoom);
-    }else{
-        if(reponseOperation==2){
-            var zoom=map.getZoom()+1;
-            map.setView(new L.LatLng(map.getCenter().lat, map.getCenter().lng), zoom);
-        }else{
-            if (reponseOperation==1) {
-                vitesseLat=0;vitesseLng=0;
-            }else{
-                if (reponseOperation==0) {
-                    for (j = 0; j < directions.length; j++) {
-                        reponseDirections = analyseurVocalImbriquer(instruction, directions[j]);
-                        if(reponseDirections != -1){
-                            reponseDirections=j;
-                            break;
-                        }
-                    }
+            });
 
-                    (reponseDirections != -1) ? (
-                        (reponseOperation==0 && reponseDirections==4) ? (vitesseLat=0,vitesseLng=-0.0001) : "",
-                            (reponseOperation==0 && reponseDirections==5) ? (vitesseLat=0,vitesseLng=0.0001) : "",
-                            (reponseOperation==0 && reponseDirections==6) ? (vitesseLng=0,vitesseLat=0.0001) : "",
-                            (reponseOperation==0 && reponseDirections==7) ? (vitesseLng=0,vitesseLat=-0.0001) : "",
-                            (reponseOperation==0 && reponseDirections==0) ? (vitesseLat=0.0001,vitesseLng=-0.0001) : "",
-                            (reponseOperation==0 && reponseDirections==1) ? (vitesseLat=0.0001,vitesseLng=0.0001) : "",
-                            (reponseOperation==0 && reponseDirections==2) ? (vitesseLat=-0.0001,vitesseLng=0.0001) : "",
-                            (reponseOperation==0 && reponseDirections==3) ? (vitesseLat=-0.0001,vitesseLng=-0.0001) : ""
-                    ) : (speak("je n'ai pas compris"));
+        }
 
-                } else {
-                    speak("je n'ai pas compris");
+        function getAdresseDestination(lat,lon){
+            supprimerIconSupplementaire();
+            var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+            var finalPath = c.replace("var1", lat);
+            var finalPath2 = finalPath.replace("var2", lon);
+            var r="";
+            $.ajax({
+                type: "post",
+                url: finalPath2,
+                contentType: "html",
+                success: function(response) {
+                    $(".destination").val(response)
+                    $(".destination").text(response)
                 }
-            }
-        }
-    }
-}
+            });
 
-
-        }else{
-            speak("{{ user.username }}, Vous devez dire 'Siri' avant toute opération ");
         }
 
 
-    }
-
-    function analyseurVocalImbriquer(instruction,tableau){
-        j=0;
-        for(j=0;j<tableau.length;j++){
-            if(instruction.replace(" ","").toLowerCase().indexOf(tableau[j].toLowerCase())!=-1){
-                return j;
-            }
-        }
-        return -1;
-    }
-})
+    })
 </script>
 </body>
 </html>

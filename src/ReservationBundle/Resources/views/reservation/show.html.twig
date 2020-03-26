@@ -1,0 +1,72 @@
+{% extends '@Reservation/Default/index.html.twig' %}
+
+{% block decisionShowBlock %} $(".micro").hide() {% endblock %}
+{% block showPositionInit %}  {% endblock %}
+{% block moduleReservationLivraison %}
+    $(".leaflet-bottom.leaflet-right").css("z-index","2001");
+    map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+    map.keyboard.disable();
+
+    var southWest = L.latLng({{ reservation.latitude }},{{ reservation.longitude }});
+    var northEast = L.latLng({{ reservation.latitude2 }},{{ reservation.longitude2 }});
+    var bounds = L.latLngBounds(southWest, northEast);
+    map.fitBounds(bounds);
+    directions.setOrigin(L.latLng({{ reservation.latitude }},{{ reservation.longitude }}))
+    directions.setDestination(L.latLng({{ reservation.latitude2 }},{{ reservation.longitude2 }}))
+    updateDirection();
+    var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+    var finalPath = c.replace("var1", {{ reservation.latitude }});
+    var finalPath2 = finalPath.replace("var2", {{ reservation.longitude }});
+    var r="";
+    $.ajax({
+    type: "post",
+    url: finalPath2,
+    contentType: "html",
+    success: function(response) {
+    $(".position").text(response)
+    }
+    });
+
+    var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+    var finalPath = c.replace("var1", {{ reservation.latitude2 }});
+    var finalPath2 = finalPath.replace("var2", {{ reservation.longitude2 }});
+    var r="";
+    $.ajax({
+    type: "post",
+    url: finalPath2,
+    contentType: "html",
+    success: function(response) {
+    $(".destination").text(response)
+    }
+    });
+{% endblock %}
+
+{% block ShowReservation %}
+<div style="position: absolute;z-index: 2000;background-color: rgba(0,0,0,0.7);width: 100%;height:100%;">
+
+    <div id="execphp-2" class="widget_text col-md-6 col-sm-6 col-xs-12 widgets footer-left widget widget_execphp ">
+        <div class="execphpwidget"><div class="footer_left_bg">
+                <span class="ais-drop-icon"></span>
+                <div class="title_back">
+                    <p class="title_ais_footer">Reservations</p>
+                    <a href="tel+:+919909434323" target="_self" class="_titl_iconic_bg" data-wpel-link="internal" style="color:#3960CC;"><i class="fa fa-home" aria-hidden="true" style="color:rgb(70,70,70);"></i> <span class="position"></span></a>
+                    <a href="mailto:biz@aistechnolabs.com" target="_self" class="_titl_iconic_bg"  style="color:#3960CC;"><i class="fa fa-map-marker" aria-hidden="true" style="color:rgb(70,70,70);"></i> <span class="destination"></span></a>
+                    <a href="skype:Ais.technolabs?chat" target="_self" class="_titl_iconic_bg" data-wpel-link="internal"  style="color:#3960CC;" ><i class="fa fa-road"  style="color:rgb(70,70,70);" aria-hidden="true"></i> <span class="distance"></span></a>
+                    <a href="skype:Ais.technolabs?chat" target="_self" class="_titl_iconic_bg" data-wpel-link="internal" style="color:#3960CC;"><i class="fa fa-money"  style="color:rgb(70,70,70);" aria-hidden="true"></i> <span class="prixs"></span> </a>
+                    <div class="btn_footer">
+                        <a href="{{ path("_edit",{"idReservation":reservation.idReservation}) }}" class="btn_orange"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Update position</a>
+                        <a href="" class="btn_desprictions"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;Show driver</a>
+                        {{ form_start(delete_form) }}
+                        <input type="submit" value="To cancle"class="btn_delete" style="border:0px;cursor: pointer">
+                        {{ form_end(delete_form) }}
+                    </div></div></div></div></div>
+    <div>
+
+    </div>
+
+
+</div>
+{% endblock %}

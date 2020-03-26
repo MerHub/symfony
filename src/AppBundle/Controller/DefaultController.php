@@ -75,7 +75,6 @@ class DefaultController extends Controller
         $content = $response->getContent();
 // $content = '{"id":521583, "name":"symfony-docs", ...}'
         $content = $response->toArray();
-
         return new Response($content["display_name"]);
     }
 

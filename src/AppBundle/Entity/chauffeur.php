@@ -284,7 +284,7 @@ class chauffeur
 
     public function __toString()
     {
-        return $this->username;
+        return strval($this->id_User);
     }
 }
 

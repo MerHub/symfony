@@ -37,6 +37,7 @@
     <!-- CORE CSS TEMPLATE - START -->
     <link href="{{ asset("back/assets/css/style.css")}}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset("back/assets/css/responsive.css")}}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset("font/css/style.css")}}">
     <!-- CORE CSS TEMPLATE - END -->
     <style>
         html{
@@ -85,6 +86,16 @@
 
 <!-- BEGIN BODY -->
 <body class=" sidebar-collapse boxed"><!-- START TOPBAR -->
+<div class="preloader" id="loading">
+    <div class="preloader-body">
+        <div id="loading-center-object">
+            <div class="object" id="object_four"></div>
+            <div class="object" id="object_three"></div>
+            <div class="object" id="object_two"></div>
+            <div class="object" id="object_one"></div>
+        </div>
+    </div>
+</div>
 <div class="debut" style="display: none;">
     <div class='page-topbar  sidebar_shift '>
         <div class=''>
@@ -589,6 +600,7 @@
     <!-- END CORE TEMPLATE JS - END -->
 
     <script>
+
         jQuery( document ).ready(function( $ ) {
             $(window).resize(function(){
 
@@ -640,7 +652,24 @@
 </body>
 <script>
     $(function(){
+        var encore=false;
+        setInterval(function () {
+            if(encore==false){
+                var pr=parseInt($(".pace-progress").attr("data-progress"))
+                if(pr>=99){
+                    maFonctionDeTest();
+                }
+            }
+
+        },200)
+        $("body").on( "load",  function(){
+            alert("oui")
+        });
         $(".debut").fadeIn()
+
+        function maFonctionDeTest(){
+            $(".preloader").fadeOut(500)
+        }
     })
 </script>
 </html>

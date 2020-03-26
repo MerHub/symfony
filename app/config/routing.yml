@@ -24,7 +24,7 @@ reclamation:
 
 reservation:
     resource: "@ReservationBundle/Resources/config/routing.yml"
-    prefix:   /Reservation
+    prefix:   /reservation
 
 chauffeur:
     resource: "@ChauffeurBundle/Resources/config/routing.yml"
