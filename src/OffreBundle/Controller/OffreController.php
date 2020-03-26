@@ -27,6 +27,19 @@ class OffreController extends Controller
         ));
     }
 
+
+    public function listAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $offres = $em->getRepository('OffreBundle:Offre')->findAll();
+
+        return $this->render('@Offre/offre/list.html.twig', array(
+            'offres' => $offres,
+        ));
+    }
+
+
     /**
      * Creates a new offre entity.
      *

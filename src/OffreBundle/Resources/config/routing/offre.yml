@@ -3,6 +3,11 @@ offre_index:
     defaults: { _controller: "OffreBundle:Offre:index" }
     methods:  GET
 
+offre_list:
+    path:     /list
+    defaults: { _controller: "OffreBundle:Offre:list" }
+    methods:  GET
+
 offre_show:
     path:     /{idOffre}/show
     defaults: { _controller: "OffreBundle:Offre:show" }

@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-xl-12">
+        <section class="box ">
+            <header class="panel_header">
+                <h2 class="title float-left">Offre list</h2>
+                <div class="actions panel_actions float-right">
+                    <a class="box_toggle fa fa-chevron-down"></a>
+
+                </div>
+            </header>
+            <div class="content-body">    <div class="row">
+                    <div class="col-12">
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+
+
+
+                                <th>Dated</th>
+                                <th>Datef</th>
+                                <th>Type</th>
+                                <th>Nom</th>
+                                <th>Reductionoffre</th>
+                                <th>Codepromo</th>
+                                <th>Img</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for offre in offres %}
+                                <tr>
+
+                                    <td>{% if offre.dateD %}{{ offre.dateD|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>{% if offre.dateF %}{{ offre.dateF|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>{{ offre.type }}</td>
+                                    <td>{{ offre.nom }}</td>
+                                    <td>{{ offre.reductionOffre }}</td>
+                                    <td>{{ offre.codePromo }}</td>
+                                    <td>{{ offre.img }}</td>
+                                    <td>
+                                        <ul>
+                                            <li>
+
+                                                <a   class="fa fa-eye" href="{{ path('offre_show', { 'idOffre': offre.idOffre }) }}"></a>
+                                            </li>
+                                            <li>
+                                                <a class="fa fa-bullseye"  href="{{ path('offre_edit', { 'idOffre': offre.idOffre }) }}">edit</a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <ul>
+                            <li>
+                                <a href="{{ path('offre_new') }}">Create a new offre</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section></div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
