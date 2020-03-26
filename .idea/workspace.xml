@@ -75,6 +75,18 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -88,6 +100,8 @@
       <workItem from="1585028373254" duration="4221000" />
       <workItem from="1585032829672" duration="97000" />
       <workItem from="1585033296808" duration="25000" />
+      <workItem from="1585250358036" duration="41000" />
+      <workItem from="1585250413529" duration="208000" />
     </task>
     <servers />
   </component>

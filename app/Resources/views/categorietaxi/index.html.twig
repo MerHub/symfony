@@ -1,0 +1,42 @@
+{% extends 'basesk.html.twig' %}
+
+{% block body %}
+    <h1>Categorietaxis list</h1>
+
+    <table>
+        <thead>
+            <tr>
+
+                <th>Model</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorieTaxi in categorieTaxis %}
+            <tr>
+                <td hidden><a href="{{ path('categorietaxi_show', { 'id': categorieTaxi.id }) }}">{{ categorieTaxi.id }}</a></td>
+
+                <td>{{ categorieTaxi.model }}</td>
+                <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ categorieTaxi.image) }}')">
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('categorietaxi_show', { 'id': categorieTaxi.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('categorietaxi_edit', { 'id': categorieTaxi.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categorietaxi_new') }}">Create a new categorieTaxi</a>
+        </li>
+    </ul>
+{% endblock %}

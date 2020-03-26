@@ -1,0 +1,24 @@
+taxi_index:
+    path:     /
+    defaults: { _controller: "TaxiBundle:Taxi:index" }
+    methods:  GET
+
+taxi_show:
+    path:     /{idTaxi}/show
+    defaults: { _controller: "TaxiBundle:Taxi:show" }
+    methods:  GET
+
+taxi_new:
+    path:     /new
+    defaults: { _controller: "TaxiBundle:Taxi:new" }
+    methods:  [GET, POST]
+
+taxi_edit:
+    path:     /{idTaxi}/edit
+    defaults: { _controller: "TaxiBundle:Taxi:edit" }
+    methods:  [GET, POST]
+
+taxi_delete:
+    path:     /{idTaxi}/delete
+    defaults: { _controller: "TaxiBundle:Taxi:delete" }
+    methods:  DELETE
