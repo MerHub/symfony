@@ -13,6 +13,25 @@ use Symfony\Component\HttpClient\HttpClient;
 class DefaultController extends Controller
 {
     /**
+     * @Route("/message/{idReservation}/{numClient}/{idDriver}", name="sendMessageChauffeur")
+     */
+    public function sendMessageChauffeur($idReservation,$numClient,$idDriver)
+    {
+        //returns an instance of Vresh\TwilioBundle\Service\TwilioWrapper
+        $twilio = $this->get('twilio.api');
+        $numChauffeur=$this->getDoctrine()->getRepository(user::class)->find($idDriver)->getNTel();
+        $message = $twilio->account->messages->sendMessage(
+            '+12018014274', // From a Twilio number in your account
+            '+216'.$numChauffeur, // Text any number
+            "Connect you, you have an reservation : phone number : +216 ".$numClient
+        );
+
+        //get an instance of \Service_Twilio
+        //$otherInstance = $twilio->createInstance('BBBB', 'CCCCC');
+
+        return $this->redirectToRoute('_show', array('idReservation' => $idReservation));
+    }
+    /**
      * @Route("/login", name="loginpage")
      */
     public function loginAction(Request $request)

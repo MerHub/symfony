@@ -39,6 +39,7 @@ class ReservationController extends Controller
         $id=$user->getId();
         $reservation = new Reservation();
         $reservationExite=$this->getDoctrine()->getRepository(Reservation::class)->findOneBy(['idClient'=>$id]);
+        $Puser=$this->getDoctrine()->getRepository(user::class)->find($id);
         if($reservationExite==null){
             $form = $this->createForm('ReservationBundle\Form\ReservationType', $reservation);
             $form->handleRequest($request);
@@ -47,11 +48,10 @@ class ReservationController extends Controller
                 $reservation->setHeure(new \DateTime('now'));
                 $em->persist($reservation);
                 $em->flush();
-
-                return $this->redirectToRoute('_show', array('idReservation' => $reservation->getIdreservation()));
+                return $this->redirectToRoute("sendMessageChauffeur",array("idReservation"=>$reservation->getIdreservation(),"numClient"=>$Puser->getNTel(),"idDriver"=>$reservation->getIdChauffeur()));
             }
 
-            $Puser=$this->getDoctrine()->getRepository(user::class)->find($id);
+
             $listDriver=$this->getDoctrine()->getRepository(user::class)->findBy(['type'=>'chauffeur']);
             return $this->render('@Reservation/reservation/new.html.twig',[
                 'user'=>$Puser,
