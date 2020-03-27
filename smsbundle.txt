@@ -1,0 +1,5 @@
+https://www.twilio.com/console
+
+pour resoudre le pb de ssl : 
+
+https://support.twilio.com/hc/en-us/articles/235279367-Twilio-PHP-helper-library-SSL-certificate-problem-on-Windows

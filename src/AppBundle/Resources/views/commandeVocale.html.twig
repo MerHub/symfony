@@ -1,0 +1,236 @@
+
+
+var bonjour=false;
+//le type de navigateur
+var Version = navigator.appVersion;
+var vitesseLat=0;
+var vitesseLng=0;
+
+//initiation des variable locales
+var recognition="";
+var synth="";
+var voices="";
+if(executeSpeech==true){
+// activer le speech recognition
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+//initiation des variable locales
+synth = window.speechSynthesis;
+recognition = new SpeechRecognition();
+recognition.interimResults = true;
+recognition.lang = 'fr-FR';
+voices = synth.getVoices();
+
+for(i = 0; i < voices.length ; i++) {
+var option = document.createElement('option');
+option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+option.setAttribute('data-lang', voices[i].lang);
+option.setAttribute('data-name', voices[i].name);
+}
+}
+if(executeSpeech==true) {
+$(".micro").click(function () {
+if (SelectIcon % 2 == 0) {
+if(bonjour==false){
+speak("bonsoir {{ user.username }}, qu'est ce que je peux faire pour vous ?");
+}else{
+speak("je vous écoutes {{ user.username }}");
+}
+
+recognition.start();
+$(".micro i").attr("class", "fa fa-microphone-slash")
+$(".micro span").text("Stop vocal")
+bonjour=true;
+} else {
+$(".micro i").attr("class", "fa fa-microphone")
+$(".micro span").text("Start vocal")
+}
+SelectIcon++;
+
+})
+}
+
+function deplacerMapNord(){
+var lat=map.getCenter().lat+vitesseLat;
+map.setView(new L.LatLng(lat,map.getCenter().lng),map.getZoom());
+}
+function deplacerMapSud(){
+var lat=map.getCenter().lat-(vitesseLat*(-1));
+map.setView(new L.LatLng(lat,map.getCenter().lng),map.getZoom());
+}
+function deplacerMapEst(){
+var long=map.getCenter().lng-(vitesseLng*(-1));
+map.setView(new L.LatLng(map.getCenter().lat,long),map.getZoom());
+}
+function deplacerMapOuest(){
+var long=map.getCenter().lng+vitesseLng;
+map.setView(new L.LatLng(map.getCenter().lat,long),map.getZoom());
+}
+
+function deplacerMapNordOuest(){
+var lat=map.getCenter().lat+vitesseLat;
+var long=map.getCenter().lng+vitesseLng;
+map.setView(new L.LatLng(lat,long),map.getZoom());
+}
+function deplacerMapSudOuest(){
+var lat=map.getCenter().lat-(vitesseLat*(-1));
+var long=map.getCenter().lng+vitesseLng;
+map.setView(new L.LatLng(lat,long),map.getZoom());
+}
+
+function deplacerMapSudEst(){
+var lat=map.getCenter().lat-(vitesseLat*(-1));
+var long=map.getCenter().lng-(vitesseLng*(-1));
+map.setView(new L.LatLng(lat,long),map.getZoom());
+}
+function deplacerMapNordEst(){
+var lat=map.getCenter().lat+vitesseLat;
+var long=map.getCenter().lng-(vitesseLng*(-1));
+map.setView(new L.LatLng(lat,long),map.getZoom());
+}
+setInterval(function(){
+if(vitesseLng==0 && vitesseLat>0){
+deplacerMapNord();
+}
+if(vitesseLng==0 && vitesseLat<0){
+deplacerMapSud();
+}
+
+if(vitesseLat==0 && vitesseLng>0){
+deplacerMapOuest();
+}
+if(vitesseLat==0 && vitesseLng<0){
+deplacerMapEst() ;
+}
+if(vitesseLat<0 && vitesseLng<0){
+deplacerMapSudEst() ;
+}
+if(vitesseLat>0 && vitesseLng<0){
+deplacerMapNordEst() ;
+}
+if(vitesseLat<0 && vitesseLng>0){
+deplacerMapSudOuest() ;
+}
+if(vitesseLat>0 && vitesseLng>0){
+deplacerMapNordOuest();
+}
+
+},100)
+
+function speak(msg){
+var utterThis = new SpeechSynthesisUtterance(msg);
+
+for(i = 0; i < voices.length ; i++) {
+if(voices[i].name === "Microsoft Hortense - French (France)") {
+utterThis.voice = voices[i];
+}
+}
+synth.speak(utterThis);
+}
+
+if(executeSpeech==true){
+recognition.addEventListener('result', e => {
+
+var transcript = Array.from(e.results).map(result => result[0]).map(result => result.transcript).join('');
+var poopScript = transcript.replace(/poop|poo|shit|dump/gi, ' ');
+
+if (e.results[0].isFinal) {
+if(poopScript!=""){
+var p = poopScript
+for(j=0;j<p.length;j++){
+p=p.toString().replace(" ","")
+}
+analyseurVocal(p)
+}
+
+// p = document.createElement('p');
+
+// words.appendChild(p);
+
+}
+
+});
+recognition.onspeechend = function() {
+$(".micro").click();
+recognition.stop();
+}
+// recognition.addEventListener('end', recognition.start);
+}
+
+function analyseurVocal(instruction){
+// navigation map
+
+if(instruction.indexOf("Siri")!=-1 || instruction.indexOf("série")!=-1 || instruction.indexOf("Syrie")!=-1) {
+var operations = [["arrête","arrêter","arrêté","arrêtez","stop","maintient","maintenier","nebougeplus","resterlà","restelà"],["déplacer", "déplace", "déplacez", "déplacé", "bouge", "bouger", "bougez", "bougé", "mouvoir", "déporter", "déporté", "décaler", "décalez", "décalé", "circuler", "circulé", "circulez"],["élargit","élargis","agrandir","agrandis","augmente","augmenté","augmentez"],["réduis","réduire","diminué","diminue"],["maposition","malocalisation","magéolocalisation"]]
+var directions = [["nord-est","nordest"], ["nord-ouest","nordouest"], ["sud-ouest","sudouest"], ["sud-est","sudest"],["gauche", "Est"], ["droite", "Ouest"], ["haut", "Nord"], ["bas", "Sud"]]
+
+var reponseOperation = -1;
+var reponseDirections = -1;
+
+var j = 0;
+for (j = 0; j < operations.length; j++) {
+reponseOperation = analyseurVocalImbriquer(instruction, operations[j]);
+if(reponseOperation != -1){
+reponseOperation=j;
+break;
+}
+}
+if(reponseOperation==4){
+map.setView(new L.LatLng({{ user.latitude }},{{ user.longitude }}), 17);
+}else{
+if(reponseOperation==3){
+var zoom=map.getZoom()-1;
+map.setView(new L.LatLng(map.getCenter().lat, map.getCenter().lng), zoom);
+}else{
+if(reponseOperation==2){
+var zoom=map.getZoom()+1;
+map.setView(new L.LatLng(map.getCenter().lat, map.getCenter().lng), zoom);
+}else{
+if (reponseOperation==0) {
+vitesseLat=0;vitesseLng=0;
+}else{
+if (reponseOperation==1) {
+for (j = 0; j < directions.length; j++) {
+reponseDirections = analyseurVocalImbriquer(instruction, directions[j]);
+if(reponseDirections != -1){
+reponseDirections=j;
+break;
+}
+}
+
+(reponseDirections != -1) ? (
+(reponseDirections==4) ? (vitesseLat=0,vitesseLng=-0.0001) : "",
+( reponseDirections==5) ? (vitesseLat=0,vitesseLng=0.0001) : "",
+(reponseDirections==6) ? (vitesseLng=0,vitesseLat=0.0001) : "",
+(reponseDirections==7) ? (vitesseLng=0,vitesseLat=-0.0001) : "",
+( reponseDirections==0) ? (vitesseLat=0.0001,vitesseLng=-0.0001) : "",
+( reponseDirections==1) ? (vitesseLat=0.0001,vitesseLng=0.0001) : "",
+( reponseDirections==2) ? (vitesseLat=-0.0001,vitesseLng=0.0001) : "",
+( reponseDirections==3) ? (vitesseLat=-0.0001,vitesseLng=-0.0001) : ""
+) : (speak("je n'ai pas compris"));
+
+} else {
+speak("je n'ai pas compris");
+}
+}
+}
+}
+}
+
+
+}else{
+speak("{{ user.username }}, Vous devez dire 'Siri' avant toute opération ");
+}
+
+
+}
+
+function analyseurVocalImbriquer(instruction,tableau){
+j=0;
+for(j=0;j<tableau.length;j++){
+if(instruction.replace(" ","").toLowerCase().indexOf(tableau[j].toLowerCase())!=-1){
+return j;
+}
+}
+return -1;
+}

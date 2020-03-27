@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Reservations list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idreservation</th>
+                <th>Depart</th>
+                <th>Arrive</th>
+                <th>Heure</th>
+                <th>Prix</th>
+                <th>Typereservation</th>
+                <th>Codeliv</th>
+                <th>Nbrplace</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Latitude2</th>
+                <th>Longitude2</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td><a href="{{ path('_show', { 'idReservation': reservation.idReservation }) }}">{{ reservation.idReservation }}</a></td>
+                <td>{{ reservation.depart }}</td>
+                <td>{{ reservation.arrive }}</td>
+                <td>{% if reservation.heure %}{{ reservation.heure|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ reservation.prix }}</td>
+                <td>{{ reservation.typeReservation }}</td>
+                <td>{{ reservation.codeLiv }}</td>
+                <td>{{ reservation.nbrPlace }}</td>
+                <td>{{ reservation.latitude }}</td>
+                <td>{{ reservation.longitude }}</td>
+                <td>{{ reservation.latitude2 }}</td>
+                <td>{{ reservation.longitude2 }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('_show', { 'idReservation': reservation.idReservation }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('_edit', { 'idReservation': reservation.idReservation }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('_new') }}">Create a new reservation</a>
+        </li>
+    </ul>
+{% endblock %}
