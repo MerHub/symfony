@@ -1,78 +1,91 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<h2>Search An Offer</h2>
 
+<div class="sidebar-search">
 
+    <div class="input-group custom-search-form">
 
+        <input type="text" id="search" class="form-control" placeholder="Search here">
+    </div>
+    <!-- /input-group -->
+</div>
 
-    <section class="box ">
-        <header class="panel_header">
-            <h2 class="title float-left">Message Validations</h2>
-            <div class="actions panel_actions float-right">
-                <a class="box_toggle fa fa-chevron-down"></a>
-                <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
-                <a class="box_close fa fa-times"></a>
-            </div>
-        </header>
-        <div class="content-body">
+<ul class="nav nav-second-level" id="entitiesNav">
+</ul>
 
-            <form id="msg_validate" action="javascript:;" novalidate="novalidate">
-                <div class="row">
-                    <div class="col-12">
+<br><br>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-                        <div class="form-group has-error">
-                            <label class="form-label">Name</label>
-                            <span class="desc">e.g. "Beautiful Mind"</span>
-                            <div class="controls">
-                                <input type="text" class="form-control" name="formfield1" aria-required="true"><span class="error"><label id="formfield1-error" class="error" for="formfield1">This field is required.</label></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group has-error">
-                            <label class="form-label">Email</label>
-                            <span class="desc">e.g. "some@example.com"</span>
-                            <div class="controls">
-                                <input type="text" class="form-control" name="formfield2" aria-required="true"><span class="error"><label id="formfield2-error" class="error" for="formfield2">This field is required.</label></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group has-error">
-                            <label class="form-label">Website</label>
-                            <span class="desc">e.g. "http://www.example.com"</span>
-                            <div class="controls">
-                                <input type="text" class="form-control" name="formfield3" aria-required="true"><span class="error"><label id="formfield3-error" class="error" for="formfield3">This field is required.</label></span>
-                            </div>
-                        </div>
-
-                        <div class="float-right">
-                            <button type="submit" class="btn btn-success">Save</button>
-                            <button type="button" class="btn">Cancel</button>
-                        </div>
-
-
-
-
-
-
-                    </div>
-                </div>
-            </form>
+    <header class="panel_header">
+        <h2 class="title float-left">Add A bicycle</h2>
+        <div class="actions panel_actions float-right">
+            <a class="box_toggle fa fa-chevron-down"></a>
+            <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
+            <a class="box_close fa fa-times"></a>
         </div>
-    </section>
+    </header>
+    <div class="content-body">
+        <div class="row">
+            <div class="col-lg-8 col-md-9 col-10">
+
+                <div class="form-group">
+                    <table class="table table-striped">
+                        {{ form_start(form) }}
+                        <tr>
+                            <td>{{ form_label(form.nom) }}</td>
+                            <td>{{ form_widget(form.nom) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_label(form.type) }}</td>
+                            <td>{{ form_widget(form.type) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_label(form.dateD) }}</td>
+                            <td>{{ form_widget(form.dateD) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_label(form.dateF) }}</td>
+                            <td>{{ form_widget(form.dateF) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_label(form.reductionOffre) }}</td>
+                            <td>{{ form_widget(form.reductionOffre) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_label(form.codePromo) }}</td>
+                            <td>{{ form_widget(form.codePromo) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_label(form.img) }}</td>
+                            <td>{{ form_widget(form.img) }}</td>
+                        </tr>
+                        <tr>
+
+                            <td>{{ form_widget(form) }}</td>
+                            <td> <input type="submit" value="Create" /></td>
+                        </tr>
+                        {{ form_end(form) }}
+                    </table>
+                </div>
 
 
 
-    <h1>Offre creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+            </div>
+        </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('offre_index') }}">Back to the list</a>
-        </li>
-    </ul>
-{% endblock %}
+
+
+
+
+
+    </div>
+
+
+
+
+
+    {% endblock %}

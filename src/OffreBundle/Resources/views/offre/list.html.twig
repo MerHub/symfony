@@ -39,7 +39,8 @@
                                     <td>{{ offre.nom }}</td>
                                     <td>{{ offre.reductionOffre }}</td>
                                     <td>{{ offre.codePromo }}</td>
-                                    <td>{{ offre.img }}</td>
+                                    <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ offre.img) }}')">
+                                    </td>
                                     <td>
                                         <ul>
                                             <li>
@@ -55,11 +56,7 @@
                             {% endfor %}
                             </tbody>
                         </table>
-                        <ul>
-                            <li>
-                                <a href="{{ path('offre_new') }}">Create a new offre</a>
-                            </li>
-                        </ul>
+
                     </div>
                 </div>
             </div>

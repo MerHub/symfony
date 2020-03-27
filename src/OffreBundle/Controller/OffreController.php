@@ -52,6 +52,10 @@ class OffreController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $file=$offre->getImg();
+            $fileName=md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('upload_directory'),$fileName);
+            $offre->setImg($fileName);
             $em->persist($offre);
             $em->flush();
 
@@ -116,7 +120,7 @@ class OffreController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('offre_index');
+        return $this->redirectToRoute('offre_list');
     }
 
     /**
