@@ -39,22 +39,22 @@
     (v2!=-1) ? (directions.setDestination(L.latLng(coordonner[v2][0], coordonner[v2][1])),fin = coordonner[v2]) : rien="";
 
     (debut != 1 && fin != 1) ? calculDistance(debut[0],debut[1],fin[0],fin[1]) : rien="";
-    (fin == 1) ? (directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }})),
+    (fin == 1) ? (directions.setOrigin(L.latLng(malatitude,malongitude)),
     directions.setDestination(L.latLng(debut[0], debut[1])),
-    calculDistance({{ user.latitude }},{{ user.longitude }},debut[0],debut[1])) : rien="";
+    calculDistance(malatitude,malongitude,debut[0],debut[1])) : rien="";
 
     LamMarker.on('click', function (e) {
     v1= iconStartExist();
     v2= iconEndExist();
     $(".infor").show();
-if(v2==-1){
+    if(v2==-1){
     $("#myInput").trigger("click")
     }else{
     var iconSelect= (theMarker[v1]._leaflet_id == e.target._leaflet_id) ? v1 : v2;
     (theMarker[iconSelect]._popup._content == "end") ? (
-    directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }})),
+    directions.setOrigin(L.latLng(malatitude,malongitude)),
     directions.setDestination(L.latLng(debut[0], debut[1])),
-    calculDistance({{ user.latitude }},{{ user.longitude }},debut[0],debut[1])
+    calculDistance(malatitude,malongitude,debut[0],debut[1])
     ) : {% if reservation is not defined %} (
     $(".infor").show(),
     theMarker[v2].setIcon(L.mapbox.marker.icon({
@@ -64,9 +64,9 @@ if(v2==-1){
     })),
     theMarker[v2]._popup._content = "start",
     fin = coordonner[v2],
-    directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }})),
+    directions.setOrigin(L.latLng(malatitude,malongitude)),
     directions.setDestination(L.latLng(fin[0], fin[1])),
-    calculDistance({{ user.latitude }},{{ user.longitude }},fin[0],fin[1])
+    calculDistance(malatitude,malongitude,fin[0],fin[1])
 
     ){% else %} rien="" {% endif %},
     {% if reservation is not defined %}
@@ -119,11 +119,11 @@ if(v2==-1){
             },100),
             directionChauffeur.setOrigin(L.latLng(e.latlng.lat, e.latlng.lng)),
             directionChauffeur.setOrigin(L.latLng(e.latlng.lat, e.latlng.lng)),
-            directionChauffeur.setDestination(L.latLng({{ user.latitude }},{{ user.longitude }})),
+            directionChauffeur.setDestination(L.latLng(malatitude,malongitude)),
             idChauffeur={{ driver.id }},
             supprimerIconSupplementaire(),
             updateDirectionChauffeur()
-            ) : ((start==-1 && end==-1) ? (map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng), 17)) : (
+            ) : ((start==-1 && end==-1) ? (map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng), map.getZoom())) : (
             taxiSelect=true,
             $(".reservation").fadeOut(100),
             $(".livraison").fadeIn(100),
@@ -137,78 +137,4 @@ if(v2==-1){
 
     {# fonction utile pour la manipulation de la map #}
 
-    function iconStartExist() {
-    for (j = 0; j < theMarker.length; j++) {
-    if (theMarker[j]._popup._content == "start") {
-    return j;
-    }
-    }
-    return -1;
-    }
-
-    function iconEndExist() {
-    for (j = 0; j < theMarker.length; j++) {
-    if (theMarker[j]._popup._content == "end") {
-    return j;
-    }
-    }
-    return -1;
-    }
-
-    function calculDistance(lat1,lon1,lat2,lon2){
-    getAdresseDebut(lat1,lon1);
-    getAdresseDestination(lat2,lon2);
-    updateDirection();
-
-    var southWest = L.latLng(lat1, lon1),
-    northEast = L.latLng(lat2, lon2),
-    bounds = L.latLngBounds(southWest, northEast);
-    map.fitBounds(bounds);
-
-    }
-
-
-
-
-    function supprimerIconSupplementaire(){
-    $(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive.leaflet-marker-draggable").css("display", "none");
-    }
-    function creerIcon(lat,lon,fonction){
-    var  icon;
-    if(fonction=="fin"){
-    icon= new L.marker([lat, lon], {
-    icon: L.mapbox.marker.icon({
-    'marker-size': 'large',
-    'marker-symbol': 'bus',
-    'marker-color': '#E91E63'
-    })
-    }).bindPopup('end');
-    }else{
-    icon= new L.marker([lat, lon], {
-    icon: L.mapbox.marker.icon({
-    'marker-size': 'large',
-    'marker-symbol': 'warehouse',
-    'marker-color': '#42AA6B'
-    })
-    }).bindPopup('start');
-    }
-
-    return icon;
-    }
-
-    function supprimerIcon(j){
-    map.removeLayer(theMarker[j]);
-    var index = theMarker.indexOf(theMarker[j]);
-    var indexs = coordonner.indexOf(coordonner[j]);
-    theMarker.splice(index, 1);
-    coordonner.splice(indexs, 1)
-    cmpt--;
-    }
-
-    function supprimerTousIcon(){
-    var taille=theMarker.length;
-    for(j=0;j<taille;j++){
-    supprimerIcon(0)
-    }
-    }
 {% endblock %}
