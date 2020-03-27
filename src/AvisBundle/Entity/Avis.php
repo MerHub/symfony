@@ -3,7 +3,7 @@
 namespace AvisBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Avis
  *
@@ -22,6 +22,7 @@ class Avis
 
     /**
      * @var int
+     * @Assert\NotBlank
      * @ORM\OneToOne(targetEntity=AppBundle\Entity\chauffeur::class)
      * @ORM\JoinColumn(name="id_chauffeur" , referencedColumnName="id")
      */
@@ -29,6 +30,7 @@ class Avis
 
     /**
      * @var int
+     * @Assert\NotBlank
      * @ORM\OneToOne(targetEntity=AppBundle\Entity\Client::class)
      * @ORM\JoinColumn(name="id_client" , referencedColumnName="id")
      */
@@ -36,14 +38,18 @@ class Avis
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(min=5,message=" length of the message must be between 5 and 10 character")
+     * @Assert\Length(max=100,message=" length of the message must be between 5 and 10 character")
      * @ORM\Column(name="msg", type="string", length=255)
      */
     private $msg;
 
     /**
      * @var int
-     *
+     * @Assert\NotBlank
+     * @Assert\LessThanOrEqual(5 ,message=" note must be between 1 and 5 ")
+     * @Assert\GreaterThanOrEqual(0,message=" note must be between 1 and 5 )
      * @ORM\Column(name="note", type="integer")
      */
     private $note;
@@ -51,7 +57,6 @@ class Avis
 
     /**
      * Get id
-     *
      * @return int
      */
     public function getId()
@@ -61,7 +66,6 @@ class Avis
 
     /**
      * Set idAvis
-     *
      * @param integer $idAvis
      *
      * @return Avis

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Avis list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idavis</th>
+                <th>Msg</th>
+                <th>Note</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for avi in avis %}
+            <tr>
+                <td><a href="{{ path('avis_show', { 'idAvis': avi.idAvis }) }}">{{ avi.idAvis }}</a></td>
+                <td>{{ avi.msg }}</td>
+                <td>{{ avi.note }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('avis_show', { 'idAvis': avi.idAvis }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('avis_edit', { 'idAvis': avi.idAvis }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('avis_new') }}">Create a new avi</a>
+        </li>
+    </ul>
+{% endblock %}
