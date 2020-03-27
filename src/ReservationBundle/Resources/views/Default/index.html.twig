@@ -71,18 +71,18 @@
 
                 <div class="contenuReservation" {% if reservation is not defined %} style="display: none;" {% endif %}>
                     <div style="margin-top: 15%;">
-                       <center>
-                           <div style="display: inline-block;width: 70%;">
-                               <div class="form-group" style="margin-top:-6%;margin-left:6%;">
-                                   <input type="text" name="position"  class="position" placeholder="your address" >
-                                   <img src="{{ asset("font/images/house.png") }}" width="15px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
-                               </div>
-                               <div class="form-group" style="margin-top:10%;margin-left:6%;">
-                                   <input type="text" name="destination"  class="destination"  placeholder="your destination" style="background-image: url('{{ asset("font/images/house.png") }}')" >
-                                   <img src="{{ asset("font/images/lo.png") }}" width="12px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
-                               </div>
-                           </div>
-                       </center>
+                        <center>
+                            <div style="display: inline-block;width: 70%;">
+                                <div class="form-group" style="margin-top:-6%;margin-left:6%;">
+                                    <input type="text" name="position"  class="position" placeholder="your address" >
+                                    <img src="{{ asset("font/images/house.png") }}" width="15px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
+                                </div>
+                                <div class="form-group" style="margin-top:10%;margin-left:6%;">
+                                    <input type="text" name="destination"  class="destination"  placeholder="your destination" style="background-image: url('{{ asset("font/images/house.png") }}')" >
+                                    <img src="{{ asset("font/images/lo.png") }}" width="12px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
+                                </div>
+                            </div>
+                        </center>
                     </div>
 
                     <div class="col-md-12" style="margin-top: 15%;">
@@ -97,11 +97,11 @@
                         <center>
                             <div class="route"><i class="fa fa-road" aria-hidden="true"></i> show the route</div>
                             {% if reservation is not defined %}
-                            <div class="drivver"><i class="fa fa-user-circle" aria-hidden="true"></i> show driver</div>
+                                <div class="drivver"><i class="fa fa-user-circle" aria-hidden="true"></i> show driver</div>
                             {% endif %}
 
                             <input type="submit" value="Confirm order" name="reservation" class="order" style="outline: none;">
-                                <a href="{{ path("reservation_homepage") }}" class="order" style="text-decoration: none;margin-top: 2%;background-color: #0d0a0a;">Cancle</a>
+                            <a href="{{ path("reservation_homepage") }}" class="order" style="text-decoration: none;margin-top: 2%;background-color: #0d0a0a;">Cancle</a>
                         </center>
                     </div>
                 </div>
@@ -217,7 +217,11 @@
 </div>
 <script>
     $(function(){
-
+        {% if user.latitude is null and reservation is not defined %}*
+        window.location.href="{{ path('reservation_homepage') }}";
+        {% endif %}
+        var malatitude={% if user.latitude is not  null  %}{{ user.latitude }}; {% else %} 0; {% endif %}
+        var malongitude={% if user.longitude is not  null  %}{{ user.longitude }}; {% else %} 0; {% endif %}
         var autorise_afficherTrajet=false;
         $("[name ='reservationbundle_reservation[idClient]']").val({{ user.id }});
         $(".route").click(function(){
@@ -235,7 +239,7 @@
         L.mapbox.accessToken = 'pk.eyJ1IjoiY3lyaWxsZTgwMCIsImEiOiJjazZzcmU2bHUwMDh0M2xxcGRtOGJndGh4In0.zqSmLTyuMbkLZQyVFgtAXA';
         var loader = document.getElementById('loader');
         // centrer la map
-        var map = L.mapbox.map('map').setView([{{ user.latitude }},{{ user.longitude }}], 17);
+        var map = L.mapbox.map('map').setView([malatitude,malongitude], 17);
         // create the initial directions object, from which the layer
         // and inputs will pull data.
         var directions = L.mapbox.directions();
@@ -275,33 +279,7 @@
         {% block showPositionInit %}
         lc.start();
         {% endblock %}
-        // initialisation de la legende
-        map.legendControl.addLegend("vide");
-        map.attributionControl.setPosition('bottomleft');
-        L.control.fullscreen().addTo(map);
-        // initiation des speech
-        var executeSpeech= (navigator.appVersion.toString().toLowerCase().indexOf("edge")!=-1) ? false : true;
 
-        {% block speech %}
-        {% include '@App/commandeVocale.html.twig' %}
-        {% endblock %}
-
-        if(executeSpeech==false) {
-            $(".micro").hide()
-        }else{
-            {% block decisionShowBlock %} {% endblock %}
-        }
-
-
-        var ty=0;
-        var nbr_click=0;
-        var idChauffeur=0;
-
-        //
-
-
-        setInterval(function(){($(".leaflet-control-layers.leaflet-control").length==1 && ty==0) ? (ty=1,$(".leaflet-control-layers-base").css({"position":"fixed","right":"0","background-color":"white","width":"13%","height":"20%"}),$(".leaflet-control-layers-base label").after("<br>"),$(".leaflet-bar-part.leaflet-bar-part-single span").css("margin-left","30%")) : "";},1000)
-        $(".leaflet-control-layers.leaflet-control").css("margin-left","-30%")
 
 
         // crontrol du micro sur la map
@@ -314,11 +292,44 @@
         var cmpt=1;
         var spr="";
         var taxiSelect=false;
+        var ty=0;
+        var nbr_click=0;
+        var idChauffeur=0;
+
+        setTimeout(function(){
+            if(typeof lc._eventt != 'undefined'){
+                malatitude=lc._event.latlng.lat;
+                malongitude=lc._event.latlng.lng;
+            }
+            // initialisation de la legende
+            map.legendControl.addLegend("vide");
+            map.attributionControl.setPosition('bottomleft');
+            L.control.fullscreen().addTo(map);
+            // initiation des speech
+            var executeSpeech= (navigator.appVersion.toString().toLowerCase().indexOf("edge")!=-1) ? false : true;
+
+            {% block speech %}
+            {% include '@App/commandeVocale.html.twig' %}
+            {% endblock %}
+
+            if(executeSpeech==false) {
+                $(".micro").hide()
+            }else{
+                {% block decisionShowBlock %} {% endblock %}
+            }
+
+
+            setInterval(function(){($(".leaflet-control-layers.leaflet-control").length==1 && ty==0) ? (ty=1,$(".leaflet-control-layers-base").css({"position":"fixed","right":"0","background-color":"white","width":"13%","height":"20%"}),$(".leaflet-control-layers-base label").after("<br>"),$(".leaflet-bar-part.leaflet-bar-part-single span").css("margin-left","30%")) : "";},1000)
+            $(".leaflet-control-layers.leaflet-control").css("margin-left","-30%")
 
 
 
-        {% block moduleReservationLivraison %}
-        {% endblock %}
+
+            {% block moduleReservationLivraison %}
+            {% endblock %}
+
+        },300)
+
         $(".lol").click(function(){
             return;
         })
@@ -343,13 +354,13 @@
                     {% endif %}
                     $(".lol").css("margin-left","-15%")
                     $('aside').animate({"left": '-=20%'});
-                    directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }}))
-                    directions.setDestination(L.latLng({{ user.latitude }},{{ user.longitude }}))
-                    directionChauffeur.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }}))
-                    directionChauffeur.setDestination(L.latLng({{ user.latitude }},{{ user.longitude }}))
+                    directions.setOrigin(L.latLng(malatitude,malongitude))
+                    directions.setDestination(L.latLng(malatitude,malongitude))
+                    directionChauffeur.setOrigin(L.latLng(malatitude,malongitude))
+                    directionChauffeur.setDestination(L.latLng(malatitude,malongitude))
                     directionChauffeur.query();
                     directions.query();
-                    map.setView(new L.LatLng({{ user.latitude }},{{ user.longitude }}),17);
+                    map.setView(new L.LatLng(malatitude,malongitude),map.getZoom());
                     nbr_click--;
                 }else{
                     $(".lol").trigger("click")
@@ -361,7 +372,80 @@
 
 
 
+        function iconStartExist() {
+            for (j = 0; j < theMarker.length; j++) {
+                if (theMarker[j]._popup._content == "start") {
+                    return j;
+                }
+            }
+            return -1;
+        }
 
+        function iconEndExist() {
+            for (j = 0; j < theMarker.length; j++) {
+                if (theMarker[j]._popup._content == "end") {
+                    return j;
+                }
+            }
+            return -1;
+        }
+
+        function calculDistance(lat1,lon1,lat2,lon2){
+            getAdresseDebut(lat1,lon1);
+            getAdresseDestination(lat2,lon2);
+            updateDirection();
+
+            var southWest = L.latLng(lat1, lon1),
+                northEast = L.latLng(lat2, lon2),
+                bounds = L.latLngBounds(southWest, northEast);
+            map.fitBounds(bounds);
+
+        }
+
+
+
+
+        function supprimerIconSupplementaire(){
+            $(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive.leaflet-marker-draggable").css("display", "none");
+        }
+        function creerIcon(lat,lon,fonction){
+            var  icon;
+            if(fonction=="fin"){
+                icon= new L.marker([lat, lon], {
+                    icon: L.mapbox.marker.icon({
+                        'marker-size': 'large',
+                        'marker-symbol': 'bus',
+                        'marker-color': '#E91E63'
+                    })
+                }).bindPopup('end');
+            }else{
+                icon= new L.marker([lat, lon], {
+                    icon: L.mapbox.marker.icon({
+                        'marker-size': 'large',
+                        'marker-symbol': 'warehouse',
+                        'marker-color': '#42AA6B'
+                    })
+                }).bindPopup('start');
+            }
+
+            return icon;
+        }
+
+        function supprimerIcon(j){
+            map.removeLayer(theMarker[j]);
+            var index = theMarker.indexOf(theMarker[j]);
+            var indexs = coordonner.indexOf(coordonner[j]);
+            theMarker.splice(index, 1);
+            coordonner.splice(indexs, 1)
+            cmpt--;
+        }
+
+        function supprimerTousIcon(){
+            var taille=theMarker.length;
+            for(j=0;j<taille;j++){
+                supprimerIcon(0)
+            }
+        }
 
         var listeD = [];
         function updateDirection(){
@@ -399,8 +483,8 @@
                     $('[name="codeLivraison"]').removeAttr("required")
                     $("[name='reservationbundle_reservation[depart]'],[name='reservationbundle_reservation[arrive]']").val("")
                     $("[name='reservationbundle_reservation[typeReservation]']").val("reservationSimple")
-                    $("[name='reservationbundle_reservation[latitude]']").val("{{ user.latitude }}")
-                    $("[name='reservationbundle_reservation[longitude]']").val("{{ user.longitude }}")
+                    $("[name='reservationbundle_reservation[latitude]']").val(malatitude)
+                    $("[name='reservationbundle_reservation[longitude]']").val(malongitude)
                     var v1= iconStartExist();
                     if(v1!=-1){
                         $("[name='reservationbundle_reservation[longitude2]']").val(coordonner[v1][1])
@@ -416,28 +500,28 @@
 
                     for(j=0;j<route.length;j++) {
                         if(autorise_afficherTrajet==true){
-                        listeD.push(j);
-                        var c = "{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
-                        var finalPath = c.replace("var1", route[j].maneuver.location.coordinates[1]);
-                        var finalPath2 = finalPath.replace("var2", route[j].maneuver.location.coordinates[0]);
-                        var r = "";
-                        $.ajax({
-                            type: "post",
-                            url: finalPath2,
-                            contentType: "html",
-                            success: function (response) {
-                                j = listeD[0];
-                                var index = listeD.indexOf(listeD[0]);
-                                listeD.splice(index, 1);
-                                var ft = $(".dest" + j).text()
-                                if (ft.includes(response) == false) {
-                                    $(".dest" + j).text(ft + " " + response)
-                                }
+                            listeD.push(j);
+                            var c = "{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+                            var finalPath = c.replace("var1", route[j].maneuver.location.coordinates[1]);
+                            var finalPath2 = finalPath.replace("var2", route[j].maneuver.location.coordinates[0]);
+                            var r = "";
+                            $.ajax({
+                                type: "post",
+                                url: finalPath2,
+                                contentType: "html",
+                                success: function (response) {
+                                    j = listeD[0];
+                                    var index = listeD.indexOf(listeD[0]);
+                                    listeD.splice(index, 1);
+                                    var ft = $(".dest" + j).text()
+                                    if (ft.includes(response) == false) {
+                                        $(".dest" + j).text(ft + " " + response)
+                                    }
 
-                            }
-                        });
-                        dc += "<li data-lat='" + route[j].maneuver.location.coordinates[1] + "' data-lng='" + route[j].maneuver.location.coordinates[1] + "' class='mapbox-directions-step'><span class='directions-icon directions-icon-" + route[j].maneuver.type.replace(" ", "") + "'></span><div class='mapbox-directions-step-maneuver dest" + j + "'>" + route[j].maneuver.type + " onto </div><div class='mapbox-directions-step-distance'>" + route[j].distance + " meter</div></li>"
-                    }
+                                }
+                            });
+                            dc += "<li data-lat='" + route[j].maneuver.location.coordinates[1] + "' data-lng='" + route[j].maneuver.location.coordinates[1] + "' class='mapbox-directions-step'><span class='directions-icon directions-icon-" + route[j].maneuver.type.replace(" ", "") + "'></span><div class='mapbox-directions-step-maneuver dest" + j + "'>" + route[j].maneuver.type + " onto </div><div class='mapbox-directions-step-distance'>" + route[j].distance + " meter</div></li>"
+                        }
                     }
                     dc+="</ol></div></div></div></div></div></div>";
                     $(".ini").html(dc)
@@ -483,7 +567,6 @@
             });
 
         }
-
 
     })
 </script>

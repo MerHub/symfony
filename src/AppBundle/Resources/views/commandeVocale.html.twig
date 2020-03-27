@@ -176,7 +176,7 @@ break;
 }
 }
 if(reponseOperation==4){
-map.setView(new L.LatLng({{ user.latitude }},{{ user.longitude }}), 17);
+map.setView(new L.LatLng(malatitude,malongitude), map.getZoom());
 }else{
 if(reponseOperation==3){
 var zoom=map.getZoom()-1;
