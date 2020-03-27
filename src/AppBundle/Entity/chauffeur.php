@@ -24,7 +24,7 @@ class chauffeur
 {
 
     /**
-     * @var integer
+     * @var int
      * @ORM\Id
      * @ORM\Column(name="id" , type="integer")
      */

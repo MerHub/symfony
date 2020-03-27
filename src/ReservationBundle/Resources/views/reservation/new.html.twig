@@ -19,6 +19,7 @@
     var v2= iconEndExist();
     {% if reservation is not defined %}
         var LamMarker = ((v1!= -1 && v2!= -1) || (v1!= -1 && v2== -1)) ? creerIcon(e.latlng.lat, e.latlng.lng,"fin") : creerIcon(e.latlng.lat, e.latlng.lng,"debut");
+        ((v1!= -1 && v2!= -1) || (v1!= -1 && v2== -1)) ? $(".infor").hide() : "";
         (theMarker.length >= 2) ? supprimerIcon(iconEndExist()) : rien="";
     {% else %}
         var LamMarker = creerIcon(e.latlng.lat, e.latlng.lng,"debut");
@@ -45,6 +46,7 @@
     LamMarker.on('click', function (e) {
     v1= iconStartExist();
     v2= iconEndExist();
+    $(".infor").show();
 if(v2==-1){
     $("#myInput").trigger("click")
     }else{
@@ -54,7 +56,7 @@ if(v2==-1){
     directions.setDestination(L.latLng(debut[0], debut[1])),
     calculDistance({{ user.latitude }},{{ user.longitude }},debut[0],debut[1])
     ) : {% if reservation is not defined %} (
-
+    $(".infor").show(),
     theMarker[v2].setIcon(L.mapbox.marker.icon({
     'marker-size': 'large',
     'marker-symbol': 'warehouse',
@@ -80,6 +82,8 @@ if(v2==-1){
     if(parseFloat($(".lol").css("margin-left").replace("px",""))<0){
     $("#myInput").trigger("click");
     }
+    }else{
+    alert("you must cancle");
     }
     });
 
@@ -95,12 +99,18 @@ if(v2==-1){
             'marker-color': '#ffcf39'
             })
             }).addTo(map).bindPopup('{{ driver.username }}').on('click', function(e) {
-            var directionChauffeurLayer = L.mapbox.directions.layer(directionChauffeur).addTo(map);
-            var directionChauffeurRouteControl = L.mapbox.directions.routesControl('routes', directionChauffeur).addTo(map);
+            $("[name ='reservationbundle_reservation[idChauffeur]']").val({{driver.id}});
+
+            var directionChauffeurLayer=0;
+            var directionChauffeurRouteControl=0;
             var start=iconStartExist();
+            var end= iconEndExist();
             var rien="";
-            (start!=-1) ? (
-            taxiSelect=true,$(".deleteFormReservation").fadeOut(100).queue(function(){$(".contenuReservation").fadeIn();$(this).dequeue()}),
+            (start!=-1 && end==-1) ? (
+            directionChauffeurLayer = L.mapbox.directions.layer(directionChauffeur).addTo(map),
+            directionChauffeurRouteControl = L.mapbox.directions.routesControl('routes', directionChauffeur).addTo(map),
+            taxiSelect=true,
+            $(".deleteFormReservation").fadeOut(100).queue(function(){$(".contenuReservation").fadeIn();$(this).dequeue()}),
             setInterval(function(){ ($("path.leaflet-interactive[stroke-width='4']").hasClass("dej")==false) ? (
             $("path.leaflet-interactive[stroke-width='4']").attr("stroke","#F1A70E"),
             $("path.leaflet-interactive[stroke-width='4']").attr("stroke-opacity","0.4"),
@@ -113,7 +123,14 @@ if(v2==-1){
             idChauffeur={{ driver.id }},
             supprimerIconSupplementaire(),
             updateDirectionChauffeur()
-            ) : map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng), 17);
+            ) : ((start==-1 && end==-1) ? (map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng), 17)) : (
+            taxiSelect=true,
+            $(".reservation").fadeOut(100),
+            $(".livraison").fadeIn(100),
+            $(".deleteLivraison").fadeOut(100),
+            $(".contenuLivraison").fadeIn(100),
+            $(".livraison").animate({"left":"0%"})
+            ));
             });
         {% endif %}
     {% endfor %}

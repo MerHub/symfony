@@ -99,4 +99,4 @@ vresh_twilio:
     #(Required) Your Account SID from www.twilio.com/user/account
     sid: 'AC28ba4ff1b617bcf887aae1b86dc8c8d7'
     #(Required) Your Auth Token from www.twilio.com/user/account
-    authToken: '0a2a4ae6d8b89eb41225c5cb38f8473a'
+    authToken: '020a11c6095a18327f24b5a43f6a10f6'

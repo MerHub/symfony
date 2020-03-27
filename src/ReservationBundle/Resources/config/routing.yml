@@ -1,3 +1,6 @@
 reservation:
     resource: "@ReservationBundle/Resources/config/routing/reservation.yml"
     prefix:   /
+livraison:
+    resource: "@ReservationBundle/Resources/config/routing/livraison.yml"
+    prefix:   /livraison

@@ -4,6 +4,7 @@ namespace ReservationBundle\Controller;
 
 use AppBundle\Entity\chauffeur;
 use AppBundle\Entity\user;
+use ReservationBundle\Entity\Livraison;
 use ReservationBundle\Entity\Reservation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,17 +39,26 @@ class ReservationController extends Controller
         $user=$this->getUser();
         $id=$user->getId();
         $reservation = new Reservation();
-        $reservationExite=$this->getDoctrine()->getRepository(Reservation::class)->findOneBy(['idClient'=>$id]);
+        $livraison = new Livraison();
+        $reservationExite=$this->getDoctrine()->getRepository(Reservation::class)->findOneBy(['idClient'=>$id,'typeReservation'=>"reservationSimple"]);
         $Puser=$this->getDoctrine()->getRepository(user::class)->find($id);
         if($reservationExite==null){
             $form = $this->createForm('ReservationBundle\Form\ReservationType', $reservation);
             $form->handleRequest($request);
+
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $reservation->setHeure(new \DateTime('now'));
                 $em->persist($reservation);
                 $em->flush();
-                return $this->redirectToRoute("sendMessageChauffeur",array("idReservation"=>$reservation->getIdreservation(),"numClient"=>$Puser->getNTel(),"idDriver"=>$reservation->getIdChauffeur()));
+                if($reservation->getTypeReservation()=="livraison"){
+                    $az=$this->getDoctrine()->getRepository(Reservation::class)->findBy(['typeReservation'=>"livraison"]);
+                    $reservations=end($az);
+                    $code=$request->get("codeLivraison");
+                    return $this->redirectToRoute("livraison_new",["idRservation"=>$reservations->getIdReservation(),"codeLivraison"=>$code]);
+                }else{
+                    return $this->redirectToRoute("sendMessageChauffeur",array("idReservation"=>$reservation->getIdreservation(),"numClient"=>$Puser->getNTel(),"idDriver"=>$reservation->getIdChauffeur()));
+                }
             }
 
 
@@ -57,6 +67,7 @@ class ReservationController extends Controller
                 'user'=>$Puser,
                 'listChauffeur'=>$listDriver,
                 'form' => $form->createView(),
+                'formLivraison' => $form->createView()
             ]);
         }else{
             return $this->redirectToRoute('_show', array('idReservation' => $reservationExite->getIdReservation()));
