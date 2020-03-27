@@ -439,12 +439,6 @@
 
                         <div class="profile-details col-8">
 
-                            <h3>
-                                <a href="ui-profile.html">{{ app.user.email }}</a>
-
-                                <!-- Available statuses: online, idle, busy, away and offline -->
-                                <span class="profile-status online"></span>
-                            </h3>
 
                             <p class="profile-title">+216 {{ app.user.nTel }}</p>
 
@@ -468,13 +462,16 @@
                                 </li>
                                 <li class="">
                                     <a href="javascript:;">
-                                        <i class="fa fa-suitcase"></i>
-                                        <span class="title">Multi Purpose</span>
+                                        <i class="fa fa-automobile"></i>
+                                        <span class="title">Reservation</span>
                                         <span class="arrow "></span><span class="badge badge-accent">HOT</span>
                                     </a>
                                     <ul class="sub-menu" >
                                         <li>
-                                            <a class="" href="hospital.html"  target = '_blank' >Hospital Admin</a>
+                                            <a class="" href="hospital.html"  target = '_blank' >My reservations</a>
+                                        </li>
+                                        <li>
+                                            <a class="" href="{{ path("livraison_index") }}"  target = '_blank' >My deliveries</a>
                                         </li>
 
                                     </ul>
