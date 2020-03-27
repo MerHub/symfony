@@ -24,7 +24,7 @@ class chauffeur
 {
 
     /**
-     * @var integer
+     * @var int
      * @ORM\Id
      * @ORM\Column(name="id" , type="integer")
      */
@@ -284,7 +284,7 @@ class chauffeur
 
     public function __toString()
     {
-        return $this->username;
+        return strval($this->id_User);
     }
 }
 

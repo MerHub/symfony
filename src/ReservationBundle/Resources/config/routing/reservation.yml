@@ -1,0 +1,24 @@
+_index:
+    path:     /
+    defaults: { _controller: "ReservationBundle:Reservation:index" }
+    methods:  GET
+
+_show:
+    path:     /{idReservation}/show
+    defaults: { _controller: "ReservationBundle:Reservation:show" }
+    methods:  GET
+
+reservation_homepage:
+    path:     /new
+    defaults: { _controller: "ReservationBundle:Reservation:new" }
+    methods:  [GET, POST]
+
+_edit:
+    path:     /{idReservation}/edit
+    defaults: { _controller: "ReservationBundle:Reservation:edit" }
+    methods:  [GET, POST]
+
+_delete:
+    path:     /{idReservation}/delete
+    defaults: { _controller: "ReservationBundle:Reservation:delete" }
+    methods:  DELETE

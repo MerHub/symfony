@@ -1,3 +1,6 @@
-reservation_homepage:
-    path:     /
-    defaults: { _controller: ReservationBundle:Default:index }
+reservation:
+    resource: "@ReservationBundle/Resources/config/routing/reservation.yml"
+    prefix:   /
+livraison:
+    resource: "@ReservationBundle/Resources/config/routing/livraison.yml"
+    prefix:   /livraison

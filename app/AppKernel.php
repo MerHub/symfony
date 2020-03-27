@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new OffreBundle\OffreBundle(),
             new AvisBundle\AvisBundle(),
             new CLientBundle\CLientBundle(),
+            new Vresh\TwilioBundle\VreshTwilioBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
