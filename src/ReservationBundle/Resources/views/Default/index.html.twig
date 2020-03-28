@@ -242,10 +242,12 @@
         var map = L.mapbox.map('map').setView([malatitude,malongitude], 17);
         // create the initial directions object, from which the layer
         // and inputs will pull data.
+        {% if form is defined or reservation is defined %}
         var directions = L.mapbox.directions();
         var directionsLayer = L.mapbox.directions.layer(directions).addTo(map);
         var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions).addTo(map);
         var directionChauffeur = L.mapbox.directions();
+        {% endif %}
         function startLoading() {
             loader.className = '';
         }
