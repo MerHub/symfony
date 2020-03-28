@@ -217,7 +217,7 @@
 </div>
 <script>
     $(function(){
-        {% if user.latitude is null and reservation is not defined %}*
+        {% if user.latitude is null and reservation is not defined %}
         window.location.href="{{ path('reservation_homepage') }}";
         {% endif %}
         var malatitude={% if user.latitude is not  null  %}{{ user.latitude }}; {% else %} 0; {% endif %}

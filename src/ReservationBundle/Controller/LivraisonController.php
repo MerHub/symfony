@@ -45,7 +45,7 @@ class LivraisonController extends Controller
         $em->persist($livraison);
         $em->flush();
 
-        return $this->redirectToRoute('reservation_homepage');
+        return $this->redirectToRoute('livraison_index');
     }
 
     /**

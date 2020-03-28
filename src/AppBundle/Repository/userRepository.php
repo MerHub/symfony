@@ -10,4 +10,17 @@ namespace AppBundle\Repository;
  */
 class userRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function last(){
+        $query=$this->getEntityManager()->createQuery(
+            '
+            SELECT
+            u
+            FROM
+            AppBundle\Entity\User u
+            ORDER BY u.id DESC
+            '
+        )->setMaxResults(1);
+
+        return $query->getResult();
+    }
 }
