@@ -5,6 +5,7 @@ namespace VeloBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +16,11 @@ class VeloType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('type')->add('adresse')->add('qte')->add('photo',FileType::class,array('label'=>'pick image','data_class' => null))->add('prix')->add('latitude',ChoiceType::class,['required'=>true])->add('longitude',ChoiceType::class,['required'=>true]);
+        $builder->add('type')->add('adresse',null,[
+            'attr'=>[
+                'class'=>'dontWrite'
+            ]
+        ])->add('qte')->add('photo',FileType::class,array('label'=>'pick image','data_class' => null))->add('prix')->add('latitude',HiddenType::class,['required'=>true])->add('longitude',HiddenType::class,['required'=>true]);
     }/**
      * {@inheritdoc}
      */

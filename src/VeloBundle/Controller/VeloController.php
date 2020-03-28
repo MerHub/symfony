@@ -44,9 +44,6 @@ class VeloController extends Controller
             $fileName=md5(uniqid()).'.'.$file->guessExtension();
             $file->move($this->getParameter('upload_directory'),$fileName);
             $velo->setPhoto($fileName);
-
-            $velo->setLatitude(null);
-            $velo->setLongitude(null);
             $em->persist($velo);
             $em->flush();
 

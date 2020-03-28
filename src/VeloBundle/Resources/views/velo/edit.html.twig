@@ -30,7 +30,7 @@
                     </tr>
                     <tr>
                         <td>{{ form_label(edit_form.adresse) }}</td>
-                        <td>{{ form_widget(edit_form.adresse) }}</td>
+                        <td>{{ form_widget(edit_form.adresse) }} <div class="btn btn-primary btn-sm afficherMap"><i class="fa fa-map-marker" ></i></div></td>
                     </tr>
                     <tr>
                         <td>{{ form_label(edit_form.qte) }}</td>
@@ -43,11 +43,11 @@
                         <td>{{ form_label(edit_form.prix) }}</td>
                         <td>{{ form_widget(edit_form.prix) }}</td>
                     </tr>
-                    <tr>
+                    <tr style="display: none">
                         <td>{{ form_label(edit_form.latitude) }}</td>
                         <td>{{ form_widget(edit_form.latitude) }}</td>
                     </tr>
-                    <tr>
+                    <tr style="display: none">
                         <td>{{ form_label(edit_form.longitude) }}</td>
                         <td>{{ form_widget(edit_form.longitude) }}</td>
                     </tr>
@@ -110,4 +110,86 @@
 
 
 
+{% endblock %}
+
+    {% block scriptMap %}
+    <script>
+        $(function(){
+            var ad=$("[name='velobundle_velo[adresse]']").val();
+            $(".dontWrite").keyup(function(){
+                $("[name='velobundle_velo[adresse]']").val(ad)
+            })
+            $(".afficherMap").click(function(){
+                $("#map").css("z-index","10000");
+                $(".btn-annuler").css("z-index","10001");
+                $(".btn-accepter").css("z-index","10001");
+                $("body").css("overflow-y","hidden")
+            })
+
+            $(".btn-accepter").click(function(){
+                var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+                var finalPath = c.replace("var1",$("[name='velobundle_velo[latitude]']").val() );
+                var finalPath2 = finalPath.replace("var2", $("[name='velobundle_velo[longitude]']").val());
+                var r="";
+                $.ajax({
+                    type: "post",
+                    url: finalPath2,
+                    contentType: "html",
+                    success: function(response) {
+                        $("[name='velobundle_velo[adresse]']").val(response)
+                        reduireMap()
+                    }
+                });
+
+            })
+
+            $(".btn-annuler").click(function(){
+                if($("[name='velobundle_velo[latitude]']").val()!=""){
+                $("[name='velobundle_velo[latitude]']").val("")
+                }
+                if($("[name='velobundle_velo[longitude]']").val()!=""){
+                $("[name='velobundle_velo[longitude]']").val("")
+                }
+                reduireMap()
+            })
+
+            function reduireMap(){
+                $("#map").css("z-index","-1");
+                $(".btn-annuler").css("z-index","-1");
+                $(".btn-accepter").css("z-index","-1");
+                $("body").css("overflow-y","scroll")
+            }
+            L.mapbox.accessToken = 'pk.eyJ1IjoiY3lyaWxsZTgwMCIsImEiOiJjazZzcmU2bHUwMDh0M2xxcGRtOGJndGh4In0.zqSmLTyuMbkLZQyVFgtAXA';
+
+            var mapboxTiles = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+                attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                tileSize: 512,
+                zoomOffset: -1
+            });
+
+            var map = L.map('map')
+                .addLayer(mapboxTiles)
+                .setView([0,0], 17);
+            var lc = L.control.locate({
+                strings:{
+                    popup: 'You'
+                }}).addTo(map);
+
+            // request location update and set location
+            lc.start();
+
+            var theMarker = [];
+            map.on('click', function(e) {
+
+                if (theMarker != undefined) {
+                    map.removeLayer(theMarker);
+                    $("[name='velobundle_velo[latitude]']").val(e.latlng.lat)
+                    $("[name='velobundle_velo[longitude]']").val(e.latlng.lng)
+                }
+                    theMarker  = L.marker([e.latlng.lat,e.latlng.lng]).addTo(map);
+                    map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng), map.getZoom());
+
+            });
+        })
+    </script>
 {% endblock %}
