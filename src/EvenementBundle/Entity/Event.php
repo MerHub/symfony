@@ -70,9 +70,9 @@ class Event
     private $description;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="latitude", type="decimal", precision=10, scale=0)
+     * @ORM\Column(name="latitude", type="float")
      */
     private $latitude1;
 
@@ -419,4 +419,11 @@ class Event
     {
         return $this->latitude1;
     }
+
+    public function __toString()
+    {
+        return strval($this->idEvent);
+    }
+
+
 }

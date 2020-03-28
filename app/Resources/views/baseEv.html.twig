@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html class=" ">
 <head>
@@ -46,12 +43,23 @@
     <link href="{{ asset('back/assets/css/style.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('back/assets/css/responsive.css') }}" rel="stylesheet" type="text/css"/>
     <!-- CORE CSS TEMPLATE - END -->
+    <script src='https://api.mapbox.com/mapbox.js/v3.3.0/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.3.0/mapbox.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.70.0/dist/L.Control.Locate.min.css" />
 
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.70.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%;z-index: -1 }
+    </style>
 </head>
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
 <body class=" "><!-- START TOPBAR -->
+<div class="btn btn-danger btn-annuler" style="position: absolute;z-index: -1;bottom:13%;right: 1%;">Annuler</div>
+<div class="btn btn-success btn-accepter" style="position: absolute;z-index: -1;bottom:13%;right: 8%;">accepter</div>
+<div id='map'></div>
 <div class='page-topbar '>
     <div class='logo-area'>
 
@@ -723,26 +731,13 @@
 
 
 <!-- General section box modal start -->
-<div class="modal" id="section-settings" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog animated bounceInDown">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Section Settings</h4>
-            </div>
-            <div class="modal-body">
 
-                Body goes here...
+<!-- General section box modal start -->
+{% block modalMpa %}
+{% endblock %}
 
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                <button class="btn btn-success" type="button">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+{% block scriptMap %}
+{% endblock %}
 <!-- modal end -->
 </body>
 </html>

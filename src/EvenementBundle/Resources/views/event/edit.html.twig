@@ -30,11 +30,11 @@
                                 </tr>
                                 <tr>
                                     <td>{{ form_label(edit_form.depart) }}</td>
-                                    <td>{{ form_widget(edit_form.depart) }}</td>
+                                    <td>{{ form_widget(edit_form.depart) }}  <div class="btn btn-primary btn-sm afficherMap depart"><i class="fa fa-map-marker" ></i></div></td>
                                 </tr>
                                 <tr>
                                     <td>{{ form_label(edit_form.arrivee) }}</td>
-                                    <td>{{ form_widget(edit_form.arrivee) }}</td>
+                                    <td>{{ form_widget(edit_form.arrivee) }}  <div class="btn btn-primary btn-sm afficherMap arrivee"><i class="fa fa-map-marker" ></i></div></td>
                                 </tr>
                                 <tr>
                                     <td>{{ form_label(edit_form.dateAllee) }}</td>
@@ -48,19 +48,19 @@
                                     <td>{{ form_label(edit_form.description) }}</td>
                                     <td>{{ form_widget(edit_form.description) }}</td>
                                 </tr>
-                                <tr>
+                                <tr style="display: none">
                                     <td>{{ form_label(edit_form.latitude1) }}</td>
                                     <td>{{ form_widget(edit_form.latitude1) }}</td>
                                 </tr>
-                                <tr>
+                                <tr style="display: none">
                                     <td>{{ form_label(edit_form.longitude1) }}</td>
                                     <td>{{ form_widget(edit_form.longitude1) }}</td>
                                 </tr>
-                                <tr>
+                                <tr style="display: none">
                                     <td>{{ form_label(edit_form.latitude2) }}</td>
                                     <td>{{ form_widget(edit_form.latitude2) }}</td>
                                 </tr>
-                                <tr>
+                                <tr style="display: none">
                                     <td>{{ form_label(edit_form.longitude2) }}</td>
                                     <td>{{ form_widget(edit_form.longitude2) }}</td>
                                 </tr>
@@ -87,18 +87,124 @@
                 </div>
             </div>
         </section></div>
-
-
-
-
-
-
-
-
-
-
-
 {% endblock %}
 
+
+   {% block scriptMap %}
+       <script>
+           $(function(){
+               var theMarker = [];
+               var addressDebut=$("[name='evenementbundle_event[depart]']").val();
+               var addressFin=$("[name='evenementbundle_event[arrivee]']").val();
+               var champ="";
+               $(".dontWrite").keyup(function(){
+                   $("[name='evenementbundle_event[depart]']").val(addressDebut)
+               })
+
+               $(".dontWrites").keyup(function(){
+                   $("[name='evenementbundle_event[arrivee]']").val(addressFin)
+               })
+
+               $(".afficherMap").click(function(){
+                   if($(this).hasClass("depart")){
+                       champ="[name='evenementbundle_event[depart]']";
+                   }else{
+                       champ="[name='evenementbundle_event[arrivee]']";
+                   }
+                   $("#map").css("z-index","10000");
+                   $(".btn-annuler").css("z-index","10001");
+                   $(".btn-accepter").css("z-index","10001");
+                   $("body").css("overflow-y","hidden")
+               })
+
+               $(".btn-accepter").click(function(){
+                   var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+                   var lat="";
+                   var lng="";
+
+                   if(champ=="[name='evenementbundle_event[depart]']"){
+
+                       lat=$("[name='evenementbundle_event[latitude1]']").val()
+                       lng=$("[name='evenementbundle_event[longitude1]']").val()
+                   }else{
+                       lat=$("[name='evenementbundle_event[latitude2]']").val()
+                       lng=$("[name='evenementbundle_event[longitude2]']").val()
+                   }
+                   var finalPath = c.replace("var1",lat);
+                   var finalPath2 = finalPath.replace("var2", lng);
+                   var r="";
+                   $.ajax({
+                       type: "post",
+                       url: finalPath2,
+                       contentType: "html",
+                       success: function(response) {
+                           $(champ).val(response)
+                           reduireMap()
+                           champ="";
+                       }
+                   });
+
+               })
+
+               $(".btn-annuler").click(function(){
+                   champ="";
+                   if($("[name='evenementbundle_event[depart]']").val()!=""){
+                       $("[name='evenementbundle_event[depart]']").val("")
+                   }
+                   if($("[name='evenementbundle_event[arrivee]']").val()!=""){
+                       $("[name='evenementbundle_event[arrivee]']").val("")
+                   }
+
+                   reduireMap()
+               })
+
+
+               L.mapbox.accessToken = 'pk.eyJ1IjoiY3lyaWxsZTgwMCIsImEiOiJjazZzcmU2bHUwMDh0M2xxcGRtOGJndGh4In0.zqSmLTyuMbkLZQyVFgtAXA';
+
+               var mapboxTiles = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+                   attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                   tileSize: 512,
+                   zoomOffset: -1
+               });
+
+               var map = L.map('map')
+                   .addLayer(mapboxTiles)
+                   .setView([0,0], 17);
+               var lc = L.control.locate({
+                   strings:{
+                       popup: 'You'
+                   }}).addTo(map);
+
+               // request location update and set location
+               lc.start();
+
+               map.on('click', function(e) {
+
+                   if (theMarker != undefined) {
+                       map.removeLayer(theMarker);
+                       if(champ=="[name='evenementbundle_event[depart]']"){
+
+                           $("[name='evenementbundle_event[latitude1]']").val(e.latlng.lat)
+                           $("[name='evenementbundle_event[longitude1]']").val(e.latlng.lng)
+                       }else{
+                           $("[name='evenementbundle_event[latitude2]']").val(e.latlng.lat)
+                           $("[name='evenementbundle_event[longitude2]']").val(e.latlng.lng)
+                       }
+                   }
+                   theMarker  = L.marker([e.latlng.lat,e.latlng.lng]).addTo(map);
+                   map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng), map.getZoom());
+
+               });
+
+               function reduireMap(){
+                   map.removeLayer(theMarker);
+                   $("#map").css("z-index","-1");
+                   $(".btn-annuler").css("z-index","-1");
+                   $(".btn-accepter").css("z-index","-1");
+                   $("body").css("overflow-y","scroll")
+               }
+           })
+       </script>
+   {% endblock %}
 
 

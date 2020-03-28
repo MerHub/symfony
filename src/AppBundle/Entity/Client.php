@@ -47,7 +47,7 @@ class Client
 
     public function __toString()
     {
-        return $this->username;
+        return strval($this->idUser);
     }
 }
 
