@@ -1,0 +1,84 @@
+{% extends 'baseEv.html.twig' %}
+
+{% block body %}
+    <div class="col-xl-12">
+        <section class="box ">
+            <header class="panel_header">
+                <h2 class="title float-left">Offre list</h2>
+                <div class="actions panel_actions float-right">
+                    <a class="box_toggle fa fa-chevron-down"></a>
+
+                </div>
+            </header>
+            <div class="content-body">    <div class="row">
+                    <div class="col-12">
+
+                        <table class="table">
+
+                            <h1>Events list</h1>
+
+                            <table>
+                                <thead>
+                                <tr>
+
+                                    <th>Name</th>
+                                    <th>Number of places</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Date of travel</th>
+                                    <th>Return Date</th>
+                                    <th>Description</th>
+                                    <th>Latitude1</th>
+                                    <th>Longitude1</th>
+                                    <th>Latitude2</th>
+                                    <th>Longitude2</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for event in events %}
+                                    <tr>
+                                       <td>{{ event.nom }}</td>
+                                        <td>{{ event.nbrPlace }}</td>
+                                        <td>{{ event.depart }}</td>
+                                        <td>{{ event.arrivee }}</td>
+                                        <td>{% if event.dateAllee %}{{ event.dateAllee|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                        <td>{% if event.dateRetour %}{{ event.dateRetour|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                        <td>{{ event.description }}</td>
+                                        <td>{{ event.latitude1 }}</td>
+                                        <td>{{ event.longitude1 }}</td>
+                                        <td>{{ event.latitude2 }}</td>
+                                        <td>{{ event.longitude2 }}</td>
+                                        <td>
+                                            <ul>
+                                                <li>
+                                                    <a class="fa fa-eye"  href="{{ path('event_show', { 'idEvent': event.idEvent }) }}"></a>
+                                                </li>
+                                                <li>
+                                                    <a class="fa fa-pencil"  href="{{ path('event_edit', { 'idEvent': event.idEvent }) }}"></a>
+                                                </li>
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </section></div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

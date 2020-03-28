@@ -55,10 +55,11 @@
                             <ul>
 
                                 <li>
-                                    <a href="{{ path('offre_edit', { 'idOffre': offre.idOffre }) }}">Edit</a>
+                                    <a class="fa fa-pencil"  href="{{ path('offre_edit', { 'idOffre': offre.idOffre }) }}"></a>
                                 </li>
                                 <li>
                                     {{ form_start(delete_form) }}
+
                                     <input type="submit" value="Delete">
                                     {{ form_end(delete_form) }}
                                 </li>
