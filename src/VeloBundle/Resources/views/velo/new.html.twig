@@ -61,7 +61,7 @@
         });
     </script>
     <header class="panel_header">
-        <h2 class="title float-left">Add A bicycle</h2>
+        <h2 class="title float-left">Basic Elements</h2>
         <div class="actions panel_actions float-right">
             <a class="box_toggle fa fa-chevron-down"></a>
             <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
@@ -86,10 +86,16 @@
                         <tr>
                             <td>{{ form_label(form.qte) }}</td>
                             <td>{{ form_widget(form.qte) }}</td>
+                            <td>
+                                <span id="misscin" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Quantity is invalide</li></ul> </span>
+                            </td>
                         </tr>
                         <tr>
                             <td>{{ form_label(form.prix) }}</td>
                             <td>{{ form_widget(form.prix) }}</td>
+                            <td>
+                                <span id="missin" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Price is invalide</li></ul> </span>
+                            </td>
                         </tr>
                         <tr>
                             <td>{{ form_label(form.latitude) }}</td>
@@ -106,10 +112,64 @@
                         <tr>
 
                             <td>{{ form_widget(form) }}</td>
+
                            <td> <input type="submit" value="Create" /></td>
                         </tr>
                         {{ form_end(form) }}
                     </table>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            $('#misscin').hide();
+                            $('#velobundle_velo_qte').keyup(function () {
+
+
+
+                                var x = $('#velobundle_velo_qte').val();
+                                if (x>1 && x<100) {
+
+                                    $('#coursbundle_cours_Ajouter').prop('disabled', false);
+                                    $('#misscin').hide();
+                                    $('#velobundle_velo_qte');
+
+                                } else {
+
+                                    $('#misscin').show();
+                                    $('#velobundle_velo_qte');
+
+
+                                    $('#coursbundle_cours_Ajouter').prop('disabled', true);
+                                }
+
+                            });
+                        })
+                    </script>
+                    <script>
+                        $(document).ready(function () {
+                            $('#missin').hide();
+                            $('#velobundle_velo_prix').keyup(function () {
+
+
+
+                                var x = $('#velobundle_velo_prix').val();
+                                if (x>1) {
+
+                                    $('#coursbundle_cours_Ajouter').prop('disabled', false);
+                                    $('#missin').hide();
+                                    $('#velobundle_velo_prix');
+
+                                } else {
+
+                                    $('#missin').show();
+                                    $('#velobundle_velo_prix');
+
+
+                                    $('#coursbundle_cours_Ajouter').prop('disabled', true);
+                                }
+
+                            });
+                        })
+                    </script>
                 </div>
 
 
@@ -119,7 +179,7 @@
         </div>
 
 
-
+    </div>
 
 
 {% endblock %}

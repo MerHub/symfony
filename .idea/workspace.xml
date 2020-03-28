@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f85daa7-c189-48ac-bbb2-6ffa9b6026d4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/base2.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +116,7 @@
       <workItem from="1585028373254" duration="4221000" />
       <workItem from="1585032829672" duration="97000" />
       <workItem from="1585033296808" duration="25000" />
-      <workItem from="1585078704051" duration="24441000" />
+      <workItem from="1585078704051" duration="42745000" />
     </task>
     <servers />
   </component>

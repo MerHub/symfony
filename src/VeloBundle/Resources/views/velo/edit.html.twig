@@ -15,6 +15,8 @@
         <a class="box_close fa fa-times"></a>
     </div>
 </header>
+
+
 <div class="content-body">
     <div class="row">
         <div class="col-lg-8 col-md-9 col-10">
@@ -33,6 +35,9 @@
                     <tr>
                         <td>{{ form_label(edit_form.qte) }}</td>
                         <td>{{ form_widget(edit_form.qte) }}</td>
+                       <td>
+                        <span id="misscin" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Quantity is invalide</li></ul> </span>
+                       </td>
                     </tr>
                     <tr>
                         <td>{{ form_label(edit_form.prix) }}</td>
@@ -53,11 +58,45 @@
                     <tr>
 
                         <td>{{ form_widget(edit_form) }}</td>
-                        <td> <input type="submit" value="Edit" /></td>
+                        <td> <input id="coursbundle_cours_Ajouter" type="submit" value="Edit" /></td>
                     </tr>
 
     {{ form_end(edit_form) }}
                 </table>
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        $('#misscin').hide();
+                        $('#velobundle_velo_qte').keyup(function () {
+
+
+
+
+
+
+                            var x = $('#velobundle_velo_qte').val();
+                            if (x>0 && x<100) {
+
+                                $('#coursbundle_cours_Ajouter').prop('disabled', false);
+                                $('#misscin').hide();
+                                $('#velobundle_velo_qte');
+
+                            } else {
+
+                                $('#misscin').show();
+                                $('#velobundle_velo_qte');
+
+
+                                $('#coursbundle_cours_Ajouter').prop('disabled', true);
+                            }
+
+                        });
+                    })
+                </script>
+
+
+
             </div>
 
 
