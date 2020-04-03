@@ -38,18 +38,23 @@ class Avis
 
     /**
      * @var string
-     * @Assert\NotBlank
-     * @Assert\Length(min=5,message=" length of the message must be between 5 and 10 character")
-     * @Assert\Length(max=100,message=" length of the message must be between 5 and 10 character")
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 150,
+     *      minMessage = "Your first name must be at least {{ 5 }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ 150 }} characters",
+     *      allowEmptyString = false
+     * )
      * @ORM\Column(name="msg", type="string", length=255)
      */
     private $msg;
 
     /**
      * @var int
-     * @Assert\NotBlank
-     * @Assert\LessThanOrEqual(5 ,message=" note must be between 1 and 5 ")
-     * @Assert\GreaterThanOrEqual(0,message=" note must be between 1 and 5 )
+     * @Assert\NotNull
+     * @Assert\LessThanOrEqual(5)
+     * @Assert\GreaterThanOrEqual(0)
      * @ORM\Column(name="note", type="integer")
      */
     private $note;
