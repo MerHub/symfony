@@ -62,6 +62,15 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/reflection" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/vresh/twilio-bundle" />
+      <path value="$PROJECT_DIR$/vendor/twilio/sdk" />
+      <path value="$PROJECT_DIR$/vendor/ocramius/package-versions" />
     </include_path>
   </component>
   <component name="ProjectId" id="1ZYuVKA7oYOb6Zrw3lOSIvuNz8I" />
@@ -102,6 +111,7 @@
       <workItem from="1585033296808" duration="25000" />
       <workItem from="1585250358036" duration="41000" />
       <workItem from="1585250413529" duration="208000" />
+      <workItem from="1585873018360" duration="672000" />
     </task>
     <servers />
   </component>
@@ -109,9 +119,9 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1585032832001">
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1585873022423">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585032832001" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585873022423" />
   </component>
 </project>
