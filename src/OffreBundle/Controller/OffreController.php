@@ -2,9 +2,11 @@
 
 namespace OffreBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
 use OffreBundle\Entity\Offre;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * Offre controller.
@@ -93,9 +95,14 @@ class OffreController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+           $em= $this->getDoctrine()->getManager();
+            $file=$offre->getImg();
+            $fileName=md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('upload_directory'),$fileName);
+            $offre->setImg($fileName);
+            $em->flush();
 
-            return $this->redirectToRoute('offre_edit', array('idOffre' => $offre->getIdoffre()));
+            return $this->redirectToRoute('offre_show', array('idOffre' => $offre->getIdoffre()));
         }
 
         return $this->render('@Offre/offre/edit.html.twig', array(
@@ -137,5 +144,27 @@ class OffreController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $libelle = $request->get('q');
+        $rec = $em->getRepository('OffreBundle:Offre')->SearchOffre($libelle);
+
+        if (!$rec) {
+            $result['offre']['error'] = "Offer does not exist :( ";
+        } else {
+            $result['offre'] = $this->getRealEntities($rec);
+        }
+        return new Response(json_encode($result));
+    }
+
+    public function getRealEntities($rec)
+    {
+        foreach ($rec as $rec) {
+            $realEntities[$rec->getIdoffre()] = [$rec->getDateD(), $rec->getDateF(), $rec->getType() ,  $rec->getNom(),$rec->getReductionOffre(),$rec->getCodePromo(),$rec->getImg()];
+
+        }
+        return $realEntities;
     }
 }

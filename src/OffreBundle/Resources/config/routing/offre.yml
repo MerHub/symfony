@@ -7,7 +7,10 @@ offre_list:
     path:     /list
     defaults: { _controller: "OffreBundle:Offre:list" }
     methods:  GET
-
+search:
+    path:     /search
+    defaults: { _controller: "OffreBundle:Offre:search" }
+    methods:  GET
 offre_show:
     path:     /{idOffre}/show
     defaults: { _controller: "OffreBundle:Offre:show" }
