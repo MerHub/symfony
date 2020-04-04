@@ -37,7 +37,7 @@ class AvisController extends Controller
         }
 
 
-        $avis = $em->getRepository('AvisBundle:Avis')->findBy(["idChauffeur"=>$idChauffeur]);
+        $avis = $em->getRepository('AvisBundle:Avis')->ListeAvis($idChauffeur);
         $chauffeur = $em->getRepository(chauffeur::class)->find($idChauffeur);
 
         return $this->render('@Avis/avis/index.html.twig', array(

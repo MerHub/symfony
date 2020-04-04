@@ -10,18 +10,17 @@ namespace AvisBundle\Repository;
  */
 class AvisRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function ListeLivraisonDetaille($id){
+    public function ListeAvis($idChauffeur){
         $query=$this->getEntityManager()->createQuery(
             '
             SELECT
-            l.id,l.codeLivraison,r.idReservation,r.heure,r.latitude,r.longitude,r.latitude2,r.longitude2,u.nTel,u.email,c.adresse,c.cin,c.permis,c.nom,
-            c.prenom,c.photo
+            a.idAvis,a.msg,a.note,u.username
             FROM
-            ReservationBundle\Entity\Livraison l,ReservationBundle\Entity\Reservation r,AppBundle\Entity\chauffeur c,AppBundle\Entity\User u
+            AvisBundle\Entity\Avis a,AppBundle\Entity\User u
             WHERE
-            l.idReservation=r.idReservation and r.idChauffeur=c.id_User and c.id_User=u.id and l.etat=0 and r.idClient= :idClient
+            a.idCclient=u.idUser and a.idChauffeur=idChauffeur
             '
-        )->setParameter('idClient',$id);
+        )->setParameter('idChauffeur',$idChauffeur);
 
         return $query->getResult();
     }
