@@ -74,6 +74,7 @@
       <path value="$PROJECT_DIR$/vendor/vresh/twilio-bundle" />
       <path value="$PROJECT_DIR$/vendor/twilio/sdk" />
       <path value="$PROJECT_DIR$/vendor/ocramius/package-versions" />
+      <path value="$PROJECT_DIR$/vendor/blackknight467/star-rating-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="1ZYuVKA7oYOb6Zrw3lOSIvuNz8I" />
@@ -90,6 +91,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\symfony\projetWeb\symfony\web\back" />
       <recent name="C:\wamp64\www\symfony\symfony\src\AvisBundle\Resources\views" />
       <recent name="C:\wamp64\www\symfony\projetWeb\symfony\src\ReservationBundle\Resources\views" />
     </key>

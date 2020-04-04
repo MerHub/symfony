@@ -1,15 +1,10 @@
-avis_index:
-    path:     /
-    defaults: { _controller: "AvisBundle:Avis:index" }
-    methods:  GET
-
 avis_show:
     path:     /{idAvis}/show
     defaults: { _controller: "AvisBundle:Avis:show" }
     methods:  GET
 
 avis_new:
-    path:     /new
+    path:     /{idChauffeur}/{idClient}/new
     defaults: { _controller: "AvisBundle:Avis:new" }
     methods:  [GET, POST]
 
@@ -21,4 +16,9 @@ avis_edit:
 avis_delete:
     path:     /{idAvis}/delete
     defaults: { _controller: "AvisBundle:Avis:delete" }
-    methods:  DELETE
+    methods:  [GET]
+
+avis_index:
+    path:     /{idChauffeur}/
+    defaults: { _controller: "AvisBundle:Avis:index" }
+    methods:  [GET, POST]

@@ -1,41 +1,144 @@
 {% extends 'base.html.twig' %}
 
+{% block cssPlus %}
+<link rel="stylesheet" type="text/css" href="{{ asset('back/rating.css') }}" />
+{% endblock %}
 {% block body %}
-    <h1>Avis list</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Idavis</th>
-                <th>Msg</th>
-                <th>Note</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for avi in avis %}
-            <tr>
-                <td><a href="{{ path('avis_show', { 'idAvis': avi.idAvis }) }}">{{ avi.idAvis }}</a></td>
-                <td>{{ avi.msg }}</td>
-                <td>{{ avi.note }}</td>
-                <td>
-                    <ul>
+    <section class="wrapper main-wrapper row" style='margin-top: 5px;'>
+
+        <div class='col-12'>
+            <div class="page-title">
+
+                <div class="float-left">
+                    <!-- PAGE HEADING TAG - START --><h1 class="title">Avis list</h1><!-- PAGE HEADING TAG - END -->                            </div>
+
+                <div class="float-right d-none">
+                    <ol class="breadcrumb">
                         <li>
-                            <a href="{{ path('avis_show', { 'idAvis': avi.idAvis }) }}">show</a>
+                            <a href="index.html"><i class="fa fa-home"></i>Home</a>
                         </li>
                         <li>
-                            <a href="{{ path('avis_edit', { 'idAvis': avi.idAvis }) }}">edit</a>
+                            <a href="ui-profile.html">Social Media</a>
                         </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                        <li class="active">
+                            <strong>Avis list</strong>
+                        </li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- MAIN CONTENT AREA STARTS -->
+
+
+        <div class="col-xl-12">
+            <section class="box nobox ">
+                <div class="content-body">    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-12">
+                            <div class="uprofile-image">
+                                <img alt="" src="{{ asset("font/imgProfileUser/"~chauffeur.photo) }}" class="img-fluid">
+                            </div>
+                            <div class="uprofile-name">
+                                <h3>
+                                    <a href="#">{{chauffeur.nom}} {{chauffeur.prenom}}</a>
+                                    <!-- Available statuses: online, idle, busy, away and offline -->
+                                    <span class="uprofile-status online"></span>
+                                </h3>
+                                <p class="uprofile-title">Driver</p>
+                            </div>
+                            <div class="uprofile-info">
+                                <ul class="list-unstyled">
+                                    <li><i class='fa fa-home'></i> {{ chauffeur.adresse }}</li>
+                                </ul>
+                            </div>
+                            <div class="uprofile-buttons">
+                                <a class="btn btn-md btn-primary">Send Message</a>
+                                <a class="btn btn-md btn-primary">Add as Friend</a>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-12">
+
+                            <div class="uprofile-content row">
+                                <div class="enter_post col-12">
+                                    {{ form_start(form) }}
+                                    <input type="submit" value="Post" class="btn btn-md float-right btn-primary" style="margin-bottom: 6px;"/>
+                                    {{ form_widget(form.idChauffeur,{'value': chauffeur.idUser}) }}
+                                    {{ form_widget(form.idCclient,{'value': idClient}) }}
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            {{ form_widget(form.msg) }}
+                                        </div>
+                                    </div>
+                                    {{ form_widget(form.note) }}
+                                    {{ form_end(form) }}
+                                </div>
+
+                                {% for avi in avis %}
+                                    <tr>
+                                        <td><a href="{{ path('avis_show', { 'idAvis': avi.idAvis }) }}">{{ avi.idAvis }}</a></td>
+                                        <td>{{ avi.msg }}</td>
+                                        <td>{{ avi.note }}</td>
+                                        <td>
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ path('avis_show', { 'idAvis': avi.idAvis }) }}">show</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ path('avis_edit', { 'idAvis': avi.idAvis }) }}">edit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ path('avis_delete', { 'idAvis': avi.idAvis }) }}">delete</a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                <div class="uprofile_wall_posts col-12">
+                                    <div class="row">
+                                        <div class="pic-wrapper float-left col-2 col-md-1 text-center">
+                                            <img src="{{ asset("font/imgProfileUser/user_profil.png") }}" class="" alt="">
+                                        </div>
+                                        <div class="info-wrapper float-left col-10 col-md-11">
+                                            <div class="username">
+                                                <span class="bold">John Smith</span> post in group <span class="bold">work</span>
+                                            </div>
+                                            <div class="info text-muted">
+                                                "Balance" is a concept based on human perception and the complex nature of the human senses of weight and proportion. Humans can evaluate these visual elements in several situations to find a sense of balance.
+                                            </div>
+                                            <div class="info-details">
+                                                <ul class="list-unstyled list-inline">
+                                                    <li class="list-inline-item"><a href="#" class="text-warning"><i class="fa fa-star"></i></a></li>
+                                                </ul>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section></div>
+
+
+        <!-- MAIN CONTENT AREA ENDS -->
+    </section>
 
     <ul>
         <li>
-            <a href="{{ path('avis_new') }}">Create a new avi</a>
+            <a href="{{ path('avis_new',{"idChauffeur":chauffeur.idUser|default(4),"idClient":idClient|default(18)}) }}">Create a new avi</a>
         </li>
     </ul>
+{% endblock %}
+
+{% block cssScript %}
+    <script src="{{ asset('back/rating.js') }}"></script>
 {% endblock %}

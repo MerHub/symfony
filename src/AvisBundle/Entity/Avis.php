@@ -23,7 +23,7 @@ class Avis
     /**
      * @var int
      * @Assert\NotBlank
-     * @ORM\OneToOne(targetEntity=AppBundle\Entity\chauffeur::class)
+     * @ORM\ManyToOne(targetEntity=AppBundle\Entity\chauffeur::class)
      * @ORM\JoinColumn(name="id_chauffeur" , referencedColumnName="id")
      */
     private $idChauffeur;
@@ -31,7 +31,7 @@ class Avis
     /**
      * @var int
      * @Assert\NotBlank
-     * @ORM\OneToOne(targetEntity=AppBundle\Entity\Client::class)
+     * @ORM\ManyToOne(targetEntity=AppBundle\Entity\Client::class)
      * @ORM\JoinColumn(name="id_client" , referencedColumnName="id")
      */
     private $idCclient;
@@ -43,8 +43,7 @@ class Avis
      *      min = 5,
      *      max = 150,
      *      minMessage = "Your first name must be at least {{ 5 }} characters long",
-     *      maxMessage = "Your first name cannot be longer than {{ 150 }} characters",
-     *      allowEmptyString = false
+     *      maxMessage = "Your first name cannot be longer than {{ 150 }} characters"
      * )
      * @ORM\Column(name="msg", type="string", length=255)
      */
