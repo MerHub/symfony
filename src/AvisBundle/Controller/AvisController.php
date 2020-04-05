@@ -43,7 +43,6 @@ class AvisController extends Controller
         return $this->render('@Avis/avis/index.html.twig', array(
             'avis' => $avis,
             'chauffeur' => $chauffeur,
-            'avi' => $avi,
             'form' => $form->createView(),
             'idClient'=>$idClient,
         ));
@@ -55,26 +54,7 @@ class AvisController extends Controller
      */
     public function newAction(Request $request,$idChauffeur,$idClient)
     {
-        $avi = new Avis();
-        $form = $this->createForm('AvisBundle\Form\AvisType', $avi);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($avi);
-            $em->flush();
-
-            return $this->redirectToRoute('avis_index',[
-                'idChauffeur'=>$avi->getIdChauffeur()
-            ]);
-        }
-
-        return $this->render('@Avis/avis/new.html.twig', array(
-            'avi' => $avi,
-            'form' => $form->createView(),
-            'idChauffeur'=>$idChauffeur,
-            'idClient'=>$idClient,
-        ));
+        // j'ai mélangé avec index
     }
 
     /**
@@ -83,12 +63,7 @@ class AvisController extends Controller
      */
     public function showAction(Avis $avi)
     {
-        $deleteForm = $this->createDeleteForm($avi);
-
-        return $this->render('@Avis/avis/show.html.twig', array(
-            'avi' => $avi,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        // j'ai mélangé avec index
     }
 
     /**
@@ -107,10 +82,13 @@ class AvisController extends Controller
                 'idChauffeur'=>$avi->getIdChauffeur()
             ]);
         }
-
-        return $this->render('@Avis/avis/edit.html.twig', array(
-            'avi' => $avi,
-            'edit_form' => $editForm->createView(),
+        $chauffeur=$avi->getIdChauffeur();
+        $idClient=$this->getUser()->getId();
+        return $this->render('@Avis/avis/index.html.twig', array(
+            'avis' => $avi,
+            'chauffeur' => $chauffeur,
+            'form' => $editForm->createView(),
+            'idClient'=>$idClient,
         ));
     }
 

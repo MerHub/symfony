@@ -64,9 +64,9 @@
                             <div class="uprofile-content row">
                                 <div class="enter_post col-12">
                                     {{ form_start(form) }}
-                                    <input type="submit" value="Post" class="btn btn-md float-right btn-primary" style="margin-bottom: 6px;"/>
-                                    {{ form_widget(form.idChauffeur,{'value': chauffeur.idUser}) }}
-                                    {{ form_widget(form.idCclient,{'value': idClient}) }}
+                                    <input type="submit" value="Post" class="btn  btn-primary" style="margin-bottom: 6px;"/>
+                                    {{ form_widget(form.idChauffeur,{'value': chauffeur.idUser ~ ""}) }}
+                                    {{ form_widget(form.idCclient,{'value': idClient ~ ""}) }}
                                     <div class="form-group">
                                         <div class="controls">
                                             {{ form_widget(form.msg) }}
@@ -77,49 +77,35 @@
                                 </div>
 
                                 {% for avi in avis %}
-                                    <tr>
-                                        <td><a href="{{ path('avis_show', { 'idAvis': avi.idAvis }) }}">{{ avi.idAvis }}</a></td>
-                                        <td>{{ avi.msg }}</td>
-                                        <td>{{ avi.note }}</td>
-                                        <td>
-                                            <ul>
-                                                <li>
-                                                    <a href="{{ path('avis_show', { 'idAvis': avi.idAvis }) }}">show</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ path('avis_edit', { 'idAvis': avi.idAvis }) }}">edit</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ path('avis_delete', { 'idAvis': avi.idAvis }) }}">delete</a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
+                                    <div class="uprofile_wall_posts col-12" style="margin-left: 8%;">
+                                        <div class="row">
+                                            <div class="pic-wrapper float-left col-2 col-md-1 text-center">
+                                                <img src="{{ asset("font/imgProfileUser/user_profil.png") }}" class="" alt="">
+                                            </div>
+                                            <div class="info-wrapper float-left col-10 col-md-11">
+                                                <div class="username">
+                                                    <span class="bold">{{ avi.username }}</span>
+                                                    {% if app.user.id==avi.id %}
+                                                        &nbsp;&nbsp;&nbsp;<span><a class="text-dark" href="{{ path("avis_edit",{"idAvis":avi.idAvis}) }}" style="cursor:pointer;"><i class="fa fa-pencil"></i>&nbsp;Modifier</a>&nbsp;&nbsp;<a class="text-danger" style="cursor:pointer;" href="{{ path("avis_delete",{"idAvis":avi.idAvis}) }}"><i class="fa fa-trash"></i>&nbsp;Supprimer</a></span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="info text-muted">
+                                                {{ avi.msg }}
+                                                </div>
+                                                <div class="info-details">
+                                                    <ul class="list-unstyled list-inline">
 
-                                <div class="uprofile_wall_posts col-12">
-                                    <div class="row">
-                                        <div class="pic-wrapper float-left col-2 col-md-1 text-center">
-                                            <img src="{{ asset("font/imgProfileUser/user_profil.png") }}" class="" alt="">
-                                        </div>
-                                        <div class="info-wrapper float-left col-10 col-md-11">
-                                            <div class="username">
-                                                <span class="bold">John Smith</span> post in group <span class="bold">work</span>
-                                            </div>
-                                            <div class="info text-muted">
-                                                "Balance" is a concept based on human perception and the complex nature of the human senses of weight and proportion. Humans can evaluate these visual elements in several situations to find a sense of balance.
-                                            </div>
-                                            <div class="info-details">
-                                                <ul class="list-unstyled list-inline">
-                                                    <li class="list-inline-item"><a href="#" class="text-warning"><i class="fa fa-star"></i></a></li>
-                                                </ul>
+                                                        {% for i in 1..avi.note %}
+                                                            <li class="list-inline-item"><span class="text-warning"><i class="fa fa-star"></i></span></li>
+                                                        {% endfor %}
+                                                    </ul>
+
+                                                </div>
 
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
-
+                                {% endfor %}
 
                             </div>
 
@@ -131,12 +117,6 @@
 
         <!-- MAIN CONTENT AREA ENDS -->
     </section>
-
-    <ul>
-        <li>
-            <a href="{{ path('avis_new',{"idChauffeur":chauffeur.idUser|default(4),"idClient":idClient|default(18)}) }}">Create a new avi</a>
-        </li>
-    </ul>
 {% endblock %}
 
 {% block cssScript %}

@@ -14,11 +14,11 @@ class AvisRepository extends \Doctrine\ORM\EntityRepository
         $query=$this->getEntityManager()->createQuery(
             '
             SELECT
-            a.idAvis,a.msg,a.note,u.username
+            a.idAvis,u.id,a.msg,a.note,u.username
             FROM
             AvisBundle\Entity\Avis a,AppBundle\Entity\User u
             WHERE
-            a.idCclient=u.idUser and a.idChauffeur=idChauffeur
+            a.idCclient=u.id and a.idChauffeur= :idChauffeur ORDER By a.idAvis DESC
             '
         )->setParameter('idChauffeur',$idChauffeur);
 
