@@ -38,18 +38,18 @@ class AvisController extends Controller
             $notification
                 ->setTitle($titre)
                 ->setDescription($body)
-                ->setIdClient($avi->getIdCclient())
-                ->setIdChauffeur($avi->getIdChauffeur())
+                ->setIdSend($avi->getIdCclient()->getIdUser())
+                ->setIdReceive($avi->getIdChauffeur()->getIdUser())
                 ->setIcon($operation)
                 ->setRoute('comment_show')
                 ->setParameters([])
             ;
+            $pusher = $this->get('mrad.pusher.notificaitons');
+            $pusher->trigger($notification);
             $em->persist($notification);
                 $em->flush();
-
-
             return $this->redirectToRoute('avis_index',[
-                'idChauffeur'=>$avi->getIdChauffeur()
+                'idChauffeur'=>$avi->getIdChauffeur()->getIdUser()->getId()
             ]);
         }
 

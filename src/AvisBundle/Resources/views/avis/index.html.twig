@@ -65,7 +65,7 @@
                                 <div class="enter_post col-12">
                                     {{ form_start(form) }}
                                     <input type="submit" value="Post" class="btn  btn-primary" style="margin-bottom: 6px;"/>
-                                    {{ form_widget(form.idChauffeur,{'value': chauffeur.idUser ~ ""}) }}
+                                    {{ form_widget(form.idChauffeur,{'value': chauffeur.idUser.id ~ ""}) }}
                                     {{ form_widget(form.idCclient,{'value': idClient ~ ""}) }}
                                     <div class="form-group">
                                         <div class="controls">

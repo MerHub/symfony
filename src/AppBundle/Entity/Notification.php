@@ -25,16 +25,16 @@ class Notification extends BaseNotification implements \JsonSerializable
     /**
      * @var int
      * @ORM\ManyToOne(targetEntity=AppBundle\Entity\user::class)
-     * @ORM\JoinColumn(name="idClient" , referencedColumnName="id_user")
+     * @ORM\JoinColumn(name="idSend" , referencedColumnName="id_user")
      */
-    private $idClient;
+    private $idSend;
 
     /**
      * @var int
      * @ORM\ManyToOne(targetEntity=AppBundle\Entity\user::class)
-     * @ORM\JoinColumn(name="idChauffeur" , referencedColumnName="id_user", nullable=true)
+     * @ORM\JoinColumn(name="idReceive" , referencedColumnName="id_user", nullable=true)
      */
-    private $idChauffeur;
+    private $idReceive;
 
     /**
      * @var int
@@ -74,37 +74,37 @@ class Notification extends BaseNotification implements \JsonSerializable
     /**
      * Set idClient.
      *
-     * @param int $idClient
+     * @param int $idSend
      *
      * @return Notification
      */
-    public function setIdClient($idClient)
+    public function setIdSend($idSend)
     {
-        $this->idClient = $idClient;
+        $this->idSend = $idSend;
 
         return $this;
     }
 
     /**
-     * Get idClient.
+     * Get idSend.
      *
      * @return int
      */
-    public function getIdClient()
+    public function getIdSend()
     {
-        return $this->idClient;
+        return $this->idSend;
     }
 
     /**
-     * Set idChauffeur.
+     * Set idReceive.
      *
-     * @param int $idChauffeur
+     * @param int $idReceive
      *
      * @return Notification
      */
-    public function setIdChauffeur($idChauffeur)
+    public function setIdReceive($idReceive)
     {
-        $this->idChauffeur = $idChauffeur;
+        $this->idReceive = $idReceive;
 
         return $this;
     }
@@ -114,9 +114,9 @@ class Notification extends BaseNotification implements \JsonSerializable
      *
      * @return int
      */
-    public function getIdChauffeur()
+    public function getIdReceive()
     {
-        return $this->idChauffeur;
+        return $this->idReceive;
     }
 
     public function jsonSerialize (){
