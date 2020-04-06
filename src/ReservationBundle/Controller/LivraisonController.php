@@ -20,9 +20,10 @@ class LivraisonController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $livraisons = $em->getRepository('ReservationBundle:Livraison')->findAll();
-
+        $user=$this->getUser();
+        $id=$user->getId();
+        $livraisons=[];
+        $livraisons=$this->getDoctrine()->getRepository(Livraison::class)->ListeLivraisonDetaille($id);
         return $this->render('@Reservation/livraison/index.html.twig', array(
             'livraisons' => $livraisons,
         ));
@@ -44,7 +45,7 @@ class LivraisonController extends Controller
         $em->persist($livraison);
         $em->flush();
 
-        return $this->redirectToRoute('reservation_homepage');
+        return $this->redirectToRoute('livraison_index');
     }
 
     /**
@@ -88,16 +89,11 @@ class LivraisonController extends Controller
      * Deletes a livraison entity.
      *
      */
-    public function deleteAction(Request $request, Livraison $livraison)
+    public function deleteAction(Livraison $livraison)
     {
-        $form = $this->createDeleteForm($livraison);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($livraison);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($livraison);
+        $em->flush();
 
         return $this->redirectToRoute('livraison_index');
     }

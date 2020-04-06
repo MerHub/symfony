@@ -25,8 +25,8 @@ class chauffeur
 
     /**
      * @var int
-     * @ORM\Id
-     * @ORM\Column(name="id" , type="integer")
+     * @ORM\Id @ORM\OneToOne(targetEntity=user::class)
+     * @ORM\JoinColumn(name="id" , referencedColumnName="id_user", nullable=false)
      */
     private $id_User;
 

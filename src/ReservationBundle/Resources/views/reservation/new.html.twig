@@ -4,7 +4,7 @@
 
     {# choisir une position sur la map #}
 
-
+    {% if form is defined %}
     map.on('click', function(e) {
     if(taxiSelect==false) {
     setInterval(function () {
@@ -87,8 +87,10 @@
     }
     });
 
+    {% endif %}
     {# afficher la liste des chauffeur sur la map #}
 
+    {% if user.type=="client" %}
     {% for driver in listChauffeur %}
 
         {% if driver.latitude is not null and driver.latitude is defined %}
@@ -134,6 +136,7 @@
             });
         {% endif %}
     {% endfor %}
+    {% endif %}
 
     {# fonction utile pour la manipulation de la map #}
 

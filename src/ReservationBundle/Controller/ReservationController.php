@@ -22,12 +22,14 @@ class ReservationController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $reservations = $em->getRepository('ReservationBundle:Reservation')->findAll();
-
-        return $this->render('reservation/index.html.twig', array(
-            'reservations' => $reservations,
-        ));
+        $user=$this->getUser();
+        $id=$user->getId();
+        $Puser=$this->getDoctrine()->getRepository(user::class)->find($id);
+        $listDriver=$this->getDoctrine()->getRepository(user::class)->findBy(['type'=>'chauffeur']);
+        return $this->render('@Reservation/reservation/new.html.twig',[
+            'user'=>$Puser,
+            'listChauffeur'=>$listDriver
+        ]);
     }
 
     /**
@@ -57,7 +59,7 @@ class ReservationController extends Controller
                     $code=$request->get("codeLivraison");
                     return $this->redirectToRoute("livraison_new",["idRservation"=>$reservations->getIdReservation(),"codeLivraison"=>$code]);
                 }else{
-                    return $this->redirectToRoute("sendMessageChauffeur",array("idReservation"=>$reservation->getIdreservation(),"numClient"=>$Puser->getNTel(),"idDriver"=>$reservation->getIdChauffeur()));
+                    return $this->redirectToRoute("sendMessageChauffeur",array("idReservation"=>$reservation->getIdreservation(),"numClient"=>$Puser->getNTel(),"idDriver"=>$reservation->getIdChauffeur()->getIdUser()->getId()));
                 }
             }
 

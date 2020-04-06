@@ -10,4 +10,19 @@ namespace ReservationBundle\Repository;
  */
 class LivraisonRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function ListeLivraisonDetaille($id){
+        $query=$this->getEntityManager()->createQuery(
+            '
+            SELECT
+            l.id,l.codeLivraison,r.idReservation,r.heure,r.latitude,r.longitude,r.latitude2,r.longitude2,u.nTel,u.email,c.adresse,c.cin,c.permis,c.nom,
+            c.prenom,c.photo
+            FROM
+            ReservationBundle\Entity\Livraison l,ReservationBundle\Entity\Reservation r,AppBundle\Entity\chauffeur c,AppBundle\Entity\User u
+            WHERE
+            l.idReservation=r.idReservation and r.idChauffeur=c.id_User and c.id_User=u.id and l.etat=0 and r.idClient= :idClient
+            '
+        )->setParameter('idClient',$id);
+
+        return $query->getResult();
+    }
 }

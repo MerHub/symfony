@@ -105,6 +105,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -112,6 +113,11 @@
       <recent name="C:\wamp64\www\symfony\symfony\src\AvisBundle\Resources\views" />
       <recent name="C:\wamp64\www\symfony\projetWeb\symfony\src\ReservationBundle\Resources\views" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="s server:run" />
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />

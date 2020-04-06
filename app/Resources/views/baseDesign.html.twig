@@ -256,12 +256,6 @@
 
                         <div class="profile-details col-8">
 
-                            <h3>
-                                <a href="ui-profile.html">{{ app.user.email }}</a>
-
-                                <!-- Available statuses: online, idle, busy, away and offline -->
-                                <span class="profile-status online"></span>
-                            </h3>
 
                             <p class="profile-title">+216 {{ app.user.nTel }}</p>
 
@@ -278,20 +272,23 @@
                             <ul>
                                 <li class='menusection'>Main</li>
                                 <li class="">
-                                    <a href="index.html">
+                                    <a href="{{ path("reservation_index") }}" target="cad">
                                         <i class="fa fa-dashboard"></i>
                                         <span class="title">Dashboard</span>
                                     </a>
                                 </li>
                                 <li class="">
                                     <a href="javascript:;">
-                                        <i class="fa fa-suitcase"></i>
-                                        <span class="title">Multi Purpose</span>
+                                        <i class="fa fa-automobile"></i>
+                                        <span class="title">Reservation</span>
                                         <span class="arrow "></span><span class="badge badge-accent">HOT</span>
                                     </a>
                                     <ul class="sub-menu" >
                                         <li>
-                                            <a class="" href="hospital.html"  target = '_blank' >Hospital Admin</a>
+                                            <a class="" href="{{ path("reservation_homepage") }}"  target = 'cad' >My reservations</a>
+                                        </li>
+                                        <li>
+                                            <a class="" href="{{ path("livraison_index") }}"  target = 'cad' >My deliveries</a>
                                         </li>
 
                                     </ul>
@@ -332,7 +329,7 @@
 
                 <div class='col-12'  style='padding: 0;margin: 0;'>
                     <div class="page-title" style='padding: 0;margin: 0;margin-top: 3.9%;'>
-                        <iframe src="{{ path("reservation_homepage") }}" frameborder="0" style="width: 100%;height: 92.8%;border-left:1px solid rgba(0,0,0,0.2);"></iframe>
+                        <iframe src="{{ path("reservation_index") }}" frameborder="0" style="width: 100%;height: 92.8%;border-left:1px solid rgba(0,0,0,0.2);" name="cad"></iframe>
                         <!-- <div class="float-left">
                             <h1 class="title">Boxed Layout</h1></div>
 
