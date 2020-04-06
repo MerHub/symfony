@@ -102,3 +102,9 @@ vresh_twilio:
     sid: 'AC28ba4ff1b617bcf887aae1b86dc8c8d7'
     #(Required) Your Auth Token from www.twilio.com/user/account
     authToken: 'a97a269aa861377b2b48e531b92f3868'
+
+notifications:
+    app_id:     976633
+    app_key:    e182c43dbd36887c5e79
+    app_secret: a8de544e405ae5d08ee2
+    cluster:    eu

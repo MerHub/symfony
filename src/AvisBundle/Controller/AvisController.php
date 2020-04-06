@@ -3,6 +3,7 @@
 namespace AvisBundle\Controller;
 
 use AppBundle\Entity\chauffeur;
+use AppBundle\Entity\Notification;
 use AvisBundle\Entity\Avis;
 use ChauffeurBundle\ChauffeurBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,7 +30,23 @@ class AvisController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($avi);
-            $em->flush();
+
+            $titre = "Nouvel avis";
+            $body = $avi->getMsg()." &nbsp;&nbsp; Note = ".$avi->getNote();
+            $operation="add";
+            $notification = new Notification();
+            $notification
+                ->setTitle($titre)
+                ->setDescription($body)
+                ->setIdClient($avi->getIdCclient())
+                ->setIdChauffeur($avi->getIdChauffeur())
+                ->setIcon($operation)
+                ->setRoute('comment_show')
+                ->setParameters([])
+            ;
+            $em->persist($notification);
+                $em->flush();
+
 
             return $this->redirectToRoute('avis_index',[
                 'idChauffeur'=>$avi->getIdChauffeur()
