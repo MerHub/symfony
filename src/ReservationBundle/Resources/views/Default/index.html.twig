@@ -1,6 +1,3 @@
-
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,6 +24,9 @@
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
+        .hide{
+            display: none;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.70.0/dist/L.Control.Locate.min.css" />
 
@@ -37,93 +37,134 @@
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 </head>
-<body translate="no">
+<body translate="no" style="display: none;">
+<div class="fond" style="display: none">
+    <center>
+        <div class="ini"></div>
+    </center>
+</div>
+{% block ShowReservation %}
+
+{% endblock %}
 <main>
     <aside style="background-color: #1A1A1A;opacity:0.9;left:-20%;">
-    <div class="row">
-        <div class="col-md-12" style="padding:8%;">
-            <img src="{{ asset("font/images/logo.png") }}" alt="" width="50px"  style="display: inline-block;vertical-align: middle;padding-left: 10%;">&nbsp;&nbsp;&nbsp;<span class="lead" style="color:white;display: inline-block;">Drive</span>
-         </div>
-        <div class="reservation menu-imbriquer" style="position: absolute;z-index:0;left:0%;top:15%;">
-            <div class="col-md-12 deleteFormReservation ">
-                <center>
-                    <div class="infor" style="margin-top:2%;margin-left:8%;">
-                        <strong><i class="fa fa-info" aria-hidden="true"></i></strong> <br> select a location on the map to pick up a package
-                    </div>
-                </center>
-                <center>
-                    <div class="warnN" style="margin-top:5%;">
-                        <strong><i class="fa fa-info" aria-hidden="true"></i></strong> <br> please select a taxi to make a trip
-                    </div>
-                </center>
-                <center class="loadDsign" style="margin-top: 4%;"><div class="lds-ripple"><div></div><div></div></div></center>
+        <div class="row">
+            <div class="col-md-12" style="padding:8%;">
+                <img src="{{ asset("font/images/logo.png") }}" alt="" width="50px"  style="display: inline-block;vertical-align: middle;padding-left: 10%;">&nbsp;&nbsp;&nbsp;<span class="lead" style="color:white;display: inline-block;">Drive</span>
             </div>
-
-            <div class="contenuReservation" style="display: none;">
-                <div style="margin-top: 15%;">
-                    <img src="{{ asset("font/images/design.png") }}" alt=""  style="display: inline-block;margin-left:10%;" width="8px">
-                    <form style="display: inline-block;width: 70%;">
-                        <div class="form-group" style="margin-top:-6%;margin-left:6%;">
-                            <input type="text" name="position"  class="position" placeholder="your address" >
-                            <img src="{{ asset("font/images/house.png") }}" width="15px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
-                        </div>
-                        <div class="form-group" style="margin-top:10%;margin-left:6%;">
-                            <input type="text" name="destination"  class="destination"  placeholder="your destination" style="background-image: url('{{ asset("font/images/house.png") }}')" >
-                            <img src="{{ asset("font/images/lo.png") }}" width="12px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
-                        </div>
-                    </form>
-                </div>
-
-                <div class="col-md-12" style="margin-top: 15%;">
-                    <h2 class="font-weight-bold" style="color: white;text-align: center;">Price</h2>
+            {% if form is defined %}
+            {{ form_start(form) }}
+            <div class="reservation menu-imbriquer" style="position: absolute;z-index:0;left:0%;top:15%;">
+                <div class="col-md-12 deleteFormReservation " {% if reservation is defined %} style="display: none;" {% endif %}>
                     <center>
-                        <div class="prix">
-                            <spen class="prixs">10</spen> dinars
+                        <div class="infor" style="margin-top:2%;margin-left:8%;">
+                            <strong><i class="fa fa-info" aria-hidden="true"></i></strong> <br> select a location on the map to pick up a package
                         </div>
                     </center>
-                </div>
-                <div class="col-md-12" style="margin-top: 20%;">
                     <center>
-                        <input type="submit" value="Confirm order" class="order">
+                        <div class="warnN" style="margin-top:5%;width: 70%;">
+                            <strong><i class="fa fa-info" aria-hidden="true"></i></strong> <br> please select a taxi to make a trip
+                        </div>
                     </center>
+                    <center class="loadDsign" style="margin-top: 4%;"><div class="lds-ripple"><div></div><div></div></div></center>
+                </div>
+
+                <div class="contenuReservation" {% if reservation is not defined %} style="display: none;" {% endif %}>
+                    <div style="margin-top: 15%;">
+                        <center>
+                            <div style="display: inline-block;width: 70%;">
+                                <div class="form-group" style="margin-top:-6%;margin-left:6%;">
+                                    <input type="text" name="position"  class="position" placeholder="your address" >
+                                    <img src="{{ asset("font/images/house.png") }}" width="15px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
+                                </div>
+                                <div class="form-group" style="margin-top:10%;margin-left:6%;">
+                                    <input type="text" name="destination"  class="destination"  placeholder="your destination" style="background-image: url('{{ asset("font/images/house.png") }}')" >
+                                    <img src="{{ asset("font/images/lo.png") }}" width="12px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+
+                    <div class="col-md-12" style="margin-top: 15%;">
+                        <h2 class="font-weight-bold" style="color: white;text-align: center;">Price</h2>
+                        <center>
+                            <div class="prix">
+                                <spen class="prixs">10</spen>
+                            </div>
+                        </center>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 20%;">
+                        <center>
+                            <div class="route"><i class="fa fa-road" aria-hidden="true"></i> show the route</div>
+                            {% if reservation is not defined %}
+                                <div class="drivver"><i class="fa fa-user-circle" aria-hidden="true"></i> show driver</div>
+                            {% endif %}
+
+                            <input type="submit" value="Confirm order" name="reservation" class="order" style="outline: none;">
+                            <a href="{{ path("reservation_homepage") }}" class="order" style="text-decoration: none;margin-top: 2%;background-color: #0d0a0a;">Cancle</a>
+                        </center>
+                    </div>
                 </div>
             </div>
-</div>
-        <div class="livraison menu-imbriquer" style="position: absolute;z-index:0;left:-100%;top:15%;">
-            <div style="margin-top: 5%;">
-                <img src="{{ asset("font/images/design.png") }}" alt=""  style="display: inline-block;margin-left:10%;" width="8px">
-                <form style="display: inline-block;width: 70%;">
-                    <div class="form-group" style="margin-top:-6%;margin-left:6%;">
-                        <input type="text" name="position"placeholder="our address" >
-                        <img src="{{ asset("font/images/house.png") }}" width="15px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
-                    </div>
-                    <div class="form-group" style="margin-top:10%;margin-left:6%;">
-                        <input type="text" name="destination" placeholder="your destination" style="background-image: url('{{ asset("font/images/house.png") }}')" >
-                        <img src="{{ asset("font/images/lo.png") }}" width="12px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
-                    </div>
-                </form>
-            </div>
+            <div class="livraison menu-imbriquer" style="position: absolute;z-index:0;top:15%;left: -120%">
+                <div class="col-md-12 deleteLivraison " style="display: none">
+                    <center>
+                        <div class="infor" style="margin-top:2%;margin-left:8%;">
+                            <strong><i class="fa fa-info" aria-hidden="true"></i></strong> <br> select a location on the map to pick up a package
+                        </div>
+                    </center>
+                    <center>
+                        <div class="warnN" style="margin-top:5%;">
+                            <strong><i class="fa fa-info" aria-hidden="true"></i></strong> <br> please select a taxi to make a trip
+                        </div>
+                    </center>
+                    <center class="loadDsign" style="margin-top: 4%;"><div class="lds-ripple"><div></div><div></div></div></center>
+                </div>
 
-            <div class="col-md-12" style="margin-top: 15%;">
-                <h2 class="font-weight-bold" style="color: white;text-align: center;">Price</h2>
-                <center>
-                    <div class="prix">
-                        10 dinars
+                <div class="contenuLivraison">
+                    <div style="margin-top: 15%;">
+                        <center>
+                            <div style="display: inline-block;width: 70%;">
+                                <div class="form-group" style="margin-top:-6%;margin-left:6%;">
+                                    <input type="text" name="position"  class="position" placeholder="your address" >
+                                    <img src="{{ asset("font/images/house.png") }}" width="15px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
+                                </div>
+                                <div class="form-group" style="margin-top:10%;margin-left:6%;">
+                                    <input type="text" name="destination"  class="destination"  placeholder="your destination" style="background-image: url('{{ asset("font/images/house.png") }}')" >
+                                    <img src="{{ asset("font/images/lo.png") }}" width="12px" style="vertical-align: middle;opacity: 0.7;margin-left: -16%;margin-top: -2%;">
+                                </div>
+                            </div>
+                        </center>
                     </div>
-                </center>
-            </div>
-            <div class="col-md-12" style="margin-top: 20%;">
-                <center>
-                    <input type="submit" value="Confirm order" class="order">
-                </center>
+
+                    <div class="col-md-12" style="margin-top: 15%;">
+                        <h2 class="font-weight-bold" style="color: white;text-align: center;">Price</h2>
+                        <center>
+                            <div class="prix">
+                                <spen class="prixs">10</spen>
+                            </div>
+                        </center>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 20%;">
+                        <center>
+                            <div class="drivver"><i class="fa fa-user-circle" aria-hidden="true"></i> show driver</div>
+                            {% if formLivraison is defined %}
+                                <input type="text" name="codeLivraison" placeholder="delivery code" style="margin-bottom:2.5%;width: 50%;border-radius: 4px;" required>
+                                <input type="submit" value="Confirm order" class="order" name="livraison" style="outline: none;">
+
+                            {% endif %}
+                            {{ form_end(form) }}
+                            {% endif %}
+                        </center>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
     </aside>
     <div class="as" style="display: none;">
         <h4 class="" style="color: #474747;">Routes - <span class="dist">2.5 Kilometers</span></h4>
         <div class="carModel"  style="display: inline-block">
-        <div><i class="fa fa-car" aria-hidden="true"></i> <span class="title">&nbsp;&nbsp;&nbsp;&nbsp;Car Model</span></div>
+            <div><i class="fa fa-car" aria-hidden="true"></i> <span class="title">&nbsp;&nbsp;&nbsp;&nbsp;Car Model</span></div>
             <div class="contentes">Ferary</div>
             <div class="voir"><center><i class="fa fa-eye" aria-hidden="true"></i></center></div>
         </div>
@@ -175,493 +216,361 @@
     <center><div style="background-color: #26316F;display: inline-block;margin-top:6%;"><i class="fa fa-microphone" aria-hidden="true"></i></div> <span class="textMicro">Start vocal</span></center>
 </div>
 <script>
-$(function(){
-
-    //le type de navigateur
-   var Version = navigator.appVersion;
-   var executeSpeech= (navigator.appVersion.toString().toLowerCase().indexOf("edge")!=-1) ? false : true;
-    //initiation vocal*
-    var recognition="";
-    var synth="";
-    var voices="";
-    if(executeSpeech==true){
-        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-        //initiation voie
-        synth = window.speechSynthesis;
-        recognition = new SpeechRecognition();
-        recognition.interimResults = true;
-        recognition.lang = 'fr-FR';
-        voices = synth.getVoices();
-
-        for(i = 0; i < voices.length ; i++) {
-            var option = document.createElement('option');
-            option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
-            option.setAttribute('data-lang', voices[i].lang);
-            option.setAttribute('data-name', voices[i].name);
+    $(function(){
+        {% if user.latitude is null and reservation is not defined %}
+        window.location.href="{{ path('reservation_homepage') }}";
+        {% endif %}
+        var malatitude={% if user.latitude is not  null  %}{{ user.latitude }}; {% else %} 0; {% endif %}
+        var malongitude={% if user.longitude is not  null  %}{{ user.longitude }}; {% else %} 0; {% endif %}
+        var autorise_afficherTrajet=false;
+        $("[name ='reservationbundle_reservation[idClient]']").val({{ user.id }});
+        $(".route").click(function(){
+            autorise_afficherTrajet=true;
+            updateDirection();
+            $(".fond").fadeIn()
+        })
+        $(".fond").click(function () {
+            autorise_afficherTrajet=false;
+            $(".fond").fadeOut()
+        })
+        $("label").hide();
+        $(".lol").show();
+        $("body").fadeIn()
+        L.mapbox.accessToken = 'pk.eyJ1IjoiY3lyaWxsZTgwMCIsImEiOiJjazZzcmU2bHUwMDh0M2xxcGRtOGJndGh4In0.zqSmLTyuMbkLZQyVFgtAXA';
+        var loader = document.getElementById('loader');
+        // centrer la map
+        var map = L.mapbox.map('map').setView([malatitude,malongitude], 17);
+        // create the initial directions object, from which the layer
+        // and inputs will pull data.
+        {% if form is defined or reservation is defined %}
+        var directions = L.mapbox.directions();
+        var directionsLayer = L.mapbox.directions.layer(directions).addTo(map);
+        var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions).addTo(map);
+        var directionChauffeur = L.mapbox.directions();
+        {% endif %}
+        function startLoading() {
+            loader.className = '';
         }
-    }else{
-        $(".micro").hide();
-    }
-
-    var ty=0;
-    setInterval(function(){
-        if($(".leaflet-control-layers.leaflet-control").length==1 && ty==0){
-            ty=1;
-            $(".leaflet-control-layers-base").css({"position":"fixed","right":"0","background-color":"white","width":"13%","height":"20%"})
-            $(".leaflet-control-layers-base label").after("<br>")
-            $(".leaflet-bar-part.leaflet-bar-part-single span").css("margin-left","30%")
+        function finishedLoading() {
+            // first, toggle the class 'done', which makes the loading screen
+            // fade out
+            loader.className = 'done';
+            setTimeout(function() {
+                // then, after a half-second, add the class 'hide', which hides
+                // it completely and ensures that the user can interact with the
+                // map again.
+                loader.className = 'hide';
+            }, 500);
         }
-    },1000)
-    $(".leaflet-control-layers.leaflet-control").css("margin-left","-30%")
-    var nbr_click=0;
-    L.mapbox.accessToken = 'pk.eyJ1IjoiY3lyaWxsZTgwMCIsImEiOiJjazZzcmU2bHUwMDh0M2xxcGRtOGJndGh4In0.zqSmLTyuMbkLZQyVFgtAXA';
-    var loader = document.getElementById('loader');
+        // start the loading screen
+        startLoading();
+        L.control.layers({
+            'Mapbox Streets': L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11').on('load', finishedLoading),
+            'Mapbox Light': L.mapbox.styleLayer('mapbox://styles/mapbox/light-v9').addTo(map).on('load', finishedLoading),
+            'MapBox satelite': L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-v9').on('load', finishedLoading),
+            'MapBox dark': L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v9').on('load', finishedLoading)
+        }).addTo(map);
 
-    var map = L.mapbox.map('map').setView([{{ user.latitude }},{{ user.longitude }}], 17);
-    map.legendControl.addLegend("vide");
-    map.legendControl.addLegend("vide")
-    console.log(map);
-// move the attribution control out of the way
-    map.attributionControl.setPosition('bottomleft');
-    L.control.fullscreen().addTo(map);
+        // create control and add to map
+        var lc = L.control.locate({
+            strings:{
+                popup: '{{ user.username }}'
+            }}).addTo(map);
 
-// create the initial directions object, from which the layer
-// and inputs will pull data.
-    var directions = L.mapbox.directions();
-    var directionsLayer = L.mapbox.directions.layer(directions).addTo(map);
-    var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions).addTo(map);
-    var directionChauffeur = L.mapbox.directions();
-
+        // request location update and set location
+        {% block showPositionInit %}
+        lc.start();
+        {% endblock %}
 
 
-    // start the loading screen
-    startLoading();
 
+        // crontrol du micro sur la map
+        var SelectIcon=0;
 
-    // crontrol du micro sur la map
-    var SelectIcon=0;
-    if(executeSpeech==true) {
-        $(".micro").click(function () {
-            if (SelectIcon % 2 == 0) {
-                speak("bonsoir {{ user.username }}, qu'est ce que je peux faire pour vous ?");
-                recognition.start();
-                $(".micro i").attr("class", "fa fa-microphone-slash")
-                $(".micro span").text("Stop vocal")
-            } else {
-                $(".micro i").attr("class", "fa fa-microphone")
-                $(".micro span").text("Start vocal")
+        var theMarker = new Array();
+        var coordonner = new Array();
+        var i=1;
+        var j=1;
+        var cmpt=1;
+        var spr="";
+        var taxiSelect=false;
+        var ty=0;
+        var nbr_click=0;
+        var idChauffeur=0;
+
+        setTimeout(function(){
+            if(typeof lc._eventt != 'undefined'){
+                malatitude=lc._event.latlng.lat;
+                malongitude=lc._event.latlng.lng;
             }
-            SelectIcon++;
+            // initialisation de la legende
+            map.legendControl.addLegend("vide");
+            map.attributionControl.setPosition('bottomleft');
+            L.control.fullscreen().addTo(map);
+            // initiation des speech
+            var executeSpeech= (navigator.appVersion.toString().toLowerCase().indexOf("edge")!=-1) ? false : true;
+
+            {% block speech %}
+            {% include '@App/commandeVocale.html.twig' %}
+            {% endblock %}
+
+            if(executeSpeech==false) {
+                $(".micro").hide()
+            }else{
+                {% block decisionShowBlock %} {% endblock %}
+            }
+
+
+            setInterval(function(){($(".leaflet-control-layers.leaflet-control").length==1 && ty==0) ? (ty=1,$(".leaflet-control-layers-base").css({"position":"fixed","right":"0","background-color":"white","width":"13%","height":"20%"}),$(".leaflet-control-layers-base label").after("<br>"),$(".leaflet-bar-part.leaflet-bar-part-single span").css("margin-left","30%")) : "";},1000)
+            $(".leaflet-control-layers.leaflet-control").css("margin-left","-30%")
+
+
+
+
+            {% block moduleReservationLivraison %}
+            {% endblock %}
+
+        },300)
+
+        $(".lol").click(function(){
+            return;
+        })
+        $("#myInput").click(function(){
+
+            if(parseFloat($(".lol").css("margin-left").replace("px",""))<0){
+                $(".lol").css("margin-left","15%")
+                $('aside').animate({"left": '+=20%'});
+            }else{
+                var  y= confirm({% if reservation is not defined %}"can you cancle this reservation ?"{% else %} " change position" {% endif %})
+
+                if(y==true){
+                    $(".infor").show()
+                    $(".reservation").fadeIn();
+                    $(".deleteFormReservation").fadeIn(100).queue(function(){$(".contenuReservation").fadeOut();$(this).dequeue()})
+                    $(".deleteLivraison").fadeIn(100).queue(function(){$(".contenuLivraison").fadeOut();$(this).dequeue()})
+                    $(".livraison").css("left","-120%")
+                    taxiSelect=false;
+                    supprimerTousIcon()
+                    {% if reservation is not defined %}
+                    $("[name='reservationbundle_reservation']")[0].reset()
+                    {% endif %}
+                    $(".lol").css("margin-left","-15%")
+                    $('aside').animate({"left": '-=20%'});
+                    directions.setOrigin(L.latLng(malatitude,malongitude))
+                    directions.setDestination(L.latLng(malatitude,malongitude))
+                    directionChauffeur.setOrigin(L.latLng(malatitude,malongitude))
+                    directionChauffeur.setDestination(L.latLng(malatitude,malongitude))
+                    directionChauffeur.query();
+                    directions.query();
+                    map.setView(new L.LatLng(malatitude,malongitude),map.getZoom());
+                    nbr_click--;
+                }else{
+                    $(".lol").trigger("click")
+                    return;
+                }
+            }
 
         })
-    }
-    var theMarker = new Array();
-    var coordonner = new Array();
-    var i=1;
-    var j=1;
-    var cmpt=1;
-    var spr="";
-    var taxiSelect=false;
-    map.on('click', function(e) {
-       if(taxiSelect==false) {
-            setInterval(function () {
-                if ($("path.leaflet-interactive[stroke-opacity='0.75']").hasClass("dej") == false) {
-                    $("path.leaflet-interactive[stroke-opacity='0.75']").attr("stroke", "#49BB72")
-                    $("path.leaflet-interactive[stroke-opacity='0.75']").attr("stroke-width", "6")
-                    $("path.leaflet-interactive[stroke-opacity='0.75']").addClass("dej")
+
+
+
+        function iconStartExist() {
+            for (j = 0; j < theMarker.length; j++) {
+                if (theMarker[j]._popup._content == "start") {
+                    return j;
                 }
-            }, 100)
-           var rien="";
-            var v1= iconStartExist();
-           var v2= iconEndExist();
-           var LamMarker = ((v1!= -1 && v2!= -1) || (v1!= -1 && v2== -1)) ? creerIcon(e.latlng.lat, e.latlng.lng,"fin") : creerIcon(e.latlng.lat, e.latlng.lng,"debut");
-           (theMarker.length >= 2) ? supprimerIcon(iconEndExist()) : rien="";
-            LamMarker._leaflet_id = i;
-            theMarker.push(LamMarker);
-            coordonner.push([e.latlng.lat, e.latlng.lng])
-            map.addLayer(LamMarker);
-           v1= iconStartExist();
-           v2= iconEndExist();
+            }
+            return -1;
+        }
 
-            var debut = 1;
-            var fin = 1;
-           (v1!=-1) ? (directions.setOrigin(L.latLng(coordonner[v1][0], coordonner[v1][1])),debut = coordonner[v1]) : rien="";
-           (v2!=-1) ? (directions.setDestination(L.latLng(coordonner[v2][0], coordonner[v2][1])),fin = coordonner[v2]) : rien="";
+        function iconEndExist() {
+            for (j = 0; j < theMarker.length; j++) {
+                if (theMarker[j]._popup._content == "end") {
+                    return j;
+                }
+            }
+            return -1;
+        }
 
-           (debut != 1 && fin != 1) ? calculDistance(debut[0],debut[1],fin[0],fin[1]) : rien="";
-           (fin == 1) ? (directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }})),
-               directions.setDestination(L.latLng(debut[0], debut[1])),
-               calculDistance({{ user.latitude }},{{ user.longitude }},debut[0],debut[1])) : rien="";
+        function calculDistance(lat1,lon1,lat2,lon2){
+            getAdresseDebut(lat1,lon1);
+            getAdresseDestination(lat2,lon2);
+            updateDirection();
 
-           LamMarker.on('click', function (e) {
-               v1= iconStartExist();
-               v2= iconEndExist();
-               var iconSelect= (theMarker[v1]._leaflet_id == e.target._leaflet_id) ? v1 : v2;
-                (theMarker[iconSelect]._popup._content == "end") ? (
-                           directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }})),
-                               directions.setDestination(L.latLng(debut[0], debut[1])),
-                               calculDistance({{ user.latitude }},{{ user.longitude }},debut[0],debut[1])
-                       ) : (
-                    theMarker[v2].setIcon(L.mapbox.marker.icon({
+            var southWest = L.latLng(lat1, lon1),
+                northEast = L.latLng(lat2, lon2),
+                bounds = L.latLngBounds(southWest, northEast);
+            map.fitBounds(bounds);
+
+        }
+
+
+
+
+        function supprimerIconSupplementaire(){
+            $(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive.leaflet-marker-draggable").css("display", "none");
+        }
+        function creerIcon(lat,lon,fonction){
+            var  icon;
+            if(fonction=="fin"){
+                icon= new L.marker([lat, lon], {
+                    icon: L.mapbox.marker.icon({
+                        'marker-size': 'large',
+                        'marker-symbol': 'bus',
+                        'marker-color': '#E91E63'
+                    })
+                }).bindPopup('end');
+            }else{
+                icon= new L.marker([lat, lon], {
+                    icon: L.mapbox.marker.icon({
                         'marker-size': 'large',
                         'marker-symbol': 'warehouse',
                         'marker-color': '#42AA6B'
-                    })),
-                           theMarker[v2]._popup._content = "start",
-                           fin = coordonner[v2],directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }})),
-                           directions.setDestination(L.latLng(fin[0], fin[1])),calculDistance({{ user.latitude }},{{ user.longitude }},fin[0],fin[1])),
-                           supprimerIcon(iconSelect)
-});
-
-            i++;
-            cmpt++;
-            if (nbr_click % 2 == 0) {
-                $("#myInput").trigger("click")
+                    })
+                }).bindPopup('start');
             }
-        }
-    });
-    $(".lol").click(function(){
-        return;
-    })
-    $("#myInput").click(function(){
-console.log(directions+"222222")
-        if(nbr_click%2==0){
-            $(".lol").css("margin-left","15%")
-            $('aside').animate({"left": '+=20%'});
 
-        }else{
-          var  y= confirm("can you cancle this reservation ?")
-           if(y==true){
-               $(".lol").css("margin-left","-15%")
-               $('aside').animate({"left": '-=20%'});
-               directions.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }}))
-               directions.setDestination(L.latLng({{ user.latitude }},{{ user.longitude }}))
-               directionChauffeur.setOrigin(L.latLng({{ user.latitude }},{{ user.longitude }}))
-               directionChauffeur.setDestination(L.latLng({{ user.latitude }},{{ user.longitude }}))
-               directionChauffeur.query();
-               directions.query();
-               map.setView(new L.LatLng({{ user.latitude }},{{ user.longitude }}),17);
-               nbr_click--;
-           }else{
-               $(".lol").trigger("click")
-               return;
-           }
-        }
-        nbr_click++;
-
-    })
-    L.control.layers({
-        'Mapbox Streets': L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11').on('load', finishedLoading),
-        'Mapbox Light': L.mapbox.styleLayer('mapbox://styles/mapbox/light-v9').addTo(map).on('load', finishedLoading),
-        'MapBox satelite': L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-v9').on('load', finishedLoading),
-        'MapBox dark': L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v9').on('load', finishedLoading)
-    }).addTo(map);
-
-    // create control and add to map
-    var lc = L.control.locate({
-        strings:{
-            popup: '{{ user.username }}'
-        }}).addTo(map);
-
-    // request location update and set location
-    lc.start();
-
-    {% for driver in listChauffeur %}
-
-    {% if driver.latitude is not null and driver.latitude is defined %}
-    L.marker([{{ driver.latitude }},{{ driver.longitude }}], {
-        icon: L.mapbox.marker.icon({
-            'marker-size': 'medium',
-            'marker-symbol': 'car',
-            'marker-color': '#ffcf39'
-        })
-    }).addTo(map).bindPopup('{{ driver.username }}').on('click', function(e) {
-        var directionChauffeurLayer = L.mapbox.directions.layer(directionChauffeur).addTo(map);
-        var directionChauffeurRouteControl = L.mapbox.directions.routesControl('routes', directionChauffeur).addTo(map);
-        var start=iconStartExist();
-        var rien="";
-        (start!=-1) ? (
-            taxiSelect=true,$(".deleteFormReservation").fadeOut(100).queue(function(){$(".contenuReservation").fadeIn();$(this).dequeue()}),
-            setInterval(function(){ ($("path.leaflet-interactive[stroke-width='4']").hasClass("dej")==false) ? (
-                    $("path.leaflet-interactive[stroke-width='4']").attr("stroke","#F1A70E"),
-                        $("path.leaflet-interactive[stroke-width='4']").attr("stroke-opacity","0.4"),
-                        $("path.leaflet-interactive[stroke-width='4']").addClass("dej")
-                ) : rien=""
-                },100),
-                directionChauffeur.setOrigin(L.latLng(e.latlng.lat, e.latlng.lng)),
-                directionChauffeur.setOrigin(L.latLng(e.latlng.lat, e.latlng.lng)),
-                directionChauffeur.setDestination(L.latLng({{ user.latitude }},{{ user.longitude }})),
-                supprimerIconSupplementaire(),
-                updateDirectionChauffeur()
-              ) : map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng), 17);
-    });
-    {% endif %}
-    {% endfor %}
-
-    function iconStartExist() {
-        for (j = 0; j < theMarker.length; j++) {
-            if (theMarker[j]._popup._content == "start") {
-                return j;
-            }
-    }
-        return -1;
-    }
-
-    function iconEndExist() {
-        for (j = 0; j < theMarker.length; j++) {
-            if (theMarker[j]._popup._content == "end") {
-                return j;
-            }
-        }
-        return -1;
-    }
-
-    function calculDistance(lat1,lon1,lat2,lon2){
-        getAdresseDebut(lat1,lon1);
-        getAdresseDestination(lat2,lon2);
-        updateDirection();
-
-        var southWest = L.latLng(lat1, lon1),
-            northEast = L.latLng(lat2, lon2),
-            bounds = L.latLngBounds(southWest, northEast);
-        map.fitBounds(bounds);
-
-    }
-    var listeD = [];
-    function updateDirection(){
-        var res= directions.query().on('selectRoute', function(data) {
-            $(".map-legends.wax-legends.leaflet-control").css("background-color","rgba(0,0,0,0.75)")
-            var route = data.route.steps;
-            var j=0;
-
-           var  dist=parseFloat(String(data.route.distance));
-           var  prixs=(dist/1000)*3;
-           $(".prixs").text(prixs.toFixed(3));
-
-            var dc="<div class='mapboxgl-ctrl-top-left' style='background-color: transparent;height:550px;overflow-y: scroll;'><div class='mapboxgl-ctrl-directions mapboxgl-ctrl'><div></div><div class='directions-control directions-control-instructions'><div class='directions-control directions-control-directions'><div style='background-color: rgba(0,0,0,0.75);color:white;padding:7px;text-align: center;font-weight: bold;'><span>"+ data.route.distance+" meters</span>&nbsp;&nbsp;<span style='color: rgba(255,255,255,0.6)'>"+data.route.duration+" secondes</span></div><div class='mapbox-directions-instructions'><div class='mapbox-directions-instructions-wrapper'><ol class='mapbox-directions-steps'>";
-
-            for(j=0;j<route.length;j++){
-
-                    listeD.push(j);
-                    var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
-                    var finalPath = c.replace("var1", route[j].maneuver.location.coordinates[1]);
-                    var finalPath2 = finalPath.replace("var2", route[j].maneuver.location.coordinates[0]);
-                    var r="";
-                    $.ajax({
-                        type: "post",
-                        url: finalPath2,
-                        contentType: "html",
-                        success: function(response) {
-                            j=listeD[0];
-                            var index = listeD.indexOf(listeD[0]);
-                            listeD.splice(index, 1);
-                            var ft=$(".dest"+j).text()
-                            if(ft.includes(response)==false){
-                                $(".dest"+j).text(ft +" "+response)
-                            }
-
-                        }
-                    });
-                    console.log(route[j])
-                dc+="<li data-lat='"+route[j].maneuver.location.coordinates[1]+"' data-lng='"+route[j].maneuver.location.coordinates[1]+"' class='mapbox-directions-step'><span class='directions-icon directions-icon-"+route[j].maneuver.type.replace(" ", "")+"'></span><div class='mapbox-directions-step-maneuver dest"+j+"'>"+route[j].maneuver.type+" onto </div><div class='mapbox-directions-step-distance'>"+route[j].distance+" meter</div></li>"
-
-            }
-            dc+="</ol></div></div></div></div></div></div>";
-            $(".map-legends.wax-legends.leaflet-control").html(dc)
-          //  map.setView(new L.LatLng(lat, lon), (data.route.distance*17)/920);
-        });
-    }
-    function updateDirectionChauffeur(){
-        var res= directionChauffeur.query();
-    }
-
-    function getAdresseDebut(lat,lon){
-        supprimerIconSupplementaire();
-        var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
-        var finalPath = c.replace("var1", lat);
-        var finalPath2 = finalPath.replace("var2", lon);
-        var r="";
-        $.ajax({
-            type: "post",
-            url: finalPath2,
-            contentType: "html",
-            success: function(response) {
-                $(".position").val(response)
-            }
-        });
-
-    }
-
-    function getAdresseDestination(lat,lon){
-        supprimerIconSupplementaire();
-        var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
-        var finalPath = c.replace("var1", lat);
-        var finalPath2 = finalPath.replace("var2", lon);
-        var r="";
-        $.ajax({
-            type: "post",
-            url: finalPath2,
-            contentType: "html",
-            success: function(response) {
-                $(".destination").val(response)
-            }
-        });
-
-    }
-
-    function speak(msg){
-        var utterThis = new SpeechSynthesisUtterance(msg);
-
-        for(i = 0; i < voices.length ; i++) {
-            if(voices[i].name === "Microsoft Hortense - French (France)") {
-                utterThis.voice = voices[i];
-            }
-        }
-        synth.speak(utterThis);
-    }
-
-
-function supprimerIconSupplementaire(){
-    $(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive.leaflet-marker-draggable").css("display", "none");
-}
-    function creerIcon(lat,lon,fonction){
-        var  icon;
-        if(fonction=="fin"){
-            icon= new L.marker([lat, lon], {
-                icon: L.mapbox.marker.icon({
-                    'marker-size': 'large',
-                    'marker-symbol': 'bus',
-                    'marker-color': '#E91E63'
-                })
-            }).bindPopup('end');
-        }else{
-            icon= new L.marker([lat, lon], {
-                icon: L.mapbox.marker.icon({
-                    'marker-size': 'large',
-                    'marker-symbol': 'warehouse',
-                    'marker-color': '#42AA6B'
-                })
-            }).bindPopup('start');
+            return icon;
         }
 
-        return icon;
-    }
+        function supprimerIcon(j){
+            map.removeLayer(theMarker[j]);
+            var index = theMarker.indexOf(theMarker[j]);
+            var indexs = coordonner.indexOf(coordonner[j]);
+            theMarker.splice(index, 1);
+            coordonner.splice(indexs, 1)
+            cmpt--;
+        }
 
-    function supprimerIcon(j){
-        map.removeLayer(theMarker[j]);
-        var index = theMarker.indexOf(theMarker[j]);
-        var indexs = coordonner.indexOf(coordonner[j]);
-        theMarker.splice(index, 1);
-        coordonner.splice(indexs, 1)
-        cmpt--;
-    }
+        function supprimerTousIcon(){
+            var taille=theMarker.length;
+            for(j=0;j<taille;j++){
+                supprimerIcon(0)
+            }
+        }
 
-    function startLoading() {
-        loader.className = '';
-    }
+        var listeD = [];
+        function updateDirection(){
 
-    function finishedLoading() {
-        // first, toggle the class 'done', which makes the loading screen
-        // fade out
-        loader.className = 'done';
-        setTimeout(function() {
-            // then, after a half-second, add the class 'hide', which hides
-            // it completely and ensures that the user can interact with the
-            // map again.
-            loader.className = 'hide';
-        }, 500);
-    }
+            var res= directions.query().on('selectRoute', function(data) {
 
+                $(".map-legends.wax-legends.leaflet-control").css({"background-color":"rgba(0,0,0,0.75)","margin-right":"0","margin-bottom":"0"})
+                // $(".leaflet-bottom.leaflet-right").css("bottom","5%")
+                var route = data.route.steps;
+                var j=0;
+                var  dist=parseFloat(String(data.route.distance));
+                $(".distance").text(data.route.distance+" meters")
+                var  prixs=(dist/1000)*3;
+                $(".prixs").text(prixs.toFixed(3) + "Dinars");
+                $('[name="codeLivraison"]').attr("required","required")
+                $("[name='reservationbundle_reservation[prix]']").val(prixs)
 
-if(executeSpeech==true){
-    recognition.addEventListener('result', e => {
-
-        var transcript = Array.from(e.results).map(result => result[0]).map(result => result.transcript).join('');
-        var poopScript = transcript.replace(/poop|poo|shit|dump/gi, ' ');
-
-        if (e.results[0].isFinal) {
-            if(poopScript!=""){
-                var p = poopScript
-                for(j=0;j<p.length;j++){
-                    p=p.toString().replace(" ","")
+                var v2=iconEndExist();
+                var v1= iconStartExist();
+                if(v2!=-1 && v1!=-1){
+                    $("[name='reservationbundle_reservation[typeReservation]']").val("livraison")
+                    $("[name='reservationbundle_reservation[longitude2]']").val(coordonner[v2][1])
+                    $("[name='reservationbundle_reservation[latitude2]']").val(coordonner[v2][0])
+                    $("[name='reservationbundle_reservation[longitude]']").val(coordonner[v1][1])
+                    $("[name='reservationbundle_reservation[latitude]']").val(coordonner[v1][0])
                 }
-                analyseurVocal(p)
-            }
 
-            // p = document.createElement('p');
 
-            // words.appendChild(p);
-
-        }
-
-    });
-    recognition.onspeechend = function() {
-        $(".micro").click();
-        recognition.stop();
-    }
-   // recognition.addEventListener('end', recognition.start);
-}
-
-    function analyseurVocal(instruction){
-        // navigation map
-        if(instruction.indexOf("disSiri")!=-1) {
-            var operations = [["déplacer", "déplace", "déplacez", "déplacé", "bouge", "bouger", "bougez", "bougé", "mouvoir", "déporter", "déporté", "décaler", "décalez", "décalé", "circuler", "circulé", "circulez"]]
-            var directions = [["nord-est","nordest"], ["nord-ouest","nordouest"], ["sud-ouest","sudouest"], ["sud-est","sudest"],["gauche", "Est"], ["droite", "Ouest"], ["haute", "Nord"], ["bas", "Sud"]]
-
-            var reponseOperation = -1;
-            var reponseDirections = -1;
-
-            var j = 0;
-            for (j = 0; j < operations.length; j++) {
-                reponseOperation = analyseurVocalImbriquer(instruction, operations[j]);
-                if(reponseOperation != -1){
-                    reponseOperation=j;
-                    break;
-                }
-            }
-            if (reponseOperation != -1) {
-                for (j = 0; j < directions.length; j++) {
-                    reponseDirections = analyseurVocalImbriquer(instruction, directions[j]);
-                    if(reponseDirections != -1){
-                      //  console.log(instruction.replace(" ","").toLowerCase())
-                        reponseDirections=j;
-                        break;
+                {% if reservation is defined and form is defined %}
+                var v1= iconStartExist();
+                $("[name='reservationbundle_reservation[longitude2]']").val(coordonner[v1][1])
+                $("[name='reservationbundle_reservation[latitude2]']").val(coordonner[v1][0])
+                {% endif %}
+                directionChauffeur.query().on('selectRoute', function(datas){
+                    $('[name="codeLivraison"]').removeAttr("required")
+                    $("[name='reservationbundle_reservation[depart]'],[name='reservationbundle_reservation[arrive]']").val("")
+                    $("[name='reservationbundle_reservation[typeReservation]']").val("reservationSimple")
+                    $("[name='reservationbundle_reservation[latitude]']").val(malatitude)
+                    $("[name='reservationbundle_reservation[longitude]']").val(malongitude)
+                    var v1= iconStartExist();
+                    if(v1!=-1){
+                        $("[name='reservationbundle_reservation[longitude2]']").val(coordonner[v1][1])
+                        $("[name='reservationbundle_reservation[latitude2]']").val(coordonner[v1][0])
+                        dist+=parseFloat(String(datas.route.distance))
+                        var  prixs=(dist/1000)*3;
+                        $(".prixs").text(prixs.toFixed(3) + "Dinars");
+                        $("[name='reservationbundle_reservation[prix]']").val(prixs)
                     }
+                });
+                if(autorise_afficherTrajet==true){
+                    var dc="<div class='mapboxgl-ctrl-top-left' style='background-color: transparent;height:550px;overflow-y: scroll;'><div class='mapboxgl-ctrl-directions mapboxgl-ctrl'><div></div><div class='directions-control directions-control-instructions'><div class='directions-control directions-control-directions'><div style='background-color: rgba(0,0,0,0.75);color:white;padding:7px;text-align: center;font-weight: bold;'><span>"+ data.route.distance+" meters</span>&nbsp;&nbsp;<span style='color: rgba(255,255,255,0.6)'>"+data.route.duration+" secondes</span></div><div class='mapbox-directions-instructions'><div class='mapbox-directions-instructions-wrapper'><ol class='mapbox-directions-steps'>";
+
+                    for(j=0;j<route.length;j++) {
+                        if(autorise_afficherTrajet==true){
+                            listeD.push(j);
+                            var c = "{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+                            var finalPath = c.replace("var1", route[j].maneuver.location.coordinates[1]);
+                            var finalPath2 = finalPath.replace("var2", route[j].maneuver.location.coordinates[0]);
+                            var r = "";
+                            $.ajax({
+                                type: "post",
+                                url: finalPath2,
+                                contentType: "html",
+                                success: function (response) {
+                                    j = listeD[0];
+                                    var index = listeD.indexOf(listeD[0]);
+                                    listeD.splice(index, 1);
+                                    var ft = $(".dest" + j).text()
+                                    if (ft.includes(response) == false) {
+                                        $(".dest" + j).text(ft + " " + response)
+                                    }
+
+                                }
+                            });
+                            dc += "<li data-lat='" + route[j].maneuver.location.coordinates[1] + "' data-lng='" + route[j].maneuver.location.coordinates[1] + "' class='mapbox-directions-step'><span class='directions-icon directions-icon-" + route[j].maneuver.type.replace(" ", "") + "'></span><div class='mapbox-directions-step-maneuver dest" + j + "'>" + route[j].maneuver.type + " onto </div><div class='mapbox-directions-step-distance'>" + route[j].distance + " meter</div></li>"
+                        }
+                    }
+                    dc+="</ol></div></div></div></div></div></div>";
+                    $(".ini").html(dc)
                 }
-
-                (reponseDirections != -1) ? (
-                    (reponseOperation==0 && reponseDirections==4) ? speak("déplacer la map vers Est") : "",
-                    (reponseOperation==0 && reponseDirections==5) ? speak("déplacer la map vers l'ouest'") : "",
-                    (reponseOperation==0 && reponseDirections==6) ? speak("déplacer la map vers le nord") : "",
-                    (reponseOperation==0 && reponseDirections==7) ? speak("déplacer la map vers le sud") : "",
-                    (reponseOperation==0 && reponseDirections==0) ? speak("déplacer la map vers le nord-est") : "",
-                    (reponseOperation==0 && reponseDirections==1) ? speak("déplacer la map vers le nord-ouest") : "",
-                    (reponseOperation==0 && reponseDirections==2) ? speak("déplacer la map vers le sud-ouest") : "",
-                    (reponseOperation==0 && reponseDirections==3) ? speak("déplacer la map vers le sud-est") : ""
-                ) : (speak("je n'ai pas compris"));
-
-            } else {
-                speak("je n'ai pas compris");
-            }
-
-        }else{
-            speak("{{ user.username }}, Vous devez dire 'dis Siri' avant toute opération ");
+            });
+        }
+        function updateDirectionChauffeur(){
+            var res= directionChauffeur.query();
         }
 
+        function getAdresseDebut(lat,lon){
+            supprimerIconSupplementaire();
+            var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+            var finalPath = c.replace("var1", lat);
+            var finalPath2 = finalPath.replace("var2", lon);
+            var r="";
+            $.ajax({
+                type: "post",
+                url: finalPath2,
+                contentType: "html",
+                success: function(response) {
+                    $(".position").val(response)
+                    $(".position").text(response)
+                }
+            });
 
-    }
-
-    function analyseurVocalImbriquer(instruction,tableau){
-        j=0;
-        for(j=0;j<tableau.length;j++){
-            if(instruction.replace(" ","").toLowerCase().indexOf(tableau[j].toLowerCase())!=-1){
-                return j;
-            }
         }
-        return -1;
-    }
-})
+
+        function getAdresseDestination(lat,lon){
+            supprimerIconSupplementaire();
+            var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+            var finalPath = c.replace("var1", lat);
+            var finalPath2 = finalPath.replace("var2", lon);
+            var r="";
+            $.ajax({
+                type: "post",
+                url: finalPath2,
+                contentType: "html",
+                success: function(response) {
+                    $(".destination").val(response)
+                    $(".destination").text(response)
+                }
+            });
+
+        }
+
+    })
 </script>
 </body>
 </html>

@@ -1,0 +1,23 @@
+livraison_index:
+    path:     /
+    defaults: { _controller: "ReservationBundle:Livraison:index" }
+    methods:  GET
+
+livraison_show:
+    path:     /{id}/show
+    defaults: { _controller: "ReservationBundle:Livraison:show" }
+    methods:  GET
+
+livraison_new:
+    path:     /{idRservation}/{codeLivraison}/new
+    defaults: { _controller: "ReservationBundle:Livraison:new" }
+    methods:  [GET, POST]
+
+livraison_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ReservationBundle:Livraison:edit" }
+    methods:  [GET, POST]
+
+livraison_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ReservationBundle:Livraison:delete" }

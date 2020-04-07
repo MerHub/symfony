@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class user extends BaseUser
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_user", type="integer", nullable=false)
      * @ORM\Id

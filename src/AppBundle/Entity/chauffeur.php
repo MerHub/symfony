@@ -24,9 +24,9 @@ class chauffeur
 {
 
     /**
-     * @var integer
-     * @ORM\Id
-     * @ORM\Column(name="id" , type="integer")
+     * @var int
+     * @ORM\Id @ORM\OneToOne(targetEntity=user::class)
+     * @ORM\JoinColumn(name="id" , referencedColumnName="id_user", nullable=false)
      */
     private $id_User;
 
@@ -284,7 +284,7 @@ class chauffeur
 
     public function __toString()
     {
-        return $this->username;
+        return strval($this->id_User);
     }
 }
 
