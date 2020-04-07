@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Reservation
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_Reservation", type="integer", nullable=false)
      * @ORM\Id
@@ -22,14 +22,14 @@ class Reservation
     private $idReservation;
 
     /**
-     * @var integer
+     * @var int
      * @ORM\ManyToOne(targetEntity=AppBundle\Entity\Client::class)
      * @ORM\JoinColumn(name="id_client" , referencedColumnName="id")
      */
     private $idClient;
 
     /**
-     * @var integer
+     * @var int
      * @ORM\ManyToOne(targetEntity=AppBundle\Entity\chauffeur::class)
      * @ORM\JoinColumn(name="id_chauffeur" , referencedColumnName="id")
      */
@@ -38,21 +38,21 @@ class Reservation
     /**
      * @var string
      *
-     * @ORM\Column(name="depart", type="string", length=255, nullable=false)
+     * @ORM\Column(name="depart", type="string", length=255, nullable=true)
      */
     private $depart;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="arrive", type="string", length=255, nullable=false)
+     * @ORM\Column(name="arrive", type="string", length=255, nullable=true)
      */
     private $arrive;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="heure", type="datetime", nullable=true)
+     * @ORM\Column(name="heure", type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
     private $heure = 'NULL';
 
@@ -69,20 +69,6 @@ class Reservation
      * @ORM\Column(name="type_Reservation", type="string", length=255, nullable=false)
      */
     private $typeReservation;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="code_liv", type="integer", nullable=false)
-     */
-    private $codeLiv;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="nbr_place", type="integer", nullable=false)
-     */
-    private $nbrPlace;
 
     /**
      * @var float
@@ -238,38 +224,6 @@ class Reservation
     public function setTypeReservation($typeReservation)
     {
         $this->typeReservation = $typeReservation;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCodeLiv()
-    {
-        return $this->codeLiv;
-    }
-
-    /**
-     * @param int $codeLiv
-     */
-    public function setCodeLiv($codeLiv)
-    {
-        $this->codeLiv = $codeLiv;
-    }
-
-    /**
-     * @return int
-     */
-    public function getNbrPlace()
-    {
-        return $this->nbrPlace;
-    }
-
-    /**
-     * @param int $nbrPlace
-     */
-    public function setNbrPlace($nbrPlace)
-    {
-        $this->nbrPlace = $nbrPlace;
     }
 
     /**

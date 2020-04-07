@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\chauffeur;
+use AppBundle\Entity\Notification;
 use AppBundle\Entity\user;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,6 +13,35 @@ use Symfony\Component\HttpClient\HttpClient;
 // version meriem
 class DefaultController extends Controller
 {
+    /**
+     * @Route("/markAll", name="markAllRead")
+     */
+    public function mark()
+    {
+        $user = $this->getUser();
+        $this->getDoctrine()->getRepository(Notification::class)->AllMark($user->getId());
+        return new Response("ok");
+    }
+
+    /**
+     * @Route("/message/{idReservation}/{numClient}/{idDriver}", name="sendMessageChauffeur")
+     */
+    public function sendMessageChauffeur($idReservation,$numClient,$idDriver)
+    {
+        //returns an instance of Vresh\TwilioBundle\Service\TwilioWrapper
+        $twilio = $this->get('twilio.api');
+        $numChauffeur=$this->getDoctrine()->getRepository(user::class)->find($idDriver)->getNTel();
+        $message = $twilio->account->messages->sendMessage(
+            '+12018014274', // From a Twilio number in your account
+            '+216'.$numChauffeur, // Text any number
+            "Connect you, you have an reservation : phone number : +216 ".$numClient
+        );
+
+        //get an instance of \Service_Twilio
+        //$otherInstance = $twilio->createInstance('BBBB', 'CCCCC');
+
+        return $this->redirectToRoute('_show', array('idReservation' => $idReservation));
+    }
     /**
      * @Route("/login", name="loginpage")
      */
@@ -75,9 +105,7 @@ class DefaultController extends Controller
         $content = $response->getContent();
 // $content = '{"id":521583, "name":"symfony-docs", ...}'
         $content = $response->toArray();
-
         return new Response($content["display_name"]);
     }
-
 
 }

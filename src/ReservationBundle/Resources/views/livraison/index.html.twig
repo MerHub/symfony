@@ -1,0 +1,166 @@
+{% extends 'pagevide.html.twig' %}
+
+{% block cssPlus %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+{% endblock %}
+{% block body %}
+
+    <section id="main-content" class="" style="margin:0;position: relative;margin-top: -4%;">
+        <section class="wrapper main-wrapper row" style="">
+
+            <div class="col-12">
+                <div class="page-title">
+
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START --><h1 class="title">Delivery Lists </h1><!-- PAGE HEADING TAG - END -->                            </div>
+
+                    <div class="float-right d-none">
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="index.html"><i class="fa fa-home"></i>Home</a>
+                            </li>
+                            <li>
+                                <a href="layout-default.html">Layouts</a>
+                            </li>
+                            <li class="active">
+                                <strong>Livraisons list</strong>
+                            </li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- MAIN CONTENT AREA STARTS -->
+
+            <div class="col-xl-12">
+                <section class="box ">
+                    <header class="panel_header">
+                        <h2 class="title float-left">Section Box</h2>
+                        <div class="actions panel_actions float-right">
+                            <a class="box_toggle fa fa-chevron-down"></a>
+                            <a class="box_close fa fa-times"></a>
+                        </div>
+                    </header>
+                    <div class="content-body">    <div class="row">
+                            <div class="col-12" style="height: 70%;">
+                                <table  id="table_id" class="display table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Livraison</th>
+                                        <th>Chauffeur</th>
+                                        <th>Opération</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for livraison in livraisons %}
+                                        <tr>
+                                            <td><center><a href=#">{{ livraison.id }}</a></center></td>
+                                            <td><center><span  data-toggle="modal" data-target="#livraison{{ livraison.id }}" style="cursor:pointer;color: #FC974B;"><i class="fa fa-road" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Livraison_{{ livraison.id }}</span>
+                                                    <div class="modal fade" id="livraison{{ livraison.id }}" tabindex="-1" role="dialog" aria-labelledby="chauffeur" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Livraison</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Code livraison : {{ livraison.codeLivraison }} <br>
+                                                                    Heure : {{ livraison.heure | date }} <br>
+                                                                    Depart : <span class="depart{{ livraison.id }}"> Wait please</span> <br>
+                                                                    Arrivée : <span class="arrive{{ livraison.id }}"> Wait please</span>
+                                                                    <script>
+                                                                        $(function(){
+                                                                            var c = "{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+                                                                            var finalPath = c.replace("var1", {{ livraison.latitude }});
+                                                                            var finalPath2 = finalPath.replace("var2", {{ livraison.longitude }});
+                                                                            $.ajax({
+                                                                                type: "post",
+                                                                                url: finalPath2,
+                                                                                contentType: "html",
+                                                                                success: function (response) {
+                                                                                    $(".depart{{ livraison.id }}").text(response);
+                                                                                }
+                                                                            });
+                                                                            c = "{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+                                                                            finalPath = c.replace("var1", {{ livraison.latitude2 }});
+                                                                            finalPath2 = finalPath.replace("var2", {{ livraison.longitude2 }});
+                                                                            $.ajax({
+                                                                                type: "post",
+                                                                                url: finalPath2,
+                                                                                contentType: "html",
+                                                                                success: function (response) {
+                                                                                    $(".arrive{{ livraison.id }}").text(response);
+                                                                                }
+                                                                            });
+                                                                        })
+                                                                    </script>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div></center></td>
+                                            <td><center><span  data-toggle="modal" data-target="#chauffeur{{ livraison.id }}" style="cursor:pointer;color: #5290F5;"><i class="fa fa-user" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Chauffeur_{{ livraison.id }}</span></center>
+                                                <div class="modal fade" id="chauffeur{{ livraison.id }}" tabindex="-1" role="dialog" aria-labelledby="chauffeur" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Chauffeur</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Numéro de télephone : {{ livraison.nTel }} <br>
+                                                                Email : {{ livraison.email }}<br>
+                                                                Adresse : {{ livraison.adresse }}<br>
+                                                                Nom : {{ livraison.nom }}<br>
+                                                                Prenom : {{ livraison.prenom }}<br>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div></td>
+                                            <td>
+<center>                                                <a href="{{ path('livraison_delete',{'id':livraison.id}) }}" style="color: #ED5A69;"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+</center>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('reservation_homepage') }}"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Create a new livraison</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section></div>
+
+
+            <!-- MAIN CONTENT AREA ENDS -->
+        </section>
+    </section>
+
+{% endblock %}
+{% block scriptPLus %}
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#table_id').DataTable();
+            setTimeout(function(){
+                $("table.dataTable.no-footer").css("border-bottom","1px solid #EEEEEE")
+            })
+        } );
+    </script>
+{% endblock %}

@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Client
 {
 /**
-     * @var integer
-     * @ORM\Id
-     * @ORM\Column(name="id" , type="integer")
+     * @var int
+     * @ORM\Id @ORM\OneToOne(targetEntity=user::class)
+     * @ORM\JoinColumn(name="id" , referencedColumnName="id_user", nullable=false)
      */
     private $idUser;
 
