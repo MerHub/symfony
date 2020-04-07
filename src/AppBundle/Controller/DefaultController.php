@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\chauffeur;
+use AppBundle\Entity\Notification;
 use AppBundle\Entity\user;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,6 +13,16 @@ use Symfony\Component\HttpClient\HttpClient;
 // version amira
 class DefaultController extends Controller
 {
+    /**
+     * @Route("/markAll", name="markAllRead")
+     */
+    public function mark()
+    {
+        $user = $this->getUser();
+        $this->getDoctrine()->getRepository(Notification::class)->AllMark($user->getId());
+        return new Response("ok");
+    }
+
     /**
      * @Route("/message/{idReservation}/{numClient}/{idDriver}", name="sendMessageChauffeur")
      */
@@ -96,6 +107,5 @@ class DefaultController extends Controller
         $content = $response->toArray();
         return new Response($content["display_name"]);
     }
-
 
 }

@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Vresh\TwilioBundle\VreshTwilioBundle(),
             new blackknight467\StarRatingBundle\StarRatingBundle(),
             new SBC\NotificationsBundle\NotificationsBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

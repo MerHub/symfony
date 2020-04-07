@@ -4,6 +4,7 @@ namespace AvisBundle\Controller;
 
 use AppBundle\Entity\chauffeur;
 use AppBundle\Entity\Notification;
+use AppBundle\Entity\user;
 use AvisBundle\Entity\Avis;
 use ChauffeurBundle\ChauffeurBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,8 +33,8 @@ class AvisController extends Controller
             $em->persist($avi);
 
             $titre = "Nouvel avis";
-            $body = $avi->getMsg()." &nbsp;&nbsp; Note = ".$avi->getNote();
-            $operation="add";
+            $body = $avi->getMsg()." . Note = ".$avi->getNote();
+            $operation="notif";
             $notification = new Notification();
             $notification
                 ->setTitle($titre)
@@ -41,8 +42,8 @@ class AvisController extends Controller
                 ->setIdSend($avi->getIdCclient()->getIdUser())
                 ->setIdReceive($avi->getIdChauffeur()->getIdUser())
                 ->setIcon($operation)
-                ->setRoute('comment_show')
-                ->setParameters([])
+                ->setRoute('avis_show')
+                ->setParameters(['idReceive'=>$avi->getIdChauffeur()->getIdUser()->getId()])
             ;
             $pusher = $this->get('mrad.pusher.notificaitons');
             $pusher->trigger($notification);
@@ -55,10 +56,18 @@ class AvisController extends Controller
 
 
         $avis = $em->getRepository('AvisBundle:Avis')->ListeAvis($idChauffeur);
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator= $this->get("knp_paginator");
+        $result= $paginator->paginate(
+            $avis,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 2));
         $chauffeur = $em->getRepository(chauffeur::class)->find($idChauffeur);
 
         return $this->render('@Avis/avis/index.html.twig', array(
-            'avis' => $avis,
+            'avis' => $result,
             'chauffeur' => $chauffeur,
             'form' => $form->createView(),
             'idClient'=>$idClient,
@@ -78,7 +87,7 @@ class AvisController extends Controller
      * Finds and displays a avi entity.
      *
      */
-    public function showAction(Avis $avi)
+    public function showAction()
     {
         // j'ai mélangé avec index
     }
@@ -96,7 +105,7 @@ class AvisController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('avis_index',[
-                'idChauffeur'=>$avi->getIdChauffeur()
+                'idChauffeur'=>$avi->getIdChauffeur()->getIdUser()->getId()
             ]);
         }
         $chauffeur=$avi->getIdChauffeur();
@@ -120,7 +129,7 @@ class AvisController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('avis_index',[
-            'idChauffeur'=>$avi->getIdChauffeur()
+            'idChauffeur'=>$avi->getIdChauffeur()->getIdUser()->getId()
         ]);
     }
 

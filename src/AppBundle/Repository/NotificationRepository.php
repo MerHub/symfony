@@ -2,6 +2,9 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Notification;
+use AppBundle\Entity\user;
+
 /**
  * NotificationRepository
  *
@@ -10,4 +13,15 @@ namespace AppBundle\Repository;
  */
 class NotificationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function AllMark($id){
+        $em=$this->getEntityManager();
+        $queryBuilder = $em->createQueryBuilder();
+        $queryBuilder
+            ->update(Notification::class, 'u')
+            ->set('u.seen', 1)
+            ->where('u.idReceive = ?1')
+            ->setParameter(1, $id)
+            ->getQuery()
+            ->execute();
+    }
 }
