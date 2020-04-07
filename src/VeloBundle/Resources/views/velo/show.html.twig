@@ -40,7 +40,26 @@
                             <tr>
 
                                 <td>{{ velo.id }}</td>
-                                <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ velo.photo) }}')">
+                                <td>
+                                    <a href="#ultraModal-{{velo.id}}" class="btn btn-warning btn-sm" data-toggle="modal">Show picture</a>
+                                    <div class="modal fade" id="ultraModal-{{velo.id}}" tabindex="-1" role="dialog" aria-labelledby="ultraModal-Label" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+
+                                                    <h4 class="modal-title">Picture</h4><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                </div>
+                                                <div class="modal-body" style="padding:2px;">
+
+                                                    <center><img src="{{ asset('font/uploads/' ~ velo.photo) }}" alt="vide" width="300px"></center>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>{{ velo.type }}</td>
                                 <td>{{ velo.adresse }}</td>
