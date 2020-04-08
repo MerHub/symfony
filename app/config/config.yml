@@ -101,7 +101,7 @@ vresh_twilio:
     #(Required) Your Account SID from www.twilio.com/user/account
     sid: 'AC28ba4ff1b617bcf887aae1b86dc8c8d7'
     #(Required) Your Auth Token from www.twilio.com/user/account
-    authToken: 'a97a269aa861377b2b48e531b92f3868'
+    authToken: '8ae60366004f0daaae6f443ab87500e9'
 
 notifications:
     app_id:     976633
