@@ -39,6 +39,8 @@ framework:
     assets: ~
     php_errors:
         log: true
+    templating:
+        engines: ['twig']
 
 # Twig Configuration
 twig:
@@ -100,3 +102,23 @@ vresh_twilio:
     sid: 'AC28ba4ff1b617bcf887aae1b86dc8c8d7'
     #(Required) Your Auth Token from www.twilio.com/user/account
     authToken: 'a97a269aa861377b2b48e531b92f3868'
+
+notifications:
+    app_id:     976633
+    app_key:    e182c43dbd36887c5e79
+    app_secret: a8de544e405ae5d08ee2
+    cluster:    eu
+
+knp_paginator:
+    page_range: 5                       # number of links showed in the pagination menu (e.g: you have 10 pages, a page_range of 3, on the 5th page you'll see links to page 4, 5, 6)
+    default_options:
+        page_name: page                 # page query parameter name
+        sort_field_name: sort           # sort field query parameter name
+        sort_direction_name: direction  # sort direction query parameter name
+        distinct: true                  # ensure distinct results, useful when ORM queries are using GROUP BY statements
+        filter_field_name: filterField  # filter field query parameter name
+        filter_value_name: filterValue  # filter value query parameter name
+    template:
+        pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig'     # sliding pagination controls template
+        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
+        filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template

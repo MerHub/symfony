@@ -1,3 +1,5 @@
-avis_homepage:
-    path:     /
-    defaults: { _controller: AvisBundle:Default:index }
+avis_avis:
+    resource: "@AvisBundle/Resources/config/routing/avis.yml"
+    prefix:   /
+
+
