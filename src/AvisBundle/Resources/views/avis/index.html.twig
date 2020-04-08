@@ -65,7 +65,7 @@
                                 <div class="enter_post col-12">
                                     {{ form_start(form) }}
                                     <input type="submit" value="Post" class="btn  btn-primary" style="margin-bottom: 6px;"/>
-                                    {{ form_widget(form.idChauffeur,{'value': chauffeur.idUser ~ ""}) }}
+                                    {{ form_widget(form.idChauffeur,{'value': chauffeur.idUser.id ~ ""}) }}
                                     {{ form_widget(form.idCclient,{'value': idClient ~ ""}) }}
                                     <div class="form-group">
                                         <div class="controls">
@@ -76,6 +76,11 @@
                                     {{ form_end(form) }}
                                 </div>
 
+                                <center>
+                                    <div class="navigation">
+                                        {{ knp_pagination_render(avis) }}
+                                    </div>
+                                </center>
                                 {% for avi in avis %}
                                     <div class="uprofile_wall_posts col-12" style="margin-left: 8%;">
                                         <div class="row">
@@ -121,4 +126,10 @@
 
 {% block cssScript %}
     <script src="{{ asset('back/rating.js') }}"></script>
+    <script>
+        $(function(){
+            $(".pagination li a,.pagination li.active span,.pagination li.disabled span").css({"padding":"8px"})
+            $(".pagination").css({"margin-left":"37%","margin-bottom":"2.3%"})
+        })
+    </script>
 {% endblock %}

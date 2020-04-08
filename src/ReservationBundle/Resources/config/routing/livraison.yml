@@ -21,4 +21,3 @@ livraison_edit:
 livraison_delete:
     path:     /{id}/delete
     defaults: { _controller: "ReservationBundle:Livraison:delete" }
-    methods:  DELETE

@@ -3,6 +3,8 @@
 namespace AvisBundle\Controller;
 
 use AppBundle\Entity\chauffeur;
+use AppBundle\Entity\Notification;
+use AppBundle\Entity\user;
 use AvisBundle\Entity\Avis;
 use ChauffeurBundle\ChauffeurBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,19 +31,46 @@ class AvisController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($avi);
-            $em->flush();
+
+            // notifi
+            $titre = "Nouvel avis";
+            $body = $avi->getMsg()." . Note = ".$avi->getNote();
+            $operation="notif";
+            $notification = new Notification();
+            $notification
+                ->setTitle($titre)
+                ->setDescription($body)
+                ->setIdSend($avi->getIdCclient()->getIdUser())
+                ->setIdReceive($avi->getIdChauffeur()->getIdUser())
+                ->setIcon($operation)
+                ->setRoute('avis_show')
+                ->setParameters(['idReceive'=>$avi->getIdChauffeur()->getIdUser()->getId()])
+            ;
+            $pusher = $this->get('mrad.pusher.notificaitons');
+            $pusher->trigger($notification);
+            $em->persist($notification);
+                $em->flush();
+
 
             return $this->redirectToRoute('avis_index',[
-                'idChauffeur'=>$avi->getIdChauffeur()
+                'idChauffeur'=>$avi->getIdChauffeur()->getIdUser()->getId()
             ]);
         }
 
 
         $avis = $em->getRepository('AvisBundle:Avis')->ListeAvis($idChauffeur);
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator= $this->get("knp_paginator");
+        $result= $paginator->paginate(
+            $avis,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 2));
         $chauffeur = $em->getRepository(chauffeur::class)->find($idChauffeur);
 
         return $this->render('@Avis/avis/index.html.twig', array(
-            'avis' => $avis,
+            'avis' => $result,
             'chauffeur' => $chauffeur,
             'form' => $form->createView(),
             'idClient'=>$idClient,
@@ -61,7 +90,7 @@ class AvisController extends Controller
      * Finds and displays a avi entity.
      *
      */
-    public function showAction(Avis $avi)
+    public function showAction()
     {
         // j'ai mélangé avec index
     }
@@ -79,7 +108,7 @@ class AvisController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('avis_index',[
-                'idChauffeur'=>$avi->getIdChauffeur()
+                'idChauffeur'=>$avi->getIdChauffeur()->getIdUser()->getId()
             ]);
         }
         $chauffeur=$avi->getIdChauffeur();
@@ -103,7 +132,7 @@ class AvisController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('avis_index',[
-            'idChauffeur'=>$avi->getIdChauffeur()
+            'idChauffeur'=>$avi->getIdChauffeur()->getIdUser()->getId()
         ]);
     }
 

@@ -1,5 +1,5 @@
 avis_show:
-    path:     /{idAvis}/show
+    path:     /show
     defaults: { _controller: "AvisBundle:Avis:show" }
     methods:  GET
 
