@@ -81,4 +81,13 @@ class DefaultController extends Controller
             "form"=>$form->createView()
         ]);
     }
+
+    public function ShowAction()
+    {
+        $liste=$this->getDoctrine()->getRepository(chauffeur::class)->findAll();
+        return $this->render('@Chauffeur/Default/ShowAvisReclamation.html.twig',[
+            "listeChauffeur"=>$liste
+        ]);
+    }
+
 }
