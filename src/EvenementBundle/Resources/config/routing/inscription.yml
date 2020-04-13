@@ -9,8 +9,13 @@ inscription_show:
     methods:  GET
 
 inscription_new:
-    path:     /new
+    path:     /search
     defaults: { _controller: "EvenementBundle:Inscription:new" }
+    methods:  [GET]
+
+searchi:
+    path:     /new
+    defaults: { _controller: "EvenementBundle:Inscription:search" }
     methods:  [GET, POST]
 
 inscription_edit:

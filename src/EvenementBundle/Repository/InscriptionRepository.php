@@ -9,5 +9,10 @@ namespace EvenementBundle\Repository;
  * repository methods below.
  */
 class InscriptionRepository extends \Doctrine\ORM\EntityRepository
-{
+{    function SearchiOffre($libelle){
+    $query=$this->getEntityManager()->createQuery("select e from EvenementBundle:Inscription e where e.id LIKE '%$libelle%'");
+
+    return $query->getResult();
+
+}
 }

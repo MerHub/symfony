@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block body %}
 
@@ -45,7 +45,7 @@
                                 $.each(arr, function(id, value) {
                                     if (key === 'offre') {
                                         if (id !== 'error') {
-                                            console.log(value[1]);
+                                            console.log(value[3]);
                                             entitySelector.append('<li><b>'+value[3]+'</b><a href="'+id+'/show">'+'<img src="../../font/uploads/'+value[6]+'" style="width: 100px; height: 100px"/>'+'</a></li>');
                                         } else {
                                             entitySelector.append('<li class="errorLi">'+value+'</li>');
@@ -106,7 +106,7 @@
                         <tr>
 
                             <td>{{ form_widget(form) }}</td>
-                            <td> <input type="submit" value="Create" /></td>
+                            <td> <input class="btn btn-primary"  type="submit" value="add" /></td>
                         </tr>
                         {{ form_end(form) }}
                     </table>

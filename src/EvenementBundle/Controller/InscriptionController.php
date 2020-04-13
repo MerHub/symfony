@@ -2,9 +2,12 @@
 
 namespace EvenementBundle\Controller;
 
+use AppBundle\Entity\user;
 use EvenementBundle\Entity\Inscription;
+use http\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Inscription controller.
@@ -34,18 +37,23 @@ class InscriptionController extends Controller
     public function newAction(Request $request)
     {
         $inscription = new Inscription();
+        $user=$this->getUser();
+        $id=$user->getId();
+        $Puser=$this->getDoctrine()->getRepository(\AppBundle\Entity\Client::class)->find($id);
         $form = $this->createForm('EvenementBundle\Form\InscriptionType', $inscription);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $inscription->setIdClient($Puser);
             $em = $this->getDoctrine()->getManager();
             $em->persist($inscription);
             $em->flush();
 
-            return $this->redirectToRoute('inscription_show', array('id' => $inscription->getId()));
+            return $this->redirectToRoute('inscription_new');
         }
 
         return $this->render('@Evenement/inscription/new.html.twig', array(
+            'user'=>$Puser,
             'inscription' => $inscription,
             'form' => $form->createView(),
         ));
@@ -59,7 +67,7 @@ class InscriptionController extends Controller
     {
         $deleteForm = $this->createDeleteForm($inscription);
 
-        return $this->render('inscription/show.html.twig', array(
+        return $this->render('@Evenement/inscription/show.html.twig', array(
             'inscription' => $inscription,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -121,4 +129,35 @@ class InscriptionController extends Controller
             ->getForm()
         ;
     }
+
+
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $libelle = $request->get('qi');
+        $rec = $em->getRepository('EvenementBundle:Inscription')->SearchiOffre($libelle);
+
+        if (!$rec) {
+            $result['offre']['error'] = "There is not a registration for this name ";
+        } else {
+            $result['offre'] = $this->getRealEntities($rec);
+        }
+        return new Response(json_encode($result));
+    }
+
+    public function getRealEntities($rec)
+    {
+        foreach ($rec as $rec) {
+            $realEntities[$rec->getId()] = [$rec->getIdEvent()->getNom(),$rec->getIdClient()];
+
+        }
+        return $realEntities;
+    }
+
+
+
+
+
+
+
 }

@@ -3,6 +3,7 @@
 namespace EvenementBundle\Controller;
 
 use EvenementBundle\Entity\Event;
+use EvenementBundle\Entity\Inscription;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -23,6 +24,16 @@ class EventController extends Controller
         $events = $em->getRepository('EvenementBundle:Event')->findAll();
 
         return $this->render('@Evenement/event/index.html.twig', array(
+            'events' => $events,
+        ));
+    }
+    public function frontAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $events = $em->getRepository('EvenementBundle:Event')->findAll();
+
+        return $this->render('@Evenement/event/eventlistFront.html.twig', array(
             'events' => $events,
         ));
     }
@@ -65,6 +76,39 @@ class EventController extends Controller
         ));
     }
 
+
+
+    public function addAction(Event $id2)
+    {
+        if ($id2->getNbrPlace()!=0)
+        { $i = new Inscription();
+        $nbr=$id2->getNbrPlace();
+        $nbr--;
+        $id2->setNbrPlace($nbr);
+        $user=$this->getUser();
+        $id=$user->getId();
+        $i->setIdEvent($id2);
+
+        $Puser=$this->getDoctrine()->getRepository(\AppBundle\Entity\Client::class)->find($id);
+
+        $i->setIdClient($Puser);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($i);
+        $em->flush();
+            $this->addFlash(
+                'notice',
+                'Your changes were saved!'
+            );
+        return $this->redirectToRoute('event_front');
+
+    }
+    else{$this->addFlash('success', 'Article Created! Knowledge is power!');}
+    }
+
+    
+
+
     /**
      * Displays a form to edit an existing event entity.
      *
@@ -78,7 +122,7 @@ class EventController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('event_edit', array('idEvent' => $event->getIdevent()));
+            return $this->redirectToRoute('event_index', array('idEvent' => $event->getIdevent()));
         }
 
         return $this->render('@Evenement/event/edit.html.twig', array(
