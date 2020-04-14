@@ -46,7 +46,7 @@
                                         if (key === 'velo') {
                                             if (id !== 'error') {
                                                 console.log(value[1]);
-                                                entitySelector.append('<li><b>'+value[0]+'</b><a href="'+id+'/show">'+'<img src="/font/uploads/'+value[3]+'" style="width: 100px; height: 100px"/>'+'</a></li>');
+                                                entitySelector.append('<li><b>'+value[0]+'</b><a href="'+id+'/show">'+'<img src="../../font/uploads/'+value[3]+'" style="width: 100px; height: 100px"/>'+'</a></li>');
                                             } else {
                                                 entitySelector.append('<li class="errorLi">'+value+'</li>');
                                             }
@@ -113,7 +113,7 @@
 
                             <td>{{ form_widget(form) }}</td>
 
-                           <td> <input type="submit" value="Create" /></td>
+                           <td> <input class="btn btn-accent btn-md" type="submit" value="Create" /></td>
                         </tr>
                         {{ form_end(form) }}
                     </table>

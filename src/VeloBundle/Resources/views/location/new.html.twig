@@ -35,9 +35,12 @@
                             <td hidden>{{ form_label(form.idClient) }}</td>
                             <td hidden>{{ form_widget(form.idClient) }}</td>
                         </tr>
-                        <tr><td hidden>{{ form_label(form.idVelo) }}</td><td hidden>{{ form_widget(form.idVelo) }}</td></tr>
-                            <td> <input type="submit" value="Create" id="cr"/></td>
-                        <td><input type="button" id="prix" value="calculate"></td>
+                        <tr><td >{{ form_label(form.idVelo) }}</td><td >{{ form_widget(form.idVelo) }}</td></tr>
+
+                        <td> <input class="btn btn-accent btn-md" type="submit" value="Create" id="cr"/></td>
+
+
+                        <td><input class="btn btn-accent btn-md" type="button" id="prix" value="calculate"></td>
                         </tr>
                         {{ form_end(form) }}
                     </table>

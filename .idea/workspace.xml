@@ -2,39 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f85daa7-c189-48ac-bbb2-6ffa9b6026d4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/basevelo.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/templateFront/basevelo.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/rent.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/font/uploads/2ecfdb3a2ff7447542bc76b93b9d969e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/font/uploads/5e9b7b4a1890af357ecee4a902063375.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/font/uploads/981e74ec0d80d3df7eb87d55fb1fe220.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/font/uploads/b374de8cadd1dd22aaca4ad344816d0d.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PiDevWeb3A.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PiDevWeb3A.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/commandlinetools/Composer_3_24_20__10_07_PM_c.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_29_03_2020_13_03_s.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_29_03_2020_13_03_s.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_3_24_20__10_07_PM_s.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/baseDesign.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/baseDesign.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/basevelo.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/basevelo.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VeloBundle/Controller/LocationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Controller/LocationController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VeloBundle/Entity/Location.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Entity/Location.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Form/LocationType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Form/LocationType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Repository/LocationRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Repository/LocationRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Repository/VeloRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Repository/VeloRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/config/routing.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/config/routing/location.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/config/routing/location.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +174,7 @@
       <workItem from="1586281616650" duration="400000" />
       <workItem from="1586282028942" duration="2585000" />
       <workItem from="1586378647133" duration="32000" />
-      <workItem from="1586378844716" duration="37408000" />
+      <workItem from="1586378844716" duration="43047000" />
     </task>
     <servers />
   </component>

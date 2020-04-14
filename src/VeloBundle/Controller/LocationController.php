@@ -72,14 +72,20 @@ class LocationController extends Controller
         $location = new Location();
         $location->setDateD(new \DateTime('now'));
         $location->setDateF(new \DateTime('now'));
+
+
+
+
         $form = $this->createForm('VeloBundle\Form\LocationType', $location);
         $form->handleRequest($request);
         $user=$this->getUser();
         $velo=$this->getDoctrine()->getRepository(Velo::class)->findAll();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
             $location->setIdClient($user);
+
             $em->persist($location);
             $em->flush();
 

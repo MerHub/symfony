@@ -3,6 +3,7 @@
 namespace VeloBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Location
@@ -39,7 +40,7 @@ class Location
      *
      * @ORM\Column(name="date_d", type="datetime")
      * @var string A "Y-m-d H:i:s" formatted value
-     * @Assert\LessThan("today")
+     * @Assert\GreaterThan("today")
      */
     private $dateD;
 
@@ -48,6 +49,7 @@ class Location
      *
      * @ORM\Column(name="date_f", type="datetime")
      * @var string A "Y-m-d H:i:s" formatted value
+     * @Assert\GreaterThan("today")
      */
     private $dateF;
 
