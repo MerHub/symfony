@@ -38,6 +38,8 @@ class Location
      * @var \DateTime
      *
      * @ORM\Column(name="date_d", type="datetime")
+     * @var string A "Y-m-d H:i:s" formatted value
+     * @Assert\LessThan("today")
      */
     private $dateD;
 
@@ -45,6 +47,7 @@ class Location
      * @var \DateTime
      *
      * @ORM\Column(name="date_f", type="datetime")
+     * @var string A "Y-m-d H:i:s" formatted value
      */
     private $dateF;
 

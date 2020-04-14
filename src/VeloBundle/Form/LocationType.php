@@ -4,6 +4,7 @@ namespace VeloBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use VeloBundle\Entity\Velo;
@@ -15,7 +16,7 @@ class LocationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('dateD')->add('dateF')->add('prix')->add('idClient')->add('idVelo',EntityType::class,
+        $builder->add('dateD',DateTimeType::class)->add('dateF',DateTimeType::class)->add('prix')->add('idClient')->add('idVelo',EntityType::class,
             [
                 'class'=>Velo::class,
                 'choice_label'=>'id'

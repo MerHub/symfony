@@ -15,4 +15,8 @@ class VeloRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
 
     }
+function prix($id){
+    $query=$this->getEntityManager()->createQuery("select e.prix from VeloBundle:Velo e where e.id = '$id'");
+    return $query->getResult();
+}
 }

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'basevelo.html.twig' %}
 
 {% block body %}
 <div class="col-xl-12">
@@ -17,30 +17,22 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                <th>Idlocation</th>
-                <th>Dated</th>
-                <th>Datef</th>
-                <th>Prix</th>
-                <th>Actions</th>
+
+                <th>Date debut</th>
+                <th>end Date</th>
+                <th>Price</th>
+
             </tr>
         </thead>
         <tbody>
         {% for location in locations %}
             <tr>
-                <td><a href="{{ path('location_show', { 'idLocation': location.idLocation }) }}">{{ location.idLocation }}</a></td>
+                <td hidden><a href="{{ path('location_show', { 'idLocation': location.idLocation }) }}">{{ location.idLocation }}</a></td>
                 <td>{% if location.dateD %}{{ location.dateD|date('Y-m-d') }}{% endif %}</td>
                 <td>{% if location.dateF %}{{ location.dateF|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ location.prix }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('location_show', { 'idLocation': location.idLocation }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('location_edit', { 'idLocation': location.idLocation }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+
+
             </tr>
         {% endfor %}
         </tbody>
@@ -54,6 +46,9 @@
     <ul>
         <li>
             <a href="{{ path('location_new') }}">Create a new location</a>
+        </li>
+        <li>
+            <a href="{{ path('download') }}">download</a>
         </li>
     </ul>
 {% endblock %}

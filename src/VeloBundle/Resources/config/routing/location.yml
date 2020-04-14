@@ -22,3 +22,10 @@ location_delete:
     path:     /{idLocation}/delete
     defaults: { _controller: "VeloBundle:Location:delete" }
     methods:  DELETE
+prix:
+    path:     /prix
+    defaults: { _controller: "VeloBundle:Location:prix" }
+
+download:
+    path:     /download
+    defaults: { _controller: "VeloBundle:Location:download" }

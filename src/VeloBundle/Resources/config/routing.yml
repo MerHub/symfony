@@ -6,3 +6,6 @@ velo_homepage:
     resource: "@VeloBundle/Resources/config/routing/velo.yml"
     prefix:   /
 
+prix:
+    path:     /prix
+    defaults: { _controller: "VeloBundle:Location:prix" }
