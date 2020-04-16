@@ -4,6 +4,7 @@ namespace OffreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Offre
  *
@@ -26,6 +27,7 @@ class Offre
      * @var \DateTime
      *
      * @ORM\Column(name="date_d", type="datetime")
+     * @Assert\GreaterThan("today")
      */
     private $dateD;
 
@@ -33,6 +35,7 @@ class Offre
      * @var \DateTime
      *
      * @ORM\Column(name="date_f", type="datetime")
+     * @Assert\GreaterThan("today")
      */
     private $dateF;
 

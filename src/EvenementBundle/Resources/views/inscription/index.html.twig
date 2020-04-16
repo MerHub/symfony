@@ -43,9 +43,10 @@
                                     $.each(arr, function(id, value) {
                                         if (key === 'offre') {
                                             if (id !== 'error') {
-                                                console.log(value[0]);
+                                                console.log(value);
                                                 console.log(window.navigator);
-                                                entitySelector.append('<li><tr><b>'+value[0]+'</b></tr><tr>'+value[1]+''+'</tr></li>');
+                                                entitySelector.append('   <div class="content-body">    <div class="row">\n' +
+                                                    '                <div class="col-12"> <table class="table"><tr><b> Event : </b><th></th>'+value.nom+'</tr><tr><b>  Client : </b>'+value.username+''+'</tr></table> </div></div></div>');
                                             } else {
                                                 entitySelector.append('<li class="errorLi">'+value+'</li>');
                                             }

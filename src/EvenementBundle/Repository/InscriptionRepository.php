@@ -10,7 +10,11 @@ namespace EvenementBundle\Repository;
  */
 class InscriptionRepository extends \Doctrine\ORM\EntityRepository
 {    function SearchiOffre($libelle){
-    $query=$this->getEntityManager()->createQuery("select e from EvenementBundle:Inscription e where e.id LIKE '%$libelle%'");
+    $query=$this->getEntityManager()->createQuery("select i.id, e.idEvent, e.nom, u.id, u.username FROM EvenementBundle\Entity\Inscription i, EvenementBundle\Entity\Event e , AppBundle\Entity\User u
+                                                        WHERE i.idEvent=e.idEvent and i.idClient=u.id and e.nom LIKE '%$libelle%'"
+
+
+    );
 
     return $query->getResult();
 

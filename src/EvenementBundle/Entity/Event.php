@@ -3,6 +3,7 @@
 namespace EvenementBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Event
@@ -52,6 +53,7 @@ class Event
      * @var \DateTime
      *
      * @ORM\Column(name="date_allee", type="datetime")
+     * @Assert\GreaterThan("today")
      */
     private $dateAllee;
 
@@ -59,6 +61,7 @@ class Event
      * @var \DateTime
      *
      * @ORM\Column(name="date_retour", type="datetime")
+     * @Assert\GreaterThan("today")
      */
     private $dateRetour;
 
@@ -246,6 +249,7 @@ class Event
      * Get dateAllee
      *
      * @return \DateTime
+     *
      */
     public function getDateAllee()
     {

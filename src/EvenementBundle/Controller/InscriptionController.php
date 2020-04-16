@@ -138,18 +138,17 @@ class InscriptionController extends Controller
         $rec = $em->getRepository('EvenementBundle:Inscription')->SearchiOffre($libelle);
 
         if (!$rec) {
-            $result['offre']['error'] = "There is not a registration for this name ";
+            $result['offre']['error'] = "There is not an event for this name ";
         } else {
-            $result['offre'] = $this->getRealEntities($rec);
+            $result['offre'] = $rec;
         }
         return new Response(json_encode($result));
     }
-
-    public function getRealEntities($rec)
+//$this->getRealEntities($rec);
+    public function getRealEntities( $rec)
     {
-        foreach ($rec as $rec) {
-            $realEntities[$rec->getId()] = [$rec->getIdEvent()->getNom(),$rec->getIdClient()];
-
+        foreach ($rec as $r) {
+            $realEntities[$r->getId()]=[$r->getIdEvent(),$r->getIdEvent()->getNom(),$r->getIdClient()];
         }
         return $realEntities;
     }

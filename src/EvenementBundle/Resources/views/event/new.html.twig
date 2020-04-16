@@ -12,6 +12,33 @@
 
                 </div>
             </header>
+            <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDqkMjY2kfjUW41cnfsrrCxCN1Wi_S1x5o" type="text/javascript"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+            <script>
+                $(document).ready(function () {
+
+                    $('#submit').click(function () {
+                        var date = $('#utilisateurs_utilisateursbundle_reservation_date').val();
+                        var d1 = new Date();
+                        var d2 = new Date(date);
+
+                    else if (d1>d2 ) {
+
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Vous devez choisir une date et heure supérieur au date actuel : '+d1,
+                                showConfirmButton: false,
+                                timer: 4000
+                            })
+                            return false;
+                        }
+                        else{
+                            return true;
+                        }
+                    });
+                });
+            </script>
+    
             <div class="content-body">    <div class="row">
                     <div class="col-12">
 
