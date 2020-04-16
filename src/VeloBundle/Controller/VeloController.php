@@ -2,6 +2,7 @@
 
 namespace VeloBundle\Controller;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use VeloBundle\Entity\Velo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -82,6 +83,7 @@ class VeloController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
            $em= $this->getDoctrine()->getManager();
+            /** @var UploadedFile $file */
             $file=$velo->getPhoto();
             $fileName=md5(uniqid()).'.'.$file->guessExtension();
             $file->move($this->getParameter('upload_directory'),$fileName);
@@ -152,5 +154,18 @@ class VeloController extends Controller
 
         }
         return $realEntities;
+    }
+    public function excelAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $velos = $em->getRepository('VeloBundle:Velo')->findAll();
+        $writer = $this->container->get('egyg33k.csv.writer');
+        $csv = $writer::createFromFileObject(new \SplTempFileObject());
+        $csv->insertOne(['type', 'adresse', 'qte','prix']);
+        foreach ($velos as $velo){
+            $csv->insertOne([$velo->getType(),$velo->getAdresse(),$velo->getQte(),$velo->getPrix()]);
+        }
+        $csv->output('velo.csv');
+        die('excel');
     }
 }

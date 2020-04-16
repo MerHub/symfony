@@ -8,7 +8,7 @@
 
 </ul>
 <header class="panel_header">
-    <h2 class="title float-left">Add A bicycle</h2>
+    <h2 class="title float-left">Edit A bicycle</h2>
     <div class="actions panel_actions float-right">
         <a class="box_toggle fa fa-chevron-down"></a>
         <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
@@ -25,23 +25,23 @@
                 <table class="table table-striped">
     {{ form_start(edit_form) }}
                     <tr>
-                        <td>{{ form_label(edit_form.type) }}</td>
-                        <td>{{ form_widget(edit_form.type) }}</td>
+                        <td>{{ form_label(edit_form.type,'Type') }}</td>
+                        <td>{{ form_widget(edit_form.type, { 'attr': {'class': 'form-control'}}) }}</td>
                     </tr>
                     <tr>
-                        <td>{{ form_label(edit_form.adresse) }}</td>
-                        <td>{{ form_widget(edit_form.adresse) }} <div class="btn btn-primary btn-sm afficherMap"><i class="fa fa-map-marker" ></i></div></td>
+                        <td>{{ form_label(edit_form.adresse,'Adresse') }}</td>
+                        <td>{{ form_widget(edit_form.adresse, { 'attr': {'class': 'form-control'}}) }} <div class="btn btn-primary btn-sm afficherMap"><i class="fa fa-map-marker" ></i></div></td>
                     </tr>
                     <tr>
-                        <td>{{ form_label(edit_form.qte) }}</td>
-                        <td>{{ form_widget(edit_form.qte) }}</td>
+                        <td>{{ form_label(edit_form.qte,'Quantity') }}</td>
+                        <td>{{ form_widget(edit_form.qte, { 'attr': {'class': 'form-control'}}) }}</td>
                        <td>
                         <span id="misscin" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Quantity is invalide</li></ul> </span>
                        </td>
                     </tr>
                     <tr>
-                        <td>{{ form_label(edit_form.prix) }}</td>
-                        <td>{{ form_widget(edit_form.prix) }}</td>
+                        <td>{{ form_label(edit_form.prix,'Price') }}</td>
+                        <td>{{ form_widget(edit_form.prix, { 'attr': {'class': 'form-control'}}) }}</td>
                     </tr>
                     <tr style="display: none">
                         <td>{{ form_label(edit_form.latitude) }}</td>
@@ -52,8 +52,8 @@
                         <td>{{ form_widget(edit_form.longitude) }}</td>
                     </tr>
                     <tr>
-                        <td>{{ form_label(edit_form.photo) }}</td>
-                        <td>{{ form_widget(edit_form.photo) }}</td>
+                        <td>{{ form_label(edit_form.photo,'Pick a photo') }}</td>
+                        <td>{{ form_widget(edit_form.photo, { 'attr': {'class': 'form-control'}}) }}</td>
                     </tr>
                     <tr>
 

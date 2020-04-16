@@ -26,3 +26,7 @@ velo_delete:
 search:
     path:     /search
     defaults: { _controller: "VeloBundle:Velo:search" }
+
+excel:
+    path:     /excel
+    defaults: { _controller: "VeloBundle:Velo:excel" }

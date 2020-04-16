@@ -61,7 +61,7 @@
         });
     </script>
     <header class="panel_header">
-        <h2 class="title float-left">Basic Elements</h2>
+        <h2 class="title float-left">Add a bic</h2>
         <div class="actions panel_actions float-right">
             <a class="box_toggle fa fa-chevron-down"></a>
             <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
@@ -76,23 +76,23 @@
                     <table class="table table-striped">
                         {{ form_start(form) }}
                         <tr>
-                            <td>{{ form_label(form.type) }}</td>
-                            <td>{{ form_widget(form.type) }}</td>
+                            <td>{{ form_label(form.type,'Type') }}</td>
+                            <td>{{ form_widget(form.type,{'attr':{'class':'form-control'}}) }}</td>
                         </tr>
                         <tr>
-                            <td>{{ form_label(form.adresse) }}</td>
-                            <td>{{ form_widget(form.adresse) }} <div class="btn btn-primary btn-sm afficherMap"><i class="fa fa-map-marker" ></i></div></td>
+                            <td>{{ form_label(form.adresse,'Adresse') }}</td>
+                            <td>{{ form_widget(form.adresse,{'attr':{'class':'form-control'}}) }} <div class="btn btn-primary btn-sm afficherMap"><i class="fa fa-map-marker" ></i></div></td>
                         </tr>
                         <tr>
-                            <td>{{ form_label(form.qte) }}</td>
-                            <td>{{ form_widget(form.qte) }}</td>
+                            <td>{{ form_label(form.qte,'Quantity') }}</td>
+                            <td>{{ form_widget(form.qte,{'attr':{'class':'form-control'}}) }}</td>
                             <td>
                                 <span id="misscin" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Quantity is invalide</li></ul> </span>
                             </td>
                         </tr>
                         <tr>
-                            <td>{{ form_label(form.prix) }}</td>
-                            <td>{{ form_widget(form.prix) }}</td>
+                            <td>{{ form_label(form.prix,'Price') }}</td>
+                            <td>{{ form_widget(form.prix,{'attr':{'class':'form-control'}}) }}</td>
                             <td>
                                 <span id="missin" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Price is invalide</li></ul> </span>
                             </td>
@@ -106,14 +106,14 @@
                             <td style="display: none">{{ form_widget(form.longitude) }}</td>
                         </tr>
                         <tr>
-                            <td>{{ form_label(form.photo) }}</td>
-                            <td>{{ form_widget(form.photo) }}</td>
+                            <td>{{ form_label(form.photo,'Pick a photo') }}</td>
+                            <td>{{ form_widget(form.photo,{'attr':{'class':'form-control'}}) }}</td>
                         </tr>
                         <tr>
 
                             <td>{{ form_widget(form) }}</td>
 
-                           <td> <input class="btn btn-accent btn-md" type="submit" value="Create" /></td>
+                           <td> <input class="btn btn-accent btn-md"  type="submit" value="Create" /></td>
                         </tr>
                         {{ form_end(form) }}
                     </table>
