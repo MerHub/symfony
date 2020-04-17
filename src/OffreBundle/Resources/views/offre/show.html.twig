@@ -1,0 +1,89 @@
+{% extends 'base2.html.twig' %}
+
+
+{% block body %}
+    <div class="col-xl-12">
+        <section class="box ">
+            <header class="panel_header">
+                <h2 class="title float-left">Offer  <td>{{ offre.nom }}</td>  </h2>
+
+                <div class="actions panel_actions float-right">
+                    <a class="box_toggle fa fa-chevron-down"></a>
+
+                </div>
+            </header>
+            <div class="content-body">    <div class="row">
+                    <div class="col-12">
+
+                        <table class="table">
+
+                                <thead>
+                                <tr>
+
+
+
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Start date</th>
+                                    <th>End date</th>
+
+                                    <th>Offer reduction</th>
+                                    <th>Promo code</th>
+                                    <th>Img</th>
+                                    <th> </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+
+
+                                    <td>{{ offre.nom }}</td>
+
+
+
+                                    <td>{{ offre.type }}</td>
+
+
+                                    <td>{% if offre.dateD %}{{ offre.dateD|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+                                    <td>{% if offre.dateF %}{{ offre.dateF|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+                                    <td>{{ offre.reductionOffre }}</td>
+
+                                    <td>{{ offre.codePromo }}</td>
+
+                                    <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ offre.img) }}')">
+                                    </td> <td>
+                                    <a class="fa fa-pencil"  href="{{ path('offre_edit', { 'idOffre': offre.idOffre }) }}"></a>
+                                    </td> <td>
+                                    {{ form_start(delete_form) }}
+
+                                    <input class="btn btn-primary" type="submit" value="Delete">
+                                    {{ form_end(delete_form) }}
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section></div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+

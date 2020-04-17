@@ -1,3 +1,7 @@
+evenement_inscription:
+    resource: "@EvenementBundle/Resources/config/routing/inscription.yml"
+    prefix:   /inscription
+
 evenement_homepage:
-    path:     /
-    defaults: { _controller: EvenementBundle:Default:index }
+    resource: "@EvenementBundle/Resources/config/routing/event.yml"
+    prefix:   /
