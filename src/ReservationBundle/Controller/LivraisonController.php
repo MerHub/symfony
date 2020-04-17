@@ -2,6 +2,7 @@
 
 namespace ReservationBundle\Controller;
 
+use AppBundle\Entity\Notification;
 use ReservationBundle\Entity\Livraison;
 use ReservationBundle\Entity\Reservation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -43,7 +44,26 @@ class LivraisonController extends Controller
         $livraison->setEtat(0);
         $em = $this->getDoctrine()->getManager();
         $em->persist($livraison);
+
+
+        $titre = "Nouvel livraison";
+        $body = "vous avez une livraison à effectuer Connectez vous";
+        $operation="add";
+        $notification = new Notification();
+        $notification
+            ->setTitle($titre)
+            ->setDescription($body)
+            ->setIdSend($livraison->getIdReservation()->getIdClient()->getIdUser())
+            ->setIdReceive($livraison->getIdReservation()->getIdChauffeur()->getIdUser())
+            ->setIcon($operation)
+            ->setRoute('avis_show')
+            ->setParameters(['idReceive'=>$livraison->getIdReservation()->getIdChauffeur()->getIdUser()->getId()])
+        ;
+        $pusher = $this->get('mrad.pusher.notificaitons');
+        $pusher->trigger($notification);
+        $em->persist($notification);
         $em->flush();
+
 
         return $this->redirectToRoute('livraison_index');
     }
