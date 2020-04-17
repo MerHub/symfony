@@ -3,7 +3,9 @@
 namespace ReservationBundle\Controller;
 
 use AppBundle\Entity\chauffeur;
+use AppBundle\Entity\Notification;
 use AppBundle\Entity\user;
+use EvenementBundle\Entity\Event;
 use ReservationBundle\Entity\Livraison;
 use ReservationBundle\Entity\Reservation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,9 +28,11 @@ class ReservationController extends Controller
         $id=$user->getId();
         $Puser=$this->getDoctrine()->getRepository(user::class)->find($id);
         $listDriver=$this->getDoctrine()->getRepository(user::class)->findBy(['type'=>'chauffeur']);
+        $listEvent=$this->getDoctrine()->getRepository(Event::class)->findAll();
         return $this->render('@Reservation/reservation/new.html.twig',[
             'user'=>$Puser,
-            'listChauffeur'=>$listDriver
+            'listChauffeur'=>$listDriver,
+            'listEvenement'=>$listEvent
         ]);
     }
 
@@ -41,7 +45,6 @@ class ReservationController extends Controller
         $user=$this->getUser();
         $id=$user->getId();
         $reservation = new Reservation();
-        $livraison = new Livraison();
         $reservationExite=$this->getDoctrine()->getRepository(Reservation::class)->findOneBy(['idClient'=>$id,'typeReservation'=>"reservationSimple"]);
         $Puser=$this->getDoctrine()->getRepository(user::class)->find($id);
         if($reservationExite==null){
@@ -52,7 +55,45 @@ class ReservationController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $reservation->setHeure(new \DateTime('now'));
                 $em->persist($reservation);
+
+
+                $titre = "Nouvel Reservation";
+                $body = "vous avez une reservation";
+                $operation="add";
+                $notification = new Notification();
+                $notification
+                    ->setTitle($titre)
+                    ->setDescription($body)
+                    ->setIdSend($user)
+                    ->setIdReceive($reservation->getIdChauffeur()->getIdUser())
+                    ->setIcon($operation)
+                    ->setRoute('avis_show')
+                    ->setParameters(['idReceive'=>$reservation->getIdChauffeur()->getIdUser()->getId()])
+                ;
+                $pusher = $this->get('mrad.pusher.notificaitons');
+                $pusher->trigger($notification);
+                $em->persist($notification);
+
+                $titre = "Nouvel Reservation";
+                $body = "vous avez une opération en cour ";
+                $operation="add";
+                $notification = new Notification();
+                $notification
+                    ->setTitle($titre)
+                    ->setDescription($body)
+                    ->setIdSend($reservation->getIdChauffeur()->getIdUser())
+                    ->setIdReceive($user)
+                    ->setIcon($operation)
+                    ->setRoute('avis_show')
+                    ->setParameters(['idReceive'=>$user->getId()])
+                ;
+                $pusher = $this->get('mrad.pusher.notificaitons');
+                $pusher->trigger($notification);
+                $em->persist($notification);
+
                 $em->flush();
+
+
                 if($reservation->getTypeReservation()=="livraison"){
                     $az=$this->getDoctrine()->getRepository(Reservation::class)->findBy(['typeReservation'=>"livraison"]);
                     $reservations=end($az);

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block cssPlus %}
+{% endblock %}
+{% block body %}
+    <section class="box " style="width: 80%;margin:auto;margin-top:2%;">
+        <header class="panel_header">
+            <h2 class="title float-left">Site Members</h2>
+            <div class="actions panel_actions float-right">
+                <a class="box_toggle fa fa-chevron-down"></a>
+                <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
+                <a class="box_close fa fa-times"></a>
+            </div>
+        </header>
+        <div class="content-body">    <div class="row">
+                <div class="col-12">
+
+                    <div class="row">
+                        {% for chauffeur in listeChauffeur %}
+                            {% if chauffeur.photo is not empty and chauffeur.idUser.nTel is not empty and chauffeur.nom is not empty  and chauffeur.prenom is not empty   and chauffeur.cin is not empty  and chauffeur.permis is not empty %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="team-member ">
+                                <div class="team-img">
+                                        <img class="img-fluid" src="{{ asset('font/imgProfileUser/'~chauffeur.photo) }}" style="width: 160px;height: 160px; border-radius: 100px;">
+                                </div>
+                                <div class="team-info">
+                                    <h3>{{chauffeur.nom}} {{chauffeur.prenom}}</h3>
+                                    <span>chauffeur</span> <br>
+                                    Email : {{chauffeur.idUser.email}} <br>
+                                    Cin : {{chauffeur.permis}}
+                                </div>
+                                <center>
+                                    <ul class="social-icons list-inline list-unstyled">
+                                        <li class="list-inline-item"><a href="{{ path("avis_index",{"idChauffeur":chauffeur.idUser.id}) }}" class="btn btn-sm btn-primary">Selectionner &nbsp;&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </center>
+                            </div>
+                        </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block cssScript %}
+{% endblock %}
