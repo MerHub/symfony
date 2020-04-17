@@ -20,16 +20,15 @@
                             {% if chauffeur.photo is not empty and chauffeur.idUser.nTel is not empty and chauffeur.nom is not empty  and chauffeur.prenom is not empty   and chauffeur.cin is not empty  and chauffeur.permis is not empty %}
                         <div class="col-md-6 col-lg-4">
                             <div class="team-member ">
-                                <div class="team-img" style="width: 344px;height: 258px;">
-                                        <img class="img-fluid" src="{{ asset('font/imgProfileUser/'~chauffeur.photo) }}" style="width: 200px;hei">
+                                <div class="team-img">
+                                        <img class="img-fluid" src="{{ asset('font/imgProfileUser/'~chauffeur.photo) }}" style="width: 160px;height: 160px; border-radius: 100px;">
                                 </div>
                                 <div class="team-info">
                                     <h3>{{chauffeur.nom}} {{chauffeur.prenom}}</h3>
-                                    <span>chauffeur</span>
+                                    <span>chauffeur</span> <br>
+                                    Email : {{chauffeur.idUser.email}} <br>
+                                    Cin : {{chauffeur.permis}}
                                 </div>
-                                <p>Email : {{chauffeur.idUser.email}}</p>
-                                <p>Cin : {{chauffeur.cin}}</p>
-                                <p>Cin : {{chauffeur.permis}}</p>
                                 <center>
                                     <ul class="social-icons list-inline list-unstyled">
                                         <li class="list-inline-item"><a href="{{ path("avis_index",{"idChauffeur":chauffeur.idUser.id}) }}" class="btn btn-sm btn-primary">Selectionner &nbsp;&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></a></li>

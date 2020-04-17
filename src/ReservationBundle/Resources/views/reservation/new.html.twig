@@ -137,22 +137,23 @@
         {% endif %}
     {% endfor %}
 
+        {% if listEvenement is defined %}
+            {% for event in listEvenement %}
 
-        {% for event in listEvenement %}
-
-            {% if event.latitude1 is not null and event.latitude1 is defined %}
-                L.marker([{{ event.latitude1 }},{{ event.longitude1 }}], {
-                icon: L.mapbox.marker.icon({
-                'marker-size': 'medium',
-                'marker-symbol': 'building',
-                'marker-color': '#4D6AC3'
-                })
-                }).addTo(map).bindPopup('Depart : {{ event.depart }} {{ event.dateAllee | date('Y-m-d H:i:sP') }} <br> Arrivée : {{ event.arrivee }} {{ event.dateRetour| date('Y-m-d H:i:sP') }} <br> nombre de place restant {{ event.nbrPlace }} <br> <center><a class="btn btn-primary" href="{{ path('inscription_add',{id2: event.idEvent}) }}">show </a></center>').on('click', function(e) {
+                {% if event.latitude1 is not null and event.latitude1 is defined %}
+                    L.marker([{{ event.latitude1 }},{{ event.longitude1 }}], {
+                    icon: L.mapbox.marker.icon({
+                    'marker-size': 'medium',
+                    'marker-symbol': 'building',
+                    'marker-color': '#4D6AC3'
+                    })
+                    }).addTo(map).bindPopup('Depart : {{ event.depart }} {{ event.dateAllee | date('Y-m-d H:i:sP') }} <br> Arrivée : {{ event.arrivee }} {{ event.dateRetour| date('Y-m-d H:i:sP') }} <br> nombre de place restant {{ event.nbrPlace }} <br> <center><a class="btn btn-primary" href="{{ path('inscription_add',{id2: event.idEvent}) }}">show </a></center>').on('click', function(e) {
 
 
-                });
-            {% endif %}
-        {% endfor %}
+                    });
+                {% endif %}
+            {% endfor %}
+         {% endif %}
 
     {% endif %}
 
