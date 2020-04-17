@@ -5,6 +5,7 @@ namespace ReservationBundle\Controller;
 use AppBundle\Entity\chauffeur;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\user;
+use EvenementBundle\Entity\Event;
 use ReservationBundle\Entity\Livraison;
 use ReservationBundle\Entity\Reservation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -27,9 +28,11 @@ class ReservationController extends Controller
         $id=$user->getId();
         $Puser=$this->getDoctrine()->getRepository(user::class)->find($id);
         $listDriver=$this->getDoctrine()->getRepository(user::class)->findBy(['type'=>'chauffeur']);
+        $listEvent=$this->getDoctrine()->getRepository(Event::class)->findAll();
         return $this->render('@Reservation/reservation/new.html.twig',[
             'user'=>$Puser,
-            'listChauffeur'=>$listDriver
+            'listChauffeur'=>$listDriver,
+            'listEvenement'=>$listEvent
         ]);
     }
 
