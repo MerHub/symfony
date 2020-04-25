@@ -16,7 +16,7 @@ class LocationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('dateD',DateTimeType::class)->add('dateF',DateTimeType::class)->add('prix')->add('idClient')->add('idVelo',EntityType::class,
+        $builder->add('dateD',DateTimeType::class)->add('dateF',DateTimeType::class)->add('prix')->add('idVelo',EntityType::class,
             [
                 'class'=>Velo::class,
                 'choice_label'=>'id'

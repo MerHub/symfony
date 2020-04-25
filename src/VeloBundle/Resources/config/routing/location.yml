@@ -9,7 +9,7 @@ location_show:
     methods:  GET
 
 location_new:
-    path:     /new
+    path:     /{idVelo}/new
     defaults: { _controller: "VeloBundle:Location:new" }
     methods:  [GET, POST]
 
