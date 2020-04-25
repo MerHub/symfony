@@ -2,6 +2,7 @@
 
 namespace VeloBundle\Controller;
 
+use AppBundle\Entity\user;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use VeloBundle\Entity\Location;
@@ -67,7 +68,7 @@ class LocationController extends Controller
      * Creates a new location entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request,$idVelo)
     {
         $location = new Location();
         $location->setDateD(new \DateTime('now'));
@@ -80,10 +81,12 @@ class LocationController extends Controller
         $form->handleRequest($request);
         $user=$this->getUser();
         $velo=$this->getDoctrine()->getRepository(Velo::class)->findAll();
+        $velo_s=$this->getDoctrine()->getRepository(Velo::class)->find($idVelo);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
+            $location->setIdVelo($velo_s);
             $location->setIdClient($user);
 
             $em->persist($location);
@@ -96,7 +99,8 @@ class LocationController extends Controller
             'location' => $location,
             'form' => $form->createView(),
             'user'=>$user,
-            'velo'=>$velo
+            'velo'=>$velo,
+            'idSelect'=>$idVelo
         ));
     }
 
