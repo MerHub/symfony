@@ -15,12 +15,15 @@
     },
     "require": {
         "php": ">=5.5.9",
+        "ext-json": "*",
         "blackknight467/star-rating-bundle": "2.*",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
+        "dompdf/dompdf": "^0.8.5",
+        "egyg33k/csv-bundle": "^1.0",
         "friendsofsymfony/user-bundle": "~2.0",
         "incenteev/composer-parameter-handler": "^2.0",
-        "knplabs/knp-paginator-bundle": "^5.1",
+        "knplabs/knp-paginator-bundle": "^2.7",
         "mrad/notifications-bundle": "^1.3",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^5.0.0",
@@ -54,7 +57,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.3.12"
+            "php": "7.3.1"
         },
         "sort-packages": true
     },

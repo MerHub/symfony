@@ -1,0 +1,32 @@
+velo_index:
+    path:     /
+    defaults: { _controller: "VeloBundle:Velo:index" }
+    methods:  GET
+
+velo_show:
+    path:     /{id}/show
+    defaults: { _controller: "VeloBundle:Velo:show" }
+    methods:  GET
+
+velo_new:
+    path:     /new
+    defaults: { _controller: "VeloBundle:Velo:new" }
+    methods:  [GET, POST]
+
+velo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VeloBundle:Velo:edit" }
+    methods:  [GET, POST]
+
+velo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VeloBundle:Velo:delete" }
+    methods:  DELETE
+
+search:
+    path:     /search
+    defaults: { _controller: "VeloBundle:Velo:search" }
+
+excel:
+    path:     /excel
+    defaults: { _controller: "VeloBundle:Velo:excel" }

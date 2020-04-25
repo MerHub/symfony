@@ -10,4 +10,13 @@ namespace VeloBundle\Repository;
  */
 class VeloRepository extends \Doctrine\ORM\EntityRepository
 {
+    function SearchVelo($libelle){
+        $query=$this->getEntityManager()->createQuery("select e from VeloBundle:Velo e where e.type LIKE '%$libelle%'");
+        return $query->getResult();
+
+    }
+function prix($id){
+    $query=$this->getEntityManager()->createQuery("select e.prix from VeloBundle:Velo e where e.id = '$id'");
+    return $query->getResult();
+}
 }
