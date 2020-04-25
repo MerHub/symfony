@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f85daa7-c189-48ac-bbb2-6ffa9b6026d4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/web/back/data/profile/g.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PiDevWeb3A.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PiDevWeb3A.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AppKernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AppKernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/basevelo.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/basevelo.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Controller/VeloController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Controller/VeloController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/config/routing/velo.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/config/routing/velo.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/location/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/VeloBundle/Resources/views/velo/new.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +115,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/back/data/profile" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
   </component>
@@ -188,6 +174,8 @@
       <workItem from="1586282028942" duration="2585000" />
       <workItem from="1586378647133" duration="32000" />
       <workItem from="1586378844716" duration="54107000" />
+      <workItem from="1587734966533" duration="6000" />
+      <workItem from="1587817455958" duration="4250000" />
     </task>
     <servers />
   </component>
