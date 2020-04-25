@@ -10,6 +10,7 @@ use ReservationBundle\Entity\Livraison;
 use ReservationBundle\Entity\Reservation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use VeloBundle\Entity\Velo;
 
 /**
  * Reservation controller.
@@ -29,10 +30,12 @@ class ReservationController extends Controller
         $Puser=$this->getDoctrine()->getRepository(user::class)->find($id);
         $listDriver=$this->getDoctrine()->getRepository(user::class)->findBy(['type'=>'chauffeur']);
         $listEvent=$this->getDoctrine()->getRepository(Event::class)->findAll();
+        $listVelo=$this->getDoctrine()->getRepository(Velo::class)->findAll();
         return $this->render('@Reservation/reservation/new.html.twig',[
             'user'=>$Puser,
             'listChauffeur'=>$listDriver,
-            'listEvenement'=>$listEvent
+            'listEvenement'=>$listEvent,
+            'listVelo'=>$listVelo
         ]);
     }
 
