@@ -46,7 +46,7 @@
               <!-- RD Navbar Toggle-->
               <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
               <!-- RD Navbar Brand-->
-              <div class="rd-navbar-brand"> <a class="brand" href="index.html.twig"><img class="brand-logo-dark" src="{{ asset("font/images/logo-111x33.png") }}" alt="" width="111" height="33" srcset="{{ asset("font/images/logo-222x66.png") }} 2x" ./></a></div>
+              <div class="rd-navbar-brand"> <a class="brand" href="index.html.twig"><img class="brand-logo-dark" src="{{ asset("font/images/logo-111x33.png") }}" alt="" width="111" srcset="{{ asset("font/images/logo-222x66.png") }}" ./></a></div>
             </div>
             <div class="rd-navbar-nav-wrap">
               <!-- RD Navbar Nav-->
@@ -286,7 +286,18 @@
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();</script>
+  })();
+$(function(){
+  if($(window).width()<=500){
+    $("img.phone-frame-2-outer").css({"width":"270px","height":"440px"})
+    $("img.phone-frame-2-outer").wrap("<center></center>");
+    $("div.col-md-7.col-lg-6.wow.fadeInRightSmall").css({"margin-top":"-55%","background-color":"#2A4696"})
+  }
+  $(window).resize(function () {
+    window.location.reload();
+  })
+})
+</script>
 
 </body>
 </html>
