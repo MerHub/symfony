@@ -1,0 +1,332 @@
+
+/* C:\Users\armand\Desktop\SprintMobiles\css\theme.css */
+@font-face {
+    font-family: "think";
+    src: url('../assets/police/CentraleSans-Thin.ttf');
+}
+
+@media cn1{
+    indexPage {
+        background-color: white;
+    }
+    loginPage {
+        background-color: white;
+    }
+    registerPage{
+        background-color: white;
+    }
+    text1LoginPage{
+        color: #464343;
+        font-size: 3mm;
+        font-family: "native:MainRegular";
+        margin-left:3mm;
+        margin-top:1mm;
+    }
+    entetePageIndex {
+        background-color: white;
+        padding:3mm;
+        padding-top:5mm;
+    }
+    TopleftBarIndexpage1{
+        margin-top:5mm;
+        padding:5mm;
+        background-image: url("../assets/images/logo.png");
+        cn1-source-dpi:160;
+        
+    }
+    btnRegister{
+        color: #2A4696;
+        background-color: transparent;
+        border:2px solid #2A4696;
+        padding: 2mm;
+        padding-left: 3mm;
+        padding-right: 3mm;
+        border-radius: 1mm;
+        font-size: 3mm;
+        margin-left:3mm;
+
+    }
+    btnRegister.pressed {
+        background-color: #2A4696;
+        color:white;
+    }
+
+    image1{
+        background-image: url("../assets/images/debut1.png");
+
+    }
+    image2{
+        background-image: url("../assets/images/debut2.png");
+
+    }
+    image3{
+        background-image: url("../assets/images/formLogin.png");
+
+    }
+    image4{
+        background-image: url("../assets/images/logo.png");
+
+    }
+    SideNavigationPanel {
+        background-color: white;
+    }
+    SideCommand {
+        background-color: white;
+        color: #4B5258;  
+        margin-top:5mm;   
+        padding:3mm;  
+        border : 1px #EBEBEB;
+        margin-left:2mm;
+    }
+    ch {
+        background-color: red;
+    }
+    block1{
+        background-color: #2A4696;
+    }
+    block11{
+        margin-top:5mm;  
+    }
+    text3 {
+        background-color: transparent;
+        color: rgb(33, 34, 36); 
+        margin-top:14px;  
+        margin-left:4mm;  
+        margin-right:4mm; 
+        font-size: 45px;
+        font-family: "think";       
+    }
+    text4 {
+        background-color: transparent;
+        color: rgb(33, 34, 36); 
+        margin-top:14px;  
+        margin-left:25mm;  
+        margin-right:4mm; 
+        font-size: 45px;
+        font-family: "think";    
+        margin-bottom: 3mm;   
+    }
+    text2{
+        background-color: transparent;
+        color: rgb(33, 34, 36); 
+        margin-top:16mm;  
+        margin-left:4mm;  
+        margin-right:4mm; 
+        font-size: 45px;
+        font-family: "think";
+    }
+    block2{
+        background-image: url("../assets/images/formLogin.png");
+        margin-top:8mm;
+        margin-left: 2mm;
+        margin-bottom: 5mm;
+    }
+    headEditClient{
+        background-image: url("../assets/images/menuEditClient.png");
+    }
+
+    headEditProfil1{
+        background-image: url("../assets/images/menuEditProfil.png");
+    }
+    headEditChauffeur{
+        background-image: url("../assets/images/menuEditChauffeur.png");
+    }
+    headEditCar{
+        background-image: url("../assets/images/menuEditCar.png");
+    }
+    headEditProfil2{
+        padding-top:5mm;
+        padding-left:7mm;
+    }
+    saveEdit{
+        border-radius: 10px;
+        color:white;
+        padding:1mm;
+        background-color: orange;
+        margin-left:20mm;
+        margin-right:20mm;
+        margin-top:4mm;
+    }
+    changepass{
+        border-radius: 10px;
+        color:white;
+        padding:5px;
+        background-color: #D9534F;
+        margin-left:10mm;
+        margin-right:11mm;
+        margin-top:1mm;   
+        margin-bottom:5mm;  
+        font-family: "think";
+        font-size: 60px; 
+        font-weight: bold;  
+    }
+    bouttonEdit,btnCar,bouttonDriver{
+        background-color: transparent;
+        padding:30px;
+        padding-right:205px;
+    }
+    blockEditProfil{
+        padding-left:2mm;
+        margin-left:2mm;
+        padding-top:7mm;
+        background-image:url("../assets/images/EditProf.png"); ;
+    }
+    bouttonEdit1{
+        background-color: transparent;
+        padding:30px;
+        padding-right:900px;
+    }
+    btnCar{
+        padding-right:340px; 
+    }
+    bouttonDriver{
+        padding-right:290px; 
+    }
+    headEditProfil{
+        background-image: url("../assets/images/1752.png");
+    }
+    btnDisconnect{
+        background-color: #D9534F;
+        color:white;
+        padding:2mm;
+        margin:10px;
+        border-radius: 1mm;
+        margin-right: 52mm;
+    }
+    btnDisconnect.pressed{
+        background-color: #BD2D28;
+    }
+    btnimage{
+        border-radius: 5mm;
+        padding:2mm;
+        background-color: #4081F1;
+        color:white;
+        margin-left:50mm;
+        margin-right: 2mm;
+        margin-top:9mm;
+        margin-bottom:1mm;
+    }
+    btnimage.pressed{
+        background-color: #0D4AB0;
+        cursor: pointer;
+    }
+    blockRegister{
+        background-image: url("../assets/images/formRegister.png");
+        margin-top:8mm;
+        margin-bottom: 5mm;        
+    }
+
+    input1, input2 {
+        border-radius: 10px;
+        border: 1px rgb(136, 135, 135) solid;
+        margin-left: 7mm;
+        margin-right: 8mm;
+        padding:2mm;
+        margin-top:2mm;
+        padding-left:4mm;
+        font-family: "think";
+        color: rgb(2, 2, 2); 
+        font-size: 50px;
+    }
+
+    input1.selected {
+        border: 1px rgb(41, 41, 41) solid;
+        color:rgb(41, 41, 41);
+        font-weight: bold;
+    }
+    input2.selected {
+        border: 1px rgb(41, 41, 41) solid;
+        color:rgb(41, 41, 41);
+        font-weight: bold;
+    }
+
+    inter2,inter1{
+        padding-left: 3mm;
+        font-size: 50px;
+        color: rgb(2, 2, 2);
+        font-family: "think"; 
+    }
+    submit{
+        background-color: #09B294;
+        color: white;
+        margin-left: 7mm;
+        margin-right: 8mm;
+        padding:2mm;
+        padding-left:17mm;
+        border-radius: 10px;
+        margin-top:7mm;
+        margin-bottom:8mm;
+    }
+    submit.pressed{
+        color: #09B294;
+        background-color: white;
+        border: 2px #09B294 solid;
+    }
+
+    submit1{
+        background-color: #09B294;
+        color: white;
+        margin-left: 7mm;
+        margin-right: 8mm;
+        padding:2mm;
+        padding-left:2mm;
+        border-radius: 10px;
+        margin-top:7mm;
+        margin-bottom:8mm;
+    }
+    submit1.pressed{
+        color: #09B294;
+        background-color: white;
+        border: 2px #09B294 solid;
+    }
+
+    choix{
+        margin-top: 4mm;
+        margin-left: 7mm;
+        margin-right: 8mm;
+    }
+
+    choixDriver,choixClient{
+        color: rgb(33, 34, 36);
+        font-family: "think"; 
+        font-size: 50px;  
+    }
+
+    choixDriver{
+        margin-left: 3mm;
+    }
+    messageErrorShow{
+        background-color: rgb(255, 228, 228);
+        border: 1px rgb(238, 49, 16) solid;
+        margin-left:7mm;
+        margin-top:3mm;
+        padding:1mm;
+        border-radius: 10px;
+    }
+
+    messageok{
+        background-color: rgb(221, 243, 227);
+        border: 1px rgb(16, 238, 90) solid;
+        margin-left:7mm;
+        margin-top:3mm;
+        padding:1mm;
+        border-radius: 10px;
+    }
+
+    messageErrorHide{
+        opacity: 0;
+    }
+    msgError{
+        background-color: transparent;
+        color: rgb(238, 49, 16);
+        font-family: "think"; 
+        font-size: 50px; 
+    }
+    msgOk{
+        background-color: transparent;
+        color: rgb(16, 238, 90);
+        font-family: "think"; 
+        font-size: 50px; 
+    }
+}
+/* End C:\Users\armand\Desktop\SprintMobiles\css\theme.css */
