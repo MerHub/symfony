@@ -250,7 +250,11 @@ class DefaultController extends Controller
             $data = [ "requette"=>['reponse'=>'no']];
             if($encoder->isPasswordValid($user->getPassword(),$password,$user->getSalt())){
                 $data = [ "requette"=>['reponse'=>'yes','user'=>['username' =>$user->getUsername(),'email' =>$user->getEmail(),'id_user'=>$user->getId(),'type'=>$user->getType()]]];
+
+                
+
             }
+
         }
 
 
