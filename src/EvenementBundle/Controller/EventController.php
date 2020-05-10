@@ -7,6 +7,11 @@ use EvenementBundle\Entity\Inscription;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 /**
  * Event controller.
  *
@@ -22,6 +27,10 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $events = $em->getRepository('EvenementBundle:Event')->findAll();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($events);
+        return new JsonResponse($formatted);
 
         return $this->render('@Evenement/event/index.html.twig', array(
             'events' => $events,
@@ -70,13 +79,26 @@ class EventController extends Controller
     {
         $deleteForm = $this->createDeleteForm($event);
 
+
+
         return $this->render('@Evenement/event/show.html.twig', array(
             'event' => $event,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
-
+    public function mail(\Swift_Mailer $mailer)
+    {   $user=$this->getUser();
+        $email=$user->getEmail();
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('Bolt2020@contact.com')
+            ->setTo($email)
+            ->setBody(
+             "Vous etes inscrit"
+            )
+        ;
+        $mailer->send($message);
+    }
 
     public function addAction(Event $id2)
     {
@@ -86,21 +108,48 @@ class EventController extends Controller
         $nbr--;
         $id2->setNbrPlace($nbr);
         $user=$this->getUser();
+     //   $email=$user->getEmail();
+
+
+           //    $transport = \Swift_MailTransport::newInstance();
+
+
+          //  $transport = (new \Swift_SmtpTransport('smtp.mailtrap.io', 25))
+      //          ->setUsername('0aeda355df9ad5')
+        //        ->setPassword('7579b37003ae2d');
+
+
+
+  /*              $msg = (new \Swift_Message('Hello Email'))
+               ->setFrom('Bolt2020@contact.com')
+               ->setTo($email)
+               ->setBody(
+                  'Vous etes inscrit'
+              );
+*/      //     $mailer= new  \Swift_Mailer($transport) ;
+
+    //        $this->get('mailer')->send($msg);
+
+         //   if (!$mailer->send($message, $failures))
+           // { $mailer->send($message);
+             //   echo "Failures:";
+               // print_r($failures);
+            //}
         $id=$user->getId();
         $i->setIdEvent($id2);
-
         $Puser=$this->getDoctrine()->getRepository(\AppBundle\Entity\Client::class)->find($id);
-
         $i->setIdClient($Puser);
-
         $em = $this->getDoctrine()->getManager();
         $em->persist($i);
         $em->flush();
+
+
             $this->addFlash(
                 'notice',
-                'Your changes were saved!'
+                'You are registred succssefully!'
             );
-        return $this->redirectToRoute('event_front');
+
+        return $this->redirectToRoute('reservation_index');
 
     }
     else{$this->addFlash('success', 'Article Created! Knowledge is power!');}
