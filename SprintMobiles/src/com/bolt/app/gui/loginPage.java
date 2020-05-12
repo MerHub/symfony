@@ -45,6 +45,8 @@ public class loginPage extends Form {
         setUIID("loginPage");
         
         add(messageError);
+        
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> new indexClientPage().showBack());
 
         Container block1=new Container(new FlowLayout(CENTER));
         block1.setUIID("block11");
@@ -84,9 +86,10 @@ public class loginPage extends Form {
            $("messageErrorShow").slideUp(); 
        });
                         MyApplication.userConnect=u;
+                        System.out.println(u+"<------------------");
                         if(u.getN_tel()!=0){
                         if(u.getType().equals("client")){
-                           new indexClientPage().show();
+                            new indexClientPage().show();
                         }else{
                             new indexChauffeurPage().show();
                         }                            

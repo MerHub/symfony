@@ -145,20 +145,18 @@
         background-color: orange;
         margin-left:20mm;
         margin-right:20mm;
-        margin-top:4mm;
+        margin-top:3mm;
     }
     changepass{
         border-radius: 10px;
         color:white;
-        padding:5px;
-        background-color: #D9534F;
+        padding:15px;
+        background-color: #4081F1;
         margin-left:10mm;
         margin-right:11mm;
         margin-top:1mm;   
         margin-bottom:5mm;  
-        font-family: "think";
-        font-size: 60px; 
-        font-weight: bold;  
+        font-size: 60px;   
     }
     bouttonEdit,btnCar,bouttonDriver{
         background-color: transparent;
@@ -193,6 +191,16 @@
         border-radius: 1mm;
         margin-right: 52mm;
     }
+
+    btnDisconnect1{
+        background-color: #D9534F;
+        color:white;
+        padding:2mm;
+        margin:10px;
+        border-radius: 1mm;
+        margin-right: 52mm;
+        margin-bottom:15mm;
+    }
     btnDisconnect.pressed{
         background-color: #BD2D28;
     }
@@ -216,6 +224,18 @@
         margin-bottom: 5mm;        
     }
 
+    inputTextarea{
+        border-radius: 10px;
+        border: 1px rgb(136, 135, 135) solid;
+        margin-left: 4mm;
+        margin-right:7mm;
+        margin-bottom:4mm;
+        padding:1mm;
+        margin-top:2mm;
+        font-family: "think";
+        color: rgb(2, 2, 2); 
+        font-size: 50px;       
+    }
     input1, input2 {
         border-radius: 10px;
         border: 1px rgb(136, 135, 135) solid;
@@ -282,7 +302,7 @@
 
     choix{
         margin-top: 4mm;
-        margin-left: 7mm;
+        padding-left: 7mm;
         margin-right: 8mm;
     }
 
@@ -291,7 +311,31 @@
         font-family: "think"; 
         font-size: 50px;  
     }
-
+    textLoad{
+        color: rgb(33, 34, 36);
+        font-family: "think"; 
+        font-weight: bold;
+        font-size: 70px;  
+        margin-left:8mm;      
+    }
+    maps{
+        margin-top: 1mm;
+        margin-left: 2mm;
+        color: rgb(42, 0, 97);
+        padding:1mm;
+        padding-left:25px;
+        margin-right: 52mm;
+        background-color: rgb(209, 213, 255);
+        border-radius: 1mm;
+        cursor: pointer;
+    }
+    maps.pressed{
+        background-color: rgb(131, 88, 189)
+    }
+    load{
+        margin-left: 10mm;
+        margin-top:38mm;
+    }
     choixDriver{
         margin-left: 3mm;
     }
@@ -328,5 +372,277 @@
         font-family: "think"; 
         font-size: 50px; 
     }
+
+    blockdate{
+        background-color: rgb(219, 250, 236);
+        padding:5mm;
+        padding-left: 9mm;
+        padding-right: 9mm;
+        border-radius: 1mm;
+        margin-right: 5px;
+        margin-left: 50px;
+        margin-top: 50px;
+    }
+    blockHour{
+        background-color: rgb(219, 250, 236);
+        padding:5mm;
+        padding-right: 5mm;
+        padding-left: 5mm;
+        border-radius: 1mm;
+        margin-top: 50px;
+    }
+    day,hour{
+        background-color: transparent;
+        font-family:"think" ;
+        font-weight: bold;
+        font-size: 6mm; 
+        color:rgb(36, 36, 36);
+    }
+    month,sigle{
+        background-color: transparent;
+        font-family:"think" ;
+        font-size: 4mm; 
+        color:rgb(90, 90, 90);       
+    }
+    sigle{
+        margin-left:4mm;
+    }
+
+    blockDetailcoord{
+        padding-left:1mm;
+        padding-top:3mm;
+        
+    }
+    blockDetailcoordImbrique{
+    }
+    locationDepart{
+
+        
+    }
+    enteteotal{
+       background-image: url("../assets/images/entetepayement.png");
+       padding-top: 2mm;
+       padding-left: 3mm;
+       padding-right:3mm;
+    }
+    containergrand{
+        background-image: url("../assets/images/showChauffeur.png");  
+        margin-top:3mm;      
+    }
+    containergrand2{
+        background-image: url("../assets/images/addAvis.png");   
+        background-repeat: no-repeat;
+        margin-top:3mm;        
+    }
+    moyenne{
+        background-color: transparent;
+        margin-left:45mm;
+    }
+    cin{
+        background-color: transparent;
+        padding-left:4.5mm;
+        color:rgb(66, 66, 66);
+        font-size:3mm;
+        font-family: "think";
+    }
+    permis{
+        background-color: transparent;
+        padding-left:4.5mm;
+        color:rgb(66, 66, 66);
+        font-size:3mm;
+        font-family: "think";
+    }
+
+    rating{
+        padding-left:8.5mm;
+    }
+    messageAvis{
+        background-color: transparent;
+        font-family: "think";
+        color:rgb(122, 122, 122);
+        font-size:44px;
+    }
+    usernameAvis{
+        background-color: transparent;
+    }
+    avis{
+        background-image: url("../assets/images/bgAvis.png"); 
+        padding-top:5mm;   
+        padding-left:18mm;  
+        margin-top:1.4mm;  
+        margin-left:1mm;  
+    }
+    contenuAvis{
+        background-color: transparent;
+    }
+    nom{
+        background-color: transparent;
+        padding-left:4mm;
+        color:rgb(41, 41, 41);
+        margin-bottom: 1.5mm;
+        margin-right:5mm;
+        color:rgb(80, 80, 80);
+    }
+    corpsFoot{
+        margin-top:0.1mm;
+        margin-left:21mm;  
+        padding-right:6mm;   
+        margin-bottom: 2mm; 
+    }
+    corpsImage{
+        background-color: transparent;
+    }
+    corpsInformation{
+        background-color: transparent;
+    }
+    corpsChauffeur{
+        background-color: transparent;
+    }
+    enteteChauffeur{
+        background-color: transparent;
+    }
+    showChauffeur{
+        background-color: rgb(238, 236, 236);
+    }
+    entetephoto{
+        background-color: rgb(201, 201, 201);
+        padding:0.4mm;
+        margin-right: 39mm;
+        border-radius: 1mm;
+        margin-left:3mm;
+    }
+    enteteInformation1{
+        background-color: transparent;
+    }
+    entetePaiement1{
+        background-color: transparent;
+        color:#200046;
+        font-size:40px;
+        padding-left:5.7mm;
+        padding-top:2mm;
+        padding-bottom:5.7mm;
+    }
+
+    entetePaiement11{
+        background-color: transparent;
+        color:#200046;
+        font-size:40px;
+        padding-left:10mm;
+        padding-top:2mm;
+        padding-bottom:5.7mm;
+    }
+    
+
+    enteteInformation{
+        background-color: transparent;
+    }
+    entetePaiement{
+        font-size:70px;
+        font-family: "think";
+        margin-left:5.5mm;
+        padding-top:2mm;
+        background-color: transparent;
+        color:#200046;
+    }
+
+
+    blockFormContenu{
+        padding-left:2mm;
+    }
+    transitionIMage{
+        padding:2mm;
+        margin-left:12mm;
+    }
+    blockDestainnation{
+        margin-left:3mm;
+    }
+    locationarrive{
+        background-color: transparent;
+        color:#63707E;
+        margin-left: 11mm;
+    }
+    ouicy2{
+        background-color: transparent;
+        color:#545B65;      
+        font-size: 50px;
+    }
+    ouicy{
+        background-color: transparent;
+        color:#545B65;
+        font-size: 50px;
+    }
+    btnNext{
+        background-color: #0276FE;
+        padding:3mm;
+        margin-bottom: 10mm;
+        margin-right:3mm;
+        color:white;
+        font-size: 5mm;
+    }
+    btnClose{
+        background-color: rgb(211, 63, 83);
+        padding:3mm;
+        margin-bottom: 10mm;
+        margin-right:3mm;
+        color:white;
+        font-size: 5mm;        
+        padding:2mm;
+        margin-right: 49mm;
+        border-radius: 105px;
+        margin-left: 3mm;
+        background-color: rgb(207, 75, 86);
+    }
+    btnRoute{
+        padding:3mm;
+        margin-bottom: 2mm;
+        margin-right:3mm;
+        color:rgb(88, 43, 0);
+        font-size: 5mm;        
+        padding:2mm;
+        margin-right: 49mm;
+        border-radius: 105px;
+        margin-left: 3mm;      
+        background-color: rgb(236, 155, 4);
+    }
+    instruction{
+        font-weight: bold;
+        font-family: "think";
+        font-size: 5=4mm;
+    }
+    adresse{
+        color:rgb(150, 149, 149);
+    }
+    time{
+        margin-right:10mm;
+        font-size:50px;        margin-top:2mm;
+        margin-bottom:2mm;
+        color:rgb(116, 114, 114);
+    }
+    distance{
+        font-size:50px;
+        margin-top:2mm;
+        margin-bottom:2mm;
+        color:rgb(116, 114, 114);
+    }
+    itiPage{
+        background-color: #DFDFDF;
+        
+    }
+    listRoute{
+        
+        border-radius: 15px;
+        background-color: #DFDFDF;
+    }
+    item{
+        margin-left:3mm;
+        border-radius: 15px;
+        padding:1mm;
+    }
+    gitem{
+        margin-left:2mm;
+        margin-right:2mm;
+        border-radius: 15px;
+    }
+    
 }
 /* End C:\Users\armand\Desktop\SprintMobiles\css\theme.css */

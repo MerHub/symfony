@@ -42,8 +42,6 @@ tb.addComponentToSideMenu(c);
 Style s = UIManager.getInstance().getComponentStyle("Title");
 FontImage searchIcon = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_BOX, s);
 tb.addCommandToSideMenu("Connection profile",searchIcon,e->new loginPage(current).show());
-
-
 current.getTitleArea().setUIID("entetePageIndex");
 
   

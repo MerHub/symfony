@@ -6,7 +6,11 @@
 package com.bolt.app.gui;
 
 import com.bolt.app.MyApplication;
+import static com.bolt.app.gui.startPage.current;
+import com.bolt.app.services.ServiceUser;
 import com.codename1.ui.Button;
+import com.codename1.ui.Command;
+import static com.codename1.ui.ComponentSelector.$;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
@@ -29,6 +33,14 @@ public class editProfilPage extends Form{
         current=this;
         current.setTitle("Edit Profil");
         current.setUIID("indexPage");
+        
+        Container messageError=new Container(BoxLayout.y());
+        messageError.setUIID("messageok");
+        messageError.setVisible(false);
+        Label textError=new Label("");
+        textError.setUIID("msgOk");
+        messageError.add(textError);
+        
 
 Toolbar tb=current.getToolbar();
 Container c=BorderLayout.east(new Label(""));
@@ -36,17 +48,30 @@ c.setUIID("TopleftBarIndexpage1");
 tb.addComponentToSideMenu(c);
 Style s = UIManager.getInstance().getComponentStyle("Title");
 FontImage searchIcon = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_BOX, s);
+tb.addCommandToSideMenu("DashBoard",searchIcon,e->new indexClientPage().showBack());
 
         getTitleArea().setUIID("entetePageIndex");
         
          Container block2 = new Container(BoxLayout.y());
          block2.setUIID("headEditProfil");
          Button btn1=new Button(FontImage.MATERIAL_LOGOUT);
+         btn1.addActionListener(e->{
+             MyApplication.userConnect=null;
+             new loginPage(new startPage()).showBack();
+         });
          Button btn2=new Button(FontImage.MATERIAL_CAMERA_ALT);
-         btn1.setUIID("btnDisconnect");
+                  if(MyApplication.userConnect.getType().equals("client")){
+          btn1.setUIID("btnDisconnect1");   
+         }else{
+          btn1.setUIID("btnDisconnect");            
+                  }
+         
          btn2.setUIID("btnimage");
          block2.add(btn1);
-         block2.add(btn2);
+         if(!MyApplication.userConnect.getType().equals("client")){
+          block2.add(btn2);   
+         }
+         
          
          Container block3 = new Container(BoxLayout.x());
          
@@ -110,7 +135,9 @@ FontImage searchIcon = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_BOX, 
          TextField numero=new TextField("","Number");
          numero.getHintLabel().setUIID("inter1");
          numero.setUIID("input1");
-         
+         if(MyApplication.userConnect.getN_tel()!=0){
+            numero.setText(Integer.toString(MyApplication.userConnect.getN_tel()));
+         }
          TextField password=new TextField("","Current password");
          password.getHintLabel().setUIID("inter1");
          password.setUIID("input1");
@@ -123,9 +150,29 @@ FontImage searchIcon = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_BOX, 
          blockEditProfil.add(Email);
          blockEditProfil.add(numero);
          blockEditProfil.add(password);
+         password.setConstraint(TextField.PASSWORD);
          
          Button saveEdit=new Button("Save ",FontImage.MATERIAL_CHECK,"re");
          saveEdit.setUIID("saveEdit");
+         saveEdit.addActionListener(e-> {
+           String retour=  ServiceUser.getInstance().setUser(username.getText(),password.getText(),Email.getText(),numero.getText(),MyApplication.userConnect.getId_user());
+           
+           if(retour.equals("finish")){
+              messageError.setUIID("messageok");
+                        textError.setUIID("msgOk");
+                        textError.setText("* opération terminé");
+                                                $(() -> {
+           $("messageok").fadeIn(); 
+       }); 
+           }else{
+                               messageError.setUIID("messageErrorShow");
+                     textError.setUIID("msgError");
+                     textError.setText("* "+retour);
+         $(() -> {
+           $("messageErrorShow").fadeIn(); 
+       });     
+           }
+         });
          
          Button changePassword=new Button("change password ",FontImage.MATERIAL_ARROW_RIGHT,"re");
          changePassword.setUIID("changepass");
@@ -133,9 +180,16 @@ FontImage searchIcon = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_BOX, 
          blockEditProfil.add(saveEdit);
          blockEditProfil.add(changePassword);
          add(block2);
+         add(messageError);
+                 block4.setVisible(false);
+       blockEditProfil.setVisible(false);
          add(block4);
-         
-         add(blockEditProfil);
+        add(blockEditProfil);
+        
+         $(() -> {
+             $("headEditProfil2").fadeIn();
+           $("blockEditProfil").slideDown(); 
+       });
     }
     
 }

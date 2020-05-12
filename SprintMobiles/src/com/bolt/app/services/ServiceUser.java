@@ -13,6 +13,8 @@ import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
+import com.codename1.ui.Command;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.events.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import org.json.JSONObject;
 public class ServiceUser {
     public User uc;
     public Boolean reponse;
+    public String msgBack;
     
     private ConnectionRequest req;
     
@@ -59,6 +62,9 @@ public class ServiceUser {
                 u.setLogin(obj.getJSONObject("requette").getJSONObject("user").getString("username"));
                 u.setMail(obj.getJSONObject("requette").getJSONObject("user").getString("email"));
                 u.setType(obj.getJSONObject("requette").getJSONObject("user").getString("type"));
+                u.setN_tel((int) obj.getJSONObject("requette").getJSONObject("user").getInt("numero"));
+                u.setLatitude(Double.parseDouble(obj.getJSONObject("requette").getJSONObject("user").getString("latitude")));
+                u.setLongitude(Double.parseDouble(obj.getJSONObject("requette").getJSONObject("user").getString("longitude")));
             }
             
             
@@ -81,20 +87,35 @@ public class ServiceUser {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return uc;
     }
-            public void setUser(String username,String email,String numero,String password,int id){
-        String url = Statics.BASE_URL+"/setUser/"+username+"/"+email+"/"+password+"/"+numero+"/"+id;
+            
+            
+     public String setUser(String username,String password,String mail,String numero,int id){
+         
+        String url = Statics.BASE_URL+"/setUsers/"+username+"/"+mail+"/"+password+"/"+numero+"/"+id;
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
-                uc = parseUser(new String(req.getResponseData()));
+                            JSONObject obj;
+                try {
+                    obj = new JSONObject(new String(req.getResponseData()));
+                                if(obj.getJSONObject("requette").getString("reponse").equals("no")){
+               msgBack=  obj.getJSONObject("requette").getString("message");
+            }else{
+               MyApplication.userConnect.setLogin(username);
+               MyApplication.userConnect.setMail(mail);
+               MyApplication.userConnect.setN_tel(Integer.parseInt(numero));
+               msgBack=  "finish";
+            }
+                } catch (JSONException ex) {
+                }
                 req.removeResponseListener(this);
             }
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
-            }
-            
+        return msgBack;
+    }            
                 public Boolean addUser(String username,String password,String email,String type){
         String url = Statics.BASE_URL+"/ServiceAddUser/"+email+"/"+username+"/"+password+"/"+type;
         req.setUrl(url);

@@ -92,6 +92,108 @@ class DefaultController extends Controller
 
     }
 
+
+
+    /**
+     * @Route("/listChaffeur/maList", name="listChaffeur")
+     */
+    public function listChaffeur()
+    {
+        $array=["liste"=>[]];
+        $data=$this->getDoctrine()->getRepository(chauffeur::class)->findAll();
+        foreach ($data as $key=>$value){
+            array_push($array["liste"],[
+                "id"=>$value->getIdUser()->getId(),
+                "adresse"=>$value->getAdresse(),
+                "cin"=>$value->getCin(),
+                "permis"=>$value->getPermis(),
+                "nom"=>$value->getNom(),
+                "prenom"=>$value->getPrenom(),
+                "photo"=>$value->getPhoto(),
+                "numero"=>$value->getIdUser()->getNTel(),
+                "type"=>$value->getIdUser()->getType(),
+                "mail"=>$value->getIdUser()->getEmail(),
+                "latitude"=>$value->getIdUser()->getLatitude(),
+                "longitude"=>$value->getIdUser()->getLongitude(),
+                "username"=>$value->getIdUser()->getUsername(),
+            ]);
+        }
+        header('Content-type: application/json');
+        return  new Response(json_encode( $array ));
+    }
+
+    /**
+     * @Route("/serviceAdreeseGPS/{lat}/{lon}", name="ServiceAdreeseGPS")
+     */
+    public function ServiceAdreeseGPS($lat,$lon)
+    {
+        $client = HttpClient::create();
+        $response = $client->request('GET', "https://nominatim.openstreetmap.org/reverse?format=json&lat=".$lat."&lon=".$lon);
+
+        $statusCode = $response->getStatusCode();
+// $statusCode = 200
+        $contentType = $response->getHeaders()['content-type'][0];
+// $contentType = 'application/json'
+        $content = $response->getContent();
+// $content = '{"id":521583, "name":"symfony-docs", ...}'
+        $content = $response->toArray();
+        $data=["adresse"=>["adr"=>$content["display_name"]]];
+        header('Content-type: application/json');
+        return  new Response(json_encode( $data ));
+    }
+
+
+
+    /**
+     * @Route("/serviceGetDirection/{lat1}/{lon1}/{lat2}/{lon2}", name="serviceGetDirection")
+     */
+    public function serviceGetDirection($lat1,$lon1,$lat2,$lon2)
+    {
+    $url="https://maps.googleapis.com/maps/api/directions/json?origin=".$lat1.",".$lon1."&destination=".$lat2.",".$lon2."&key=AIzaSyD2Ws0KYSjxNXXgRh8jRBGZgrXqgNHzWbI";
+        $client = HttpClient::create();
+        $response = $client->request('GET',$url);
+        $content = json_decode($response->getContent());
+        $data=["routes"=>[]];
+        forEach($content->routes[0]->legs[0]->steps as $key=>$value){
+            $html_instructions=$value->html_instructions;
+            $html_instructions=str_replace("<b>","",$html_instructions);
+            $html_instructions=str_replace("b>","",$html_instructions);
+            $html_instructions=str_replace("</","",$html_instructions);
+            $html_instructions=str_replace("<div","",$html_instructions);
+            $html_instructions=str_replace("style=\"font-size:0.9em","",$html_instructions);
+            $html_instructions=str_replace('">',"",$html_instructions);
+            $html_instructions=str_replace('div>',"",$html_instructions);
+            $value->html_instructions=$html_instructions;
+            array_push($data["routes"],$value);
+    }
+
+        return  new Response(json_encode($data));
+    }
+
+
+
+    /**
+     * @Route("/serviceCurrentDate/", name="serviceCurrentDate")
+     */
+    public function serviceCurrentDate()
+    {
+        $data=["date"=>[
+            "annee"=>date("Y"),
+            "mois"=>date("M"),
+            "jour"=>date("d"),
+            "heures"=>date("H")+1,
+            "minutes"=>date("i")
+        ]];
+        header('Content-type: application/json');
+        return  new Response(json_encode( $data ));
+    }
+
+
+
+
+
+
+
     /**
      * @Route("/serviceLogin/{username}/{password}", name="serviceLogin")
      */
@@ -105,7 +207,7 @@ class DefaultController extends Controller
             $encoder = $encoder_service->getEncoder($user);
             $data = [ "requette"=>['reponse'=>'no']];
             if($encoder->isPasswordValid($user->getPassword(),$password,$user->getSalt())){
-                $data = [ "requette"=>['reponse'=>'yes','user'=>['username' =>$user->getUsername(),'email' =>$user->getEmail(),'id_user'=>$user->getId(),'type'=>$user->getType()]]];
+                $data = [ "requette"=>['reponse'=>'yes','user'=>['longitude'=>$user->getLongitude(),'latitude'=>$user->getLatitude(),'numero'=>$user->getNTel(),'username' =>$user->getUsername(),'email' =>$user->getEmail(),'id_user'=>$user->getId(),'type'=>$user->getType()]]];
             }
         }
 

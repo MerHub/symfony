@@ -2,6 +2,7 @@ package com.bolt.app;
 
 
 import com.bolt.app.entities.User;
+import com.bolt.app.gui.loadScreen;
 import com.bolt.app.gui.startPage;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Display;
@@ -58,7 +59,8 @@ public class MyApplication {
     }
     
     public void start() {
-        new startPage().show();
+       // new startPage().show();
+       new loadScreen(new startPage()).show();
     }
 
     public void stop() {

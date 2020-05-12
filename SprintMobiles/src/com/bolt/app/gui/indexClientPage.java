@@ -6,6 +6,8 @@
 package com.bolt.app.gui;
 
 import com.bolt.app.MyApplication;
+import com.bolt.app.entities.Chauffeur;
+import com.bolt.app.entities.PointMap;
 import static com.bolt.app.gui.startPage.current;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.InteractionDialog;
@@ -36,6 +38,14 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
+import com.bolt.app.gui.editProfilPage;
+import com.bolt.app.services.ServiceChauffeur;
+import com.bolt.app.services.ServiceUser;
+import com.bolt.app.services.ServiceUtils;
+import com.bolt.app.utils.Function;
+import com.codename1.googlemaps.MapContainer.MapObject;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -46,19 +56,32 @@ public class indexClientPage extends Form{
      private static final String HTML_API_KEY = "AIzaSyD2Ws0KYSjxNXXgRh8jRBGZgrXqgNHzWbI";
     private Form current;
     boolean tapDisabled = false;
-    public indexClientPage() {
-                current=this;
+    Coord selected=new Coord(0, 0);
+    public ArrayList<PointMap> route;
+    
+    public indexClientPage(){
+                             current=this;
         current.setTitle("WELCOME");
         current.setUIID("indexPage");
 
-Toolbar tb=current.getToolbar();
-Container c=BorderLayout.east(new Label(""));
-c.setUIID("TopleftBarIndexpage1");
-tb.addComponentToSideMenu(c);
-Style s = UIManager.getInstance().getComponentStyle("Title");
-FontImage searchIcon = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_BOX, s);
+        Toolbar tb=current.getToolbar();
+        Container c=BorderLayout.east(new Label(""));
+        c.setUIID("TopleftBarIndexpage1");
+        tb.addComponentToSideMenu(c);
+        Style s = UIManager.getInstance().getComponentStyle("Title");
+        FontImage searchIcon = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_BOX, s);
+        current.getTitleArea().setUIID("entetePageIndex");
+        if(MyApplication.userConnect.getN_tel()==0){
+                     Button changePassword=new Button("completer vos infos ",FontImage.MATERIAL_ARROW_RIGHT,"re");
+         changePassword.setUIID("changepass");
+         add(changePassword);
+         changePassword.addActionListener(e-> {
+            new editProfilPage().show(); 
+         });
+            
+        }else{
 
-        getTitleArea().setUIID("entetePageIndex");
+        getTitleArea().setUIID("entetePageIndex");current.getTitleArea().setUIID("entetePageIndex");
         //getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
         
         
@@ -66,239 +89,207 @@ FontImage searchIcon = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_BOX, 
         setLayout(new BorderLayout());
         final MapContainer cnt = new MapContainer(HTML_API_KEY);
         cnt.setShowMyLocation(true);
-        cnt.setMapType(0);
+        cnt.setMapType(3);
+        
+        
+        
+      
+                FloatingActionButton btnNext = FloatingActionButton.createFAB(FontImage.MATERIAL_ARROW_RIGHT);
+                btnNext.setVisible(false);
+                btnNext.setUIID("btnNext");
+        btnNext.addActionListener(e->{
+            new detailCoordonne(current,selected.getLatitude(),selected.getLongitude(),route).show();
+                
+        });
+
+
+                Button btnClose = new Button(FontImage.MATERIAL_CLOSE);
+                btnClose.setUIID("btnClose");
+                btnClose.setVisible(false);
+        
+                        Button btnRoute = new Button(FontImage.MATERIAL_TRAFFIC);
+                btnRoute.setUIID("btnRoute");
+                btnRoute.setVisible(false);
+        btnRoute.addActionListener(e->{
+            new itineaire(current,route).show();
+        });
+        
+        btnClose.addActionListener(e->{
+            btnRoute.setVisible(false);
+            btnNext.setVisible(false);
+            btnClose.setVisible(false);
+            new indexClientPage().show();
+        });
+        
+                Button btnMaposition = new Button(FontImage.MATERIAL_LOCATION_ON);
+                btnMaposition.setUIID("maps");
+        btnMaposition.addActionListener(e->{
+            cnt.setCameraPosition(new Coord(MyApplication.userConnect.getLatitude(), MyApplication.userConnect.getLongitude()));
+        });
+        
+                        Button btnZoomIn = new Button(FontImage.MATERIAL_ZOOM_IN);
+                        btnZoomIn.setUIID("maps");
+        btnZoomIn.addActionListener(e->{
+            cnt.zoom(new Coord(cnt.getCameraPosition().getLatitude(),cnt.getCameraPosition().getLongitude()), (int) cnt.getZoom()+1);
+        });
+                                Button btnZoomOut = new Button(FontImage.MATERIAL_ZOOM_OUT);
+                                btnZoomOut.setUIID("maps");
+        btnZoomOut.addActionListener(e->{
+            cnt.zoom(new Coord(cnt.getCameraPosition().getLatitude(),cnt.getCameraPosition().getLongitude()), (int) cnt.getZoom()-1);
+        });
+        
+        Container root = LayeredLayout.encloseIn(
+                BorderLayout.center(btnNext.bindFabToContainer(cnt)),
+                                BorderLayout.north(
+                BoxLayout.encloseY(btnMaposition,btnZoomIn,btnZoomOut )
+                ),
+                                BorderLayout.south(BoxLayout.encloseY(btnRoute,btnClose))
+        );
+        
+        add(BorderLayout.CENTER, root);  
+        
+        
         //final MapContainer cnt = new MapContainer();
-        cnt.setCameraPosition(new Coord(-26.1486233, 28.67401229999996));//this breaks the code //because the Google map is not loaded yet
         cnt.addMapListener(new MapListener() {
 
             @Override
             public void mapPositionUpdated(Component source, int zoom, Coord center) {
-                System.out.println("Map position updated: zoom="+zoom+", Center="+center);
             }
             
         });
+                int maxZoom = cnt.getMaxZoom();
+        Style s1 = new Style();
+        Style s2 = new Style();
+        s1.setFgColor(0x0080FF);
+        s1.setBgTransparency(0);
         
+        s2.setFgColor(0xF1C232);
+        s2.setBgTransparency(0);
+        
+        FontImage markerImg = FontImage.createMaterial(FontImage.MATERIAL_PLACE, s1, 7);
+        FontImage markertaxi = FontImage.createMaterial(FontImage.MATERIAL_CAR_REPAIR, s2, 7);
+        
+        
+        
+        
+        
+        
+         cnt.setCameraPosition(new Coord(MyApplication.userConnect.getLatitude(), MyApplication.userConnect.getLongitude()));
+         cnt.zoom(new Coord(MyApplication.userConnect.getLatitude(), MyApplication.userConnect.getLongitude()), 18);
+                                 try {
+                                     cnt.addMarker(EncodedImage.create("/moi.png"), cnt.getCameraPosition(), "Hi marker", "Optional long description", new ActionListener() {
+                                         public void actionPerformed(ActionEvent evt) {
+                                             ToastBar.showMessage("Your position", FontImage.MATERIAL_PLACE);
+                                         }
+                                     });                  } catch (IOException ex) {
+                                 }
+            ArrayList<Chauffeur> list=ServiceChauffeur.getInstance().getListChauffeur();
+                System.out.println(list+"------------");
+                for(int i=0; i<list.size(); i++){
+                    //liste.get(i)
+                String txt = "oui";
+                if(list.get(i).getLatitude()!=0  && !list.get(i).getPhoto().trim().equals("") && list.get(i).getCin()!=0 && list.get(i).getId_user()!=0
+                        && !list.get(i).getLogin().trim().equals("") && list.get(i).getN_tel()!=0 && !list.get(i).getNom().trim().equals("") && 
+                        !list.get(i).getPrenom().trim().equals("") && 
+                        !list.get(i).getPermis().trim().equals("")){
+                    try {
+                        Chauffeur cs=list.get(i);
+                        cnt.addMarker(EncodedImage.create("/iconTaxi.png"),new Coord(list.get(i).getLatitude(), list.get(i).getLongitude()), txt, "", e3->{
+                            new showChauffeur(current, cs, null).show();  
+                        }); } catch (IOException ex) {
+                    }
+                }
+                }
+                
+        Style s3 = new Style();
+        s3.setFgColor(0xDF2A2A);
+        s3.setBgTransparency(0);
+        FontImage markerDest = FontImage.createMaterial(FontImage.MATERIAL_PLACE, s3, 7);
         cnt.addLongPressListener(e->{
-            System.out.println("Long press");
             ToastBar.showMessage("Received longPress at "+e.getX()+", "+e.getY(), FontImage.MATERIAL_3D_ROTATION);
         });
         cnt.addTapListener(e->{
-            ToastBar.showMessage("Received tap at "+e.getX()+", "+e.getY(), FontImage.MATERIAL_3D_ROTATION);
-        });
-        
-        int maxZoom = cnt.getMaxZoom();
-        System.out.println("Max zoom is "+maxZoom);
-        Button btnMoveCamera = new Button("Move Camera");
-        btnMoveCamera.addActionListener(e->{
-            cnt.setCameraPosition(new Coord(-33.867, 151.206));
-        });
-        Style s1 = new Style();
-        s1.setFgColor(0xff0000);
-        s1.setBgTransparency(0);
-        FontImage markerImg = FontImage.createMaterial(FontImage.MATERIAL_PLACE, s1, 3);
-        
-        Button btnAddMarker = new Button("Add Marker");
-        btnAddMarker.addActionListener(e->{
-           
-            cnt.setCameraPosition(new Coord(41.889, -87.622));
-            cnt.addMarker(EncodedImage.createFromImage(markerImg, false), cnt.getCameraPosition(), "Hi marker", "Optional long description", new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    System.out.println("Bounding box is "+cnt.getBoundingBox());
-                    ToastBar.showMessage("You clicked the marker", FontImage.MATERIAL_PLACE);
-                }
-            });
             
-        });
-        
-        Button btnAddPath = new Button("Add Path");
-        btnAddPath.addActionListener(e->{
-            
-            cnt.addPath(
-                    cnt.getCameraPosition(),
-                    new Coord(-33.866, 151.195), // Sydney
-                    new Coord(-18.142, 178.431)  // Fiji
-            );
-        });
-        
-        Button panTo = new Button("Pan To");
-        panTo.addActionListener(e->{
-            //bounds.extend(new google.maps.LatLng('66.057878', '-22.579047')); // Iceland
-            //bounds.extend(new google.maps.LatLng('37.961952', '43.878878')); // Turkey
-            Coord c1 = new Coord(49.0986192, -122.6764454);
-            Coord c2 = new Coord(49.2577142, -123.1941149);
-            //Coord center = new Coord(c1.getLatitude()/2 +  c2.getLatitude() / 2, c1.getLongitude()/2 + c2.getLongitude()/2 );
-            Coord center = new Coord(49.1110928, -122.9414646);
-            
-            float zoom = cnt.getZoom();
-            
-            boolean[] finished = new boolean[1];
-            cnt.addMapListener(new MapListener() {
-
-                @Override
-                public void mapPositionUpdated(Component source, int zoom, Coord c) {
-                    
-                    if (Math.abs(c.getLatitude() - center.getLatitude()) > .001 || Math.abs(c.getLongitude() - center.getLongitude()) > .001) {
-                        return;
-                    }
-                    finished[0] = true;
-                    synchronized(finished) {
-                        final MapListener fthis = this;
-                        Display.getInstance().callSerially(()->{
-                            cnt.removeMapListener(fthis);
-                        });
-                        finished.notify();
-                    }
-                    
-                }
-                
-            });
-            cnt.zoom(center, (int)zoom);
-            while (!finished[0]) {
-                Display.getInstance().invokeAndBlock(()->{
-                    while (!finished[0]) {
-                        Util.wait(finished, 100);
+            try {
+                cnt.clearMapLayers();
+                cnt.addMarker(EncodedImage.create("/moi.png"),new Coord(MyApplication.userConnect.getLatitude(), MyApplication.userConnect.getLongitude()), "Hi marker", "Optional long description", new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        ToastBar.showMessage("Your position", FontImage.MATERIAL_PLACE);
                     }
                 });
-            }
-            BoundingBox box = cnt.getBoundingBox();
-            if (!box.contains(c1) || !box.contains(c2)) {
-                while (!box.contains(c1) || !box.contains(c2)) {
-                    if (!box.contains(c1)) {
-                        System.out.println("Box "+box+" doesn't contain "+c1);
-                    }
-                    if (!box.contains(c1)) {
-                        System.out.println("Box "+box+" doesn't contain "+c2);
-                    }
-                    zoom -= 1;
-                    final boolean[] done = new boolean[1];
-                    
-                    final int fzoom = (int)zoom;
-                    cnt.addMapListener(new MapListener() {
-
-                        @Override
-                        public void mapPositionUpdated(Component source, int zm, Coord center) {
-                            
-                            if (zm == fzoom) {
-                                final MapListener fthis = this;
-                                Display.getInstance().callSerially(()->{
-                                    cnt.removeMapListener(fthis);
-                                });
-                                
-                                done[0] = true;
-                                synchronized(done) {
-                                    done.notify();
-                                }
-                            }
-                        }
+                for(int i=0; i<list.size(); i++){
+                    String txt = "oui";
+                    if(list.get(i).getLatitude()!=0  && !list.get(i).getPhoto().trim().equals("") && list.get(i).getCin()!=0 && list.get(i).getId_user()!=0
+                        && !list.get(i).getLogin().trim().equals("") && list.get(i).getN_tel()!=0 && !list.get(i).getNom().trim().equals("") && 
+                        !list.get(i).getPrenom().trim().equals("") && 
+                        !list.get(i).getPermis().trim().equals("")){
                         
-                    });
-                    cnt.zoom(center, (int)zoom);
-                    while (!done[0]) {
-                        Display.getInstance().invokeAndBlock(()->{
-                            while (!done[0]) {
-                                Util.wait(done, 100);
-                            }
+                        Chauffeur cs=list.get(i);
+                        cnt.addMarker(EncodedImage.create("/iconTaxi.png"),new Coord(list.get(i).getLatitude(), list.get(i).getLongitude()), txt, "", e3->{
+                            new showChauffeur(current, cs, null).show();
                         });
                     }
-                    box = cnt.getBoundingBox();
-                    System.out.println("Zoom now "+zoom);
-                    
                 }
-            } else if (box.contains(c1) && box.contains(c2)) {
-                while (box.contains(c1) && box.contains(c2)) {
-                    zoom += 1;
-                    final boolean[] done = new boolean[1];
-                    
-                    final int fzoom = (int)zoom;
-                    cnt.addMapListener(new MapListener() {
-                        public void mapPositionUpdated(Component source, int zm, Coord center)  {
-                            if (zm == fzoom) {
-                                final MapListener fthis = this;
-                                Display.getInstance().callSerially(()->{
-                                    cnt.removeMapListener(fthis);
-                                });
-                                done[0] = true;
-                                synchronized(done) {
-                                    done.notify();
+                String adrs=Function.getInstance().getAdresse(
+                        cnt.getCoordAtPosition(e.getX(), e.getY()).getLatitude(), cnt.getCoordAtPosition(e.getX(), e.getY()).getLongitude());
+                
+                
+                // tracer le chemin
+                route=ServiceUtils.getInstance().getAllRoutes(MyApplication.userConnect.getLatitude(),
+                        MyApplication.userConnect.getLongitude(),
+                        cnt.getCoordAtPosition(e.getX(), e.getY()).getLatitude(),
+                        cnt.getCoordAtPosition(e.getX(), e.getY()).getLongitude());
+                            
+                            Coord[] myArray = new Coord[route.size()];
+                                 
+                            for(int i=0;i<route.size();i++){
+                                if(route.get(i).getStart()!=null){
+                                myArray[i]=route.get(i).getStart();     
                                 }
-                            }
-                        }
-                    });
-                    cnt.zoom(center, (int)zoom);
-                    while (!done[0]) {
-                        Display.getInstance().invokeAndBlock(()->{
-                            while (!done[0]) {
-                                Util.wait(done, 100);
-                            }
-                        });
-                    }
-                    box = cnt.getBoundingBox();
-                    
-                }
-                zoom -= 1;
-                cnt.zoom(center, (int)zoom);
-                cnt.addTapListener(null);
+                                if(route.get(i).getEnd()!=null){
+                                myArray[i]=route.get(i).getEnd();     
+                                }
+                                
+                             }
+                            
+                            cnt.setPathStrokeColor(0x7272F2);
+                            cnt.setPathStrokeWidth(10);
+                                     
+                          cnt.addPath(myArray);
+
+                            
+                            
+                            
+                ToastBar.showMessage(adrs, FontImage.MATERIAL_PLACE);
+                                    selected.setLatitude(cnt.getCoordAtPosition(e.getX(), e.getY()).getLatitude());
+                    selected.setLongitude(cnt.getCoordAtPosition(e.getX(), e.getY()).getLongitude());
+                cnt.addMarker(EncodedImage.create("/destination.png"),cnt.getCoordAtPosition(e.getX(), e.getY()), "destination", "", e3->{
+                    new detailCoordonne(current,cnt.getCoordAtPosition(e.getX(), e.getY()).getLatitude(),cnt.getCoordAtPosition(e.getX(), e.getY()).getLongitude(),route).show();
+                });
+                                                        $(() -> {
+           $("btnNext,btnClose,btnRoute").fadeIn(); 
+       });
+                
+                // System.out.println(cnt.getComponentAt(cnt.getComponentCount()));
+            } catch (IOException ex) {
             }
-            
         });
         
-        Button testCoordPositions = $(new Button("Test Coords"))
-                .addActionListener(e->{
-                    Coord topLeft = cnt.getCoordAtPosition(0, 0);
-                    System.out.println("Top Left is "+topLeft+" -> "+cnt.getScreenCoordinate(topLeft) +" Should be (0,0)");
-                    Coord bottomRight = cnt.getCoordAtPosition(cnt.getWidth(), cnt.getHeight());
-                    System.out.println("Bottom right is "+bottomRight+" -> "+cnt.getScreenCoordinate(bottomRight) + " Should be "+cnt.getWidth()+", "+cnt.getHeight());
-                    Coord bottomLeft = cnt.getCoordAtPosition(0, cnt.getHeight());
-                    System.out.println("Bottom Left is "+bottomLeft+" -> "+cnt.getScreenCoordinate(bottomLeft) + " Should be 0, "+cnt.getHeight());
-                    Coord topRight = cnt.getCoordAtPosition(cnt.getWidth(), 0);
-                    System.out.println("Top right is "+topRight + " -> "+cnt.getScreenCoordinate(topRight)+ " Should be "+cnt.getWidth()+", 0");
-                    Coord center = cnt.getCoordAtPosition(cnt.getWidth()/2, cnt.getHeight()/2);
-                    System.out.println("Center is "+center+" -> "+cnt.getScreenCoordinate(center)+", should be "+(cnt.getWidth()/2)+", "+(cnt.getHeight()/2));
-                    EncodedImage encImg = EncodedImage.createFromImage(markerImg, false);
-                    cnt.addMarker(encImg, topLeft,"Top Left", "Top Left", null);
-                    cnt.addMarker(encImg, topRight, "Top Right", "Top Right", null);
-                    cnt.addMarker(encImg, bottomRight, "Bottom Right", "Bottom Right", null);
-                    cnt.addMarker(encImg, bottomLeft, "Bottom Left", "Bottom Left", null);
-                    cnt.addMarker(encImg, center, "Center", "Center", null);
-                    
-                    
-                })
-                .asComponent(Button.class);
-        
-        Button toggleTopMargin = $(new Button("Toggle Margin"))
-                .addActionListener(e->{
-                    int marginTop = $(cnt).getStyle().getMarginTop();
-                    if (marginTop < Display.getInstance().getDisplayHeight() / 3) {
-                        $(cnt).selectAllStyles().setMargin(Display.getInstance().getDisplayHeight() / 3, 0, 0, 0);
-                    } else {
-                        $(cnt).selectAllStyles().setMargin(0,0,0,0);
-                    }
-                    $(cnt).getComponentForm().revalidate();
-                })
-                .asComponent(Button.class);
-        
-        
-        Button btnClearAll = new Button("Clear All");
-        btnClearAll.addActionListener(e->{
-            cnt.clearMapLayers();
-        });
-        
+                
+                
+                
         MapContainer.MapObject mo = cnt.addMarker(EncodedImage.createFromImage(markerImg, false), new Coord(-33.866, 151.195), "test", "test",e->{
-            System.out.println("Marker clicked");
             cnt.removeMapObject(sydney);
         });
         sydney = mo;
-        System.out.println("MO is "+mo);
         mo = cnt.addMarker(EncodedImage.createFromImage(markerImg, false), new Coord(-18.142, 178.431), "test", "test",e->{
-            System.out.println("Marker clicked");
         });
-        System.out.println("MO is "+mo);
         cnt.addTapListener(e->{
             if (tapDisabled) {
                 return;
             }
             tapDisabled = true;
-            TextField enterName = new TextField();
+           /* TextField enterName = new TextField();
             Container wrapper = BoxLayout.encloseY(new Label("Name:"), enterName);
             InteractionDialog dlg = new InteractionDialog("Add Marker");
             dlg.getContentPane().add(wrapper);
@@ -311,55 +302,10 @@ FontImage searchIcon = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_BOX, 
                 tapDisabled = false;
             });
             dlg.showPopupDialog(new Rectangle(e.getX(), e.getY(), 10, 10));
-            enterName.startEditingAsync();
+            enterName.startEditingAsync();*/
         });
-        
-        Button showNextForm = $(new Button("Next Form"))
-                .addActionListener(e->{
-                    Form form = new Form("Hello World");
-                    Button b1 = $(new Button("B1"))
-                            .addActionListener(e2->{
-                                ToastBar.showMessage("B1 was pressed", FontImage.MATERIAL_3D_ROTATION);
-                            })
-                            .asComponent(Button.class);
-                    
-                    Button back = $(new Button("Back"))
-                            .addActionListener(e2->{
-                                this.showBack();
-                            })
-                            .asComponent(Button.class);
-                    form.add(b1);
-                })
-                .asComponent(Button.class);
-        
-        FloatingActionButton nextForm = FloatingActionButton.createFAB(FontImage.MATERIAL_ACCESS_ALARM);
-        nextForm.addActionListener(e->{
-            Form form = new Form("Hello World");
-            Button b1 = $(new Button("B1"))
-                    .addActionListener(e2->{
-                        ToastBar.showMessage("B1 was pressed", FontImage.MATERIAL_3D_ROTATION);
-                    })
-                    .asComponent(Button.class);
 
-            Button back = $(new Button("Back"))
-                    .addActionListener(e2->{
-                        showBack();
-                    })
-                    .asComponent(Button.class);
-            form.add(b1).add(back);
-            form.show();
-        });
-        
-        
-        
-        Container root = LayeredLayout.encloseIn(
-                BorderLayout.center(nextForm.bindFabToContainer(cnt)),
-                BorderLayout.south(
-                        FlowLayout.encloseBottom(panTo, testCoordPositions, toggleTopMargin, btnMoveCamera, btnAddMarker, btnAddPath, btnClearAll )
-                )
-        );
-        
-        add(BorderLayout.CENTER, root);
+        }
     }
     
 }
