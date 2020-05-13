@@ -86,6 +86,17 @@ class EventController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    public function showwwwAction(Event $event)
+    {
+        $deleteForm = $this->createDeleteForm($event);
+
+
+
+        return $this->render('@Evenement/event/show.html.twig', array(
+            'event' => $event,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
 
     public function mail(\Swift_Mailer $mailer)
     {   $user=$this->getUser();
