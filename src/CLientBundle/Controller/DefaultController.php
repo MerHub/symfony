@@ -3,6 +3,7 @@
 namespace CLientBundle\Controller;
 
 use AppBundle\Entity\chauffeur;
+use AppBundle\Entity\Notification;
 use AppBundle\Entity\user;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,10 @@ class DefaultController extends Controller
         if($Puser->getNtel()==null){
             return $this->redirectToRoute("userProfile_page_client");
         }
-        return $this->render('@CLient/Default/index.html.twig');
+        $notification=$this->getDoctrine()->getRepository(Notification::class)->findBy(["idReceive"=>$id,"seen"=>0]);
+        return $this->render('@CLient/Default/index.html.twig',[
+            "notification"=>$notification
+        ]);
     }
 
     public function userProfileAction()

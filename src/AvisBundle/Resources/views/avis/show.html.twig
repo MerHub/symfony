@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Avi</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Idavis</th>
+                <td>{{ avi.idAvis }}</td>
+            </tr>
+            <tr>
+                <th>Msg</th>
+                <td>{{ avi.msg }}</td>
+            </tr>
+            <tr>
+                <th>Note</th>
+                <td>{{ avi.note }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('avis_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('avis_edit', { 'idAvis': avi.idAvis }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

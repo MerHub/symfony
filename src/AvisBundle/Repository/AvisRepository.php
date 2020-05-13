@@ -10,4 +10,18 @@ namespace AvisBundle\Repository;
  */
 class AvisRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function ListeAvis($idChauffeur){
+        $query=$this->getEntityManager()->createQuery(
+            '
+            SELECT
+            a.idAvis,u.id,a.msg,a.note,u.username
+            FROM
+            AvisBundle\Entity\Avis a,AppBundle\Entity\User u
+            WHERE
+            a.idCclient=u.id and a.idChauffeur= :idChauffeur ORDER By a.idAvis DESC
+            '
+        )->setParameter('idChauffeur',$idChauffeur);
+
+        return $query->getResult();
+    }
 }

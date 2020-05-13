@@ -1,0 +1,32 @@
+avis_moyenne:
+    path:     avis_moyenne/{idChauffeur}
+    defaults: { _controller: "AvisBundle:Avis:moyenne" }
+    methods:  GET
+
+avis_service_showAll:
+    path:     avis_service_showAll/{idChauffeur}
+    defaults: { _controller: "AvisBundle:Avis:avis_service_showAll" }
+avis_show:
+    path:     /show
+    defaults: { _controller: "AvisBundle:Avis:show" }
+    methods:  GET
+
+avis_new:
+    path:     /{idChauffeur}/{idClient}/new
+    defaults: { _controller: "AvisBundle:Avis:new" }
+    methods:  [GET, POST]
+
+avis_edit:
+    path:     /{idAvis}/edit
+    defaults: { _controller: "AvisBundle:Avis:edit" }
+    methods:  [GET, POST]
+
+avis_delete:
+    path:     /{idAvis}/delete
+    defaults: { _controller: "AvisBundle:Avis:delete" }
+    methods:  [GET]
+
+avis_index:
+    path:     /{idChauffeur}/
+    defaults: { _controller: "AvisBundle:Avis:index" }
+    methods:  [GET, POST]

@@ -50,6 +50,22 @@ class Taxi
     private $numChassis;
 
     /**
+     * @return string
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @param string $categorie
+     */
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
+    }
+
+    /**
      * @return int
      */
     public function getIdTaxi()

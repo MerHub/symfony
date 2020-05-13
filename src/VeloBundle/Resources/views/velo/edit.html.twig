@@ -1,0 +1,195 @@
+{% extends 'basevelo.html.twig' %}
+
+{% block body %}
+<ul>
+    <li>
+        <a href="{{ path('velo_index') }}"><i class="fa fa-backward" style="color:#2e6da4 "></i>Back to the list</a>
+    </li>
+
+</ul>
+<header class="panel_header">
+    <h2 class="title float-left">Edit A bicycle</h2>
+    <div class="actions panel_actions float-right">
+        <a class="box_toggle fa fa-chevron-down"></a>
+        <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
+        <a class="box_close fa fa-times"></a>
+    </div>
+</header>
+
+
+<div class="content-body">
+    <div class="row">
+        <div class="col-lg-8 col-md-9 col-10">
+
+            <div class="form-group">
+                <table class="table table-striped">
+    {{ form_start(edit_form) }}
+                    <tr>
+                        <td>{{ form_label(edit_form.type,'Type') }}</td>
+                        <td>{{ form_widget(edit_form.type, { 'attr': {'class': 'form-control'}}) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(edit_form.adresse,'Adresse') }}</td>
+                        <td>{{ form_widget(edit_form.adresse, { 'attr': {'class': 'form-control'}}) }} <div class="btn btn-primary btn-sm afficherMap"><i class="fa fa-map-marker" ></i></div></td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(edit_form.qte,'Quantity') }}</td>
+                        <td>{{ form_widget(edit_form.qte, { 'attr': {'class': 'form-control'}}) }}</td>
+                       <td>
+                        <span id="misscin" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Quantity is invalide</li></ul> </span>
+                       </td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(edit_form.prix,'Price') }}</td>
+                        <td>{{ form_widget(edit_form.prix, { 'attr': {'class': 'form-control'}}) }}</td>
+                    </tr>
+                    <tr style="display: none">
+                        <td>{{ form_label(edit_form.latitude) }}</td>
+                        <td>{{ form_widget(edit_form.latitude) }}</td>
+                    </tr>
+                    <tr style="display: none">
+                        <td>{{ form_label(edit_form.longitude) }}</td>
+                        <td>{{ form_widget(edit_form.longitude) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_label(edit_form.photo,'Pick a photo') }}</td>
+                        <td>{{ form_widget(edit_form.photo, { 'attr': {'class': 'form-control'}}) }}</td>
+                    </tr>
+                    <tr>
+
+                        <td>{{ form_widget(edit_form) }}</td>
+                        <td> <input class="btn btn-accent btn-md" id="coursbundle_cours_Ajouter" type="submit" value="Edit" /></td>
+                    </tr>
+
+    {{ form_end(edit_form) }}
+                </table>
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        $('#misscin').hide();
+                        $('#velobundle_velo_qte').keyup(function () {
+
+
+
+
+
+
+                            var x = $('#velobundle_velo_qte').val();
+                            if (x>0 && x<100) {
+
+                                $('#coursbundle_cours_Ajouter').prop('disabled', false);
+                                $('#misscin').hide();
+                                $('#velobundle_velo_qte');
+
+                            } else {
+
+                                $('#misscin').show();
+                                $('#velobundle_velo_qte');
+
+
+                                $('#coursbundle_cours_Ajouter').prop('disabled', true);
+                            }
+
+                        });
+                    })
+                </script>
+
+
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}
+
+    {% block scriptMap %}
+    <script>
+        $(function(){
+            var ad=$("[name='velobundle_velo[adresse]']").val();
+            $(".dontWrite").keyup(function(){
+                $("[name='velobundle_velo[adresse]']").val(ad)
+            })
+            $(".afficherMap").click(function(){
+                $("#map").css("z-index","10000");
+                $(".btn-annuler").css("z-index","10001");
+                $(".btn-accepter").css("z-index","10001");
+                $("body").css("overflow-y","hidden")
+            })
+
+            $(".btn-accepter").click(function(){
+                var c="{{ path("adresseGPS",{'lat':'var1','lon':'var2'}) }}";
+                var finalPath = c.replace("var1",$("[name='velobundle_velo[latitude]']").val() );
+                var finalPath2 = finalPath.replace("var2", $("[name='velobundle_velo[longitude]']").val());
+                var r="";
+                $.ajax({
+                    type: "post",
+                    url: finalPath2,
+                    contentType: "html",
+                    success: function(response) {
+                        $("[name='velobundle_velo[adresse]']").val(response)
+                        reduireMap()
+                    }
+                });
+
+            })
+
+            $(".btn-annuler").click(function(){
+                if($("[name='velobundle_velo[latitude]']").val()!=""){
+                $("[name='velobundle_velo[latitude]']").val("")
+                }
+                if($("[name='velobundle_velo[longitude]']").val()!=""){
+                $("[name='velobundle_velo[longitude]']").val("")
+                }
+                reduireMap()
+            })
+
+            function reduireMap(){
+                $("#map").css("z-index","-1");
+                $(".btn-annuler").css("z-index","-1");
+                $(".btn-accepter").css("z-index","-1");
+                $("body").css("overflow-y","scroll")
+            }
+            L.mapbox.accessToken = 'pk.eyJ1IjoiY3lyaWxsZTgwMCIsImEiOiJjazZzcmU2bHUwMDh0M2xxcGRtOGJndGh4In0.zqSmLTyuMbkLZQyVFgtAXA';
+
+            var mapboxTiles = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+                attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                tileSize: 512,
+                zoomOffset: -1
+            });
+
+            var map = L.map('map')
+                .addLayer(mapboxTiles)
+                .setView([0,0], 17);
+            var lc = L.control.locate({
+                strings:{
+                    popup: 'You'
+                }}).addTo(map);
+
+            // request location update and set location
+            lc.start();
+
+            var theMarker = [];
+            map.on('click', function(e) {
+
+                if (theMarker != undefined) {
+                    map.removeLayer(theMarker);
+                    $("[name='velobundle_velo[latitude]']").val(e.latlng.lat)
+                    $("[name='velobundle_velo[longitude]']").val(e.latlng.lng)
+                }
+                    theMarker  = L.marker([e.latlng.lat,e.latlng.lng]).addTo(map);
+                    map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng), map.getZoom());
+
+            });
+        })
+    </script>
+{% endblock %}

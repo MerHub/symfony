@@ -5,3 +5,7 @@ chauffeur_homepage:
 userProfile_page_chauffeur:
     path:     /userProfile
     defaults: { _controller: ChauffeurBundle:Default:userProfile }
+
+chauffeur_index:
+    path:     /Show
+    defaults: { _controller: ChauffeurBundle:Default:Show }

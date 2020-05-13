@@ -27,6 +27,11 @@ class AppKernel extends Kernel
             new OffreBundle\OffreBundle(),
             new AvisBundle\AvisBundle(),
             new CLientBundle\CLientBundle(),
+            new Vresh\TwilioBundle\VreshTwilioBundle(),
+            new blackknight467\StarRatingBundle\StarRatingBundle(),
+            new SBC\NotificationsBundle\NotificationsBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Egyg33k\CsvBundle\Egyg33kCsvBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

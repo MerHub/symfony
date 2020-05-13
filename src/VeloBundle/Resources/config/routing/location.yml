@@ -1,0 +1,31 @@
+location_index:
+    path:     /
+    defaults: { _controller: "VeloBundle:Location:index" }
+    methods:  GET
+
+location_show:
+    path:     /{idLocation}/show
+    defaults: { _controller: "VeloBundle:Location:show" }
+    methods:  GET
+
+location_new:
+    path:     /{idVelo}/new
+    defaults: { _controller: "VeloBundle:Location:new" }
+    methods:  [GET, POST]
+
+location_edit:
+    path:     /{idLocation}/edit
+    defaults: { _controller: "VeloBundle:Location:edit" }
+    methods:  [GET, POST]
+
+location_delete:
+    path:     /{idLocation}/delete
+    defaults: { _controller: "VeloBundle:Location:delete" }
+    methods:  DELETE
+prix:
+    path:     /prix
+    defaults: { _controller: "VeloBundle:Location:prix" }
+
+download:
+    path:     /download
+    defaults: { _controller: "VeloBundle:Location:download" }

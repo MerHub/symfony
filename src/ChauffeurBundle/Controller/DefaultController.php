@@ -3,6 +3,7 @@
 namespace ChauffeurBundle\Controller;
 
 use AppBundle\Entity\chauffeur;
+use AppBundle\Entity\Notification;
 use AppBundle\Entity\user;
 use AppBundle\Form\chauffeurType;
 use AppBundle\Form\userType;
@@ -27,7 +28,9 @@ class DefaultController extends Controller
             || $user->getPhoto()==null || $Puser->getNtel()==null){
             return $this->redirectToRoute("userProfile_page_chauffeur");
         }
+        $notification=$this->getDoctrine()->getRepository(Notification::class)->findBy(["idReceive"=>$id,"seen"=>0]);
         return $this->render('@Chauffeur/Default/index.html.twig',[
+            "notification"=>$notification,
             'user'=>$user
         ]);
     }
@@ -78,4 +81,13 @@ class DefaultController extends Controller
             "form"=>$form->createView()
         ]);
     }
+
+    public function ShowAction()
+    {
+        $liste=$this->getDoctrine()->getRepository(chauffeur::class)->findAll();
+        return $this->render('@Chauffeur/Default/ShowAvisReclamation.html.twig',[
+            "listeChauffeur"=>$liste
+        ]);
+    }
+
 }

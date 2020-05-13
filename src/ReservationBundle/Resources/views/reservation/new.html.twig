@@ -1,0 +1,182 @@
+{% extends '@Reservation/Default/index.html.twig' %}
+
+{% block moduleReservationLivraison %}
+
+    {# choisir une position sur la map #}
+
+    {% if form is defined %}
+    map.on('click', function(e) {
+    if(taxiSelect==false) {
+    setInterval(function () {
+    if ($("path.leaflet-interactive[stroke-opacity='0.75']").hasClass("dej") == false) {
+    $("path.leaflet-interactive[stroke-opacity='0.75']").attr("stroke", "#49BB72")
+    $("path.leaflet-interactive[stroke-opacity='0.75']").attr("stroke-width", "6")
+    $("path.leaflet-interactive[stroke-opacity='0.75']").addClass("dej")
+    }
+    }, 500)
+    var rien="";
+    var v1= iconStartExist();
+    var v2= iconEndExist();
+    {% if reservation is not defined %}
+        var LamMarker = ((v1!= -1 && v2!= -1) || (v1!= -1 && v2== -1)) ? creerIcon(e.latlng.lat, e.latlng.lng,"fin") : creerIcon(e.latlng.lat, e.latlng.lng,"debut");
+        ((v1!= -1 && v2!= -1) || (v1!= -1 && v2== -1)) ? $(".infor").hide() : "";
+        (theMarker.length >= 2) ? supprimerIcon(iconEndExist()) : rien="";
+    {% else %}
+        var LamMarker = creerIcon(e.latlng.lat, e.latlng.lng,"debut");
+        (theMarker.length >= 1) ? supprimerIcon(iconStartExist()) : rien="";
+    {% endif %}
+
+    LamMarker._leaflet_id = i;
+    theMarker.push(LamMarker);
+    coordonner.push([e.latlng.lat, e.latlng.lng])
+    map.addLayer(LamMarker);
+    v1= iconStartExist();
+    v2= iconEndExist();
+
+    var debut = 1;
+    var fin = 1;
+    (v1!=-1) ? (directions.setOrigin(L.latLng(coordonner[v1][0], coordonner[v1][1])),debut = coordonner[v1]) : rien="";
+    (v2!=-1) ? (directions.setDestination(L.latLng(coordonner[v2][0], coordonner[v2][1])),fin = coordonner[v2]) : rien="";
+
+    (debut != 1 && fin != 1) ? calculDistance(debut[0],debut[1],fin[0],fin[1]) : rien="";
+    (fin == 1) ? (directions.setOrigin(L.latLng(malatitude,malongitude)),
+    directions.setDestination(L.latLng(debut[0], debut[1])),
+    calculDistance(malatitude,malongitude,debut[0],debut[1])) : rien="";
+
+    LamMarker.on('click', function (e) {
+    v1= iconStartExist();
+    v2= iconEndExist();
+    $(".infor").show();
+    if(v2==-1){
+    $("#myInput").trigger("click")
+    }else{
+    var iconSelect= (theMarker[v1]._leaflet_id == e.target._leaflet_id) ? v1 : v2;
+    (theMarker[iconSelect]._popup._content == "end") ? (
+    directions.setOrigin(L.latLng(malatitude,malongitude)),
+    directions.setDestination(L.latLng(debut[0], debut[1])),
+    calculDistance(malatitude,malongitude,debut[0],debut[1])
+    ) : {% if reservation is not defined %} (
+    $(".infor").show(),
+    theMarker[v2].setIcon(L.mapbox.marker.icon({
+    'marker-size': 'large',
+    'marker-symbol': 'warehouse',
+    'marker-color': '#42AA6B'
+    })),
+    theMarker[v2]._popup._content = "start",
+    fin = coordonner[v2],
+    directions.setOrigin(L.latLng(malatitude,malongitude)),
+    directions.setDestination(L.latLng(fin[0], fin[1])),
+    calculDistance(malatitude,malongitude,fin[0],fin[1])
+
+    ){% else %} rien="" {% endif %},
+    {% if reservation is not defined %}
+        supprimerIcon(iconSelect)
+    {% else %}
+        $("#myInput").trigger("click")
+    {% endif %}
+    }
+    });
+
+    i++;
+    cmpt++;
+    if(parseFloat($(".lol").css("margin-left").replace("px",""))<0){
+    $("#myInput").trigger("click");
+    }
+    }else{
+    alert("you must cancle");
+    }
+    });
+
+    {% endif %}
+    {# afficher la liste des chauffeur sur la map #}
+
+    {% if user.type=="client" %}
+    {% for driver in listChauffeur %}
+
+        {% if driver.latitude is not null and driver.latitude is defined %}
+            L.marker([{{ driver.latitude }},{{ driver.longitude }}], {
+            icon: L.mapbox.marker.icon({
+            'marker-size': 'medium',
+            'marker-symbol': 'car',
+            'marker-color': '#ffcf39'
+            })
+            }).addTo(map).bindPopup('{{ driver.username }}').on('click', function(e) {
+            $("[name ='reservationbundle_reservation[idChauffeur]']").val({{driver.id}});
+
+            var directionChauffeurLayer=0;
+            var directionChauffeurRouteControl=0;
+            var start=iconStartExist();
+            var end= iconEndExist();
+            var rien="";
+            (start!=-1 && end==-1) ? (
+            directionChauffeurLayer = L.mapbox.directions.layer(directionChauffeur).addTo(map),
+            directionChauffeurRouteControl = L.mapbox.directions.routesControl('routes', directionChauffeur).addTo(map),
+            taxiSelect=true,
+            $(".deleteFormReservation").fadeOut(100).queue(function(){$(".contenuReservation").fadeIn();$(this).dequeue()}),
+            setInterval(function(){ ($("path.leaflet-interactive[stroke-width='4']").hasClass("dej")==false) ? (
+            $("path.leaflet-interactive[stroke-width='4']").attr("stroke","#F1A70E"),
+            $("path.leaflet-interactive[stroke-width='4']").attr("stroke-opacity","0.4"),
+            $("path.leaflet-interactive[stroke-width='4']").addClass("dej")
+            ) : rien=""
+            },100),
+            directionChauffeur.setOrigin(L.latLng(e.latlng.lat, e.latlng.lng)),
+            directionChauffeur.setOrigin(L.latLng(e.latlng.lat, e.latlng.lng)),
+            directionChauffeur.setDestination(L.latLng(malatitude,malongitude)),
+            idChauffeur={{ driver.id }},
+            supprimerIconSupplementaire(),
+            updateDirectionChauffeur()
+            ) : ((start==-1 && end==-1) ? (map.setView(new L.LatLng(e.latlng.lat, e.latlng.lng), map.getZoom())) : (
+            taxiSelect=true,
+            $(".reservation").fadeOut(100),
+            $(".livraison").fadeIn(100),
+            $(".deleteLivraison").fadeOut(100),
+            $(".contenuLivraison").fadeIn(100),
+            $(".livraison").animate({"left":"0%"})
+            ));
+            });
+        {% endif %}
+    {% endfor %}
+
+        {% if listEvenement is defined %}
+            {% for event in listEvenement %}
+
+                {% if event.latitude1 is not null and event.latitude1 is defined %}
+                    L.marker([{{ event.latitude1 }},{{ event.longitude1 }}], {
+                    icon: L.mapbox.marker.icon({
+                    'marker-size': 'medium',
+                    'marker-symbol': 'building',
+                    'marker-color': '#4D6AC3'
+                    })
+                    }).addTo(map).bindPopup('Depart : {{ event.depart }} {{ event.dateAllee | date('Y-m-d H:i:sP') }} <br> Arrivée : {{ event.arrivee }} {{ event.dateRetour| date('Y-m-d H:i:sP') }} <br> nombre de place restant {{ event.nbrPlace }} <br> <center><a class="btn btn-primary" href="{{ path('inscription_add',{id2: event.idEvent}) }}">show </a></center>').on('click', function(e) {
+
+
+                    });
+                {% endif %}
+            {% endfor %}
+         {% endif %}
+
+
+        {% if listVelo is defined %}
+            {% for velo in listVelo %}
+
+                {% if velo.latitude is not null and velo.latitude is defined %}
+                    L.marker([{{ velo.latitude }},{{ velo.longitude }}], {
+                    icon: L.mapbox.marker.icon({
+                    'marker-size': 'medium',
+                    'marker-symbol': 'bicycle',
+                    'marker-color': '#1CD182'
+                    })
+                    }).addTo(map).bindPopup('Adresse : {{ velo.adresse }} <br> prix : {{ velo.prix }} <br> nombre de vélos restant {{ velo.qte }} <br> <center><img src="{{ asset('font/uploads/'~velo.photo) }}" width="70px" height="70px" alt=""><br><a class="btn btn-primary" href="{{ path('location_new',{idVelo: velo.id}) }}">show </a></center>').on('click', function(e) {
+
+
+                    });
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+
+    {% endif %}
+
+    {# fonction utile pour la manipulation de la map #}
+
+{% endblock %}
