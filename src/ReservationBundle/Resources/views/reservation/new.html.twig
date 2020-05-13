@@ -155,6 +155,26 @@
             {% endfor %}
          {% endif %}
 
+
+        {% if listVelo is defined %}
+            {% for velo in listVelo %}
+
+                {% if velo.latitude is not null and velo.latitude is defined %}
+                    L.marker([{{ velo.latitude }},{{ velo.longitude }}], {
+                    icon: L.mapbox.marker.icon({
+                    'marker-size': 'medium',
+                    'marker-symbol': 'bicycle',
+                    'marker-color': '#1CD182'
+                    })
+                    }).addTo(map).bindPopup('Adresse : {{ velo.adresse }} <br> prix : {{ velo.prix }} <br> nombre de vélos restant {{ velo.qte }} <br> <center><img src="{{ asset('font/uploads/'~velo.photo) }}" width="70px" height="70px" alt=""><br><a class="btn btn-primary" href="{{ path('location_new',{idVelo: velo.id}) }}">show </a></center>').on('click', function(e) {
+
+
+                    });
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+
     {% endif %}
 
     {# fonction utile pour la manipulation de la map #}

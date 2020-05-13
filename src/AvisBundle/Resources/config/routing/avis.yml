@@ -1,3 +1,11 @@
+avis_moyenne:
+    path:     avis_moyenne/{idChauffeur}
+    defaults: { _controller: "AvisBundle:Avis:moyenne" }
+    methods:  GET
+
+avis_service_showAll:
+    path:     avis_service_showAll/{idChauffeur}
+    defaults: { _controller: "AvisBundle:Avis:avis_service_showAll" }
 avis_show:
     path:     /show
     defaults: { _controller: "AvisBundle:Avis:show" }
