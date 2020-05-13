@@ -1,31 +1,39 @@
 location_index:
-    path:     /
-    defaults: { _controller: "VeloBundle:Location:index" }
-    methods:  GET
+  path:     /
+  defaults: { _controller: "VeloBundle:Location:index" }
+  methods:  GET
 
 location_show:
-    path:     /{idLocation}/show
-    defaults: { _controller: "VeloBundle:Location:show" }
-    methods:  GET
+  path:     /{idLocation}/show
+  defaults: { _controller: "VeloBundle:Location:show" }
+  methods:  GET
+location_showM:
+  path:     /showM/{idLocation}
+  defaults: { _controller: "VeloBundle:Location:showM" }
+  methods:  GET
+location_newM:
+  path:     /newM/{idVelo}/{Date_D}/{Date_f}/{idclient}/{prix}
+  defaults: { _controller: "VeloBundle:Location:newM" }
+  methods:  [GET, POST]
 
 location_new:
-    path:     /new
-    defaults: { _controller: "VeloBundle:Location:new" }
-    methods:  [GET, POST]
+  path:     /{idVelo}/new
+  defaults: { _controller: "VeloBundle:Location:new" }
+  methods:  [GET, POST]
 
 location_edit:
-    path:     /{idLocation}/edit
-    defaults: { _controller: "VeloBundle:Location:edit" }
-    methods:  [GET, POST]
+  path:     /{idLocation}/edit
+  defaults: { _controller: "VeloBundle:Location:edit" }
+  methods:  [GET, POST]
 
 location_delete:
-    path:     /{idLocation}/delete
-    defaults: { _controller: "VeloBundle:Location:delete" }
-    methods:  DELETE
+  path:     /{idLocation}/delete
+  defaults: { _controller: "VeloBundle:Location:delete" }
+  methods:  DELETE
 prix:
-    path:     /prix
-    defaults: { _controller: "VeloBundle:Location:prix" }
+  path:     /prix
+  defaults: { _controller: "VeloBundle:Location:prix" }
 
 download:
-    path:     /download
-    defaults: { _controller: "VeloBundle:Location:download" }
+  path:     /download
+  defaults: { _controller: "VeloBundle:Location:download" }

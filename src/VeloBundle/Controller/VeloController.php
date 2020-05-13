@@ -3,7 +3,11 @@
 namespace VeloBundle\Controller;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use VeloBundle\Entity\Location;
 use VeloBundle\Entity\Velo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,6 +73,14 @@ class VeloController extends Controller
             'velo' => $velo,
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+    public function showVAction()
+    {
+        $deleteForm = $this->getDoctrine()->getRepository(Location::class)->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($deleteForm);
+        return new JsonResponse($formatted);
+
     }
 
     /**

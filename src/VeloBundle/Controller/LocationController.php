@@ -2,8 +2,12 @@
 
 namespace VeloBundle\Controller;
 
+use AppBundle\Entity\Client;
+use AppBundle\Entity\user;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use VeloBundle\Entity\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +35,7 @@ class LocationController extends Controller
             'locations' => $locations,
         ));
     }
+
     public function downloadAction()
     {
 
@@ -67,23 +72,23 @@ class LocationController extends Controller
      * Creates a new location entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $idVelo)
     {
         $location = new Location();
         $location->setDateD(new \DateTime('now'));
         $location->setDateF(new \DateTime('now'));
 
 
-
-
         $form = $this->createForm('VeloBundle\Form\LocationType', $location);
         $form->handleRequest($request);
-        $user=$this->getUser();
-        $velo=$this->getDoctrine()->getRepository(Velo::class)->findAll();
+        $user = $this->getUser();
+        $velo = $this->getDoctrine()->getRepository(Velo::class)->findAll();
+        $velo_s = $this->getDoctrine()->getRepository(Velo::class)->find($idVelo);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
+            $location->setIdVelo($velo_s);
             $location->setIdClient($user);
 
             $em->persist($location);
@@ -95,16 +100,48 @@ class LocationController extends Controller
         return $this->render('@Velo/location/new.html.twig', array(
             'location' => $location,
             'form' => $form->createView(),
-            'user'=>$user,
-            'velo'=>$velo
+            'user' => $user,
+            'velo' => $velo,
+            'idSelect' => $idVelo
         ));
+    }
+
+    public function newMAction(Velo $idVelo, $Date_D, $Date_f, user $idclient, $prix)
+    {
+        $location = new Location();
+        $location->setDateD(new \DateTime('now'));
+        $location->setDateF(new \DateTime('now'));
+
+
+        //   $user=$this->getUser();
+        $velo = $this->getDoctrine()->getRepository(Velo::class)->findAll();
+        $velo_s = $this->getDoctrine()->getRepository(Velo::class)->find($idVelo);
+
+
+        $em = $this->getDoctrine()->getManager();
+        try {
+            $df = new \DateTime($Date_f);
+            $dd=new \DateTime($Date_D);
+        } catch (\Exception $e) {
+        }
+        $location->setIdVelo($velo_s);
+        $location->setIdClient($idclient);
+        $location->setDateF($df);
+        $location->setDateD($dd);
+        $location->setPrix($prix);
+        $em->persist($location);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($location);
+        return new JsonResponse($formatted);
     }
 
     /**
      * Finds and displays a location entity.
      *
      */
-    public function prixAction(Request $request){
+    public function prixAction(Request $request)
+    {
 
         if (isset($_POST['d'])) {
 
@@ -116,6 +153,7 @@ class LocationController extends Controller
 
 
     }
+
     public function showAction(Location $location)
     {
         $deleteForm = $this->createDeleteForm($location);
@@ -124,6 +162,14 @@ class LocationController extends Controller
             'location' => $location,
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+    public function showMAction(Location $location)
+    {
+        $deleteForm = $this->getDoctrine()->getRepository(Location::class)->find($location);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($deleteForm);
+        return new JsonResponse($formatted);
+
     }
 
     /**
@@ -179,7 +225,6 @@ class LocationController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('location_delete', array('idLocation' => $location->getIdlocation())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
