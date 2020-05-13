@@ -1,0 +1,114 @@
+{% extends 'baseEv.html.twig' %}
+
+{% block body %}
+    <h1>Registraion list</h1>
+    <div class="sidebar-search">
+
+        <div class="input-group custom-search-form">
+
+            <input type="text" id="search" class="form-control" placeholder="Search here">
+        </div>
+        <!-- /input-group -->
+    </div>
+
+    <ul class="nav nav-second-level" id="entitiesNav">
+    </ul>
+
+    <br><br>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('searchi') }}",
+                        data: {
+                            'qi' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key === 'offre') {
+                                            if (id !== 'error') {
+                                                console.log(value);
+                                                console.log(window.navigator);
+                                                entitySelector.append('   <div class="content-body">    <div class="row">\n' +
+                                                    '                <div class="col-12"> <table class="table"><tr><b> Event : </b><th></th>'+value.nom+'</tr><tr><b>  Client : </b>'+value.username+''+'</tr></table> </div></div></div>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+    <div class="col-xl-12">
+    <section class="box ">
+        <header class="panel_header">
+            <h2 class="title float-left">Registration list</h2>
+            <div class="actions panel_actions float-right">
+                <a class="box_toggle fa fa-chevron-down"></a>
+
+            </div>
+        </header>
+        <div class="content-body">    <div class="row">
+                <div class="col-12">
+
+                    <table class="table">
+
+        <thead>
+            <tr>
+
+                <th>Client</th>
+                <th>Event</th>
+                <th>Date of travel</th>
+                <th>Return Date</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for inscription in inscriptions %}
+            <tr>
+
+                <td>{{ inscription.idClient  }}</td>
+                <td>{{ inscription.idEvent.nom }}</td>
+                <td>
+                    {{ inscription.idEvent.dateAllee|date('Y-m-d H:i:s')  }}
+
+                </td>
+                <td>
+                    {{ inscription.idEvent.dateRetour|date('Y-m-d H:i:s')  }}
+
+                </td>
+            </tr>
+        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section></div>
+
+
+
+{% endblock %}

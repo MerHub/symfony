@@ -1,0 +1,41 @@
+event_index:
+    path:     /
+    defaults: { _controller: "EvenementBundle:Event:index" }
+    methods:  GET
+
+event_front:
+    path:     /front
+    defaults: { _controller: "EvenementBundle:Event:front" }
+    methods:  GET
+
+event_details:
+    path:     /{id3}/details
+    defaults: { _controller: "EvenementBundle:Event:details" }
+    methods:  GET
+
+event_show:
+    path:     /{idEvent}/show
+    defaults: { _controller: "EvenementBundle:Event:show" }
+    methods:  GET
+
+inscription_add:
+    path:     /{id2}/add
+    defaults: { _controller: "EvenementBundle:Event:add" }
+    methods:  [GET, POST]
+
+
+
+event_new:
+    path:     /new
+    defaults: { _controller: "EvenementBundle:Event:new" }
+    methods:  [GET, POST]
+
+event_edit:
+    path:     /{idEvent}/edit
+    defaults: { _controller: "EvenementBundle:Event:edit" }
+    methods:  [GET, POST]
+
+event_delete:
+    path:     /{idEvent}/delete
+    defaults: { _controller: "EvenementBundle:Event:delete" }
+    methods:  DELETE

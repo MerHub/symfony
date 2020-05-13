@@ -10,4 +10,11 @@ namespace OffreBundle\Repository;
  */
 class OffreRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    function SearchOffre($libelle){
+    $query=$this->getEntityManager()->createQuery("select e from OffreBundle:Offre e where e.type LIKE '%$libelle%'");
+    return $query->getResult();
+
+}
+
 }

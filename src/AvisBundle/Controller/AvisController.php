@@ -9,6 +9,7 @@ use AvisBundle\Entity\Avis;
 use ChauffeurBundle\ChauffeurBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Avi controller.
@@ -32,6 +33,7 @@ class AvisController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($avi);
 
+            // notifi
             $titre = "Nouvel avis";
             $body = $avi->getMsg()." . Note = ".$avi->getNote();
             $operation="notif";
@@ -49,6 +51,8 @@ class AvisController extends Controller
             $pusher->trigger($notification);
             $em->persist($notification);
                 $em->flush();
+
+
             return $this->redirectToRoute('avis_index',[
                 'idChauffeur'=>$avi->getIdChauffeur()->getIdUser()->getId()
             ]);
@@ -81,6 +85,42 @@ class AvisController extends Controller
     public function newAction(Request $request,$idChauffeur,$idClient)
     {
         // j'ai mélangé avec index
+    }
+
+    /**
+     * Creates a new avi entity.
+     *
+     */
+    public function avis_service_showAllAction($idChauffeur)
+    {
+        $data=$this->getDoctrine()->getRepository(Avis::class)->findBy(["idChauffeur"=>$idChauffeur]);
+        $array=["listeAvis"=>[]];
+        foreach($data as $key=>$value){
+            array_push($array["listeAvis"],[
+                "username"=>$value->getIdCclient()->getIdUser()->getUsername(),
+                "message"=>$value->getMsg(),
+                "note"=>$value->getNote()
+            ]);
+        }
+        header('Content-type: application/json');
+        return  new Response(json_encode( $array ));
+    }
+
+
+    /**
+     * Creates a new avi entity.
+     *
+     */
+    public function moyenneAction($idChauffeur)
+    {
+        $dql = "SELECT AVG(e.note) AS balance FROM AvisBundle\Entity\Avis e " .
+            "WHERE e.idChauffeur = ?1";
+        $balance = $this->getDoctrine()->getManager()->createQuery($dql)
+            ->setParameter(1, $idChauffeur)
+            ->getSingleScalarResult();
+    $data=["moyenne"=>ceil($balance)];
+        header('Content-type: application/json');
+        return  new Response(json_encode( $data ));
     }
 
     /**

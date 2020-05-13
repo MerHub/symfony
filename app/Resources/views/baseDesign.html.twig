@@ -247,10 +247,10 @@
 
                     <div class='wraplist' style="background-color: transparent;">
 
-                        <div style="background-color: white;width: 100%;height: 79.6%;">
+                        <div>
                             <ul>
                                 <li class='menusection'>Main</li>
-                                <li class="">
+                                <li class="open">
                                     <a href="{{ path("reservation_index") }}" target="cad">
                                         <i class="fa fa-dashboard"></i>
                                         <span class="title">Dashboard</span>
@@ -272,18 +272,15 @@
 
                                     </ul>
                                 </li>
-                                <li class="open">
+                                <li  class="">
                                     <a href="javascript:;">
-                                        <i class="fa fa-columns"></i>
-                                        <span class="title">Layouts</span>
+                                        <i class="fa fa-heart" style="color: #FF0080;"></i>
+                                        <span class="title">Avis & reclamation</span>
                                         <span class="arrow open"></span>
                                     </a>
-                                    <ul class="sub-menu" style='display:block;'>
+                                    <ul class="sub-menu">
                                         <li>
-                                            <a class="" href="layout-boxed.html" >Boxed Layout</a>
-                                        </li>
-                                        <li>
-                                            <a class="active" href="layout-boxed-collapsed.html" >Boxed Collapsed Menu</a>
+                                            <a class=""  href="{{ path("chauffeur_index") }}"  target = 'cad' >Selectionner le chauffeur</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -307,7 +304,7 @@
             <section class="wrapper main-wrapper row" style='padding: 0;margin: 0;'>
 
                 <div class='col-12'  style='padding: 0;margin: 0;'>
-                    <div class="page-title" style='padding: 0;margin: 0;margin-top: 3.9%;'>
+                    <div class="page-title" style='padding: 0;margin: 0;margin-top: 3.7%;'>
                         <iframe src="{{ path("reservation_index") }}" frameborder="0" style="width: 100%;height: 92.8%;border-left:1px solid rgba(0,0,0,0.2);" name="cad"></iframe>
             </section>
         </section>
