@@ -318,15 +318,6 @@ class Event
         return $this;
     }
 
-    /**
-     * Get latitude
-     *
-     * @return string
-     */
-    public function getLatitude()
-    {
-        return $this->latitude;
-    }
 
     /**
      * Set longitude1
@@ -417,7 +408,7 @@ class Event
     /**
      * Get latitude1
      *
-     * @return string
+     * @return int
      */
     public function getLatitude1()
     {

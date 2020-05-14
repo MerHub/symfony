@@ -3,6 +3,10 @@ velo_index:
     defaults: { _controller: "VeloBundle:Velo:index" }
     methods:  GET
 
+velo_serviceList:
+    path:     /serviceList
+    defaults: { _controller: "VeloBundle:Velo:serviceList" }
+
 velo_show:
     path:     /{id}/show
     defaults: { _controller: "VeloBundle:Velo:show" }
