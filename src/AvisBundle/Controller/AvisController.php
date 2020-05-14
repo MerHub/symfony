@@ -3,6 +3,7 @@
 namespace AvisBundle\Controller;
 
 use AppBundle\Entity\chauffeur;
+use AppBundle\Entity\Client;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\user;
 use AvisBundle\Entity\Avis;
@@ -121,6 +122,27 @@ class AvisController extends Controller
     $data=["moyenne"=>ceil($balance)];
         header('Content-type: application/json');
         return  new Response(json_encode( $data ));
+    }
+
+
+    /**
+     * Creates a new avi entity.
+     *
+     */
+    public function avis_service_addAction($idChauffeur,$idClient,$note,$message)
+    {
+        $chauffeur=$this->getDoctrine()->getRepository(chauffeur::class)->find($idChauffeur);
+        $client=$this->getDoctrine()->getRepository(Client::class)->find($idClient);
+        $avis=new Avis();
+        $avis->setNote($note);
+        $avis->setMsg($message);
+        $avis->setIdCclient($client);
+        $avis->setIdChauffeur($chauffeur);
+        $em=$this->getDoctrine()->getManager();
+        $em->persist($avis);
+        $em->flush();
+        header('Content-type: application/json');
+        return  new Response(json_encode( ["reponse"=>"oui"] ));
     }
 
     /**
