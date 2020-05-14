@@ -6,6 +6,7 @@ use EvenementBundle\Entity\Event;
 use EvenementBundle\Entity\Inscription;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -35,6 +36,46 @@ class EventController extends Controller
         return $this->render('@Evenement/event/index.html.twig', array(
             'events' => $events,
         ));
+    }
+
+    public function serviceShowListAction(){
+        $list=$this->getDoctrine()->getRepository(Event::class)->findAll();
+        $data=["liste"=>[]];
+        forEach($list as $key=>$value){
+            $dateAlle=$value->getDateAllee();
+            $dateRetour=$value->getDateRetour();
+            array_push($data["liste"],[
+                "idEvent"=>$value->getIdEvent(),
+                "nom"=>$value->getNom(),
+                "nbrPlace"=>$value->getNbrPlace(),
+                "depart"=>$value->getDepart(),
+                "arrivee"=>$value->getArrivee(),
+                "dateAllee"=>[
+                    "annee"=>$dateAlle->format('Y'),
+                    "mois"=>$dateAlle->format('m'),
+                    "jour"=>$dateAlle->format('d'),
+                    "heure"=>$dateAlle->format('H')+1,
+                    "minute"=>$dateAlle->format('i'),
+                    "seconde"=>$dateAlle->format('s')
+                ],
+                "dateRetour"=>[
+                    "annee"=>$dateRetour->format('Y'),
+                    "mois"=>$dateRetour->format('m'),
+                    "jour"=>$dateRetour->format('d'),
+                    "heure"=>$dateRetour->format('H')+1,
+                    "minute"=>$dateRetour->format('i'),
+                    "seconde"=>$dateRetour->format('s')
+                ],
+                "decription"=>$value->getDescription(),
+                "latitude1"=>$value->getLatitude1(),
+                "latitude2"=>$value->getLatitude2(),
+                "longitude1"=>$value->getLongitude1(),
+                "longitude2"=>$value->getLongitude2(),
+            ]);
+        }
+
+        header('Content-type: application/json');
+        return  new Response(json_encode( $data ));
     }
     public function frontAction()
     {
