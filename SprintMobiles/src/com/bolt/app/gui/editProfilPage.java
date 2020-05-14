@@ -36,7 +36,6 @@ public class editProfilPage extends Form{
         
         Container messageError=new Container(BoxLayout.y());
         messageError.setUIID("messageok");
-        messageError.setVisible(false);
         Label textError=new Label("");
         textError.setUIID("msgOk");
         messageError.add(textError);
@@ -181,8 +180,6 @@ tb.addCommandToSideMenu("DashBoard",searchIcon,e->new indexClientPage().showBack
          blockEditProfil.add(changePassword);
          add(block2);
          add(messageError);
-                 block4.setVisible(false);
-       blockEditProfil.setVisible(false);
          add(block4);
         add(blockEditProfil);
         

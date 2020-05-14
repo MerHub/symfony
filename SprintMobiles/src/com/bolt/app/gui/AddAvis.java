@@ -8,12 +8,14 @@ package com.bolt.app.gui;
 import com.bolt.app.MyApplication;
 import com.bolt.app.entities.Avis;
 import com.bolt.app.entities.Chauffeur;
+import com.bolt.app.entities.Client;
 import com.bolt.app.entities.Taxi;
 import com.bolt.app.services.ServiceAvis;
 import com.bolt.app.services.ServiceTaxi;
 import com.bolt.app.utils.Statics;
 import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
+import static com.codename1.ui.ComponentSelector.$;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
@@ -48,7 +50,13 @@ public class AddAvis extends Form{
             current.getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, 4, e-> previous.showBack());
             current.getTitleArea().setUIID("entetePageIndex");
             
-            
+                            Container messageError=new Container(BoxLayout.y());
+        messageError.setUIID("messageok");
+        messageError.setVisible(false);
+        Label textError=new Label("");
+        textError.setUIID("msgError");
+        messageError.add(textError);
+        add(messageError);
             
             EncodedImage enc;
             Container containergrand= new Container(BoxLayout.y());
@@ -101,7 +109,31 @@ if(t.getCatTaxi()!=null){
             add(s);
             Button submit=new Button("add a reviews");
                  submit.addActionListener(e-> {
-                   
+                   Avis a=new Avis();
+                   if(textArea.getText().trim().equals("")){
+                                            messageError.setUIID("messageErrorShow");
+                     textError.setUIID("msgError");
+                     textError.setText("* remplir les champs");
+                                                                     $(() -> {
+           $("messageErrorShow").fadeIn(); 
+       });     
+                   }else{
+                                               messageError.setUIID("messageok");
+                        textError.setUIID("msgOk");
+                        textError.setText("* opération terminé");
+                                                $(() -> {
+           $("messageok").fadeIn(); 
+       });
+                                                Client cx=new Client();
+                                                cx.setId_user(MyApplication.userConnect.getId_user());
+                                                
+                                                a.setClient(cx);
+                                                a.setChauffeur(c);
+                                                a.setMsg(textArea.getText());
+                                                a.setNote(s.getProgress());
+                                                ServiceAvis.getInstance().addAvis(a);
+                                                new showChauffeur(previous, c, null).show();
+                   }
                  });
                     
          submit.setUIID("submit");

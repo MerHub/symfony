@@ -107,4 +107,19 @@ public class ServiceAvis {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return listAvis;
     }
+            
+            
+                     public void addAvis(Avis a){
+        String url = Statics.BASE_URL+"/Avis/avis_service_add/"+a.getChauffeur().getId_user()+"/"+a.getClient().getId_user()+"/"+a.getNote()+"/"+a.getMsg();
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                listAvis = parseList(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+    }
 }

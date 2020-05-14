@@ -70,6 +70,15 @@ public class indexClientPage extends Form{
         tb.addComponentToSideMenu(c);
         Style s = UIManager.getInstance().getComponentStyle("Title");
         FontImage searchIcon = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_BOX, s);
+        
+                  current.getToolbar().addCommandToOverflowMenu("Setting",MyApplication.theme.getImage("icon.png"),e->{
+           new editProfilPage().show();
+       });
+                                    current.getToolbar().addCommandToOverflowMenu("Log out",MyApplication.theme.getImage("icon.png"),e->{
+                       MyApplication.userConnect=null;
+             new loginPage(new startPage()).showBack();
+       });
+                  
         current.getTitleArea().setUIID("entetePageIndex");
         if(MyApplication.userConnect.getN_tel()==0){
                      Button changePassword=new Button("completer vos infos ",FontImage.MATERIAL_ARROW_RIGHT,"re");

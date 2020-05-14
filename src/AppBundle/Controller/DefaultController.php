@@ -188,6 +188,45 @@ class DefaultController extends Controller
         return  new Response(json_encode( $data ));
     }
 
+    /**
+     * @Route("/servicesetUsers/{username}/{email}/{password}/{numero}/{id}", name="servicesetUsers")
+     */
+    public function servicesetUsers($username,$email,$password,$numero,$id)
+    {
+        $user=$this->getDoctrine()->getRepository(user::class)->find($id);
+        $mail=$this->getDoctrine()->getRepository(user::class)->findBy(["email"=>$email]);
+        $num=$this->getDoctrine()->getRepository(user::class)->findBy(["nTel"=>$numero]);
+        $usernam=$this->getDoctrine()->getRepository(user::class)->findBy(["username"=>$username]);
+        $data=["requette"=>["reponse"=>"oui"]];
+        if(sizeof($mail)!=0 && $mail[0]->getEmail()!=$user->getEmail()){
+            $data=["requette"=>["reponse"=>"no","message"=>"ce email existe deja"]];
+        }
+        if(sizeof($num)!=0 && $num[0]->getNTel()!=$user->getNTel()){
+            $data=["requette"=>["reponse"=>"no","message"=>"ce numero existe deja"]];
+        }
+        if(sizeof($usernam)!=0 && $usernam[0]->getUsername()!=$user->getUsername()){
+            $data=["requette"=>["reponse"=>"no","message"=>"ce username existe deja"]];
+        }
+
+        if($data["requette"]["reponse"]=="oui"){
+            $encoder_service = $this->get('security.encoder_factory');
+            $encoder = $encoder_service->getEncoder($user);
+            if ($encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
+                $user->setEmail($email);
+                $user->setUsername($username);
+                $user->setNTel($numero);
+                $em=$this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+            }else{
+                $data=["requette"=>["reponse"=>"no","message"=>"password incorrect"]];
+            }
+        }
+
+        header('Content-type: application/json');
+        return  new Response(json_encode( $data ));
+    }
+
 
 
 
