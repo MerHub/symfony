@@ -130,13 +130,13 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\drive\symfony\web\back\data\profile" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\symfony\projetWeb\symfony\web\back" />
       <recent name="C:\wamp64\www\symfony\symfony\src\AvisBundle\Resources\views" />
       <recent name="C:\wamp64\www\symfony\projetWeb\symfony\src\ReservationBundle\Resources\views" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\drive\symfony\web\back\data\profile" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -225,7 +225,9 @@
       <workItem from="1589236902906" duration="2458000" />
       <workItem from="1589293164869" duration="614000" />
       <workItem from="1589318759503" duration="621000" />
->>>>>>> master
+      <workItem from="1589333014992" duration="3360000" />
+      <workItem from="1589408368808" duration="2785000" />
+      <workItem from="1589424086055" duration="13560000" />
     </task>
     <servers />
   </component>
@@ -260,11 +262,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="574" y="98" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1589110843598" />
-    <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589160028006">
+    <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589447214352">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="444" y="148" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1587006863353" />
-    <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1589160028006" />
+    <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1589447214352" />
     <state x="624" y="220" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1586659539927" />
     <state x="686" y="220" key="FileChooserDialogImpl" timestamp="1586996443860">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -280,11 +282,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1080@0.0.1920.1080" timestamp="1586914066982" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1589318760443">
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1589424097949">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="414" y="210" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1585848385900" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1589318760443" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1589424097949" />
     <state x="581" y="312" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1587055482980" />
     <state x="615" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589129281520">
       <screen x="0" y="0" width="1536" height="824" />

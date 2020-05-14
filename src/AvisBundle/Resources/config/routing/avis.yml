@@ -6,6 +6,11 @@ avis_moyenne:
 avis_service_showAll:
     path:     avis_service_showAll/{idChauffeur}
     defaults: { _controller: "AvisBundle:Avis:avis_service_showAll" }
+
+avis_service_add:
+    path:     avis_service_add/{idChauffeur}/{idClient}/{note}/{message}
+    defaults: { _controller: "AvisBundle:Avis:avis_service_add" }
+
 avis_show:
     path:     /show
     defaults: { _controller: "AvisBundle:Avis:show" }

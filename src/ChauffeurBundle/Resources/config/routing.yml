@@ -1,3 +1,7 @@
+chauffeur_serviceSetChauffeur:
+    path:     /serviceSetChauffeur/{adresse}/{cin}/{permis}/{nom}/{prenom}/{photo}/{id}
+    defaults: { _controller: ChauffeurBundle:Default:ServiceSetChauffeur }
+
 chauffeur_homepage:
     path:     /
     defaults: { _controller: ChauffeurBundle:Default:index }
