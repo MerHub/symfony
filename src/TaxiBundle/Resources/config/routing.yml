@@ -4,3 +4,11 @@ taxi_homepage:
 service_GetTaxi:
     path:    /serviceGetTaxi/{id_chauffeur}
     defaults: { _controller: TaxiBundle:Default:serviceGetTaxi }
+
+service_GetCategorieTaxi:
+    path:    /GetCategorieTaxi
+    defaults: { _controller: TaxiBundle:Default:serviceGetCategorieTaxi }
+
+service_setTaxi:
+    path:    /service_setTaxi/{numchassis}/{idCat}/{idChaufeur}
+    defaults: { _controller: TaxiBundle:Default:serviceSetCategorieTaxi }

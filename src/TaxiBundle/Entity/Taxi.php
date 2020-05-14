@@ -29,7 +29,7 @@ class Taxi
     private $idChauffeur;
 
     /**
-     * @var string
+     * @var integer
      * @ORM\ManyToOne(targetEntity=CategorieTaxi::class)
      * @ORM\JoinColumn(name="categorie" , referencedColumnName="id")
      */
@@ -50,7 +50,7 @@ class Taxi
     private $numChassis;
 
     /**
-     * @return string
+     * @return integer
      */
     public function getCategorie()
     {
@@ -58,7 +58,7 @@ class Taxi
     }
 
     /**
-     * @param string $categorie
+     * @param int $categorie
      */
     public function setCategorie($categorie)
     {
