@@ -33,6 +33,25 @@ class VeloController extends Controller
         ));
     }
 
+    public function serviceListAction(){
+        $list=$this->getDoctrine()->getRepository(Velo::class)->findAll();
+        $data=["liste"=>[]];
+        forEach($list as $key=>$value){
+            array_push($data["liste"],[
+                "id"=>$value->getId(),
+                "type"=>$value->getType(),
+                "adresse"=>$value->getAdresse(),
+                "photo"=>$value->getPhoto(),
+                "qte"=>$value->getQte(),
+                "prix"=>$value->getPrix(),
+                "latitude"=>$value->getLatitude(),
+                "longitude"=>$value->getLongitude(),
+            ]);
+        }
+        header('Content-type: application/json');
+        return  new Response(json_encode( $data ));
+    }
+
     /**
      * Creates a new velo entity.
      *

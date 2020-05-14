@@ -3,6 +3,10 @@ event_index:
     defaults: { _controller: "EvenementBundle:Event:index" }
     methods:  GET
 
+service_EventShow:
+    path:   /listEvent
+    defaults: { _controller: "EvenementBundle:Event:serviceShowList" }
+
 event_front:
     path:     /front
     defaults: { _controller: "EvenementBundle:Event:front" }
