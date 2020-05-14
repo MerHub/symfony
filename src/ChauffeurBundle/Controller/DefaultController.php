@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -33,6 +34,50 @@ class DefaultController extends Controller
             "notification"=>$notification,
             'user'=>$user
         ]);
+    }
+
+    public function ServiceSetChauffeurAction($adresse="",$cin="",$permis="",$nom="",$prenom="",$photo="",$id){
+
+        $data=["requette"=>["reponse"=>"oui"]];
+        $cins=$this->getDoctrine()->getRepository(chauffeur::class)->findBy(["cin"=>$cin]);
+        $permiss=$this->getDoctrine()->getRepository(chauffeur::class)->findBy(["permis"=>$permis]);
+        $chauffeur=new chauffeur();
+        $chauffeur=$this->getDoctrine()->getRepository(chauffeur::class)->find($id);
+        $chauffeur->setAdresse($adresse);
+        if(sizeof($cins)!=0 && $cins[0]->getCin()!=$chauffeur->getCin()){
+            $data=["requette"=>["reponse"=>"no","message"=>"CIN existe deja"]];
+        }else{
+            $chauffeur->setCin($cin);
+        }
+        if(sizeof($permiss)!=0 && $permiss[0]->getPermis()!=$chauffeur->getPermis()){
+            $data=["requette"=>["reponse"=>"no","message"=>"permis existe deja"]];
+        }else{
+            $chauffeur->setPermis($permis);
+        }
+        $chauffeur->setNom($nom);
+        $chauffeur->setPrenom($prenom);
+        if($photo!="rien"){
+            $photo=str_replace("&","/",$photo);
+            $image_link = $photo;//Direct link to image
+            $structure = __DIR__.'/../../../web/font/imgProfileUser/';
+            $ex=$pieces = explode(".", $image_link);
+            $destination=$structure.$id.".".end($ex);
+
+            if(copy($photo, $destination)){
+                $chauffeur->setPhoto($id.".".end($ex));
+            }
+        }
+
+if($data["requette"]["reponse"]=="oui"){
+    $em=$this->getDoctrine()->getManager();
+    $em->persist($chauffeur);
+    $em->flush();
+}
+
+        header('Content-type: application/json');
+        return  new Response(json_encode( $data ));
+
+
     }
 
     public function userProfileAction(Request $request)
