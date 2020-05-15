@@ -105,7 +105,7 @@ class LocationController extends Controller
             'idSelect' => $idVelo
         ));
     }
-
+/*
     public function newMAction(Velo $idVelo, $Date_D, $Date_f, user $idclient, $prix)
     {
         $location = new Location();
@@ -135,7 +135,7 @@ class LocationController extends Controller
         $formatted = $serializer->normalize($location);
         return new JsonResponse($formatted);
     }
-
+*/
     /**
      * Finds and displays a location entity.
      *
@@ -163,6 +163,7 @@ class LocationController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    /*
     public function showMAction(Location $location)
     {
         $deleteForm = $this->getDoctrine()->getRepository(Location::class)->find($location);
@@ -171,7 +172,7 @@ class LocationController extends Controller
         return new JsonResponse($formatted);
 
     }
-
+*/
     /**
      * Displays a form to edit an existing location entity.
      *

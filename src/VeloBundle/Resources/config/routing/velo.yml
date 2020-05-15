@@ -12,10 +12,6 @@ velo_show:
     defaults: { _controller: "VeloBundle:Velo:show" }
     methods:  GET
 
-velo_showV:
-    path:     /showV
-    defaults: { _controller: "VeloBundle:Velo:showV" }
-    methods:  GET
 
 velo_new:
     path:     /new

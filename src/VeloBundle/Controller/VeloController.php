@@ -93,14 +93,7 @@ class VeloController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
-    public function showVAction()
-    {
-        $deleteForm = $this->getDoctrine()->getRepository(Location::class)->findAll();
-        $serializer = new Serializer([new ObjectNormalizer()]);
-        $formatted = $serializer->normalize($deleteForm);
-        return new JsonResponse($formatted);
 
-    }
 
     /**
      * Displays a form to edit an existing velo entity.

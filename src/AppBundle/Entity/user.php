@@ -89,12 +89,12 @@ class user extends BaseUser
 
     /**
      * @return string
-     *//*
+     */
     public function getLogin()
     {
         return $this->login;
     }
-*/
+
     /**
      * @param string $login
      */
@@ -106,11 +106,11 @@ class user extends BaseUser
     /**
      * @return string
      */
-   /* public function getMdp()
+    public function getMdp()
     {
         return $this->mdp;
     }
-*/
+
     /**
      * @param string $mdp
      */
@@ -122,12 +122,12 @@ class user extends BaseUser
     /**
      * @return bool
      */
-    /*
+
     public function isEtat()
     {
         return $this->etat;
     }
-*/
+
     /**
      * @param bool $etat
      */
