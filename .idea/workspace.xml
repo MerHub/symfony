@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6f85daa7-c189-48ac-bbb2-6ffa9b6026d4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EvenementBundle/Controller/InscriptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvenementBundle/Controller/InscriptionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EvenementBundle/Entity/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvenementBundle/Entity/Event.php" afterDir="false" />
@@ -11,6 +12,8 @@
       <change beforePath="$PROJECT_DIR$/src/EvenementBundle/Resources/views/inscription/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvenementBundle/Resources/views/inscription/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OffreBundle/Entity/Offre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OffreBundle/Entity/Offre.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OffreBundle/Resources/views/offre/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/OffreBundle/Resources/views/offre/new.html.twig" afterDir="false" />
+=======
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,6 +179,7 @@
       <workItem from="1585848364881" duration="3819000" />
       <workItem from="1586107173898" duration="1332000" />
       <workItem from="1586113338741" duration="14278000" />
+<<<<<<< Updated upstream
       <workItem from="1586381004515" duration="4231000" />
       <workItem from="1586390873749" duration="724000" />
       <workItem from="1586459040645" duration="13970000" />
@@ -208,6 +212,16 @@
       <workItem from="1589408368808" duration="2785000" />
       <workItem from="1589424086055" duration="13560000" />
       <workItem from="1589492575238" duration="5058000" />
+=======
+      <workItem from="1586280187865" duration="1401000" />
+      <workItem from="1586281616650" duration="400000" />
+      <workItem from="1586282028942" duration="2585000" />
+      <workItem from="1586378647133" duration="32000" />
+      <workItem from="1586378844716" duration="54107000" />
+      <workItem from="1587734966533" duration="6000" />
+      <workItem from="1587817455958" duration="5453000" />
+      <workItem from="1588536478435" duration="15415000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
