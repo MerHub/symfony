@@ -82,6 +82,37 @@ class LivraisonController extends Controller
         ));
     }
 
+    public function serviceAddLivraisonAction($codeLivraison,$idChauffeur,$idClient,$depart,$arrive,$prix,$typeReservation,$latitude,$longitude,$latitude2,$longitude2){
+
+        $reservation=new Reservation();
+        $chaffeur=$this->getDoctrine()->getRepository(chauffeur::class)->find($idChauffeur);
+        $client=$this->getDoctrine()->getRepository(Client::class)->find($idClient);
+        $reservation->setIdChauffeur($chaffeur);
+        $reservation->setIdClient($client);
+        $reservation->setDepart($depart);
+        $reservation->setArrive($arrive);
+        $reservation->setPrix($prix);
+        $reservation->setTypeReservation($typeReservation);
+        $reservation->setLatitude($latitude);
+        $reservation->setLongitude($longitude);
+        $reservation->setLatitude2($latitude2);
+        $reservation->setLongitude2($longitude2);
+        $em=$this->getDoctrine()->getManager();
+        $em->persist($reservation);
+        $em->flush();
+        $reservation=$this->getDoctrine()->getRepository(Reservation::class)->findOneBy(["latitude"=>$latitude,"longitude"=>$longitude,"latitude2"=>$latitude2,"longitude2"=>$longitude2]);
+        $livraison=new Livraison();
+        $livraison->getIdReservation($reservation);
+        $livraison->setEtat(0);
+        $livraison->setCodeLivraison($codeLivraison);
+        $em->persist($livraison);
+        $em->flush();
+
+        header('Content-type: application/json');
+        return  new Response(json_encode( ["requette"=>["reponse"=>"oui"]] ));
+
+    }
+
     /**
      * Displays a form to edit an existing livraison entity.
      *

@@ -35,3 +35,7 @@ avis_index:
     path:     /{idChauffeur}/
     defaults: { _controller: "AvisBundle:Avis:index" }
     methods:  [GET, POST]
+
+avis_service_remove:
+    path: /avis_service_remove/{id}
+    defaults: { _controller: "AvisBundle:Avis:serviceDelete" }

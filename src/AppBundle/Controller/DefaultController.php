@@ -308,6 +308,10 @@ class DefaultController extends Controller
             if($user->getType()=="client"){
                 return $this->redirectToRoute("client_homepage");
             }
+            if($user->getType()=="admin"){
+                return $this->render('indexBack.html.twig');
+                return $this->redirectToRoute("client_homepage");
+            }
 
         }
 
