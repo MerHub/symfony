@@ -7,7 +7,7 @@ use ReservationBundle\Entity\Livraison;
 use ReservationBundle\Entity\Reservation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+//partie mobile
 /**
  * Livraison controller.
  *
