@@ -6,6 +6,7 @@ use AppBundle\Entity\chauffeur;
 use AppBundle\Entity\Client;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\user;
+use TaxiBundle\Entity\Taxi;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

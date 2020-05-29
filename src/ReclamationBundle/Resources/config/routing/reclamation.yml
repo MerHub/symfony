@@ -22,3 +22,17 @@ reclamation_delete:
     path:     /{idRec}/delete
     defaults: { _controller: "ReclamationBundle:Reclamation:delete" }
     methods:  DELETE
+
+reclamation_newM:
+    path:     /newM/{idClient}/{idchauffeur}/{typeReclamation}
+    defaults: { _controller: "ReclamationBundle:Reclamation:newM" }
+    methods:  [GET, POST]
+
+reclamation_showM:
+    path:     /showReclamation/{id}
+    defaults: { _controller: "ReclamationBundle:Reclamation:showReclamation" }
+    methods:  [GET, POST]
+reclamation_getTypesM:
+    path:     /getTypes
+    defaults: { _controller: "ReclamationBundle:Reclamation:getTypes" }
+    methods:  [GET, POST]

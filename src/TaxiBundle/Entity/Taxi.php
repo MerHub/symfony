@@ -23,11 +23,10 @@ class Taxi
 
     /**
      * @var integer
-     * @ORM\OneToOne(targetEntity=AppBundle\Entity\user::class)
-     * @ORM\JoinColumn(name="id_chauffeur" , referencedColumnName="id_user")
+     * @ORM\OneToOne(targetEntity=AppBundle\Entity\chauffeur::class)
+     * @ORM\JoinColumn(name="id_chauffeur" , referencedColumnName="id")
      */
     private $idChauffeur;
-
     /**
      * @var integer
      * @ORM\ManyToOne(targetEntity=CategorieTaxi::class)
@@ -121,21 +120,7 @@ class Taxi
         return $this->numChassis;
     }
 
-    /**
-     * @return string
-     */
-    public function getCategorie()
-    {
-        return $this->categorie;
-    }
 
-    /**
-     * @param string $categorie
-     */
-    public function setCategorie($categorie)
-    {
-        $this->categorie = $categorie;
-    }
 
 
     /**
