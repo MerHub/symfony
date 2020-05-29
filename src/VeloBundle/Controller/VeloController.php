@@ -2,6 +2,7 @@
 
 namespace VeloBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -102,7 +103,7 @@ class VeloController extends Controller
     public function editAction(Request $request, Velo $velo)
     {
         $deleteForm = $this->createDeleteForm($velo);
-        $editForm = $this->createForm('VeloBundle\Form\VeloType', $velo);
+        $editForm = $this->createForm('VeloBundle\Form\VeloType', $velo) ->add('photo',FileType::class,array('label'=>'photo','data_class'=>null, 'required'=>false));;
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

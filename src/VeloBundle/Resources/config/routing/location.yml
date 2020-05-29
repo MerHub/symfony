@@ -16,6 +16,10 @@ location_newM:
   defaults: { _controller: "VeloBundle:Location:newM" }
   methods:  [GET, POST]
 
+service_LocationShow:
+  path:   /listlocation/{idLocation}
+  defaults: { _controller: "VeloBundle:Location:serviceShowList" }
+
 location_new:
   path:     /{idVelo}/new
   defaults: { _controller: "VeloBundle:Location:new" }

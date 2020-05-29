@@ -34,15 +34,15 @@
                             <td >{{ form_widget(form.prix,{'attr':{'class':'disabled'}}) }}</td>
                             <td><input class="btn btn-colors btn-colors alert-success" type="button" id="prix" value="calculate"></td>
                         </tr>
-<<<<<<< HEAD
-                        <tr>
-                            <td >{{ form_label(form.idClient) }}</td>
-                            <td >{{ form_widget(form.idClient) }}</td>
-                        </tr>
-                        <tr><td  >{{ form_label(form.idVelo) }}</td><td  >{{ form_widget(form.idVelo) }}</td></tr>
-=======
+
+                        <tr >
+                            <td hidden >{{ form_label(form.idClient) }}</td>
+                            <td hidden>{{ form_widget(form.idClient) }}</td>
+                        </tr >
+
+
                         <tr><td  hidden>{{ form_label(form.idVelo) }}</td><td hidden>{{ form_widget(form.idVelo,{value: idSelect }) }}</td></tr>
->>>>>>> ghada
+
 
                         <td> <input class="btn btn-accent btn-md" type="submit" value="Create" id="cr"/></td>
 
@@ -53,11 +53,7 @@
                     </table>
                 </div></div></div></div>
 
-    <ul>
-        <li>
-            <a href="{{ path('location_index') }}">Back to the list</a>
-        </li>
-    </ul>
+
                 </div>
 
             </div>

@@ -105,7 +105,7 @@ class LocationController extends Controller
             'idSelect' => $idVelo
         ));
     }
-/*
+
     public function newMAction(Velo $idVelo, $Date_D, $Date_f, user $idclient, $prix)
     {
         $location = new Location();
@@ -131,11 +131,10 @@ class LocationController extends Controller
         $location->setPrix($prix);
         $em->persist($location);
         $em->flush();
-        $serializer = new Serializer([new ObjectNormalizer()]);
-        $formatted = $serializer->normalize($location);
-        return new JsonResponse($formatted);
+        header('Content-type: application/json');
+        return  new Response(json_encode( ["reponse"=>"oui"] ));
     }
-*/
+
     /**
      * Finds and displays a location entity.
      *
@@ -163,6 +162,43 @@ class LocationController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    public function serviceShowListAction($idLocation){
+
+        $list=$this->getDoctrine()->getRepository(Location::class)->findBy(["idLocation"=>$idLocation]);
+        $data=["liste"=>[]];
+        forEach($list as $key=>$value){
+            $date_d=$value->getDateD();
+            $date_f=$value->getDateF();
+            array_push($data["liste"],[
+                "idLocation"=>$value->getIdLocation(),
+                "idClient"=>$value->getIdClient(),
+                "idVelo"=>$value->getIdVelo(),
+
+
+                "date_d"=>[
+                    "annee"=>$date_d->format('Y'),
+                    "mois"=>$date_d->format('m'),
+                    "jour"=>$date_d->format('d'),
+                    "heure"=>$date_d->format('H')+1,
+                    "minute"=>$date_d->format('i'),
+                    "seconde"=>$date_d->format('s')
+                ],
+                "date_f"=>[
+                    "annee"=>$date_f->format('Y'),
+                    "mois"=>$date_f->format('m'),
+                    "jour"=>$date_f->format('d'),
+                    "heure"=>$date_f->format('H')+1,
+                    "minute"=>$date_f->format('i'),
+                    "seconde"=>$date_f->format('s')
+                ],
+                "prix"=>$value->getPrix(),
+
+            ]);
+        }
+
+        header('Content-type: application/json');
+        return  new Response(json_encode( $data ));
+    }
     /*
     public function showMAction(Location $location)
     {
@@ -186,7 +222,7 @@ class LocationController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('location_edit', array('idLocation' => $location->getIdlocation()));
+          return $this->redirectToRoute('location_edit', array('idLocation' => $location->getIdlocation()));
         }
 
         return $this->render('@Velo/location/edit.html.twig', array(

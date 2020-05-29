@@ -3,6 +3,7 @@
 namespace VeloBundle\Form;
 
 use AppBundle\Entity\Client;
+use AppBundle\Entity\user;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -23,8 +24,8 @@ class LocationType extends AbstractType
                 'choice_label'=>'id'
             ])->add('idClient',EntityType::class,
             [
-                'class'=>Client::class,
-                'choice_label'=>'idUser'
+                'class'=>user::class,
+                'choice_label'=>'id'
             ]);
     }/**
      * {@inheritdoc}
