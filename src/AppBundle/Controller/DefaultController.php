@@ -286,6 +286,24 @@ class DefaultController extends Controller
 
         return $this->redirectToRoute('_show', array('idReservation' => $idReservation));
     }
+
+    /**
+     * @Route("/Sendsmessage/{message}", name="Sendsmessage")
+     */
+    public function Sendsmessage($message)
+    {
+        //returns an instance of Vresh\TwilioBundle\Service\TwilioWrapper
+        $twilio = $this->get('twilio.api');
+        $message = $twilio->account->messages->sendMessage(
+            '+12018014274', // From a Twilio number in your account
+            '+21654426394', // Text any number
+            $message
+        );
+
+        return new Response("ok");
+    }
+
+
     /**
      * @Route("/login", name="loginpage")
      */
