@@ -223,7 +223,7 @@ class EventController extends Controller
             //}
        //     $twilio = $this->get('twilio.api');
 
-           $sid = "ACa7cb1b635f46f7fedbf40bbf2c4e25af"; // Your Account SID from www.twilio.com/console
+    /*       $sid = "ACa7cb1b635f46f7fedbf40bbf2c4e25af"; // Your Account SID from www.twilio.com/console
             $token = "520a62a1ef97242d042b0f044b564082"; // Your Auth Token from www.twilio.com/console
 
             $client = new CurlClient($sid, $token);
@@ -234,7 +234,7 @@ class EventController extends Controller
                     'body' => 'Hello You are Registred!'
                 ]
             );
-
+            */
 
         $id=$user->getId();
         $i->setIdEvent($id2);
