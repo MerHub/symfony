@@ -140,7 +140,7 @@ class user extends BaseUser
      */
     public function getMail()
     {
-        return $this->mail;
+        return $this->email;
     }
 
     /**
@@ -148,7 +148,7 @@ class user extends BaseUser
      */
     public function setMail($mail)
     {
-        $this->mail = $mail;
+        $this->email = $mail;
     }
 
     /**

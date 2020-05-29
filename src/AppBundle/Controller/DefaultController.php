@@ -16,6 +16,8 @@ use TaxiBundle\Entity\Taxi;
 // version ghada
 class DefaultController extends Controller
 {
+
+
     /**
      * @Route("/Map", name="serviceMap")
      */

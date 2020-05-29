@@ -193,48 +193,24 @@ class EventController extends Controller
         $nbr--;
         $id2->setNbrPlace($nbr);
         $user=$this->getUser();
-     //   $this->senMessage();
-     //   $email=$user->getEmail();
+        $us=$this->getDoctrine()->getRepository(user::class)->findOneBy(["username"=>$user->getUsername()]);
 
+            $transport = (new \Swift_SmtpTransport('smtp.gmail.com',465,'ssl'))->setUsername("armandcyrille.public@gmail.com")->setPassword("CE534dm699875176.");
+            $mailer=new \Swift_Mailer($transport);
 
-           //    $transport = \Swift_MailTransport::newInstance();
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Hello Email')
+                ->setFrom('meryemgomri@gmail.com')
+                ->setTo($us->getMail())
+                ->setBody(
+                    $this->renderView(
+                    // app/Resources/views/Emails/registration.html.twig
+                        'Emails/registration.html.twig'
+                    ),
+                    'text/html'
+                );
 
-
-          //  $transport = (new \Swift_SmtpTransport('smtp.mailtrap.io', 25))
-      //          ->setUsername('0aeda355df9ad5')
-        //        ->setPassword('7579b37003ae2d');
-
-
-
-  /*              $msg = (new \Swift_Message('Hello Email'))
-               ->setFrom('Bolt2020@contact.com')
-               ->setTo($email)
-               ->setBody(
-                  'Vous etes inscrit'
-              );
-*/      //     $mailer= new  \Swift_Mailer($transport) ;
-
-    //        $this->get('mailer')->send($msg);
-
-         //   if (!$mailer->send($message, $failures))
-           // { $mailer->send($message);
-             //   echo "Failures:";
-               // print_r($failures);
-            //}
-       //     $twilio = $this->get('twilio.api');
-
-    /*       $sid = "ACa7cb1b635f46f7fedbf40bbf2c4e25af"; // Your Account SID from www.twilio.com/console
-            $token = "520a62a1ef97242d042b0f044b564082"; // Your Auth Token from www.twilio.com/console
-
-            $client = new CurlClient($sid, $token);
-            $message = $client->messages->create(
-                '+21650081019', // Text this number
-                [
-                    'from' => '+12513130217', // From a valid Twilio number
-                    'body' => 'Hello You are Registred!'
-                ]
-            );
-            */
+            $mailer->send($message);
 
         $id=$user->getId();
         $i->setIdEvent($id2);
