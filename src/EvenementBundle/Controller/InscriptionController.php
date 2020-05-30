@@ -4,6 +4,7 @@ namespace EvenementBundle\Controller;
 
 use AppBundle\Entity\user;
 use EvenementBundle\Entity\Inscription;
+use EvenementBundle\Entity\Event;
 use http\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,7 +59,25 @@ class InscriptionController extends Controller
             'form' => $form->createView(),
         ));
     }
+    public function newMAction(Event $idEvent,user $idClient,int $nn)
+    {
+        $i = new Inscription();
+        $nbr=$idEvent->getNbrPlace();
+        $nbr=$nbr-$nn;
+        $idEvent->setNbrPlace($nbr);
+        $velo_s = $this->getDoctrine()->getRepository(Event::class)->find($idEvent);
+        $userr = $this->getDoctrine()->getRepository(\AppBundle\Entity\Client::class)->find($idClient);
+        $em = $this->getDoctrine()->getManager();
 
+        $i->setIdEvent($velo_s);
+  //      $user=$this->getUser();
+//        $id=$user->getId();
+        $i->setIdClient($userr);
+        $em->persist($i);
+        $em->flush();
+        header('Content-type: application/json');
+        return  new Response(json_encode( ["reponse"=>"oui"] ));
+    }
     /**
      * Finds and displays a inscription entity.
      *

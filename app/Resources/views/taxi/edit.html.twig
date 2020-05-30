@@ -11,14 +11,22 @@
         <input class="btn btn-primary " type="submit" value="Edit"  />
     {{ form_end(edit_form) }}
 
-    <ul>
+    <ul style="list-style: none;">
         <li>
-            <a class="btn btn-primary " href="{{ path('taxi_index') }}">Back to the list</a>
+            <a class="btn btn-primary " style="margin:4px;" href="{{ path('taxi_index') }}">Back to the list</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input class="btn btn-primary " type="submit" value="Delete">
+                <input class="btn btn-primary " style="margin:4px;" type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>
+{% endblock %}
+
+{% block cssScript %}
+    <script>
+        $(function(){
+            $(".dispa").parent("div").hide()
+        })
+    </script>
 {% endblock %}

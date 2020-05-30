@@ -2,11 +2,18 @@
 
 namespace EvenementBundle\Controller;
 
+use AppBundle\Entity\user;
 use EvenementBundle\Entity\Event;
 use EvenementBundle\Entity\Inscription;
+use http\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Twilio\Http;
+
+
+
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Event controller.
@@ -24,50 +31,51 @@ class EventController extends Controller
 
         $events = $em->getRepository('EvenementBundle:Event')->findAll();
 
+
         return $this->render('@Evenement/event/index.html.twig', array(
             'events' => $events,
         ));
     }
 
-    public function serviceShowListAction(){
-        $list=$this->getDoctrine()->getRepository(Event::class)->findAll();
-        $data=["liste"=>[]];
-        forEach($list as $key=>$value){
-            $dateAlle=$value->getDateAllee();
-            $dateRetour=$value->getDateRetour();
-            array_push($data["liste"],[
-                "idEvent"=>$value->getIdEvent(),
-                "nom"=>$value->getNom(),
-                "nbrPlace"=>$value->getNbrPlace(),
-                "depart"=>$value->getDepart(),
-                "arrivee"=>$value->getArrivee(),
-                "dateAllee"=>[
-                    "annee"=>$dateAlle->format('Y'),
-                    "mois"=>$dateAlle->format('m'),
-                    "jour"=>$dateAlle->format('d'),
-                    "heure"=>$dateAlle->format('H')+1,
-                    "minute"=>$dateAlle->format('i'),
-                    "seconde"=>$dateAlle->format('s')
-                ],
-                "dateRetour"=>[
-                    "annee"=>$dateRetour->format('Y'),
-                    "mois"=>$dateRetour->format('m'),
-                    "jour"=>$dateRetour->format('d'),
-                    "heure"=>$dateRetour->format('H')+1,
-                    "minute"=>$dateRetour->format('i'),
-                    "seconde"=>$dateRetour->format('s')
-                ],
-                "decription"=>$value->getDescription(),
-                "latitude1"=>$value->getLatitude1(),
-                "latitude2"=>$value->getLatitude2(),
-                "longitude1"=>$value->getLongitude1(),
-                "longitude2"=>$value->getLongitude2(),
-            ]);
-        }
+        public function serviceShowListAction(){
+            $list=$this->getDoctrine()->getRepository(Event::class)->findAll();
+            $data=["liste"=>[]];
+            forEach($list as $key=>$value){
+                $dateAlle=$value->getDateAllee();
+                $dateRetour=$value->getDateRetour();
+                array_push($data["liste"],[
+                    "idEvent"=>$value->getIdEvent(),
+                    "nom"=>$value->getNom(),
+                    "nbrPlace"=>$value->getNbrPlace(),
+                    "depart"=>$value->getDepart(),
+                    "arrivee"=>$value->getArrivee(),
+                    "dateAllee"=>[
+                        "annee"=>$dateAlle->format('Y'),
+                        "mois"=>$dateAlle->format('m'),
+                        "jour"=>$dateAlle->format('d'),
+                        "heure"=>$dateAlle->format('H')+1,
+                        "minute"=>$dateAlle->format('i'),
+                        "seconde"=>$dateAlle->format('s')
+                    ],
+                    "dateRetour"=>[
+                        "annee"=>$dateRetour->format('Y'),
+                        "mois"=>$dateRetour->format('m'),
+                        "jour"=>$dateRetour->format('d'),
+                        "heure"=>$dateRetour->format('H')+1,
+                        "minute"=>$dateRetour->format('i'),
+                        "seconde"=>$dateRetour->format('s')
+                    ],
+                    "decription"=>$value->getDescription(),
+                    "latitude1"=>$value->getLatitude1(),
+                    "latitude2"=>$value->getLatitude2(),
+                    "longitude1"=>$value->getLongitude1(),
+                    "longitude2"=>$value->getLongitude2(),
+                ]);
+            }
 
-        header('Content-type: application/json');
-        return  new Response(json_encode( $data ));
-    }
+            header('Content-type: application/json');
+            return  new Response(json_encode( $data ));
+        }
     public function frontAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -111,12 +119,70 @@ class EventController extends Controller
     {
         $deleteForm = $this->createDeleteForm($event);
 
+
+
+        return $this->render('@Evenement/event/show.html.twig', array(
+            'event' => $event,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+    public function showwwwAction(Event $event)
+    {
+        $deleteForm = $this->createDeleteForm($event);
+
+
+
         return $this->render('@Evenement/event/show.html.twig', array(
             'event' => $event,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
+    public function mail(\Swift_Mailer $mailer)
+    {   $user=$this->getUser();
+        $email=$user->getEmail();
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('Bolt2020@contact.com')
+            ->setTo($email)
+            ->setBody(
+             "Vous etes inscrit"
+            )
+        ;
+        $mailer->send($message);
+    }
+    public function sendMessageChauffeur($idReservation,$numClient,$idDriver)
+    {
+        //returns an instance of Vresh\TwilioBundle\Service\TwilioWrapper
+        $twilio = $this->get('twilio.api');
+        $numChauffeur=$this->getDoctrine()->getRepository(user::class)->find($idDriver)->getNTel();
+        $message = $twilio->account->messages->sendMessage(
+            '+12513130217', // From a Twilio number in your account
+            '+216'.$numChauffeur, // Text any number
+            "Connect you, you have an reservation : phone number : +216 ".$numClient
+        );
+
+        //get an instance of \Service_Twilio
+        //$otherInstance = $twilio->createInstance('BBBB', 'CCCCC');
+
+        return $this->redirectToRoute('_show', array('idReservation' => $idReservation));
+    }
+
+    public function senMessage()
+    {
+        //returns an instance of Vresh\TwilioBundle\Service\TwilioWrapper
+        $twilio = $this->get('twilio.api');
+
+        $message = $twilio->account->messages->sendMessage(
+            '+12513130217', // From a Twilio number in your account
+            '+21650081019', // Text any number
+            "Connect you, you have an reservation : phone number : +216 "
+        );
+
+        //get an instance of \Service_Twilio
+        //$otherInstance = $twilio->createInstance('BBBB', 'CCCCC');
+
+        return $this->redirectToRoute('reservation_index');
+    }
 
 
     public function addAction(Event $id2)
@@ -127,26 +193,111 @@ class EventController extends Controller
         $nbr--;
         $id2->setNbrPlace($nbr);
         $user=$this->getUser();
+        $us=$this->getDoctrine()->getRepository(user::class)->findOneBy(["username"=>$user->getUsername()]);
+
+            $transport = (new \Swift_SmtpTransport('smtp.gmail.com',465,'ssl'))->setUsername("armandcyrille.public@gmail.com")->setPassword("CE534dm699875176.");
+            $mailer=new \Swift_Mailer($transport);
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Hello Email')
+                ->setFrom('meryemgomri@gmail.com')
+                ->setTo($us->getMail())
+                ->setBody(
+                    $this->renderView(
+                    // app/Resources/views/Emails/registration.html.twig
+                        'Emails/registration.html.twig'
+                    ),
+                    'text/html'
+                );
+
+            $mailer->send($message);
+
         $id=$user->getId();
         $i->setIdEvent($id2);
-
         $Puser=$this->getDoctrine()->getRepository(\AppBundle\Entity\Client::class)->find($id);
-
         $i->setIdClient($Puser);
-
         $em = $this->getDoctrine()->getManager();
         $em->persist($i);
         $em->flush();
+
+
             $this->addFlash(
                 'notice',
-                'Your changes were saved!'
+                'You are registred succssefully!'
             );
-        return $this->redirectToRoute('event_front');
+
+        return $this->redirectToRoute('reservation_index');
 
     }
     else{$this->addFlash('success', 'Article Created! Knowledge is power!');}
     }
+    public function addEventAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $livraison = new Livraison();
+        $form = $this->createForm('bikeBundle\Form\LivraisonType', $livraison);
 
+        $form->handleRequest($request);
+
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->persist($livraison);
+            $em->flush();
+            $liv=$em->getRepository('bikeBundle:Livreur')->find($livraison->getLivreur()->getId());
+            $liv->setNbrlivraisonParjour(($liv->getNbrlivraisonParjour())+1);
+            $em->flush();
+            if(($liv->getNbrlivraisonParjour())>10){
+                $liv->setLivDispo(0);
+                $em->flush();
+            }
+            //Envoi d'un mail:
+            // Create the Transport
+            $transport = (new \Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
+                ->setUsername('razifertani1@gmail.com')
+                ->setPassword('raziramla');
+
+            /*
+            You could alternatively use a different transport such as Sendmail:
+
+            // Sendmail
+            $transport = new Swift_SendmailTransport('/usr/sbin/sendmail -bs');
+            */
+
+            // Create the Mailer using your created Transport
+            $mailer = new \Swift_Mailer($transport);
+
+            // Create a message
+            $message = (new \Swift_Message('Nouvelle Livraison'))
+                ->setFrom('razifertani1@gmail.com')
+                ->setTo($liv->getEmail())
+                ->setBody(
+                    '<html>' .
+                    ' <body>' .
+                    '<h4> Cher ' . $liv->getUsername() . ' vous avez une nouvelle livraison</h4> '.
+
+                    '<h1> #REF: '.$livraison->getId().'</h1>'.
+                    '<div style="color: #1e4c4a"> Vers: '.$livraison->getLivraisonAdresse().'</div>'.
+                    '<div style="color: #1e4c4a"> Produits: '.$livraison->getLivraisonProduits().'</div>'.
+                    '<div style="color: #1e4c4a"> Montant a payer: '.$livraison->getMontantTotal().'</div>'.
+                    '</html>' .
+                    ' </body>' ,'text/html'
+                );
+
+            // Send the message
+            $mailer->send($message);
+            ///////////////////
+
+
+            return $this->redirectToRoute('table_content', array('id' => $livraison->getId()));
+        }
+
+        return $this->render('livraison/new.html.twig', array(
+            'livraison' => $livraison,
+            'form' => $form->createView(),
+        ));
+    }
     
 
 

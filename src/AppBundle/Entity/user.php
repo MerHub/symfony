@@ -122,6 +122,18 @@ class user extends BaseUser
     /**
      * @return string
      */
+    public function getMail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $mail
+     */
+    public function setMail($mail)
+    {
+        $this->email = $mail;
+    }
 
     /**
      * @return string

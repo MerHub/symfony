@@ -147,7 +147,7 @@
                     'marker-symbol': 'building',
                     'marker-color': '#4D6AC3'
                     })
-                    }).addTo(map).bindPopup('Depart : {{ event.depart }} {{ event.dateAllee | date('Y-m-d H:i:sP') }} <br> Arrivée : {{ event.arrivee }} {{ event.dateRetour| date('Y-m-d H:i:sP') }} <br> nombre de place restant {{ event.nbrPlace }} <br> <center><a class="btn btn-primary" href="{{ path('inscription_add',{id2: event.idEvent}) }}">show </a></center>').on('click', function(e) {
+                    }).addTo(map).bindPopup('Depart : {{ event.depart }} {{ event.dateAllee | date('Y-m-d H:i:sP') }} <br> Arrivée : {{ event.arrivee }} {{ event.dateRetour| date('Y-m-d H:i:sP') }} <br> nombre de place restant {{ event.nbrPlace }} <br> <center><a class="btn btn-primary" href="{{ path('inscription_add',{id2: event.idEvent}) }}">Register </a></center>').on('click', function(e) {
 
 
                     });

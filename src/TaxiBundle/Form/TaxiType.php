@@ -2,7 +2,7 @@
 
 namespace TaxiBundle\Form;
 
-use AppBundle\Entity\user;
+use AppBundle\Entity\chauffeur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -17,13 +17,7 @@ class TaxiType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('photo',FileType::class,array('label'=>'pick image','data_class' => null))->add('numChassis')->add('idChauffeur',EntityType::class,[
-            "class"=>user::class,
-            "choice_label"=>"id",
-
-        ]
-
-        )->add('categorie',EntityType::class,[
+        $builder->add('photo',FileType::class,array('label'=>'pick image','data_class' => null))->add('numChassis')->add('categorie',EntityType::class,[
             "class"=>CategorieTaxi::class,
             "choice_label"=>"model"
         ]);
