@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Manifest-Version: 1.0
 X-COMMENT: Main-Class will be added automatically by build
 
@@ -7,3 +8,8 @@ Manifest-Version: 1.0
 X-COMMENT: Main-Class will be added automatically by build
 
 >>>>>>> master
+=======
+Manifest-Version: 1.0
+X-COMMENT: Main-Class will be added automatically by build
+
+>>>>>>> ghada

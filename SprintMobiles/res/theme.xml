@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <image name="debut1.png"  />
+    <image name="debut1.png 1" type="multi"  />
+    <image name="iconTaxi.png"  />
+    <theme name="Theme">
+        <val key="@includeNativeBool" value="true" />
+        <val key="SideCommand.bgColor" value="ffffff" />
+        <val key="SideCommand.fgColor" value="999999" />
+        <val key="SideNavigationPanel.bgColor" value="ffffff" />
+        <val key="SideNavigationPanel.fgColor" value="999999" />
+    </theme>
+</resource>

@@ -131,9 +131,9 @@ class user extends BaseUser
     }
 
     /**
-     * @param string $mail
+     * @param string $email
      */
-    public function setMail($mail)
+    public function setMail($email)
     {
         $this->email = $mail;
     }
