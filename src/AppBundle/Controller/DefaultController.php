@@ -6,14 +6,13 @@ use AppBundle\Entity\chauffeur;
 use AppBundle\Entity\Client;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\user;
+use TaxiBundle\Entity\Taxi;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpClient\HttpClient;
-use TaxiBundle\Entity\Taxi;
-
-// version ghada
+// version skander
 class DefaultController extends Controller
 {
 

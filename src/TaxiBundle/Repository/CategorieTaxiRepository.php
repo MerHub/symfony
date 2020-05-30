@@ -10,4 +10,9 @@ namespace TaxiBundle\Repository;
  */
 class CategorieTaxiRepository extends \Doctrine\ORM\EntityRepository
 {
+    function SearchVelo($libelle){
+        $query=$this->getEntityManager()->createQuery("select e from TaxiBundle:CategorieTaxi e where e.model LIKE '%$libelle%'");
+        return $query->getResult();
+
+    }
 }

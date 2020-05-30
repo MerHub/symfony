@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Taxi creation</h1>
+<table>
+    {{ form_start(form) }}
+    <br>{{ form_label(form.photo) }}
+    {{ form_widget(form.photo) }}
+    <br>{{ form_label(form.numChassis) }}
+    {{ form_widget(form.numChassis) }}
+    <tr hidden>
+        <td>{{ form_label(form.idChauffeur) }}
+            {{ form_widget(form.idChauffeur) }}</td>
+    </tr>
+  <br>  {{ form_label(form.categorie) }}
+    {{ form_widget(form.categorie) }}
+
+
+  <br>  <input class="btn btn-primary " type="submit" value="Create"/>
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+          <br>  <a class="btn btn-primary " href="{{ path('taxi_index') }}">Back to the list</a>
+        </li>
+    </ul>
+</table>
+{% endblock %}

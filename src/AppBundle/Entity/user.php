@@ -88,51 +88,35 @@ class user extends BaseUser
     }
 
     /**
+     * @return float
+     */
+    public function getLongitude(): float
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude(): float
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
      * @return string
      */
-    public function getLogin()
+    public function getType(): string
     {
-        return $this->login;
-    }
-
-    /**
-     * @param string $login
-     */
-    public function setLogin($login)
-    {
-        $this->login = $login;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMdp()
-    {
-        return $this->mdp;
-    }
-
-    /**
-     * @param string $mdp
-     */
-    public function setMdp($mdp)
-    {
-        $this->mdp = $mdp;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isEtat()
-    {
-        return $this->etat;
-    }
-
-    /**
-     * @param bool $etat
-     */
-    public function setEtat($etat)
-    {
-        $this->etat = $etat;
+        return $this->type;
     }
 
     /**
@@ -154,50 +138,11 @@ class user extends BaseUser
     /**
      * @return string
      */
-    public function getType()
-    {
-        return $this->type;
-    }
+
 
     /**
-     * @param string $type
+     * @return bool
      */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * @return float
-     */
-    public function getLatitude()
-    {
-        return $this->latitude;
-    }
-
-    /**
-     * @param float $latitude
-     */
-    public function setLatitude($latitude)
-    {
-        $this->latitude = $latitude;
-    }
-
-    /**
-     * @return float
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-
-    /**
-     * @param float $longitude
-     */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
-    }
 
     public function __construct()
     {

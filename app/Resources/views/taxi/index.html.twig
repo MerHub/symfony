@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Taxis list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Photo</th>
+                <th>Numchassis</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for taxi in taxis %}
+            <tr>
+
+
+                <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ taxi.photo) }}')">
+                </td>
+                <td>{{ taxi.numChassis }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a class="fa fa-eye" href="{{ path('taxi_show', { 'idTaxi': taxi.idTaxi }) }}"></a>
+                        </li>
+                        <li>
+                            <a class="fa fa-pencil" href="{{ path('taxi_edit', { 'idTaxi': taxi.idTaxi }) }}"></a>
+                        </li>
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="btn btn-primary " href="{{ path('taxi_new') }}">Create a new taxi</a>
+        </li>
+
+    </ul>
+{% endblock %}

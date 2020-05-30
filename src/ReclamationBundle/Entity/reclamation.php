@@ -64,7 +64,7 @@ class reclamation
      */
     public function getId()
     {
-        return $this->id;
+        return $this->idRec;
     }
 
     /**
@@ -212,10 +212,7 @@ class reclamation
         return $this->idChauffeur;
     }
 
-    public function __toString()
-    {
-       return $this->id;
-    }
+
 
 }
 
