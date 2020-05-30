@@ -199,13 +199,16 @@ class EventController extends Controller
             $mailer=new \Swift_Mailer($transport);
 
             $message = \Swift_Message::newInstance()
-                ->setSubject('Hello Email')
+                ->setSubject('Registration mail')
                 ->setFrom('meryemgomri@gmail.com')
                 ->setTo($us->getMail())
                 ->setBody(
                     $this->renderView(
                     // app/Resources/views/Emails/registration.html.twig
-                        'Emails/registration.html.twig'
+                        'Emails/registration.html.twig',array(
+                            'event' => $id2,
+                            'user'=>$user,
+                         )
                     ),
                     'text/html'
                 );
