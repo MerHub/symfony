@@ -2,8 +2,13 @@
 
 namespace VeloBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use VeloBundle\Entity\Location;
 use VeloBundle\Entity\Velo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,6 +95,7 @@ class VeloController extends Controller
         ));
     }
 
+
     /**
      * Displays a form to edit an existing velo entity.
      *
@@ -97,7 +103,7 @@ class VeloController extends Controller
     public function editAction(Request $request, Velo $velo)
     {
         $deleteForm = $this->createDeleteForm($velo);
-        $editForm = $this->createForm('VeloBundle\Form\VeloType', $velo);
+        $editForm = $this->createForm('VeloBundle\Form\VeloType', $velo) ->add('photo',FileType::class,array('label'=>'photo','data_class'=>null, 'required'=>false));;
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

@@ -42,6 +42,9 @@
                     <tr>
                         <td>{{ form_label(edit_form.prix,'Price') }}</td>
                         <td>{{ form_widget(edit_form.prix, { 'attr': {'class': 'form-control'}}) }}</td>
+                        <td>
+                                <span id="missin" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Price is invalide</li></ul> </span>
+                         </td>
                     </tr>
                     <tr style="display: none">
                         <td>{{ form_label(edit_form.latitude) }}</td>
@@ -94,6 +97,32 @@
                         });
                     })
                 </script>
+                 <script>
+                        $(document).ready(function () {
+                            $('#missin').hide();
+                            $('#velobundle_velo_prix').keyup(function () {
+
+
+
+                                var x = $('#velobundle_velo_prix').val();
+                                if (x>1) {
+
+                                    $('#coursbundle_cours_Ajouter').prop('disabled', false);
+                                    $('#missin').hide();
+                                    $('#velobundle_velo_prix');
+
+                                } else {
+
+                                    $('#missin').show();
+                                    $('#velobundle_velo_prix');
+
+
+                                    $('#coursbundle_cours_Ajouter').prop('disabled', true);
+                                }
+
+                            });
+                        })
+                    </script>
 
 
 
