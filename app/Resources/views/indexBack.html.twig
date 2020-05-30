@@ -106,7 +106,7 @@
                         <li>
                             <a href="javascript:;">
                                 <i class="fa fa-columns"></i>
-                                <span class="title">Gestion des offres</span>
+                                <span class="title">Offers</span>
                                 <span class="arrow open"></span>
                             </a>
                             <ul class="sub-menu" style="display:block;">
@@ -122,7 +122,7 @@
                         <li>
                             <a href="javascript:;">
                                 <i class="fa fa-columns"></i>
-                                <span class="title">Gestion des evenements</span>
+                                <span class="title">Events</span>
                                 <span class="arrow open"></span>
                             </a>
                             <ul class="sub-menu" style="display:block;">
@@ -134,6 +134,24 @@
                                 </li>
                                 <li>
                                     <a class="" href="{{ path ('inscription_index') }}" target="cad">show registration list</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-columns"></i>
+                                <span class="title">Bic </span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu" style="display:block;">
+                                <li>
+                                    <a class="" href="{{ path ('velo_index') }}" target="cad">List of Bics</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{ path ('velo_new') }}" target="cad">Add Bics</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{ path ('location_index') }}" target="cad">List of locations </a>
                                 </li>
                             </ul>
                         </li>
@@ -172,7 +190,9 @@
                         <div class="page-title" style='padding: 0;margin: 0;margin-top: 3.7%;margin-left:0.5%;padding-top:2%;'>
                             <iframe src="{{ path("homepage") }}" frameborder="0" style="width: 100%;height: 92.8%;" name="cad"></iframe>
                         </div>
+                    </div>
                 </section>
+
             </section>
 
         <!-- END CONTAINER -->
@@ -225,9 +245,10 @@
                 </div>
             </div>
         </div>
+        </div>
+    </body></html>
         <!-- modal end -->
-    </body>
-</html>
+
 
 
 
