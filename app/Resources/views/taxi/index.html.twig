@@ -21,7 +21,7 @@
                 </td>
                 <td>{{ taxi.numChassis }}</td>
                 <td>
-                    <ul>
+                    <ul  style="list-style: none;">
                         <li>
                             <a class="fa fa-eye" href="{{ path('taxi_show', { 'idTaxi': taxi.idTaxi }) }}"></a>
                         </li>
@@ -36,7 +36,7 @@
         </tbody>
     </table>
 
-    <ul>
+    <ul style="list-style: none;"  >
         <li>
             <a class="btn btn-primary " href="{{ path('taxi_new') }}">Create a new taxi</a>
         </li>

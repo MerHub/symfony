@@ -3,12 +3,12 @@
 {% block body %}
     <h1 xmlns="http://www.w3.org/1999/html">Taxi</h1>
 
-    <table>
+    <table style="list-style: none;">
         <tbody>
 
             <tr>
                 <th>Photo</th>
-                <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ taxi.photo) }}')">
+                <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ taxi.photo) }}')" >
                 </td>
             </tr>
             <tr>
@@ -17,16 +17,16 @@
             </tr>
         </tbody>
     </table>
-
-    <li>
+<ul  style="list-style: none;">
+    <li >
         <li>
-            <a class="btn btn-primary " href="{{ path('taxi_index') }}">Back to the list</a>
+            <a class="btn btn-primary " style="margin:4px;" href="{{ path('taxi_index') }}">Back to the list</a>
         </li>
         <li>
-            <a class="btn btn-primary " href="{{ path('taxi_edit', { 'idTaxi': taxi.idTaxi }) }}">Edit</a>
+            <a class="btn btn-primary  " style="margin:4px;" href="{{ path('taxi_edit', { 'idTaxi': taxi.idTaxi }) }}">Edit</a>
         </li>
     <li>
-        <a class="btn btn-primary " href="{{ path('taxi_pdf',{ 'idTaxi': taxi.idTaxi })}}">download</a>
+        <a class="btn btn-primary " style="margin:4px;" href="{{ path('taxi_pdf',{ 'idTaxi': taxi.idTaxi })}}">download</a>
     </li>
         <li>
             {{ form_start(delete_form) }}

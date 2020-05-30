@@ -2,6 +2,7 @@
 
 namespace TaxiBundle\Controller;
 use AppBundle\Entity\user;
+use AppBundle\Entity\chauffeur;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use TaxiBundle\Entity\Taxi;
@@ -39,6 +40,7 @@ class TaxiController extends Controller
         $form = $this->createForm('TaxiBundle\Form\TaxiType', $taxi);
         $form->handleRequest($request);
         $user=$this->getUser();
+       $chauffeur= $this->getDoctrine()->getRepository(chauffeur::class)->find($user->getId());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -46,7 +48,7 @@ class TaxiController extends Controller
             $fileName=md5(uniqid()).'.'.$file->guessExtension();
             $file->move($this->getParameter('upload_directory'),$fileName);
             $taxi->setPhoto($fileName);
-            $taxi->setIdChauffeur($user);
+            $taxi->setIdChauffeur($chauffeur);
             $em->persist($taxi);
             $em->flush();
 
