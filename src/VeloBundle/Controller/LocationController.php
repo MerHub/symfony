@@ -119,6 +119,7 @@ class LocationController extends Controller
 
 
         $em = $this->getDoctrine()->getManager();
+
         try {
             $df = new \DateTime($Date_f);
             $dd=new \DateTime($Date_D);
