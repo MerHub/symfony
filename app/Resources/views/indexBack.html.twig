@@ -106,7 +106,7 @@
                         <li>
                             <a href="javascript:;">
                                 <i class="fa fa-columns"></i>
-                                <span class="title">Gestion des offres</span>
+                                <span class="title">Offers</span>
                                 <span class="arrow open"></span>
                             </a>
                             <ul class="sub-menu" style="display:block;">
@@ -122,7 +122,7 @@
                         <li>
                             <a href="javascript:;">
                                 <i class="fa fa-columns"></i>
-                                <span class="title">Gestion des evenements</span>
+                                <span class="title">Events</span>
                                 <span class="arrow open"></span>
                             </a>
                             <ul class="sub-menu" style="display:block;">
@@ -133,7 +133,7 @@
                                     <a class="" href="{{ path ('event_new') }}" target="cad">Add an event</a>
                                 </li>
                                 <li>
-                                    <a class="" href="{{ path ('inscription_index') }}" target="cad">show registrations list</a>
+                                    <a class="" href="{{ path ('inscription_index') }}" target="cad">show registration list</a>
                                 </li>
                             </ul>
                         </li>
@@ -153,6 +153,23 @@
                                 <li>
                                     <a class="" href="{{ path ('location_index') }}" target="cad">List of locations </a>
                                 </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-columns"></i>
+                                <span class="title">Taxi categories</span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu" style="display:block;">
+                                <li>
+                                    <a class="" href="{{ path ('taxi_index') }}" target="cad">List</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{ path ('taxi_new') }}" target="cad">Add a categorie</a>
+                                </li>
+
                             </ul>
                         </li>
 
