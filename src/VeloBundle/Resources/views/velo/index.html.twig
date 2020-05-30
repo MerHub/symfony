@@ -6,14 +6,7 @@
 
 {% block body %}
 
-    <ul>
-        <li>
-            <a href="{{ path('velo_new') }}"><i class="fa fa-backward" style="color:#2e6da4 " ></i>Add a new Bicycle</a>
-        </li>
-        <li>
-            <a href="{{ path('excel') }}"><i class="fa fa-download" style="color:#2e6da4 " ></i>Excel file</a>
-        </li>
-    </ul>
+
 <div class="col-xl-12">
     <section class="box ">
         <header class="panel_header">
@@ -78,10 +71,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('velo_show', { 'id': velo.id }) }}">show</a>
+                            <a href="{{ path('velo_show', { 'id': velo.id }) }}"><i class="fa fa-eye"></i></a>
                         </li>
                         <li>
-                            <a href="{{ path('velo_edit', { 'id': velo.id }) }}">edit</a>
+                            <a href="{{ path('velo_edit', { 'id': velo.id }) }}"><i class="fa fa-pencil"></i></a>
                         </li>
                     </ul>
                 </td>
@@ -94,5 +87,11 @@
             </div>
         </div>
     </section></div>
+    <ul>
+
+
+        <a href="{{ path('excel') }}" class="btn btn-danger"><i class="fa fa-download" style="color:#2e6da4 " ></i>Excel file</a>
+
+    </ul>
 
 {% endblock %}

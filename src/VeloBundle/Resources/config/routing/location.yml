@@ -11,6 +11,12 @@ location_showM:
   path:     /showM/{idLocation}
   defaults: { _controller: "VeloBundle:Location:showM" }
   methods:  GET
+
+show_client_location:
+  path:     /show_client_location
+  defaults: { _controller: "VeloBundle:Location:showClientLocation" }
+  methods:  GET
+
 location_newM:
   path:     /newM/{idVelo}/{Date_D}/{Date_f}/{idclient}/{prix}
   defaults: { _controller: "VeloBundle:Location:newM" }

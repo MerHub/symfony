@@ -30,9 +30,9 @@ velo_delete:
     defaults: { _controller: "VeloBundle:Velo:delete" }
     methods:  DELETE
 
-search:
-    path:     /search
-    defaults: { _controller: "VeloBundle:Velo:search" }
+search1:
+    path:     /search1
+    defaults: { _controller: "VeloBundle:Velo:search1" }
 
 excel:
     path:     /excel
