@@ -146,6 +146,38 @@ class user extends BaseUser
         $this->type = $type;
     }
 
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @param float $latitude
+     */
+    public function setLatitude(float $latitude): void
+    {
+        $this->latitude = $latitude;
+    }
+
+    /**
+     * @param float $longitude
+     */
+    public function setLongitude(float $longitude): void
+    {
+        $this->longitude = $longitude;
+    }
+
 
 
     public function __construct()
