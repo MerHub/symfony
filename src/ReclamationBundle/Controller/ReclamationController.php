@@ -2,9 +2,19 @@
 
 namespace ReclamationBundle\Controller;
 
+
+use DateTime;
+
 use ReclamationBundle\Entity\reclamation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Validator\Constraints\Date;
+use ReclamationBundle\Entity\typeReclamation;
+use AppBundle\Entity\user;
+
 
 /**
  * Reclamation controller.
@@ -49,6 +59,43 @@ class ReclamationController extends Controller
             'reclamation' => $reclamation,
             'form' => $form->createView(),
         ));
+    }
+    public function newMAction( $idClient,  $idchauffeur, $typeReclamation)
+    {
+        $reclamation = new reclamation();
+
+
+
+            $em = $this->getDoctrine()->getManager();
+
+    $reclamation->setEtat(1);
+            $date=new DateTime('now+1 hours');
+            $reclamation->setDateAjout($date);
+        $objjj = $this->getDoctrine()
+            ->getRepository(user::class)
+            ->find($idchauffeur);
+        $reclamation->setIdchauffeur($objjj);
+
+
+        $objj = $this->getDoctrine()
+            ->getRepository(user::class)
+            ->find($idClient);
+             $reclamation->setIdClient($objj);
+
+            $obj = $this->getDoctrine()
+                ->getRepository(typeReclamation::class)
+                ->find($typeReclamation);
+
+            $reclamation->setTypeReclamation($obj);
+
+        $em->persist($reclamation);
+            $em->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reclamation);
+        return new JsonResponse($formatted);
+
+
     }
 
     /**
@@ -120,5 +167,20 @@ class ReclamationController extends Controller
             ->setMethod('DELETE')
             ->getForm()
             ;
+    }
+    public function showReclamationAction($id)
+    {
+        $idc=$id;
+        $list=$this->getDoctrine()->getRepository(reclamation::class)->findBy(['idChauffeur'=>$idc]);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($list);
+        return new JsonResponse($formatted);
+    }
+    public function getTypesAction()
+    {
+        $list=$this->getDoctrine()->getRepository(typeReclamation::class)->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($list);
+        return new JsonResponse($formatted);
     }
 }

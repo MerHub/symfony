@@ -6,14 +6,13 @@ use AppBundle\Entity\chauffeur;
 use AppBundle\Entity\Client;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\user;
+use TaxiBundle\Entity\Taxi;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpClient\HttpClient;
-use TaxiBundle\Entity\Taxi;
-
-// version ghada
+// version skander
 class DefaultController extends Controller
 {
 
@@ -288,6 +287,24 @@ class DefaultController extends Controller
 
         return $this->redirectToRoute('_show', array('idReservation' => $idReservation));
     }
+
+    /**
+     * @Route("/Sendsmessage/{message}", name="Sendsmessage")
+     */
+    public function Sendsmessage($message)
+    {
+        //returns an instance of Vresh\TwilioBundle\Service\TwilioWrapper
+        $twilio = $this->get('twilio.api');
+        $message = $twilio->account->messages->sendMessage(
+            '+12018014274', // From a Twilio number in your account
+            '+21654426394', // Text any number
+            $message
+        );
+
+        return new Response("ok");
+    }
+
+
     /**
      * @Route("/login", name="loginpage")
      */
@@ -309,6 +326,10 @@ class DefaultController extends Controller
             }
             if($user->getType()=="client"){
                 return $this->redirectToRoute("client_homepage");
+            }
+            if($user->getType()=="admin"){
+                return $this->render('indexBack.html.twig');
+              //  return $this->redirectToRoute("client_homepage");
             }
 
         }

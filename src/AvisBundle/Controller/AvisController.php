@@ -100,11 +100,23 @@ class AvisController extends Controller
             array_push($array["listeAvis"],[
                 "username"=>$value->getIdCclient()->getIdUser()->getUsername(),
                 "message"=>$value->getMsg(),
-                "note"=>$value->getNote()
+                "note"=>$value->getNote(),
+                "idAvis"=>$value->getIdAvis(),
+                "idChauffeur"=>$value->getIdChauffeur()->getIdUser()->getId(),
+                "idClient"=>$value->getIdCclient()->getIdUser()->getId()
             ]);
         }
         header('Content-type: application/json');
         return  new Response(json_encode( $array ));
+    }
+
+    public function serviceDeleteAction($id){
+        $avis=$this->getDoctrine()->getRepository(Avis::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($avis);
+        $em->flush();
+        header('Content-type: application/json');
+        return  new Response(json_encode( ["data"] ));
     }
 
 

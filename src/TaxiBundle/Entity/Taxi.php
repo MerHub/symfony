@@ -27,7 +27,6 @@ class Taxi
      * @ORM\JoinColumn(name="id_chauffeur" , referencedColumnName="id")
      */
     private $idChauffeur;
-
     /**
      * @var integer
      * @ORM\ManyToOne(targetEntity=CategorieTaxi::class)
@@ -120,6 +119,9 @@ class Taxi
     {
         return $this->numChassis;
     }
+
+
+
 
     /**
      * @param string $numChassis

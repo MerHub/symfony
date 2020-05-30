@@ -22,3 +22,15 @@ _delete:
     path:     /{idReservation}/delete
     defaults: { _controller: "ReservationBundle:Reservation:delete" }
     methods:  DELETE
+
+service_AddReservation:
+    path: /serviceAddReservation/{idChauffeur}/{idClient}/{depart}/{arrive}/{prix}/{typeReservation}/{latitude}/{longitude}/{latitude2}/{longitude2}
+    defaults: { _controller: "ReservationBundle:Reservation:serviceAddReservation" }
+
+service_GetReservation:
+    path: /serviceGetReservation/{idReservation}
+    defaults: { _controller: "ReservationBundle:Reservation:serviceGetReservation" }
+
+service_CheckReservation:
+    path: /serviceCheckReservation/{idChauffeur}
+    defaults: { _controller: "ReservationBundle:Reservation:serviceCheckReservation" }

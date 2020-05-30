@@ -21,3 +21,7 @@ livraison_edit:
 livraison_delete:
     path:     /{id}/delete
     defaults: { _controller: "ReservationBundle:Livraison:delete" }
+
+service_AddLivraison:
+    path: /serviceAddLivraison/{codeLivraison}/{idChauffeur}/{idClient}/{depart}/{arrive}/{heure}/{prix}/{typeReservation}/{latitude}/{longitude}/{latitude2}/{longitude2}/
+    defaults: { _controller: "ReservationBundle:Reservation:serviceAddLivraison" }
