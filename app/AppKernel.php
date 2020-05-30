@@ -3,7 +3,7 @@
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
-
+use Vresh\TwilioBundle\VreshTwilioBundle;
 class AppKernel extends Kernel
 {
     public function registerBundles()

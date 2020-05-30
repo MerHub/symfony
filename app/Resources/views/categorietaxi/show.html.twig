@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Categorietaxi</h1>
+
+    <table class>
+        <tbody>
+
+            <tr>
+                <th>Model</th>
+                <td>{{ categorieTaxi.model }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ categorieTaxi.image) }}')">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul  style="list-style: none;">
+        <li>
+            <a class="btn btn-primary " href="{{ path('categorietaxi_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a class="btn btn-primary " href="{{ path('categorietaxi_edit', { 'id': categorieTaxi.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input class="btn btn-primary " type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,15 +1,15 @@
 offre_index:
     path:     /
-    defaults: { _controller: "OffreBundle:Offre:index" }
+    defaults: { _controller: "OffreBundle:Offre:list" }
     methods:  GET
 
 offre_list:
     path:     /list
     defaults: { _controller: "OffreBundle:Offre:list" }
     methods:  GET
-search:
-    path:     /search
-    defaults: { _controller: "OffreBundle:Offre:search" }
+searchh:
+    path:     /searchh
+    defaults: { _controller: "OffreBundle:Offre:searchh" }
     methods:  GET
 offre_show:
     path:     /{idOffre}/show

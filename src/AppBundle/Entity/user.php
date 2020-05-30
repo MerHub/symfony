@@ -87,53 +87,39 @@ class user extends BaseUser
         $this->nTel = $nTel;
     }
 
+
+
+
+    /**
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
     /**
      * @return string
      */
-    public function getLogin()
+    public function getType()
     {
-        return $this->login;
-    }
-
-    /**
-     * @param string $login
-     */
-    public function setLogin($login)
-    {
-        $this->login = $login;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMdp()
-    {
-        return $this->mdp;
-    }
-
-    /**
-     * @param string $mdp
-     */
-    public function setMdp($mdp)
-    {
-        $this->mdp = $mdp;
-    }
-
-    /**
-     * @return bool
-     */
-
-    public function isEtat()
-    {
-        return $this->etat;
-    }
-
-    /**
-     * @param bool $etat
-     */
-    public function setEtat($etat)
-    {
-        $this->etat = $etat;
+        return $this->type;
     }
 
     /**
@@ -153,14 +139,6 @@ class user extends BaseUser
     }
 
     /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * @param string $type
      */
     public function setType($type)
@@ -169,36 +147,38 @@ class user extends BaseUser
     }
 
     /**
-     * @return float
+     * @param int $id
      */
-    public function getLatitude()
+    public function setId(int $id): void
     {
-        return $this->latitude;
+        $this->id = $id;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
     }
 
     /**
      * @param float $latitude
      */
-    public function setLatitude($latitude)
+    public function setLatitude(float $latitude): void
     {
         $this->latitude = $latitude;
     }
 
     /**
-     * @return float
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-
-    /**
      * @param float $longitude
      */
-    public function setLongitude($longitude)
+    public function setLongitude(float $longitude): void
     {
         $this->longitude = $longitude;
     }
+
+
 
     public function __construct()
     {
