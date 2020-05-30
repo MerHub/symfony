@@ -1,7 +1,9 @@
 <?php
 
 namespace TaxiBundle\Controller;
-
+use AppBundle\Entity\user;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use TaxiBundle\Entity\Taxi;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -132,5 +134,40 @@ class TaxiController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+    public function pdfAction($idTaxi)
+    {
+        $t = new Taxi();
+        $Taxi =$this->getDoctrine()->getRepository(Taxi::class)->find($idTaxi);
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->set('isRemoteEnabled', true);
+        $photo =$Taxi->getPhoto();
+        $numChassi=$Taxi->getNumChassis();
+        //$userName=getIdChauffeur();
+        $user =$this->getDoctrine()->getRepository(user::class)->find($Taxi->getIdChauffeur());
+        $name = $user->getUsername();
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('taxi/pdf.html.twig', [
+            'photo' => $photo,'numChassi' => $numChassi,'username' => $name
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+
+        $dompdf->stream($idTaxi.$name.".pdf", [
+            "Attachment" => false
+        ]);
     }
 }

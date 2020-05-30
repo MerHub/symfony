@@ -22,3 +22,6 @@ categorietaxi_delete:
     path:     /{id}/delete
     defaults: { _controller: "TaxiBundle:CategorieTaxi:delete" }
     methods:  DELETE
+search:
+    path:     /search
+    defaults: { _controller: "TaxiBundle:CategorieTaxi:search" }

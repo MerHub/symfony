@@ -1,4 +1,4 @@
-{% extends 'basesk.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
     <h1>Categorietaxis list</h1>
@@ -44,10 +44,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('categorietaxi_show', { 'id': categorieTaxi.id }) }}">show</a>
+                            <a class="fa fa-eye" href="{{ path('categorietaxi_show', { 'id': categorieTaxi.id }) }}"></a>
                         </li>
                         <li>
-                            <a href="{{ path('categorietaxi_edit', { 'id': categorieTaxi.id }) }}">edit</a>
+                            <a class="fa fa-pencil" href="{{ path('categorietaxi_edit', { 'id': categorieTaxi.id }) }}"></a>
                         </li>
                     </ul>
                 </td>
@@ -58,7 +58,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('categorietaxi_new') }}">Create a new categorieTaxi</a>
+            <a class="btn btn-primary " href="{{ path('categorietaxi_new') }}">Create a new categorieTaxi</a>
         </li>
     </ul>
 {% endblock %}

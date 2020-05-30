@@ -2,9 +2,14 @@
 
 namespace TaxiBundle\Controller;
 
+use AppBundle\Entity\user;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Symfony\Component\HttpFoundation\Response;
 use TaxiBundle\Entity\CategorieTaxi;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use TaxiBundle\Entity\Taxi;
 
 /**
  * Categorietaxi controller.
@@ -26,6 +31,7 @@ class CategorieTaxiController extends Controller
             'categorieTaxis' => $categorieTaxis,
         ));
     }
+
 
     /**
      * Creates a new categorieTaxi entity.
@@ -125,4 +131,28 @@ class CategorieTaxiController extends Controller
             ->getForm()
         ;
     }
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $libelle = $request->get('q');
+        $rec = $em->getRepository('TaxiBundle:CategorieTaxi')->SearchVelo($libelle);
+
+        if (!$rec) {
+            $result['categorieTaxi']['error'] = "categorieTaxi does not exist :( ";
+        } else {
+            $result['categorieTaxi'] = $this->getRealEntities($rec);
+        }
+        return new Response(json_encode($result));
+    }
+
+    public function getRealEntities($rec)
+    {
+        foreach ($rec as $rec) {
+            $realEntities[$rec->getId()] = [$rec->getModel(), $rec->getImage()];
+
+        }
+        return $realEntities;
+    }
+
+
 }

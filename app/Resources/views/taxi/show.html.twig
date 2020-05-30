@@ -1,14 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Taxi</h1>
+    <h1 xmlns="http://www.w3.org/1999/html">Taxi</h1>
 
     <table>
         <tbody>
-            <tr>
-                <th>Idtaxi</th>
-                <td>{{ taxi.idTaxi }}</td>
-            </tr>
+
             <tr>
                 <th>Photo</th>
                 <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ taxi.photo) }}')">
@@ -21,17 +18,21 @@
         </tbody>
     </table>
 
-    <ul>
+    <li>
         <li>
-            <a href="{{ path('taxi_index') }}">Back to the list</a>
+            <a class="btn btn-primary " href="{{ path('taxi_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('taxi_edit', { 'idTaxi': taxi.idTaxi }) }}">Edit</a>
+            <a class="btn btn-primary " href="{{ path('taxi_edit', { 'idTaxi': taxi.idTaxi }) }}">Edit</a>
         </li>
+    <li>
+        <a class="btn btn-primary " href="{{ path('taxi_pdf',{ 'idTaxi': taxi.idTaxi })}}">download</a>
+    </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input class="btn btn-primary " type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
+
     </ul>
 {% endblock %}

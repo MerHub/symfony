@@ -22,3 +22,8 @@ taxi_delete:
     path:     /{idTaxi}/delete
     defaults: { _controller: "TaxiBundle:Taxi:delete" }
     methods:  DELETE
+
+taxi_pdf:
+    path:     /{idTaxi}/pdf
+    defaults: { _controller: "TaxiBundle:Taxi:pdf" }
+    methods:  GET
