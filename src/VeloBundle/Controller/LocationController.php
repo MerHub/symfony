@@ -36,6 +36,17 @@ class LocationController extends Controller
         ));
     }
 
+    public function showClientLocationAction(){
+        $user=$this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        $locations = $em->getRepository('VeloBundle:Location')->findBy(["idClient"=>$user->getId()]);
+
+        return $this->render('@Velo/location/indexClientShow.html.twig', array(
+            'locations' => $locations,
+        ));
+    }
+
     public function downloadAction()
     {
 

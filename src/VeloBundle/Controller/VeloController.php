@@ -158,7 +158,7 @@ class VeloController extends Controller
             ->getForm()
         ;
     }
-    public function searchAction(Request $request)
+    public function search1Action(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $libelle = $request->get('q');
