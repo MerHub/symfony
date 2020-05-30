@@ -90,7 +90,7 @@ class user extends BaseUser
     /**
      * @return float
      */
-    public function getLongitude(): float
+    public function getLongitude()
     {
         return $this->longitude;
     }
@@ -98,7 +98,7 @@ class user extends BaseUser
     /**
      * @return float
      */
-    public function getLatitude(): float
+    public function getLatitude()
     {
         return $this->latitude;
     }
@@ -114,7 +114,7 @@ class user extends BaseUser
     /**
      * @return string
      */
-    public function getType(): string
+    public function getType()
     {
         return $this->type;
     }
