@@ -135,7 +135,7 @@ class user extends BaseUser
      */
     public function setMail($email)
     {
-        $this->email = $mail;
+        $this->email = $email;
     }
 
     /**
