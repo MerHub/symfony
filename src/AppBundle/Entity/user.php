@@ -87,6 +87,9 @@ class user extends BaseUser
         $this->nTel = $nTel;
     }
 
+
+
+
     /**
      * @return float
      */
@@ -136,13 +139,14 @@ class user extends BaseUser
     }
 
     /**
-     * @return string
+     * @param string $type
      */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
 
 
-    /**
-     * @return bool
-     */
 
     public function __construct()
     {
