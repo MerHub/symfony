@@ -36,10 +36,15 @@ class TaxiController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user=$this->getUser();
+        $taxi=$this->getDoctrine()->getRepository(Taxi::class)->findOneBy(["idChauffeur"=>$user->getId()]);
+        if($taxi!=null){
+            return $this->redirectToRoute("taxi_edit",["idTaxi"=>$taxi->getIdTaxi()]);
+        }
         $taxi = new Taxi();
         $form = $this->createForm('TaxiBundle\Form\TaxiType', $taxi);
         $form->handleRequest($request);
-        $user=$this->getUser();
+
        $chauffeur= $this->getDoctrine()->getRepository(chauffeur::class)->find($user->getId());
 
         if ($form->isSubmitted() && $form->isValid()) {

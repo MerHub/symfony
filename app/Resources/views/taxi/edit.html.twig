@@ -10,6 +10,7 @@
         {{ form_widget(edit_form) }}
         <input class="btn btn-primary " type="submit" value="Edit"  />
     {{ form_end(edit_form) }}
+    <span id="misschassi" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Le numero de chassi est invalide</li></ul> </span>
 
     <ul style="list-style: none;">
         <li>
@@ -27,6 +28,36 @@
     <script>
         $(function(){
             $(".dispa").parent("div").hide()
+        })
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#misschassi').hide();
+            $('#taxibundle_taxi_numChassis').keyup(function () {
+                // alert('hi');
+
+
+
+
+
+                var x = $('#taxibundle_taxi_numChassis').val();
+                if (x.length===13) {
+
+                    $('#create').prop('disabled', false);
+                    $('#misschassi').hide();
+                    $('#taxibundle_taxi_numChassis');
+
+                } else {
+
+                    $('#misschassi').show();
+                    $('#taxibundle_taxi_numChassis');
+
+
+                    $('#create').prop('disabled', true);
+                }
+
+            });
         })
     </script>
 {% endblock %}

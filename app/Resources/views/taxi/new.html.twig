@@ -8,7 +8,9 @@
     {{ form_widget(form.photo) }}
     <br>{{ form_label(form.numChassis) }}
     {{ form_widget(form.numChassis) }}
-  <br>  {{ form_label(form.categorie) }}
+    <span id="misscin" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Le numero de chassi est invalide</li></ul> </span>
+
+    <br>  {{ form_label(form.categorie) }}
     {{ form_widget(form.categorie) }}
 
 
@@ -21,4 +23,35 @@
         </li>
     </ul>
 </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#misscin').hide();
+            $('#taxibundle_taxi_numChassis').keyup(function () {
+                // alert('hi');
+
+
+
+
+
+                var x = $('#taxibundle_taxi_numChassis').val();
+                if (x.length===13) {
+
+                    $('#create').prop('disabled', false);
+                    $('#misscin').hide();
+                    $('#taxibundle_taxi_numChassis');
+
+                } else {
+
+                    $('#misscin').show();
+                    $('#taxibundle_taxi_numChassis');
+
+
+                    $('#create').prop('disabled', true);
+                }
+
+            });
+        })
+    </script>
+
 {% endblock %}
