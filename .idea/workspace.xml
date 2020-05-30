@@ -3,6 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="6f85daa7-c189-48ac-bbb2-6ffa9b6026d4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EvenementBundle/Controller/InscriptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvenementBundle/Controller/InscriptionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EvenementBundle/Entity/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvenementBundle/Entity/Event.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EvenementBundle/Repository/InscriptionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvenementBundle/Repository/InscriptionRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EvenementBundle/Resources/views/event/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvenementBundle/Resources/views/event/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EvenementBundle/Resources/views/inscription/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/EvenementBundle/Resources/views/inscription/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OffreBundle/Entity/Offre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OffreBundle/Entity/Offre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OffreBundle/Resources/views/offre/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/OffreBundle/Resources/views/offre/new.html.twig" afterDir="false" />
+=======
+>>>>>>> Stashed changes
+>>>>>>> ghada
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +134,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/back/data/profile" />
+    <property name="last_opened_file_path" value="C:/www/Pi-final" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
@@ -192,6 +206,7 @@
       <workItem from="1585848364881" duration="3819000" />
       <workItem from="1586107173898" duration="1332000" />
       <workItem from="1586113338741" duration="14278000" />
+<<<<<<< Updated upstream
       <workItem from="1586381004515" duration="4231000" />
       <workItem from="1586390873749" duration="724000" />
       <workItem from="1586459040645" duration="13970000" />
@@ -236,10 +251,27 @@
       <workItem from="1589408368808" duration="2785000" />
       <workItem from="1589424086055" duration="13560000" />
       <workItem from="1589492575238" duration="5058000" />
+<<<<<<< HEAD
       <workItem from="1589886929707" duration="6670000" />
       <workItem from="1590067043150" duration="5159000" />
       <workItem from="1590757347154" duration="595000" />
       <workItem from="1590807323362" duration="1035000" />
+=======
+<<<<<<< HEAD
+=======
+      <workItem from="1586280187865" duration="1401000" />
+      <workItem from="1586281616650" duration="400000" />
+      <workItem from="1586282028942" duration="2585000" />
+      <workItem from="1586378647133" duration="32000" />
+      <workItem from="1586378844716" duration="54107000" />
+      <workItem from="1587734966533" duration="6000" />
+      <workItem from="1587817455958" duration="5453000" />
+      <workItem from="1588536478435" duration="15415000" />
+>>>>>>> Stashed changes
+=======
+      <workItem from="1589502158772" duration="204000" />
+>>>>>>> ghada
+>>>>>>> ghada
     </task>
     <servers />
   </component>
@@ -283,7 +315,7 @@
     <state x="686" y="220" key="FileChooserDialogImpl" timestamp="1588728313331">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="488" y="148" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1586785465364" />
+    <state x="488" y="148" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1589148128906" />
     <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1585247919939" />
     <state x="686" y="220" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1588728313331" />
     <state x="461" y="183" key="SettingsEditor" timestamp="1586387648000">
