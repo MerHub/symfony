@@ -1,6 +1,6 @@
 offre_index:
     path:     /
-    defaults: { _controller: "OffreBundle:Offre:index" }
+    defaults: { _controller: "OffreBundle:Offre:list" }
     methods:  GET
 
 offre_list:

@@ -8,6 +8,11 @@ inscription_show:
     defaults: { _controller: "EvenementBundle:Inscription:show" }
     methods:  GET
 
+inscription_newmobile:
+    path:     /{idEvent}/{idClient}/{nn}/newM
+    defaults: { _controller: "EvenementBundle:Inscription:newM" }
+    methods:  GET
+
 inscription_new:
     path:     /search
     defaults: { _controller: "EvenementBundle:Inscription:new" }

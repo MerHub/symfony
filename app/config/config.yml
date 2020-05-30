@@ -99,7 +99,7 @@ fos_user:
 
 vresh_twilio:
     #(Required) Your Account SID from www.twilio.com/user/account
-    sid: 'AC28ba4ff1b617bcf887aae1b86dc8c8d7'
+    sid: 'ACa7cb1b635f46f7fedbf40bbf2c4e25af'
     #(Required) Your Auth Token from www.twilio.com/user/account
     authToken: 'bdde27d016a320651cab7ae05640cf2f'
 
