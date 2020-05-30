@@ -66,31 +66,34 @@
 <!-- END TOPBAR -->
     <!--  SIDEBAR - END -->
     <!-- START CONTENT -->
-    <section id="main-content" class=" ">
-        <section class="wrapper main-wrapper row" style=''>
+<div class="page-container" >
 
-            <div class='col-12'>
-                <div class="page-title">
+    <section id="main-content" style="margin:auto;">
+        <section class="wrapper main-wrapper row" style='padding: 0;margin: 0;'>
 
-                    <div class="float-left">
-                        <!-- PAGE HEADING TAG - START --><h1 class="title"></h1><!-- PAGE HEADING TAG - END -->                            </div>
+            <div class='col-12'  style='padding: 0;margin: 0;'>
+                {% block body %}
 
-
-                    {% block body %}
-                    {% endblock %}
-
-
-                </div>
+                {% endblock %}
             </div>
-            <div class="clearfix"></div>
-
-
-
-
-            <!-- MAIN CONTENT AREA ENDS -->
         </section>
+        <!-- END CONTENT -->
+        <div class="page-chatapi hideit">
 
-    </section>
+            <div class="chat-wrapper">
+
+            </div>
+
+        </div>
+
+
+        <div class="chatapi-windows ">
+
+
+
+
+        </div></section>
+    <!-- END CONTAINER -->
     <!-- END CONTENT -->
     <div class="page-chatapi hideit">
 
