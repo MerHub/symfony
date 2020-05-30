@@ -32,7 +32,7 @@
                     searchRequest.abort();
                 searchRequest = $.ajax({
                     type: "GET",
-                    url: "{{ path('search') }}",
+                    url: "{{ path('searchh') }}",
                     data: {
                         'q' : value
                     },
@@ -45,7 +45,7 @@
                                 $.each(arr, function(id, value) {
                                     if (key === 'offre') {
                                         if (id !== 'error') {
-                                            console.log(value[3]);
+                                            console.log(value[0]);
                                             entitySelector.append('<li><b>'+value[3]+'</b><a href="'+id+'/show">'+'<img src="../../font/uploads/'+value[6]+'" style="width: 100px; height: 100px"/>'+'</a></li>');
                                         } else {
                                             entitySelector.append('<li class="errorLi">'+value+'</li>');
