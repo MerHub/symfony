@@ -103,13 +103,13 @@
                                 <span class="title">Se déconnecter</span>
                             </a>
                         </li>
-                        <li>
+                        <li class>
                             <a href="javascript:;">
                                 <i class="fa fa-columns"></i>
                                 <span class="title">Offers</span>
                                 <span class="arrow open"></span>
                             </a>
-                            <ul class="sub-menu" style="display:block;">
+                            <ul class="sub-menu">
                                 <li>
                                     <a class="" href="{{ path ('offre_list') }}" target="cad">List</a>
                                 </li>
@@ -125,7 +125,7 @@
                                 <span class="title">Events</span>
                                 <span class="arrow open"></span>
                             </a>
-                            <ul class="sub-menu" style="display:block;">
+                            <ul class="sub-menu">
                                 <li>
                                     <a class="" href="{{ path ('event_index') }}" target="cad">List</a>
                                 </li>
@@ -143,7 +143,7 @@
                                 <span class="title">Bic </span>
                                 <span class="arrow open"></span>
                             </a>
-                            <ul class="sub-menu" style="display:block;">
+                            <ul class="sub-menu" >
                                 <li>
                                     <a class="" href="{{ path ('velo_index') }}" target="cad">List of Bics</a>
                                 </li>
@@ -162,12 +162,28 @@
                                 <span class="title">Taxi categories</span>
                                 <span class="arrow open"></span>
                             </a>
-                            <ul class="sub-menu" style="display:block;">
+                            <ul class="sub-menu" >
                                 <li>
-                                    <a class="" href="{{ path ('taxi_index') }}" target="cad">List</a>
+                                    <a class="" href="{{ path ('categorietaxi_index') }}" target="cad">List</a>
                                 </li>
                                 <li>
-                                    <a class="" href="{{ path ('taxi_new') }}" target="cad">Add a categorie</a>
+                                    <a class="" href="{{ path ('categorietaxi_new') }}" target="cad">Add a categorie</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-columns"></i>
+                                <span class="title">Reclamation</span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu" >
+                                <li>
+                                    <a class="" href="{{ path ('typereclamation_index') }}" target="cad">List reclamation type</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{ path ('typereclamation_new') }}" target="cad">Add reclamation type</a>
                                 </li>
 
                             </ul>
@@ -188,7 +204,7 @@
 
                     <div class='col-12'  style='padding: 0;margin: 0;'>
                         <div class="page-title" style='padding: 0;margin: 0;margin-top: 3.7%;margin-left:0.5%;padding-top:2%;'>
-                            <iframe src="{{ path("homepage") }}" frameborder="0" style="width: 100%;height: 92.8%;" name="cad"></iframe>
+                            <iframe src="" frameborder="0" style="width: 100%;height: 92.8%;" name="cad"></iframe>
                         </div>
                     </div>
                 </section>

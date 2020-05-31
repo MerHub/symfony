@@ -44,15 +44,15 @@ class reclamation
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\user")
-     * @ORM\JoinColumn(name="id_client" , referencedColumnName="id_user")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client")
+     * @ORM\JoinColumn(name="id_client" , referencedColumnName="id")
      */
     private $idClient;
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\user")
-     * @ORM\JoinColumn(name="id_chauffeur" , referencedColumnName="id_user")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\chauffeur")
+     * @ORM\JoinColumn(name="id_chauffeur" , referencedColumnName="id")
      */
     private $idChauffeur;
 
