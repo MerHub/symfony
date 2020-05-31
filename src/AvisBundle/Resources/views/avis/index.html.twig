@@ -55,7 +55,7 @@
                             </div>
                             <div class="uprofile-buttons">
                                 <a class="btn btn-md btn-accent" href="{{ path("avis_index",{"idChauffeur":chauffeur.idUser.id}) }}" style="color: white;"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Avis</a>
-                                <a class="btn btn-md btn-primary"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Reclamation</a>
+                                <a class="btn btn-md btn-primary" href="{{ path("reclamation_new",{"idChauffeur":chauffeur.idUser.id}) }}"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Reclamation</a>
                             </div>
 
                         </div>

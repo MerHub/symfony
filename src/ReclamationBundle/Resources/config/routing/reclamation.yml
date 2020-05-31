@@ -9,7 +9,7 @@ reclamation_show:
     methods:  GET
 
 reclamation_new:
-    path:     /new
+    path:     /new/{idChauffeur}
     defaults: { _controller: "ReclamationBundle:Reclamation:new" }
     methods:  [GET, POST]
 
