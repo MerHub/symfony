@@ -85,15 +85,15 @@
                         </tr>
                         <tr>
                             <td>{{ form_label(form.qte,'Quantity') }}</td>
-                            <td>{{ form_widget(form.qte,{'attr':{'class':'form-control'}}) }}</td>
-                            <td>
+                            <td>{{ form_widget(form.qte,{'attr':{'class':'form-control'}}) }}
+
                                 <span id="misscin" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Quantity is invalide</li></ul> </span>
                             </td>
                         </tr>
                         <tr>
                             <td>{{ form_label(form.prix,'Price') }}</td>
-                            <td>{{ form_widget(form.prix,{'attr':{'class':'form-control'}}) }}</td>
-                            <td>
+                            <td>{{ form_widget(form.prix,{'attr':{'class':'form-control'}}) }}
+
                                 <span id="missin" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Price is invalide</li></ul> </span>
                             </td>
                         </tr>
@@ -113,7 +113,7 @@
 
                             <td>{{ form_widget(form) }}</td>
 
-                           <td> <input class="btn btn-accent btn-md"  type="submit" value="Create" /></td>
+                           <td> <input class="btn btn-accent btn-md"  type="submit" value="Create" id="coursbundle_cours_Ajouter" /></td>
                         </tr>
                         {{ form_end(form) }}
                     </table>
