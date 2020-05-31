@@ -27,9 +27,8 @@ class Taxi
      * @ORM\JoinColumn(name="id_chauffeur" , referencedColumnName="id")
      */
     private $idChauffeur;
-
     /**
-     * @var string
+     * @var integer
      * @ORM\ManyToOne(targetEntity=CategorieTaxi::class)
      * @ORM\JoinColumn(name="categorie" , referencedColumnName="id")
      */
@@ -48,6 +47,22 @@ class Taxi
      * @ORM\Column(name="num_chassis", type="string", length=255, nullable=false)
      */
     private $numChassis;
+
+    /**
+     * @return integer
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @param int $categorie
+     */
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
+    }
 
     /**
      * @return int
@@ -104,6 +119,9 @@ class Taxi
     {
         return $this->numChassis;
     }
+
+
+
 
     /**
      * @param string $numChassis

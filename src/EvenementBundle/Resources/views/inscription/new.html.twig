@@ -1,0 +1,43 @@
+{% extends 'baseEv.html.twig' %}
+
+{% block body %}
+<div class="col-xl-12">
+    <section class="box ">
+        <header class="panel_header">
+            <h2 class="title float-left">Register  </h2>
+
+            <div class="actions panel_actions float-right">
+                <a class="box_toggle fa fa-chevron-down"></a>
+
+            </div>
+        </header>
+        <div class="content-body">    <div class="row">
+                <div class="col-12">
+
+                    <table class="table">
+                        <h1> </h1>
+                   
+                        <table class="table table-striped">
+
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input  class="btn btn-primary"  type="submit" value="Register" />
+
+    {{ form_end(form) }}
+                        </table>
+
+
+
+                        <ul>
+
+                        </ul>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </section></div>
+
+
+{% endblock %}

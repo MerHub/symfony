@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<div class="col-xl-12">
+    <section class="box ">
+        <header class="panel_header">
+            <h2 class="title float-left">List of Rented Bicycles </h2>
+            <div class="actions panel_actions float-right">
+                <a class="box_toggle fa fa-chevron-down"></a>
+                <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
+                <a class="box_close fa fa-times"></a>
+            </div>
+        </header>
+        <div class="content-body">    <div class="row">
+                <div class="col-12">
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+
+                            <th>Dated</th>
+                            <th>Datef</th>
+                            <th>Prix</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+        <tbody>
+            <tr>
+
+
+                <td>{% if location.dateD %}{{ location.dateD|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if location.dateF %}{{ location.dateF|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ location.prix }}</td>
+                <td>
+                    <ul>
+
+
+
+                        <li>
+                            <a href="{{ path('location_edit', { 'idLocation': location.idLocation }) }}"><i class="fa fa-pencil"></i></a>
+
+                        </li>
+
+
+
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </section></div>
+
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Renting edit</h1>
+
+
+    <header class="panel_header">
+        <h2 class="title float-left"></h2>
+        <div class="actions panel_actions float-right">
+            <a class="box_toggle fa fa-chevron-down"></a>
+            <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
+            <a class="box_close fa fa-times"></a>
+        </div>
+    </header>
+    <div class="content-body">
+        <div class="row">
+            <div class="col-lg-8 col-md-9 col-10">
+
+                <div class="form-group">
+                    <table class="table table-striped">
+                        {{ form_start(edit_form) }}
+                        <tr>
+                            <td>{{ form_label(edit_form.dateD,'Beginning date') }}</td>
+                            <td>{{ form_widget(edit_form.dateD) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_label(edit_form.dateF,'End date') }}</td>
+                            <td>{{ form_widget(edit_form.dateF) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_label(edit_form.prix,'Price') }}</td>
+                            <td>{{ form_widget(edit_form.prix) }}</td>
+                            <td><input class="btn btn-colors btn-colors alert-success" type="button" id="prix" value="calculate"></td>
+                        </tr>
+                        <tr hidden>
+                            <td >{{ form_label(edit_form.idClient) }}</td>
+                            <td >{{ form_widget(edit_form.idClient) }}</td>
+                        </tr>
+                        <tr hidden><td >{{ form_label(edit_form.idVelo) }}</td><td >{{ form_widget(edit_form.idVelo) }}</td></tr>
+                        <tr>
+
+
+
+                            <td> <input class="btn btn-accent btn-md"  type="submit" value="edit" /></td>
+
+                        </tr>
+                        {{ form_end(edit_form) }}
+                    </table>
+                </div></div></div></div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+
+            $('#prix').click(function () {
+
+                var d= $('#velobundle_location_idVelo').val();
+
+
+
+
+                let req= $.ajax({
+                    url:'{{ path('prix') }}',
+                    type:'POST',
+                    data: {d: d},
+
+
+
+                });
+                req.done(function(msg1){
+                    $('p').html(msg1);
+                    console.log(msg1.prix);
+
+                    var Md=$("#velobundle_location_dateD_date_month").val();
+                    var Dd=$("#velobundle_location_dateD_date_day").val();
+                    var Yd=$("#velobundle_location_dateD_date_year").val();
+                    var Hd=$("#velobundle_location_dateD_time_hour").val();
+                    var Mmd=$("#velobundle_location_dateD_time_minute").val();
+                    var Mf=$("#velobundle_location_dateF_date_month").val();
+                    var Df=$("#velobundle_location_dateF_date_day").val();
+                    var Yf=$("#velobundle_location_dateF_date_year").val();
+                    var Hf=$("#velobundle_location_dateF_time_hour").val();
+                    var Mmf=$("#velobundle_location_dateF_time_minute").val();
+
+
+                    var date1 = new Date(Yd+"/"+Md+"/"+Dd+" "+Hd+":"+Mmd+":"+"00");
+                    var date2 = new Date(Yf+"/"+Mf+"/"+Df+" "+Hf+":"+Mmf+":"+"00");
+                    var diffEnMilliseconde = date2-date1;
+                    var diffEnHeures = diffEnMilliseconde/1000/3600;
+
+                    $('#velobundle_location_prix').val(parseFloat(msg1.prix)*diffEnHeures);
+
+
+
+                });
+                req.fail();
+            });
+        });
+
+    </script>
+
+{% endblock %}

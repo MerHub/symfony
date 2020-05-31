@@ -3,12 +3,14 @@
 namespace AvisBundle\Controller;
 
 use AppBundle\Entity\chauffeur;
+use AppBundle\Entity\Client;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\user;
 use AvisBundle\Entity\Avis;
 use ChauffeurBundle\ChauffeurBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Avi controller.
@@ -84,6 +86,75 @@ class AvisController extends Controller
     public function newAction(Request $request,$idChauffeur,$idClient)
     {
         // j'ai mélangé avec index
+    }
+
+    /**
+     * Creates a new avi entity.
+     *
+     */
+    public function avis_service_showAllAction($idChauffeur)
+    {
+        $data=$this->getDoctrine()->getRepository(Avis::class)->findBy(["idChauffeur"=>$idChauffeur]);
+        $array=["listeAvis"=>[]];
+        foreach($data as $key=>$value){
+            array_push($array["listeAvis"],[
+                "username"=>$value->getIdCclient()->getIdUser()->getUsername(),
+                "message"=>$value->getMsg(),
+                "note"=>$value->getNote(),
+                "idAvis"=>$value->getIdAvis(),
+                "idChauffeur"=>$value->getIdChauffeur()->getIdUser()->getId(),
+                "idClient"=>$value->getIdCclient()->getIdUser()->getId()
+            ]);
+        }
+        header('Content-type: application/json');
+        return  new Response(json_encode( $array ));
+    }
+
+    public function serviceDeleteAction($id){
+        $avis=$this->getDoctrine()->getRepository(Avis::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($avis);
+        $em->flush();
+        header('Content-type: application/json');
+        return  new Response(json_encode( ["data"] ));
+    }
+
+
+    /**
+     * Creates a new avi entity.
+     *
+     */
+    public function moyenneAction($idChauffeur)
+    {
+        $dql = "SELECT AVG(e.note) AS balance FROM AvisBundle\Entity\Avis e " .
+            "WHERE e.idChauffeur = ?1";
+        $balance = $this->getDoctrine()->getManager()->createQuery($dql)
+            ->setParameter(1, $idChauffeur)
+            ->getSingleScalarResult();
+    $data=["moyenne"=>ceil($balance)];
+        header('Content-type: application/json');
+        return  new Response(json_encode( $data ));
+    }
+
+
+    /**
+     * Creates a new avi entity.
+     *
+     */
+    public function avis_service_addAction($idChauffeur,$idClient,$note,$message)
+    {
+        $chauffeur=$this->getDoctrine()->getRepository(chauffeur::class)->find($idChauffeur);
+        $client=$this->getDoctrine()->getRepository(Client::class)->find($idClient);
+        $avis=new Avis();
+        $avis->setNote($note);
+        $avis->setMsg($message);
+        $avis->setIdCclient($client);
+        $avis->setIdChauffeur($chauffeur);
+        $em=$this->getDoctrine()->getManager();
+        $em->persist($avis);
+        $em->flush();
+        header('Content-type: application/json');
+        return  new Response(json_encode( ["reponse"=>"oui"] ));
     }
 
     /**

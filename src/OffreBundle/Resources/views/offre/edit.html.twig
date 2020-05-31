@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="col-xl-12">
+        <section class="box ">
+            <header class="panel_header">
+                <h2 class="title float-left">Offer  <td>{{ offre.nom }}</td>  </h2>
+
+                <div class="actions panel_actions float-right">
+                    <a class="box_toggle fa fa-chevron-down"></a>
+
+                </div>
+            </header>
+            <div class="content-body">    <div class="row">
+                    <div class="col-12">
+
+                        <table class="table">
+                            <h1>Offre edit</h1>
+
+                            <table class="table table-striped">
+                                {{ form_start(edit_form) }}
+                                <tr>
+                                    <td>{{ form_label(edit_form.nom) }}</td>
+                                    <td>{{ form_widget(edit_form.nom) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(edit_form.type) }}</td>
+                                    <td>{{ form_widget(edit_form.type) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(edit_form.dateD) }}</td>
+                                    <td>{{ form_widget(edit_form.dateD) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(edit_form.dateF) }}</td>
+                                    <td>{{ form_widget(edit_form.dateF) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(edit_form.reductionOffre) }}</td>
+                                    <td>{{ form_widget(edit_form.reductionOffre) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(edit_form.codePromo) }}</td>
+                                    <td>{{ form_widget(edit_form.codePromo) }}</td>
+                                </tr>
+                                <tr >
+                                    <td>{{ form_label(edit_form.img) }}</td>
+                                    <td>{{ form_widget(edit_form.img) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_widget(edit_form) }}</td>
+                                  <td > <input class="btn btn-primary"  type="submit" value="Edit" /> </td>
+                                </tr>
+                                {{ form_end(edit_form) }}
+                            </table>
+
+
+
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </section></div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+

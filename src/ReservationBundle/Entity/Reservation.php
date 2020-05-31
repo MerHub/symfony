@@ -54,7 +54,7 @@ class Reservation
      *
      * @ORM\Column(name="heure", type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
-    private $heure = 'NULL';
+    private $heure;
 
     /**
      * @var float

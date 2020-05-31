@@ -73,7 +73,7 @@ class Inscription
     /**
      * Set idEvent
      *
-     * @param integer $idEvent
+     * @param \EvenementBundle\Entity\Event $idEvent
      *
      * @return Inscription
      */
@@ -87,7 +87,7 @@ class Inscription
     /**
      * Get idEvent
      *
-     * @return int
+     * @return \EvenementBundle\Entity\Event
      */
     public function getIdEvent()
     {

@@ -1,3 +1,26 @@
+taxi_taxi:
+    resource: "@TaxiBundle/Resources/config/routing/taxi.yml"
+    prefix:   /taxi
+
+taxi_categorietaxi:
+    resource: "@TaxiBundle/Resources/config/routing/categorietaxi.yml"
+    prefix:   /categorietaxi
+
+add:
+    path:     /add
+    defaults: { _controller: TaxiBundle:Categorie:add }
+
 taxi_homepage:
     path:     /
     defaults: { _controller: TaxiBundle:Default:index }
+service_GetTaxi:
+    path:    /serviceGetTaxi/{id_chauffeur}
+    defaults: { _controller: TaxiBundle:Default:serviceGetTaxi }
+
+service_GetCategorieTaxi:
+    path:    /GetCategorieTaxi
+    defaults: { _controller: TaxiBundle:Default:serviceGetCategorieTaxi }
+
+service_setTaxi:
+    path:    /service_setTaxi/{numchassis}/{idCat}/{idChaufeur}
+    defaults: { _controller: TaxiBundle:Default:serviceSetCategorieTaxi }

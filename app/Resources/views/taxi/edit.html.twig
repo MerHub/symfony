@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="col-12 col-lg-6 col-xl-4">
+        <section class="box ">
+            <header class="panel_header">
+                <h2 class="title float-left">Taxi edit</h2>
+                <div class="actions panel_actions float-right">
+                    <a class="box_toggle fa fa-chevron-down"></a>
+                    <a class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></a>
+                    <a class="box_close fa fa-times"></a>
+                </div>
+            </header>
+            <div class="content-body">        <div class="row">
+                    <div class="col-12">
+                        {{ form_start(edit_form) }}
+
+                        {{ form_widget(edit_form) }}
+                        <input class="btn btn-primary " type="submit" value="Edit"  />
+                        {{ form_end(edit_form) }}
+                        <span id="misschassi" ><ul><li><i class="fa fa-exclamation-triangle"></i>&nbsp; : Le numero de chassi est invalide</li></ul> </span>
+
+                        <ul style="list-style: none;">
+
+                            <li>
+                                {{ form_start(delete_form) }}
+                                <input class="btn btn-primary " style="margin:4px;" type="submit" value="Delete">
+                                {{ form_end(delete_form) }}
+                            </li>
+                        </ul>
+                    </div>
+                </div> <!-- End .row -->
+            </div>
+        </section>    </div>
+
+{% endblock %}
+
+{% block cssScript %}
+    <script>
+        $(function(){
+            $(".dispa").parent("div").hide()
+        })
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#misschassi').hide();
+            $('#taxibundle_taxi_numChassis').keyup(function () {
+                // alert('hi');
+
+
+
+
+
+                var x = $('#taxibundle_taxi_numChassis').val();
+                if (x.length===13) {
+
+                    $('#create').prop('disabled', false);
+                    $('#misschassi').hide();
+                    $('#taxibundle_taxi_numChassis');
+
+                } else {
+
+                    $('#misschassi').show();
+                    $('#taxibundle_taxi_numChassis');
+
+
+                    $('#create').prop('disabled', true);
+                }
+
+            });
+        })
+    </script>
+{% endblock %}

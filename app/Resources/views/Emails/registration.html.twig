@@ -1,0 +1,42 @@
+{# app/Resources/views/Emails/registration.html.twig #}
+<h3>You did it! You registered!</h3>
+<h1>Hi {{  user.username }}  You're successfully registered.
+</h1>
+<table class="table">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+        <th>Depart</th>
+        <th>Destination</th>
+        <th>Date of travel</th>
+        <th>Return Date</th>
+
+        </th>
+
+        <th> </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+
+        <td>{{ event.nom }}</td>
+        <td>{{ event.depart }}</td>
+        <td>{{ event.arrivee }}</td>
+        <td>{% if event.dateAllee %}{{ event.dateAllee|date('Y-m-d H:i:s') }}{% endif %}</td>
+        <td>{% if event.dateRetour %}{{ event.dateRetour|date('Y-m-d H:i:s') }}{% endif %}</td>
+    </tr>
+    </tbody>
+
+</table>
+
+
+
+
+
+{# example, assuming you have a route named "login" #}
+
+Thanks!
+
+    {# Makes an absolute URL to the /images/logo.png file #}

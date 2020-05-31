@@ -1,0 +1,34 @@
+inscription_index:
+    path:     /
+    defaults: { _controller: "EvenementBundle:Inscription:index" }
+    methods:  GET
+
+inscription_show:
+    path:     /{id}/show
+    defaults: { _controller: "EvenementBundle:Inscription:show" }
+    methods:  GET
+
+inscription_newmobile:
+    path:     /{idEvent}/{idClient}/{nn}/newM
+    defaults: { _controller: "EvenementBundle:Inscription:newM" }
+    methods:  GET
+
+inscription_new:
+    path:     /search
+    defaults: { _controller: "EvenementBundle:Inscription:new" }
+    methods:  [GET]
+
+searchi:
+    path:     /new
+    defaults: { _controller: "EvenementBundle:Inscription:search" }
+    methods:  [GET, POST]
+
+inscription_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "EvenementBundle:Inscription:edit" }
+    methods:  [GET, POST]
+
+inscription_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "EvenementBundle:Inscription:delete" }
+    methods:  DELETE

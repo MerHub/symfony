@@ -2,9 +2,21 @@
 
 namespace ReclamationBundle\Controller;
 
+
+use DateTime;
+
 use ReclamationBundle\Entity\reclamation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Validator\Constraints\Date;
+use ReclamationBundle\Entity\typeReclamation;
+use AppBundle\Entity\user;
+use AppBundle\Entity\chauffeur;
+use AppBundle\Entity\Client;
+
 
 /**
  * Reclamation controller.
@@ -31,24 +43,69 @@ class ReclamationController extends Controller
      * Creates a new reclamation entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request,$idChauffeur)
     {
         $reclamation = new reclamation();
         $form = $this->createForm('ReclamationBundle\Form\ReclamationType', $reclamation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user=$this->getUser();
+            $u=$this->getDoctrine()->getRepository(Client::class)->find($user->getId());
+            $chauffeur=$this->getDoctrine()->getRepository(chauffeur::class)->find($idChauffeur);
+            $reclamation->setIdClient($u);
+            $reclamation->setIdChauffeur($chauffeur);
+            $reclamation->setEtat(0);
+            $date = new \DateTime(date("Y-m-d H:i:s",time()+60*60));
+            $reclamation->setDateAjout($date);
             $em = $this->getDoctrine()->getManager();
             $em->persist($reclamation);
             $em->flush();
 
-            return $this->redirectToRoute('reclamation_show', array('idRec' => $reclamation->getIdrec()));
+            return $this->redirectToRoute('avis_index', array('idChauffeur' => $idChauffeur));
         }
 
         return $this->render('@Reclamation/reclamation/new.html.twig', array(
             'reclamation' => $reclamation,
             'form' => $form->createView(),
         ));
+    }
+    public function newMAction( $idClient,  $idchauffeur, $typeReclamation)
+    {
+        $reclamation = new reclamation();
+
+
+
+            $em = $this->getDoctrine()->getManager();
+
+    $reclamation->setEtat(1);
+            $date=new DateTime('now+1 hours');
+            $reclamation->setDateAjout($date);
+        $objjj = $this->getDoctrine()
+            ->getRepository(user::class)
+            ->find($idchauffeur);
+        $reclamation->setIdchauffeur($objjj);
+
+
+        $objj = $this->getDoctrine()
+            ->getRepository(user::class)
+            ->find($idClient);
+             $reclamation->setIdClient($objj);
+
+            $obj = $this->getDoctrine()
+                ->getRepository(typeReclamation::class)
+                ->find($typeReclamation);
+
+            $reclamation->setTypeReclamation($obj);
+
+        $em->persist($reclamation);
+            $em->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reclamation);
+        return new JsonResponse($formatted);
+
+
     }
 
     /**
@@ -120,5 +177,20 @@ class ReclamationController extends Controller
             ->setMethod('DELETE')
             ->getForm()
             ;
+    }
+    public function showReclamationAction($id)
+    {
+        $idc=$id;
+        $list=$this->getDoctrine()->getRepository(reclamation::class)->findBy(['idChauffeur'=>$idc]);
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($list);
+        return new JsonResponse($formatted);
+    }
+    public function getTypesAction()
+    {
+        $list=$this->getDoctrine()->getRepository(typeReclamation::class)->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($list);
+        return new JsonResponse($formatted);
     }
 }

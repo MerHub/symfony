@@ -3,6 +3,7 @@
 parameters:
     #parameter_name: value
     imgProfileUser_directories: '%kernel.project_dir%/web/font/imgProfileUser'
+    upload_directory: '%kernel.project_dir%/web/font/uploads'
 
 services:
     app.form.registration:

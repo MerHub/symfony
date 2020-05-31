@@ -3,6 +3,7 @@
 namespace EvenementBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Event
@@ -52,6 +53,7 @@ class Event
      * @var \DateTime
      *
      * @ORM\Column(name="date_allee", type="datetime")
+     * @Assert\GreaterThan("today")
      */
     private $dateAllee;
 
@@ -59,6 +61,7 @@ class Event
      * @var \DateTime
      *
      * @ORM\Column(name="date_retour", type="datetime")
+     * @Assert\GreaterThan("today")
      */
     private $dateRetour;
 
@@ -70,9 +73,9 @@ class Event
     private $description;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="latitude", type="decimal", precision=10, scale=0)
+     * @ORM\Column(name="latitude", type="float")
      */
     private $latitude1;
 
@@ -246,6 +249,7 @@ class Event
      * Get dateAllee
      *
      * @return \DateTime
+     *
      */
     public function getDateAllee()
     {
@@ -314,15 +318,6 @@ class Event
         return $this;
     }
 
-    /**
-     * Get latitude
-     *
-     * @return string
-     */
-    public function getLatitude()
-    {
-        return $this->latitude;
-    }
 
     /**
      * Set longitude1
@@ -395,5 +390,35 @@ class Event
     {
         return $this->longitude2;
     }
-}
 
+    /**
+     * Set latitude1
+     *
+     * @param string $latitude1
+     *
+     * @return Event
+     */
+    public function setLatitude1($latitude1)
+    {
+        $this->latitude1 = $latitude1;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude1
+     *
+     * @return int
+     */
+    public function getLatitude1()
+    {
+        return $this->latitude1;
+    }
+
+    public function __toString()
+    {
+        return strval($this->idEvent);
+    }
+
+
+}
