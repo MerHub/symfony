@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new SBC\NotificationsBundle\NotificationsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Egyg33k\CsvBundle\Egyg33kCsvBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

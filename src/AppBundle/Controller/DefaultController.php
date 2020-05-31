@@ -6,6 +6,9 @@ use AppBundle\Entity\chauffeur;
 use AppBundle\Entity\Client;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\user;
+use ReclamationBundle\Entity\reclamation;
+use ReclamationBundle\Entity\typeReclamation;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use TaxiBundle\Entity\Taxi;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,7 +18,6 @@ use Symfony\Component\HttpClient\HttpClient;
 // version skander
 class DefaultController extends Controller
 {
-
 
     /**
      * @Route("/Map", name="serviceMap")

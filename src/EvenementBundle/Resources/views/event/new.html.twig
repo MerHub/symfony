@@ -27,7 +27,8 @@
                                 </tr>
                                 <tr>
                                     <td>{{ form_label(form.nbrPlace) }}</td>
-                                    <td>{{ form_widget(form.nbrPlace) }}</td>
+                                    <td>{{ form_widget(form.nbrPlace) }}  <span id="misscin"  ><ul    ><i class="fa fa-exclamation-triangle"   ></i>&nbsp; : Number is invalide</ul> </span></td>
+
                                 </tr>
                                 <tr>
                                     <td>{{ form_label(form.depart) }}</td>
@@ -80,7 +81,34 @@
 
                             </ul>
                         </table>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+                        <script>
+                            $(document).ready(function () {
+                                $('#misscin').hide();
+                                $('#evenementbundle_event_nbrPlace').keyup(function () {
+
+
+
+                                    var x = $('#evenementbundle_event_nbrPlace').val();
+                                    if (x>1 && x<100) {
+
+                                        $('#coursbundle_cours_Ajouter').prop('disabled', false);
+                                        $('#misscin').hide();
+                                        $('#evenementbundle_event_nbrPlace');
+
+                                    } else {
+
+                                        $('#misscin').show();
+                                        $('#evenementbundle_event_nbrPlace');
+
+
+                                        $('#coursbundle_cours_Ajouter').prop('disabled', true);
+                                    }
+
+                                });
+                            })
+                        </script>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 namespace ReclamationBundle\Controller;
 
 
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use DateTime;
 
 use ReclamationBundle\Entity\reclamation;
@@ -45,6 +46,32 @@ class ReclamationController extends Controller
      */
     public function newAction(Request $request,$idChauffeur)
     {
+
+
+        $sta=$this->getDoctrine()->getRepository(reclamation::class)->getStat($idChauffeur);
+        $array=[];
+        $i=0;
+        $arrayglobal=[];
+        array_push($arrayglobal,['Task', 'Hours per Day']);
+        foreach ($sta as $key=>$value){
+            $type=$this->getDoctrine()->getRepository(typeReclamation::class)->find($value["copie"]);
+            array_push($arrayglobal,[$type->getTitre(),intval( $value["nombre"])]);
+        }
+
+//die(var_dump($arrayglobal));
+        $pieChart = new PieChart();
+        $pieChart->getData()->setArrayToDataTable($arrayglobal);
+
+        $pieChart->getOptions()->setTitle('My reclamation Activities');
+        $pieChart->getOptions()->setHeight(500);
+        $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+
+
         $reclamation = new reclamation();
         $form = $this->createForm('ReclamationBundle\Form\ReclamationType', $reclamation);
         $form->handleRequest($request);
@@ -55,6 +82,7 @@ class ReclamationController extends Controller
             $chauffeur=$this->getDoctrine()->getRepository(chauffeur::class)->find($idChauffeur);
             $reclamation->setIdClient($u);
             $reclamation->setIdChauffeur($chauffeur);
+            $reclamation->setTypeReclamationcopie($reclamation->getTypeReclamation()->getId());
             $reclamation->setEtat(0);
             $date = new \DateTime(date("Y-m-d H:i:s",time()+60*60));
             $reclamation->setDateAjout($date);
@@ -62,7 +90,24 @@ class ReclamationController extends Controller
             $em->persist($reclamation);
             $em->flush();
 
-            return $this->redirectToRoute('avis_index', array('idChauffeur' => $idChauffeur));
+            $transport = (new \Swift_SmtpTransport('smtp.gmail.com',465,'ssl'))->setUsername("armandcyrille.public@gmail.com")->setPassword("CE534dm699875176.");
+            $mailer=new \Swift_Mailer($transport);
+            $us=$this->getDoctrine()->getRepository(user::class)->find($idChauffeur);
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Registration mail')
+                ->setFrom('armandcyrille.public@gmail.com')
+                ->setTo($us->getMail())
+                ->setBody(
+                    $this->renderView(
+                    // app/Resources/views/Emails/registration.html.twig
+                        '@Reclamation/statics/reclamation.html.twig',array('piechart' => $pieChart)
+                    ),
+                    'text/html'
+                );
+
+            $mailer->send($message);
+
+            return $this->render('@Reclamation/statics/reclamation.html.twig',array('piechart' => $pieChart));
         }
 
         return $this->render('@Reclamation/reclamation/new.html.twig', array(
