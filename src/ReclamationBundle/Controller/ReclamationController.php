@@ -14,6 +14,8 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Constraints\Date;
 use ReclamationBundle\Entity\typeReclamation;
 use AppBundle\Entity\user;
+use AppBundle\Entity\chauffeur;
+use AppBundle\Entity\Client;
 
 
 /**
@@ -41,18 +43,26 @@ class ReclamationController extends Controller
      * Creates a new reclamation entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request,$idChauffeur)
     {
         $reclamation = new reclamation();
         $form = $this->createForm('ReclamationBundle\Form\ReclamationType', $reclamation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user=$this->getUser();
+            $u=$this->getDoctrine()->getRepository(Client::class)->find($user->getId());
+            $chauffeur=$this->getDoctrine()->getRepository(chauffeur::class)->find($idChauffeur);
+            $reclamation->setIdClient($u);
+            $reclamation->setIdChauffeur($chauffeur);
+            $reclamation->setEtat(0);
+            $date = new \DateTime(date("Y-m-d H:i:s",time()+60*60));
+            $reclamation->setDateAjout($date);
             $em = $this->getDoctrine()->getManager();
             $em->persist($reclamation);
             $em->flush();
 
-            return $this->redirectToRoute('reclamation_show', array('idRec' => $reclamation->getIdrec()));
+            return $this->redirectToRoute('avis_index', array('idChauffeur' => $idChauffeur));
         }
 
         return $this->render('@Reclamation/reclamation/new.html.twig', array(
