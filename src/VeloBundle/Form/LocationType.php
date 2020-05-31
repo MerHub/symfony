@@ -2,6 +2,8 @@
 
 namespace VeloBundle\Form;
 
+use AppBundle\Entity\Client;
+use AppBundle\Entity\user;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -19,7 +21,13 @@ class LocationType extends AbstractType
         $builder->add('dateD',DateTimeType::class)->add('dateF',DateTimeType::class)->add('prix')->add('idVelo',EntityType::class,
             [
                 'class'=>Velo::class,
-                'choice_label'=>'id'
+                'choice_label'=>'id',
+                "attr"=>["class"=>"dispa"]
+            ])->add('idClient',EntityType::class,
+            [
+                'class'=>user::class,
+                'choice_label'=>'id',
+                "attr"=>["class"=>"dispa"]
             ]);
     }/**
      * {@inheritdoc}

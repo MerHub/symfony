@@ -32,7 +32,7 @@
                         searchRequest.abort();
                     searchRequest = $.ajax({
                         type: "GET",
-                        url: "{{ path('search') }}",
+                        url: "{{ path('search1') }}",
                         data: {
                             'q' : value
                         },
@@ -119,6 +119,7 @@
                     </table>
 
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
                     <script>
                         $(document).ready(function () {
                             $('#misscin').hide();

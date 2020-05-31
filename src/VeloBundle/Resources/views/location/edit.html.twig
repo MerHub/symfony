@@ -32,11 +32,11 @@
                             <td>{{ form_widget(edit_form.prix) }}</td>
                             <td><input class="btn btn-colors btn-colors alert-success" type="button" id="prix" value="calculate"></td>
                         </tr>
-                        <tr>
-                            <td hidden>{{ form_label(edit_form.idClient) }}</td>
-                            <td hidden>{{ form_widget(edit_form.idClient) }}</td>
+                        <tr hidden>
+                            <td >{{ form_label(edit_form.idClient) }}</td>
+                            <td >{{ form_widget(edit_form.idClient) }}</td>
                         </tr>
-                        <tr><td hidden>{{ form_label(edit_form.idVelo) }}</td><td hidden>{{ form_widget(edit_form.idVelo) }}</td></tr>
+                        <tr hidden><td >{{ form_label(edit_form.idVelo) }}</td><td >{{ form_widget(edit_form.idVelo) }}</td></tr>
                         <tr>
 
 
@@ -47,11 +47,7 @@
                         {{ form_end(edit_form) }}
                     </table>
                 </div></div></div></div>
-    <ul>
-        <li>
-            <a href="{{ path('location_new') }}">Back to the list</a>
-        </li>
-    </ul>
+
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

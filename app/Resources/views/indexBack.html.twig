@@ -1,6 +1,3 @@
-
-
-<!DOCTYPE html>
 <html class=" ">
     <head>
         <!-- 
@@ -52,21 +49,10 @@
     <!-- END HEAD -->
 
     <!-- BEGIN BODY -->
-    <body class=" "><!-- START TOPBAR -->
+    <body style="overflow-x:hidden;"><!-- START TOPBAR -->
         <div class='page-topbar '>
             <div class='logo-area'>
 
-            </div>
-            <div class='quick-area'>
-                <div class='float-left'>
-                    <ul class="info-menu left-links list-inline list-unstyled">
-                        <li class="sidebar-toggle-wrap list-inline-item">
-                            <a href="#" data-toggle="sidebar" class="sidebar_toggle">
-                                <i class="fa fa-bars"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </div>
 
         </div>
@@ -111,19 +97,97 @@
                     <ul class='wraplist'>
 
                         <li class='menusection'>Main</li>
-                        <li class="open">
-                            <a href="index.html">
-                                <i class="fa fa-dashboard"></i>
-                                <span class="title">Dashboard</span>
+                        <li>
+                            <a href="{{ path("fos_user_security_logout") }}">
+                                <i class="fa fa-sign-out"></i>
+                                <span class="title">Se déconnecter</span>
                             </a>
                         </li>
-                        <li class="">
-                            <a href="ui-googlemaps.html">
-                                <i class="fa fa-map-marker"></i>
-                                <span class="title">Google Maps</span>
+                        <li class>
+                            <a href="javascript:;">
+                                <i class="fa fa-columns"></i>
+                                <span class="title">Offers</span>
+                                <span class="arrow open"></span>
                             </a>
-                        </li><li class='menusection'>Extensions</li>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a class="" href="{{ path ('offre_list') }}" target="cad">List</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{ path ('offre_new') }}" target="cad">Add an offer</a>
+                                </li>
+                            </ul>
+                        </li>
 
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-columns"></i>
+                                <span class="title">Events</span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a class="" href="{{ path ('event_index') }}" target="cad">List</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{ path ('event_new') }}" target="cad">Add an event</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{ path ('inscription_index') }}" target="cad">show registration list</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-columns"></i>
+                                <span class="title">Bic </span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu" >
+                                <li>
+                                    <a class="" href="{{ path ('velo_index') }}" target="cad">List of Bics</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{ path ('velo_new') }}" target="cad">Add Bics</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{ path ('location_index') }}" target="cad">List of locations </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-columns"></i>
+                                <span class="title">Taxi categories</span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu" >
+                                <li>
+                                    <a class="" href="{{ path ('categorietaxi_index') }}" target="cad">List</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{ path ('categorietaxi_new') }}" target="cad">Add a categorie</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-columns"></i>
+                                <span class="title">Reclamation</span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu" >
+                                <li>
+                                    <a class="" href="{{ path ('typereclamation_index') }}" target="cad">List reclamation type</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{{ path ('typereclamation_new') }}" target="cad">Add reclamation type</a>
+                                </li>
+
+                            </ul>
+                        </li>
 
                     </ul>
 
@@ -139,10 +203,12 @@
                 <section class="wrapper main-wrapper row" style='padding: 0;margin: 0;'>
 
                     <div class='col-12'  style='padding: 0;margin: 0;'>
-                        <div class="page-title" style='padding: 0;margin: 0;margin-top: 3.7%;'>
-                            <iframe src="{{ path("homepage") }}" frameborder="0" style="width: 100%;height: 92.8%;border-left:1px solid rgba(0,0,0,0.2);" name="cad"></iframe>
+                        <div class="page-title" style='padding: 0;margin: 0;margin-top: 3.7%;margin-left:0.5%;padding-top:2%;'>
+                            <iframe src="" frameborder="0" style="width: 100%;height: 92.8%;" name="cad"></iframe>
                         </div>
+                    </div>
                 </section>
+
             </section>
 
         <!-- END CONTAINER -->
@@ -195,9 +261,10 @@
                 </div>
             </div>
         </div>
+        </div>
+    </body></html>
         <!-- modal end -->
-    </body>
-</html>
+
 
 
 

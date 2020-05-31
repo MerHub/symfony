@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 xmlns="http://www.w3.org/1999/html">Taxi</h1>
+
+    <table style="list-style: none;">
+        <tbody>
+
+            <tr>
+                <th>Photo</th>
+                <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ taxi.photo) }}')" >
+                </td>
+            </tr>
+            <tr>
+                <th>Numchassis</th>
+                <td>{{ taxi.numChassis }}</td>
+            </tr>
+        </tbody>
+    </table>
+<ul  style="list-style: none;">
+    <li >
+        <li>
+            <a class="btn btn-primary " style="margin:4px;" href="{{ path('taxi_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a class="btn btn-primary  " style="margin:4px;" href="{{ path('taxi_edit', { 'idTaxi': taxi.idTaxi }) }}">Edit</a>
+        </li>
+    <li>
+        <a class="btn btn-primary " style="margin:4px;" href="{{ path('taxi_pdf',{ 'idTaxi': taxi.idTaxi })}}">download</a>
+    </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input class="btn btn-primary " type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+
+    </ul>
+{% endblock %}

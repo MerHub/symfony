@@ -7,10 +7,13 @@ velo_serviceList:
     path:     /serviceList
     defaults: { _controller: "VeloBundle:Velo:serviceList" }
 
+
+
 velo_show:
     path:     /{id}/show
     defaults: { _controller: "VeloBundle:Velo:show" }
     methods:  GET
+
 
 velo_new:
     path:     /new
@@ -27,9 +30,9 @@ velo_delete:
     defaults: { _controller: "VeloBundle:Velo:delete" }
     methods:  DELETE
 
-search:
-    path:     /search
-    defaults: { _controller: "VeloBundle:Velo:search" }
+search1:
+    path:     /search1
+    defaults: { _controller: "VeloBundle:Velo:search1" }
 
 excel:
     path:     /excel

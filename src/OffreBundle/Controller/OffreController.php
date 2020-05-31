@@ -145,7 +145,7 @@ class OffreController extends Controller
             ->getForm()
         ;
     }
-    public function searchAction(Request $request)
+    public function searchhAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $libelle = $request->get('q');

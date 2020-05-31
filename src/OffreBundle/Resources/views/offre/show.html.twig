@@ -1,4 +1,4 @@
-{% extends 'base2.html.twig' %}
+{% extends 'base.html.twig' %}
 
 
 {% block body %}
@@ -29,8 +29,8 @@
 
                                     <th>Offer reduction</th>
                                     <th>Promo code</th>
-                                    <th>Img</th>
-                                    <th> </th>
+                                    <th>Image</th>
+                                    <th> Operation </th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -52,14 +52,29 @@
 
                                     <td>{{ offre.codePromo }}</td>
 
-                                    <td class="fa-image" height="100px" width="100px" style="background-image: url('{{ asset('font/uploads/' ~ offre.img) }}')">
+                                    <td>
+                                        <a href="" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter{{ offre.idOffre }}">Image</a>
+                                        <div class="modal fade" id="exampleModalCenter{{ offre.idOffre }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img src="{{ asset('font/uploads/' ~ offre.img) }}" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td> <td>
-                                    <a class="fa fa-pencil"  href="{{ path('offre_edit', { 'idOffre': offre.idOffre }) }}"></a>
-                                    </td> <td>
-                                    {{ form_start(delete_form) }}
 
-                                    <input class="btn btn-primary" type="submit" value="Delete">
-                                    {{ form_end(delete_form) }}
+                                        {{ form_start(delete_form) }}
+                                        <a class="fa fa-pencil"  href="{{ path('offre_edit', { 'idOffre': offre.idOffre }) }}"></a>
+                                        <button style="background-color: transparent;border:0px;color: #3F51B5;outline: hidden;" type="submit"><i class="fa fa-trash"></i></button>
+                                        {{ form_end(delete_form) }}
                                     </td>
                                 </tr>
                                 </tbody>
