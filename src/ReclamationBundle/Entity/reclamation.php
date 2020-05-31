@@ -36,6 +36,13 @@ class reclamation
     private $etat;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="typeReclamationCopie", type="integer")
+     */
+    private $typeReclamationcopie;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateAjout", type="datetime")
@@ -65,6 +72,22 @@ class reclamation
     public function getId()
     {
         return $this->idRec;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTypeReclamationcopie()
+    {
+        return $this->typeReclamationcopie;
+    }
+
+    /**
+     * @param int $typeReclamationcopie
+     */
+    public function setTypeReclamationcopie($typeReclamationcopie)
+    {
+        $this->typeReclamationcopie = $typeReclamationcopie;
     }
 
     /**

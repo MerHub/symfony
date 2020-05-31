@@ -10,4 +10,22 @@ namespace ReclamationBundle\Repository;
  */
 class reclamationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getStat($idChauffeur){
+      /*  $query = $this->createQueryBuilder("reclamation")
+            ->select("typeReclamations.titre, count(reclamation.typeReclamation) as nombre")
+            ->groupBy("typeReclamations.titre")
+            ->Join('ReclamationBundle:typeReclamation','typeReclamations')
+            ->where('reclamation.idChauffeur = :chauffeur')
+            ->setParameter('chauffeur', $idChauffeur)
+            ->getQuery();*/
+
+        $query = $this->createQueryBuilder("reclamation")
+            ->select("reclamation.typeReclamationcopie as copie, count(reclamation.idClient) as nombre")
+            ->groupBy("reclamation.typeReclamationcopie")
+            ->where('reclamation.idChauffeur = :chauffeur')
+            ->setParameter('chauffeur', $idChauffeur)
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }

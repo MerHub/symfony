@@ -16,7 +16,8 @@ class VeloType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('type')->add('adresse',null,[
+        $builder->add('type',ChoiceType::class,array('choices'=>array('Electrique bic'=>'electrique bic','Bic'=>'bic'))
+            )->add('adresse',null,[
             'attr'=>[
                 'class'=>'dontWrite'
             ]
