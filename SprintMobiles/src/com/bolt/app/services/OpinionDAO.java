@@ -8,17 +8,17 @@ import com.codename1.messaging.Message;
 import com.codename1.ui.Display;
 /**
  *
- * @author Belgaroui Ghazi
+ * @author Meriem
  */
 public class OpinionDAO {
-      public OpinionDAO(){
+           public OpinionDAO(){
     
     Message m = new Message("Body of message");
     
  //   Message m = new Message("Body of message");
 //m.getAttachments().put(textAttachmentUri, "text/plain");
 //m.getAttachments().put(imageAttachmentUri, "image/png");
-Display.getInstance().sendMessage(new String[] {"ghadadadou07@gmail.com"}, "Opinion", m);
+Display.getInstance().sendMessage(new String[] {"meriem.gomri@esprit.tn"}, "Opinion", m);
         
         
     }

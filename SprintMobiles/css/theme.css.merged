@@ -1,5 +1,5 @@
 
-/* C:\www\SprintMobiles\css\theme.css */
+/* C:\Users\Meriem\Downloads\SprintMobiles\css\theme.css */
 @font-face {
     font-family: "think";
     src: url('../assets/police/CentraleSans-Thin.ttf');
@@ -87,15 +87,56 @@
     block11{
         margin-top:5mm;  
     }
-    text3 {
+    text32 {
         background-color: transparent;
+        color: rgb(33, 34, 36); 
+        margin-top:100px;  
+        margin-left:2mm;  
+        margin-right:2mm; 
+        font-size: 53px;
+        font-family: "cursive";       
+    }
+
+    text31 {
+        background-color: transparent;
+        color: rgb(33, 34, 36); 
+        margin-top:45px;  
+        margin-left:2mm;  
+        margin-right:2mm; 
+        font-size: 53px;
+        font-family: "cursive";       
+    }
+
+ text3 {
+background-color: transparent;
         color: rgb(33, 34, 36); 
         margin-top:14px;  
         margin-left:4mm;  
         margin-right:4mm; 
         font-size: 45px;
-        font-family: "think";       
+        font-family: "think";
+
+}
+
+    text34 {
+        background-color: transparent;
+        color: rgb(33, 34, 36); 
+        margin-top :400px;  
+        margin-left:2mm;  
+        margin-right:2mm; 
+        font-size: 53px;
+        font-family: "cursive";       
     }
+    text33 {
+        background-color: transparent;
+        color: rgb(112,128,144);
+        margin-top:90px;  
+        margin-left:2mm;  
+        margin-right:2mm; 
+        font-size: 53px;
+        font-family: "cursive";       
+    }
+
     text4 {
         background-color: transparent;
         color: rgb(33, 34, 36); 
@@ -251,9 +292,11 @@
         cursor: pointer;
     }
     blockRegister{
-        background-image: url("../assets/images/formRegister.png");
+        background-image: url("../assets/images/FormRegister.png");
         margin-top:8mm;
-        margin-bottom: 5mm;        
+        margin-bottom: 5mm;   
+	padding-top : 5mm; 
+    
     }
 
     inputTextarea{
@@ -675,21 +718,15 @@
         margin-right:2mm;
         border-radius: 15px;
     }
-  blockRegister1{
-  background-image: url("../assets/images/formRegister.png");
-   margin-top:8mm;
-        margin-bottom: 5mm;      margin-left: 2mm;       margin-right: 2mm;   
+
+    blockRegiterEvent2{        
+	margin-top:20mm;
+        margin-left: 10mm;
+        margin-bottom: 100mm;
+        border-radius: 10px;
+        background-color: #DFDFDF;
     }
 
- 
-text31 {
-        background-color: transparent;
-        color: rgb(33, 34, 36); 
-        margin-top:45px;  
-        margin-left:2mm;  
-        margin-right:2mm; 
-        font-size: 53px;
-        font-family: "cursive";       
-    }  
-} 
-/* End C:\www\SprintMobiles\css\theme.css */
+
+}
+/* End C:\Users\Meriem\Downloads\SprintMobiles\css\theme.css */

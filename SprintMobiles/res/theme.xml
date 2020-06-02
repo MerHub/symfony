@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<resource majorVersion="1" minorVersion="11" useXmlUI="false">
+<resource majorVersion="1" minorVersion="10" useXmlUI="false">
     <image name="debut1.png"  />
     <image name="debut1.png 1" type="multi"  />
+    <image name="event.jpg"  />
     <image name="iconTaxi.png"  />
     <theme name="Theme">
         <val key="@includeNativeBool" value="true" />
@@ -10,5 +11,17 @@
         <val key="SideCommand.fgColor" value="999999" />
         <val key="SideNavigationPanel.bgColor" value="ffffff" />
         <val key="SideNavigationPanel.fgColor" value="999999" />
+        <val key="event_register_btn.align" value="4" />
+        <val key="event_register_btn.bgColor" value="330099" />
+        <gradient key="event_register_btn.bgGradient" color1="0" color2="0" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="event_register_btn.bgType" value="0" />
+        <border key="event_register_btn.border" type="round" roundBorderColor="26214" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="false" />
+        <val key="event_register_btn.fgColor" value="ffffff" />
+        <font key="event_register_btn.font" type="system" face="0" style="0" size="16" />
+        <val key="event_register_btn.marUnit" value="2,2,2,2" />
+        <val key="event_register_btn.margin" value="2.0,2.0,2.0,2.0" />
+        <val key="event_register_btn.padUnit" value="2,2,2,2" />
+        <val key="event_register_btn.padding" value="2.0,2.0,2.0,2.0" />
+        <font key="event_text.font" type="system" face="0" style="1" size="16" />
     </theme>
 </resource>

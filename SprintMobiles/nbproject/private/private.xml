@@ -1,37 +1,31 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
-    </open-files>
-</project-private>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
-    </open-files>
-</project-private>
->>>>>>> master
-=======
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/armand/Desktop/SprintMobiles/src/com/bolt/app/gui/ShowVelo.java</file>
-            <file>file:/C:/Users/armand/Desktop/SprintMobiles/src/com/bolt/app/services/ServiceEvent.java</file>
-            <file>file:/C:/Users/armand/Desktop/SprintMobiles/src/com/bolt/app/gui/ShowReclamation.java</file>
-            <file>file:/C:/Users/armand/Desktop/SprintMobiles/src/com/bolt/app/services/ServiceVelo.java</file>
-            <file>file:/C:/Users/armand/Desktop/SprintMobiles/src/com/bolt/app/gui/showChauffeur.java</file>
-            <file>file:/C:/Users/armand/Desktop/SprintMobiles/src/com/bolt/app/gui/indexClientPage.java</file>
+            <file>jar:file:/C:/Users/Meriem/Downloads/SprintMobiles/lib/CodenameOne_SRC.zip!/com/codename1/ui/Component.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/entities/Client.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/loginPage.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/services/OpinionDAO.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/indexChauffeurPage.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/showChauffeur.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/ShowImage.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/ListChauffeur.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/services/ServiceEvent.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/indexClientPage.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/editProfilPage.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/services/ServiceAvis.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/startPage.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/services/ServiceInscription.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/entities/Inscription.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/registerPage.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/AddAvis.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/entities/Event.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/itineaire.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/ShowVelo.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/loadScreen.java</file>
+            <file>file:/C:/Users/Meriem/Downloads/SprintMobiles/src/com/bolt/app/gui/ShowEvent.java</file>
         </group>
     </open-files>
 </project-private>
->>>>>>> ghada

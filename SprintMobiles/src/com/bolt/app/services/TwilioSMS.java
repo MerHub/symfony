@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package com.bolt.app.services;
+
+
 import com.codename1.components.ToastBar;
 import com.codename1.io.Log;
 import com.codename1.io.rest.Response;
@@ -13,12 +15,14 @@ import com.codename1.ui.FontImage;
 import com.codename1.util.Base64;
 import com.codename1.util.Callback;
 import java.util.Map;
+
 /**
  *
- * @author Belgaroui Ghazi
+ * @author Meriem
  */
 public class TwilioSMS {
-     
+   
+    
     private String accountSID;
     private String authToken;
     private String fromPhone;
@@ -81,6 +85,5 @@ public class TwilioSMS {
         } else {
             ToastBar.showErrorMessage("Error sending SMS: " + value.getResponseCode());
         }
-    }        
-    
+    }         
 }
