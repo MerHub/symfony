@@ -127,13 +127,14 @@ class ReclamationController extends Controller
             $date=new DateTime('now+1 hours');
             $reclamation->setDateAjout($date);
         $objjj = $this->getDoctrine()
-            ->getRepository(user::class)
+            ->getRepository(chauffeur::class)
             ->find($idchauffeur);
         $reclamation->setIdchauffeur($objjj);
+        $reclamation->setTypeReclamationCopie($typeReclamation);
 
 
         $objj = $this->getDoctrine()
-            ->getRepository(user::class)
+            ->getRepository(Client::class)
             ->find($idClient);
              $reclamation->setIdClient($objj);
 

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseo.html.twig' %}
 
 {% block body %}
 
@@ -86,10 +86,12 @@
                         <tr>
                             <td>{{ form_label(form.dateD) }}</td>
                             <td>{{ form_widget(form.dateD) }}</td>
+                            <td style="color: red">{{ form_errors(form.dateD) }}</td>
                         </tr>
                         <tr>
                             <td>{{ form_label(form.dateF) }}</td>
                             <td>{{ form_widget(form.dateF) }}</td>
+                            <td style="color: red">{{ form_errors(form.dateF) }}</td>
                         </tr>
                         <tr>
                             <td>{{ form_label(form.reductionOffre) }}</td>
